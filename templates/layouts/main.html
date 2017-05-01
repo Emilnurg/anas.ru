@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block PAGE_TITLE %}{% endblock %}</title>
+    {%- block EXTRA_STYLES %}{% endblock -%}
+    {%- block EXTRA_META %}{% endblock -%}
+</head>
+<body class="{% block BODY_CLASSES %}{% endblock %}">
+    {%- block PAGE_CONTENT %}{%- endblock -%}
+    {%- block EXTRA_SCRIPTS %}{% endblock -%}
+    {%- block EXTRA_BODY %}{% endblock -%}
+</body>
+</html>
