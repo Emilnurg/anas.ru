@@ -18,14 +18,3 @@ class PageAdmin(TranslationAdmin):
 
     class Media:
         js = ('admin/js/translit.js',)
-
-
-@admin.register(models.Partner)
-class PartnerAdmin(TranslationAdmin):
-    """Партнеры"""
-    list_display = ('title', 'url', 'ordering', 'status', 'created')
-    search_fields = ('=id', 'title', 'url', 'image')
-    list_filter = ('status',)
-    list_editable = ('status', 'ordering')
-    fields = models.Partner().collect_fields()
-    ordering = ('ordering', 'title')

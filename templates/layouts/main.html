@@ -1,3 +1,4 @@
+{%- set languages = get_languages() -%}
 <!doctype html>
 <html lang="ru">
 <head>
@@ -8,6 +9,11 @@
     <title>{% block PAGE_TITLE %}{% endblock %}</title>
     {%- block EXTRA_STYLES %}{% endblock -%}
     {%- block EXTRA_META %}{% endblock -%}
+    {%- for language in get_languages() -%}
+    {%- if language[0] != request.LANGUAGE_CODE -%}
+    <link rel="alternate" href="{{ site_url() }}{{ get_language_href(request, language[0]) }}" hreflang="{{ language[0] }}" />
+    {%- endif -%}
+    {%- endfor -%}
 </head>
 <body class="{% block BODY_CLASSES %}{% endblock %}">
     {%- block PAGE_CONTENT %}{%- endblock -%}

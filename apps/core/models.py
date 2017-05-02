@@ -24,25 +24,8 @@ class Page(BaseModel):
         return reverse('core:flatpage', kwargs={'lang': lang, 'slug': self.slug})
 
     class Meta:
-        verbose_name = _('Страница')
+        verbose_name = _('Простая страница')
         verbose_name_plural = _('Простые страницы')
-
-
-class Partner(ImageMixin, BaseModel):
-    """Партнеры"""
-    title = models.CharField(
-        _('Заголовок'), max_length=255, db_index=True
-    )
-    url = models.CharField(_('Ссылка'), max_length=255, blank=True, null=True)
-    image = models.ImageField(_('Лого'), max_length=255, upload_to='partners')
-    is_main = models.NullBooleanField(_('Главный спонсор'), default=None, unique=True)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = _('Партнер')
-        verbose_name_plural = _('Партнеры')
 
 
 class Gallery(ImageMixin, BaseModel):
@@ -67,6 +50,7 @@ class GalleryPhoto(BaseModel):
     gallery = models.ForeignKey(Gallery, verbose_name=_('Галерея'), related_name='photos')
     image = models.ImageField(_('Фотография'), upload_to='galleries/photos/%Y/%m/%d')
     alt = models.CharField(_('Текст вместо фото (alt)'), blank=True, null=False, max_length=255)
+    body = RichTextUploadingField(_('Описание фото'), blank=True, null=False)
 
     def __str__(self):
         return self.alt if self.alt else str(self.pk)

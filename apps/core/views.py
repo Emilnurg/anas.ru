@@ -22,7 +22,8 @@ class FlatpageView(BaseTemplateView):
     """Простые страницы"""
     template_name = 'core/flatpage.html'
 
-    def get_context_data(self, **kwargs):
+    @staticmethod
+    def get_context_data(**kwargs):
         return {
             'current_page': get_page(kwargs.get('slug'))
         }

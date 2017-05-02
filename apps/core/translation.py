@@ -10,11 +10,6 @@ class PageTranslationOptions(BaseTranslationOptions):
     fields = ('title', 'body')
 
 
-@register(models.Partner)
-class PartnerTranslationOptions(BaseTranslationOptions):
-    fields = ('title', 'url')
-
-
 @register(models.Gallery)
 class GalleryTranslationOptions(BaseTranslationOptions):
     fields = ('title',)
@@ -22,4 +17,4 @@ class GalleryTranslationOptions(BaseTranslationOptions):
 
 @register(models.GalleryPhoto)
 class GalleryPhotoTranslationOptions(BaseTranslationOptions):
-    fields = ('alt',)
+    fields = ('alt', 'body')

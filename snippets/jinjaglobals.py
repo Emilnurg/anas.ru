@@ -215,6 +215,11 @@ def get_language_href(request, lang):
     return url if url.endswith('/') else url + '/'
 
 
+@jinjaglobal
+def get_languages():
+    return settings.LANGUAGES
+
+
 @jinjafilter
 def floatformat(value, digits):
     """Порт floatformat"""

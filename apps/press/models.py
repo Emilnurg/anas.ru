@@ -24,8 +24,8 @@ class News(ImageMixin, BaseModel):
         _('Изображение'), upload_to='news', max_length=255,
         blank=True, null=True
     )
-    thumb_list = ImageRatioField('image', '400x400', verbose_name=_('Эскиз в списке'))
-    excerpt = models.TextField(_('Анонс'), blank=True, null=True)
+    thumb_list = ImageRatioField('image', '200x400', verbose_name=_('Эскиз в списке'))
+    excerpt = RichTextUploadingField(_('Анонс'), blank=True, null=True)
     body = RichTextUploadingField(
         _('Контент'), blank=True, null=False, help_text=_('Выводится выше всех секций')
     )
@@ -45,6 +45,7 @@ class News(ImageMixin, BaseModel):
 class NewsSection(BaseModel):
     """Секции новостей"""
     news = models.ForeignKey(News, verbose_name=_('Новость'), related_name='sections')
+    title = models.CharField(_('Заголовок секции'), max_length=255, blank=True, null=True)
     body = RichTextUploadingField(
         _('Контент'), blank=True, null=False, help_text=_('Выводится выше всех секций')
     )
