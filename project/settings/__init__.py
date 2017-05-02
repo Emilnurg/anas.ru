@@ -148,10 +148,15 @@ INSTALLED_APPS = (
     'base',
     # контрибы веб-студии
     'snippets.general',
+    'catalog',
     'core',
+    'pages',
+    'press',
+    'education',
+    'knowledge',
     'users',
     'dicts',
-    'press'
+    'search'
 )
 
 LOGIN_URL = reverse_lazy('auth_login')
@@ -265,9 +270,9 @@ CACHES = {
     }
 }
 
-API = {
-    'default_page_size': 20,
-    'default_max_page_size': 200
+SEARCH = {
+    'host': 'localhost',
+    'port': '9200'
 }
 
 

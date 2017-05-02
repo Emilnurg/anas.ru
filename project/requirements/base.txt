@@ -18,6 +18,7 @@ django-solo==1.1.2
 django-suit==0.2.25
 django==1.11
 easy-thumbnails==2.4.1
+elasticsearch==5.3.0
 flake8==3.3.0
 greenlet==0.4.12          # via bpython
 jinja2==2.9.6
@@ -38,6 +39,7 @@ requests==2.13.0          # via bpython
 simplejson==3.10.0        # via uwsgitop
 six==1.10.0               # via bpython, django-appconf, django-image-cropping
 ujson==1.35
+urllib3==1.21.1           # via elasticsearch
 uwsgi==2.0.15
 uwsgitop==0.10
 wcwidth==0.1.7            # via curtsies

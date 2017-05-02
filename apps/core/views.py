@@ -2,7 +2,7 @@
 from django.conf import settings
 from django.http import HttpResponseRedirect
 
-from core.utils import get_page
+from core.utils import get_flat_page
 from snippets.views import BaseTemplateView
 
 
@@ -25,5 +25,5 @@ class FlatpageView(BaseTemplateView):
     @staticmethod
     def get_context_data(**kwargs):
         return {
-            'current_page': get_page(kwargs.get('slug'))
+            'current_page': get_flat_page(kwargs.get('slug'))
         }

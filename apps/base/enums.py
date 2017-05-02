@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from collections import OrderedDict
 
-from models import BaseEnumerate
+from snippets.models import BaseEnumerate
 
 
-class MedicalIconENum(BaseEnumerate):
+class IconEnum(BaseEnumerate):
     """Перечисление медицинских иконок"""
     ANTIBIOTIC = 'antibiotic'
     BACTERIA = 'bacteria'
@@ -23,6 +23,7 @@ class MedicalIconENum(BaseEnumerate):
     PREMOLAR = 'premolar'
     RECORDS = 'records'
     RECORDS_1 = 'records-1'
+    SEARCH = 'search'
     TEETH = 'teeth'
     TOOTH = 'tooth'
     TOOTH_1 = 'tooth-1'
@@ -48,6 +49,7 @@ class MedicalIconENum(BaseEnumerate):
         (PREMOLAR, 'premolar'),
         (RECORDS, 'records'),
         (RECORDS_1, 'records-1'),
+        (SEARCH, 'search'),
         (TEETH, 'teeth'),
         (TOOTH, 'tooth'),
         (TOOTH_1, 'tooth-1'),

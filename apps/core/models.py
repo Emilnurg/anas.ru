@@ -45,7 +45,7 @@ class Gallery(ImageMixin, BaseModel):
         verbose_name_plural = _('Галереи фотографий')
 
 
-class GalleryPhoto(BaseModel):
+class GalleryPhoto(ImageMixin, BaseModel):
     """Фотографии галерей"""
     gallery = models.ForeignKey(Gallery, verbose_name=_('Галерея'), related_name='photos')
     image = models.ImageField(_('Фотография'), upload_to='galleries/photos/%Y/%m/%d')

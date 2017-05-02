@@ -5,5 +5,8 @@ from pages import views
 
 
 urlpatterns = (
-    url(r'^(?P<lang>\w{2})/contacts/$', views.ContactsView.as_view(), name='contacts'),
+    url(
+        r'^(?P<lang>\w{2})/contacts/$',
+        views.ContactsView.as_view(), name='contacts'
+    ),
 )

@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from modeltranslation.admin import TranslationAdmin
 
+from modeltranslation.admin import TranslationStackedInline
+
+from base.admin import BaseArticleAdmin
 from press import models
 
 
-class NewsSectionInline(admin.StackedInline):
+class NewsSectionInline(TranslationStackedInline):
     """Секции новости"""
     model = models.NewsSection
     extra = 0
@@ -21,16 +23,10 @@ class NewsRelatedInline(admin.TabularInline):
 
 
 @admin.register(models.News)
-class PageAdmin(TranslationAdmin):
+class NewsAdmin(BaseArticleAdmin):
     """Новости и события"""
-    list_display = ('title', 'slug', 'publish_date', 'ordering', 'status', 'created')
-    search_fields = ('=id', 'title', 'slug', 'excerpt', 'image')
-    date_hierarchy = 'publish_date'
-    list_filter = ('status',)
-    list_editable = ('status', 'ordering', 'publish_date')
     fields = models.News().collect_fields()
     inlines = (NewsSectionInline, NewsRelatedInline)
-    ordering = ('-publish_date', 'ordering')
 
     class Media:
         js = ('admin/js/translit.js',)

@@ -6,7 +6,7 @@ from core import models
 from snippets.models.enumerates import StatusEnum
 
 
-def get_page(slug, raise_error=True):
+def get_flat_page(slug, raise_error=True):
     """Получает простую страницу по алиасу"""
     try:
         page = get_object_or_404(models.Page, slug__exact=slug, status=StatusEnum.PUBLIC)
@@ -16,8 +16,3 @@ def get_page(slug, raise_error=True):
         else:
             page = None
     return page
-
-
-def get_partners():
-    """Получает список партнеров"""
-    return models.Partner.objects.published().order_by('ordering')

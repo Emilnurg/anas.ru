@@ -6,30 +6,8 @@ from image_cropping import ImageCropField, ImageRatioField
 
 from solo.models import SingletonModel
 
-from models import BaseModel
-
-
-class ContactsPage(SingletonModel):
-    """Страница "Контакты" """
-    title = models.CharField(_('Заголовок страницы'), max_length=255)
-    address = models.TextField(_('Адрес в контактах'), max_length=4096, blank=True, null=True)
-    questions_title = models.CharField(
-        _('Заголовок блока "Есть вопросы?"'), max_length=255, blank=True, null=True
-    )
-    questions_subtitle = models.CharField(
-        _('Подзаголовок блока "Есть вопросы?"'), max_length=255, blank=True, null=True
-    )
-    map_y = models.FloatField(_('Координата Y (широта)'))
-    map_x = models.FloatField(_('Координата X (долгота)'))
-    map_zoom = models.PositiveSmallIntegerField(
-        _('Масштаб карты'), choices=[(x, str(x)) for x in range(1, 21)], default=16
-    )
-
-    def __str__(self):
-        return _('Страница "Контакты"')
-
-    class Meta:
-        verbose_name = _('Страница "Контакты"')
+from base.enums import IconEnum
+from snippets.models import BaseModel
 
 
 class AboutPage(SingletonModel):
@@ -67,8 +45,63 @@ class AboutPage(SingletonModel):
 
 class AboutAdvantage(BaseModel):
     """Преимущества на странице "О компании" """
+    about_page = models.ForeignKey(
+        AboutPage, verbose_name=_('Страница "О компании"'), related_name='advantages'
+    )
+    icon = models.CharField(_('Иконка'), choices=IconEnum.get_choices(), blank=True, null=True)
     title = models.CharField(_('Заголовок'), max_length=255)
-    image
+    subtitle = RichTextUploadingField(_('Подзаголовок'), max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _('Преимущество')
+        verbose_name_plural = _('Преимущества на странице "О компании"')
+
+
+class ContactsPage(SingletonModel):
+    """Страница "Контакты" """
+    title = models.CharField(_('Заголовок страницы'), max_length=255)
+    address = models.TextField(_('Адрес в контактах'), max_length=4096, blank=True, null=True)
+    questions_title = models.CharField(
+        _('Заголовок блока "Есть вопросы?"'), max_length=255, blank=True, null=True
+    )
+    questions_subtitle = models.CharField(
+        _('Подзаголовок блока "Есть вопросы?"'), max_length=255, blank=True, null=True
+    )
+    map_y = models.FloatField(_('Координата Y (широта)'))
+    map_x = models.FloatField(_('Координата X (долгота)'))
+    map_zoom = models.PositiveSmallIntegerField(
+        _('Масштаб карты'), choices=[(x, str(x)) for x in range(1, 21)], default=16
+    )
+
+    def __str__(self):
+        return _('Страница "Контакты"')
+
+    class Meta:
+        verbose_name = _('Страница "Контакты"')
+
+
+class HomePage(SingletonModel):
+    """Главная страница"""
+    title = models.CharField(_('Заголовок страницы'), max_length=255)
+    subtitle = RichTextUploadingField(_('Подзаголовок'), max_length=4096, blank=True, null=True)
+
+    def __str__(self):
+        return _('Главная страница')
+
+    class Meta:
+        verbose_name = _('Главная страница')
+
+
+class HomeAdvantage(BaseModel):
+    """Преимущества на главной странице"""
+    home_page = models.ForeignKey(
+        HomePage, verbose_name=_('Главная страница'), related_name='advantages'
+    )
+    icon = models.CharField(_('Иконка'), choices=IconEnum.get_choices(), blank=True, null=True)
+    title = models.CharField(_('Заголовок'), max_length=255)
 
     def __str__(self):
         return self.title

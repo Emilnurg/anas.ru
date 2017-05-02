@@ -8,6 +8,7 @@ django-pure-pagination
 django-suit
 django-solo
 easy-thumbnails
+elasticsearch
 flake8
 Jinja2
 lxml
