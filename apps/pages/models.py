@@ -25,7 +25,7 @@ class AboutPage(SingletonModel):
     )
     main_body = RichTextUploadingField(_('Главный контент'), blank=True, null=True)
     guarantee_title = models.CharField(
-        _('Заголовок гарантий', max_length=255), blank=True, null=True
+        _('Заголовок гарантий'), max_length=255, blank=True, null=True
     )
     guarantee_body = RichTextUploadingField(_('Контент гарантий'), blank=True, null=True)
 
@@ -48,7 +48,9 @@ class AboutAdvantage(BaseModel):
     about_page = models.ForeignKey(
         AboutPage, verbose_name=_('Страница "О компании"'), related_name='advantages'
     )
-    icon = models.CharField(_('Иконка'), choices=IconEnum.get_choices(), blank=True, null=True)
+    icon = models.CharField(
+        _('Иконка'), choices=IconEnum.get_choices(), blank=True, null=True, max_length=50
+    )
     title = models.CharField(_('Заголовок'), max_length=255)
     subtitle = RichTextUploadingField(_('Подзаголовок'), max_length=255, blank=True, null=True)
 
@@ -100,7 +102,9 @@ class HomeAdvantage(BaseModel):
     home_page = models.ForeignKey(
         HomePage, verbose_name=_('Главная страница'), related_name='advantages'
     )
-    icon = models.CharField(_('Иконка'), choices=IconEnum.get_choices(), blank=True, null=True)
+    icon = models.CharField(
+        _('Иконка'), choices=IconEnum.get_choices(), blank=True, null=True, max_length=50
+    )
     title = models.CharField(_('Заголовок'), max_length=255)
 
     def __str__(self):

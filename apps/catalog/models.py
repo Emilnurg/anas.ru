@@ -51,7 +51,7 @@ class Product(ImageMixin, BaseModel):
     )
 
     categories = models.ManyToManyField(
-        ProductCategory, _('Категории'), verbose_name=_('Категории'), related_name='products',
+        ProductCategory, verbose_name=_('Категории'), related_name='products',
         blank=True
     )
 

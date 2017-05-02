@@ -6,7 +6,6 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 from base.models import BaseArticle
 from snippets.models import BaseModel
-from snippets.models.image import ImageMixin
 
 
 class News(BaseArticle):

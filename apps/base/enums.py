@@ -11,7 +11,7 @@ class BackgroundPositionEnum(BaseEnumerate):
     BOTTOM_CENTER = 'bottom_center'
     BOTTOM_RIGHT = 'bottom_right'
 
-    values = ((
+    values = OrderedDict((
         (BOTTOM_CENTER, _('Снизу посередине')),
         (BOTTOM_RIGHT, _('Снизу справа'))
     ))
