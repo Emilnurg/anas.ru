@@ -14,7 +14,9 @@ class Page(BaseModel):
     """Простые страницы"""
     title = models.CharField(_('Заголовок'), max_length=255, db_index=True)
     slug = models.SlugField(
-        _('Алиас (лат.)'), max_length=150, db_index=True, unique=True)
+        _('Алиас'), max_length=150, db_index=True, unique=True,
+        help_text=_('Латинские буквы и цифры')
+    )
     body = RichTextUploadingField(_('Контент'))
 
     def __str__(self):

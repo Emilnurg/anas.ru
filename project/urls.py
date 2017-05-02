@@ -22,6 +22,7 @@ urlpatterns = (
     url(r'^', include('projects.urls', namespace='projects')),
     url(r'^', include('education.urls', namespace='education')),
     url(r'^', include('search.urls', namespace='search')),
+    url(r'^', include('seo.urls', namespace='seo')),
 )
 
 if settings.DEBUG is True:

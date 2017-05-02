@@ -123,7 +123,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'snippets.middlewares.language.LanguageMiddleware'
+    'snippets.middlewares.language.LanguageMiddleware',
+    'seo.middleware.SEOMiddleware'
 )
 
 ROOT_URLCONF = 'project.urls'
@@ -156,7 +157,8 @@ INSTALLED_APPS = (
     'knowledge',
     'users',
     'dicts',
-    'search'
+    'search',
+    'seo'
 )
 
 LOGIN_URL = reverse_lazy('auth_login')
@@ -206,17 +208,24 @@ DEFAULT_FROM_EMAIL = 'robot@anas.ru'
 EMAIL_BATCH_SIZE = 100
 
 SUIT_CONFIG = {
-    # 'SEARCH_URL': 'admin:races_race_changelist',
+    'SEARCH_URL': 'admin:catalog_product_changelist',
     'ADMIN_NAME': 'Anas.ru',
     'MENU_OPEN_FIRST_CHILD': True,
     'MENU': [
-        {'app': 'press'},
+        {'app': 'catalog'},
         {'app': 'base'},
         {'app': 'core'},
+        {'app': 'press'},
+        {'app': 'education'},
+        {'app': 'knowledge'},
+        {'app': 'projects'},
         {'app': 'general'},
         {'app': 'dicts'},
+        {'app': 'pages'},
+        {'app': 'seo'},
         {'app': 'users'},
-        {'app': 'auth'}
+        {'app': 'auth'},
+        {'app': 'search'}
     ]
 }
 
