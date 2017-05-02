@@ -1,12 +1,29 @@
 {%- set languages = get_languages() -%}
 <!doctype html>
-<html lang="ru">
+<html lang="{{ request.LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block PAGE_TITLE %}{% endblock %}</title>
+    <title>
+        {%- if request.seo_params -%}
+        {{- request.seo_params['seo_title'] -}}
+        {%- else -%}
+        {{- var('SEO_TITLE_PREFIX', request) -}}
+        {%- block PAGE_TITLE %}{% endblock -%}
+        {{- var('SEO_TITLE_POSTFIX', request) -}}
+        {%- endif -%}
+    </title>
+    <meta name="description" content="
+        {%- if request.seo_params -%}
+        {{- request.seo_params['seo_description'] -}}
+        {%- endif -%}
+    ">
+    <meta name="keywords" content="
+        {%- if request.seo_params -%}
+        {{- request.seo_params['seo_keywords'] -}}
+        {%- endif -%}
+    ">
     {%- block EXTRA_STYLES %}{% endblock -%}
     {%- block EXTRA_META %}{% endblock -%}
     {%- for language in get_languages() -%}
