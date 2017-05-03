@@ -15,44 +15,6 @@ UPDATED_VERBOSE = _('Обновлено')
 UTIL_FIELDS = ('id', 'created', 'updated', 'ordering', 'status')
 
 
-class IsActiveManager(models.Manager):
-    def get_queryset(self):
-        return super(IsActiveManager, self).get_queryset().filter(is_active=True)
-
-
-class DeletableManager(models.Manager):
-    def get_queryset(self):
-        return super(DeletableManager, self).get_queryset().filter(is_deleted=False)
-
-
-class BaseIsActiveModel(models.Model):
-    is_active = models.BooleanField(_('Активен'), default=True)
-
-    objects = models.Manager()
-    active_objects = IsActiveManager()
-
-    class Meta:
-        abstract = True
-
-
-class VirtualDeletableMixin(models.Model):
-    """Миксин позволяет сделать удаление модели виртуальным"""
-    is_deleted = models.BooleanField('Удален', default=False)
-    objects = Manager()
-    existing_objects = DeletableManager()
-
-    def delete(self, *args, **kwargs):
-        self.is_deleted = True
-        self.save()
-
-    def restore(self):
-        self.is_deleted = False
-        self.save()
-
-    class Meta:
-        abstract = True
-
-
 class BaseQuerySet(QuerySet):
     def published(self):
         return self.filter(status__exact=StatusEnum.PUBLIC)
@@ -126,13 +88,3 @@ class BaseModel(BasicModel, LastModMixin, StatusOrderingMixin):
 
     class Meta:
         abstract = True
-
-
-class BaseDictionaryModel(VirtualDeletableMixin, BaseModel):
-    title = models.CharField(_('Заголовок'), max_length=255, unique=True)
-
-    class Meta:
-        abstract = True
-
-    def __str__(self):
-        return self.title

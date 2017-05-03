@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from snippets.models import IsActiveManager, LastModMixin, BasicModel
+from snippets.models import LastModMixin, BasicModel
 from users.managers import UserManager
 
 
@@ -34,7 +34,6 @@ class User(AbstractUser, LastModMixin, BasicModel):
         verbose_name_plural = _('Профили пользователей')
 
     objects = UserManager()
-    active_objects = IsActiveManager()
 
     def __str__(self):
         return self.full_name

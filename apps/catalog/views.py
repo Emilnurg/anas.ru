@@ -8,5 +8,5 @@ class CatalogIndexView(BaseTemplateView):
 
 
 class ProductView(BaseTemplateView):
-    """Страница товара"""
+    """Страница продукта"""
     template_name = 'catalog/product.html'

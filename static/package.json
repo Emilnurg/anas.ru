@@ -1,0 +1,25 @@
+{
+  "name": "anas",
+  "version": "0.0.1",
+  "description": "Anas.ru",
+  "main": "static/js/core.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "vee-validate": "^2.0.0-rc.3",
+    "vue": "^2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/face_2017/anas.git"
+  },
+  "keywords": [
+    "anas"
+  ],
+  "author": "Rafael Kamashev",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/face_2017/anas#readme"
+}

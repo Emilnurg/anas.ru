@@ -22,5 +22,6 @@ Thumbs.db
 /.idea/
 /logs/
 project/settings/settings_local.py
+static/node_modules/
 /public/
 /venv/

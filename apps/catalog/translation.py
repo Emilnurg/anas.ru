@@ -13,3 +13,13 @@ class ProductCategoryTranslationOptions(BaseTranslationOptions):
 @register(models.Product)
 class ProductTranslationOptions(BaseTranslationOptions):
     fields = ('title',)
+
+
+@register(models.Feature)
+class FeatureTranslationOptions(BaseTranslationOptions):
+    fields = ('title',)
+
+
+@register(models.ProductFeature)
+class FeatureTranslationOptions(BaseTranslationOptions):
+    fields = ('value',)
