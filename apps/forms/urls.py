@@ -22,6 +22,14 @@ urlpatterns = (
         views.PartnershipRequestView.as_view(), name='partnership'
     ),
     url(
+        r'^(?P<lang>\w{2})/forms/product/proposal/$',
+        views.ProductProposalRequestView, name='product_proposal'
+    ),
+    url(
+        r'^(?P<lang>\w{2})/forms/product/question/$',
+        views.ProductQuestionRequestView, name='product_question'
+    ),
+    url(
         r'^(?P<lang>\w{2})/forms/purchase/$',
         views.PurchaseRequestView.as_view(), name='purchase'
     ),

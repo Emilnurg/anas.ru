@@ -101,6 +101,32 @@ class PartnershipFormRequest(BaseNamePhoneRequest):
         verbose_name_plural = _('Сотрудничество')
 
 
+class ProductProposalRequest(BaseNamePhoneRequest):
+    """Запрос КП по продукту"""
+    product = models.ForeignKey(
+        'catalog.Product', verbose_name=_('Продукт'), related_name=_('question_proposals')
+    )
+    email = models.EmailField(_('E-mail'))
+    comment = models.TextField(_('Комментарий'), max_length=32768, blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Запрос КП по продукту')
+        verbose_name_plural = _('Запросы КП по продуктам')
+
+
+class ProductQuestionRequest(BaseNamePhoneRequest):
+    """Вопрос по продукту"""
+    product = models.ForeignKey(
+        'catalog.Product', verbose_name=_('Продукт'), related_name=_('question_requests')
+    )
+    email = models.EmailField(_('E-mail'))
+    comment = models.TextField(_('Комментарий'), max_length=32768, blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Вопрос по продукту')
+        verbose_name_plural = _('Вопросы по продуктам')
+
+
 class PurchaseFormRequest(BaseNamePhoneRequest):
     """Запросы закупки"""
     product = models.ForeignKey(

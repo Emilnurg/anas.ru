@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from image_cropping import ImageCropField
 
+from ckeditor_uploader.fields import RichTextUploadingField
+from image_cropping import ImageCropField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
 from base.enums import BackgroundPositionEnum
+from snippets.datetime import utcnow
 from snippets.models import BaseModel
 from snippets.models.image import ImageMixin
 
@@ -29,6 +31,7 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
         _('Позиция фона'), choices=BackgroundPositionEnum.get_choices(),
         default=BackgroundPositionEnum.BOTTOM_CENTER, max_length=50
     )
+    body = RichTextUploadingField(_('Контент'), blank=True, null=False)
 
     class MPTTMeta:
         order_insertion_by = ['ordering']
@@ -50,6 +53,10 @@ class Product(ImageMixin, BaseModel):
     )
     image = ImageCropField(
         _('Главное изображение'), max_length=255, upload_to='products', blank=True, null=True
+    )
+    body = RichTextUploadingField(_('Основной контент'), blank=True, null=False)
+    features_body = RichTextUploadingField(
+        _('Контент над характеристиками'), blank=True, null=False
     )
 
     categories = models.ManyToManyField(
@@ -77,6 +84,21 @@ class Feature(BaseModel):
         return self.title
 
 
+class ProductDocument(BaseModel):
+    """Документы продукта"""
+    product = models.ForeignKey(Product, verbose_name=_('Продукт'), related_name='documents')
+    document = models.FileField(_('Документ'), max_length=255, upload_to='products/docs')
+    title = models.CharField(_('Заголовок'), max_length=255, blank=True, null=True)
+    publish_date = models.DateTimeField(_('Дата публикации'), db_index=True, default=utcnow)
+
+    def __str__(self):
+        return '%s: %s' % (self.product, self.title)
+
+    class Meta:
+        verbose_name = _('Документ продукта')
+        verbose_name_plural = _('Документы продукта')
+
+
 class ProductFeature(BaseModel):
     """Характеристика товара"""
     product = models.ForeignKey(Product, verbose_name=_('Товар'), related_name='features')
@@ -97,7 +119,10 @@ class ProductImage(ImageMixin, BaseModel):
     """Изображения продукта"""
     product = models.ForeignKey(Product, verbose_name=_('Продукт'), related_name='images')
     image = ImageCropField(_('Изображение'), max_length=255, upload_to='products/images')
-    alt = models.CharField(_('Подпись (alt)'), max_length=255, blank=True, null=True)
+    alt = models.CharField(
+        _('Подпись (alt)'), max_length=255, blank=True, null=True,
+        help_text=_('Альтернативный текст вместо изображения')
+    )
 
     def __str__(self):
         return str(self.pk)

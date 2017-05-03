@@ -46,6 +46,16 @@ class PartnershipRequestView(BaseFormRequestView):
     form_class = forms.PartnershipRequestForm
 
 
+class ProductProposalRequestView(BaseFormRequestView):
+    """Обработчик формы КП по товару"""
+    form_class = forms.ProductProposalRequestForm
+
+
+class ProductQuestionRequestView(BaseFormRequestView):
+    """Обработчик формы вопроса по товару"""
+    form_class = forms.ProductQuestionRequestForm
+
+
 class PurchaseRequestView(BaseFormRequestView):
     """Обработчик формы закупки"""
     form_class = forms.PurchaseRequestForm

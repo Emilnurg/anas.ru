@@ -40,6 +40,21 @@ class PartnershipRequestForm(BaseRequestForm):
         fields = '__all__'
 
 
+class ProductProposalRequestForm(BaseRequestForm):
+    """Форма КП по продукту"""
+
+    class Meta:
+        model = models.ProductProposalRequest
+        fields = '__all__'
+
+
+class ProductQuestionRequestForm(BaseRequestForm):
+    """Форма вопроса по продукту"""
+    class Meta:
+        model = models.ProductQuestionRequest
+        fields = '__all__'
+
+
 class PurchaseRequestForm(BaseRequestForm):
     """Форма закупки"""
     product = forms.ModelChoiceField(

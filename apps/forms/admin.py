@@ -126,6 +126,26 @@ class PurchaseFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
     list_filter = BaseNamePhoneRequestAdmin.list_filter + ('product__categories',)
 
 
+@admin.register(models.ProductProposalRequest)
+class ProductProposalRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
+    """Админ.часть запросов КП по товарам"""
+    list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
+    search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
+    for language in settings.LANGUAGE_CODES:
+        search_fields.append('product__title_' + language)
+    list_filter = BaseNamePhoneRequestAdmin.list_filter + ('product__categories',)
+
+
+@admin.register(models.ProductQuestionRequest)
+class ProductQuestionRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
+    """Админ.часть вопросов по товарам"""
+    list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
+    search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
+    for language in settings.LANGUAGE_CODES:
+        search_fields.append('product__title_' + language)
+    list_filter = BaseNamePhoneRequestAdmin.list_filter + ('product__categories',)
+
+
 @admin.register(models.ServiceFormRequest)
 class ServiceFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
     """Админ.часть для запросов сервисного центра"""

@@ -7,12 +7,12 @@ from snippets.modeltranslation import BaseTranslationOptions
 
 @register(models.ProductCategory)
 class ProductCategoryTranslationOptions(BaseTranslationOptions):
-    fields = ('title',)
+    fields = ('title', 'body')
 
 
 @register(models.Product)
 class ProductTranslationOptions(BaseTranslationOptions):
-    fields = ('title',)
+    fields = ('title', 'body', 'features_body')
 
 
 @register(models.Feature)
@@ -21,5 +21,15 @@ class FeatureTranslationOptions(BaseTranslationOptions):
 
 
 @register(models.ProductFeature)
-class FeatureTranslationOptions(BaseTranslationOptions):
+class ProductFeatureTranslationOptions(BaseTranslationOptions):
     fields = ('value',)
+
+
+@register(models.ProductDocument)
+class ProductDocumentTranslationOptions(BaseTranslationOptions):
+    fields = ('document', 'title')
+
+
+@register(models.ProductImage)
+class ProductImageTranslationOptions(BaseTranslationOptions):
+    fields = ('alt',)
