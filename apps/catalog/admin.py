@@ -8,7 +8,7 @@ from catalog import models
 
 
 @admin.register(models.ProductCategory)
-class ProductAdmin(TranslationAdmin, MPTTModelAdmin):
+class ProductCategoryAdmin(TranslationAdmin, MPTTModelAdmin):
     """Категории продуктов"""
     list_display_links = ('image_thumb', 'title')
     list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')

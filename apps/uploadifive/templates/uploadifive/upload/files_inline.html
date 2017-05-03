@@ -1,0 +1,5 @@
+<fieldset class="module">
+	<h2>Файлы</h2>
+	<span class="help-inline">Будьте осторожны при переходе по ссылке! Файлы могут содержать опасный код.</span>
+	{% autoescape off %}{{ original.files_list }}{% endautoescape %}
+</fieldset>

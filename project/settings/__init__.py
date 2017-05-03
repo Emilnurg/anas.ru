@@ -158,7 +158,8 @@ INSTALLED_APPS = (
     'users',
     'dicts',
     'search',
-    'seo'
+    'seo',
+    'uploadifive'
 )
 
 LOGIN_URL = reverse_lazy('auth_login')
@@ -212,20 +213,21 @@ SUIT_CONFIG = {
     'ADMIN_NAME': 'Anas.ru',
     'MENU_OPEN_FIRST_CHILD': True,
     'MENU': [
-        {'app': 'catalog'},
-        {'app': 'base'},
-        {'app': 'core'},
-        {'app': 'press'},
-        {'app': 'education'},
-        {'app': 'knowledge'},
-        {'app': 'projects'},
-        {'app': 'general'},
-        {'app': 'dicts'},
-        {'app': 'pages'},
-        {'app': 'seo'},
-        {'app': 'users'},
-        {'app': 'auth'},
-        {'app': 'search'}
+        'catalog',
+        'base',
+        'core',
+        'press',
+        'education',
+        'knowledge',
+        'projects',
+        'general',
+        'dicts',
+        'pages',
+        'seo',
+        'users',
+        'auth',
+        'uploadifive'
+        'search'
     ]
 }
 
@@ -283,6 +285,56 @@ SEARCH = {
     'host': 'localhost',
     'port': '9200'
 }
+
+UPLOADIFIVE_IMAGE_MIMETYPES = (
+    'image/jpeg',
+    'image/gif',
+    'image/png',
+    'image/jpg',
+    'image/tiff',
+    'image/bmp',
+)
+
+UPLOADIFIVE_GENERIC_MIMETYPES = (
+    'application/pdf',
+    'text/csv',
+    'text/plain',
+    'application/msword',
+    'text/rtf',
+    'application/rtf',
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.ms-powerpoint',
+    'application/x-rar-compressed',
+    'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+)
+
+UPLOADIFIVE_VIDEO_MIMETYPES = (
+    'video/mpeg',
+    'video/mp4',
+    'video/ogg',
+    'video/quicktime',
+    'video/webm',
+    'video/x-ms-wmv',
+    'video/x-flv',
+    'video/3gpp',
+    'video/3gpp2',
+    'video/x-ms-asf',
+    'video/x-ms-asf-plugin',
+    'video/avi',
+    'video/msvideo',
+    'video/x-msvideo',
+    'application/x-troff-msvideo',
+    'video/x-dv',
+    'video/dl',
+    'video/x-dl',
+    'video/x-sgi-movie',
+    'video/x-mpeg',
+    'video/x-mpeq2a',
+    'video/vnd.rn-realvideo',
+    'video/x-matroska'
+)
 
 
 try:
