@@ -17,7 +17,9 @@ class UploadAdminMixin(object):
 @admin.register(models.Upload)
 class UploadAdmin(admin.ModelAdmin):
     """Загруженные файлы"""
-    list_display = ('id', 'filetype', 'filename', 'obtained', 'created')
-    list_filter = ('obtained',)
     date_hierarchy = 'created'
+    fields = models.Upload().collect_fields()
+    list_display = ('id', 'filetype', 'filename', 'obtained', 'created')
+    list_filter = ('obtained', 'filetype')
+    readonly_fields = ('created', 'updated')
     search_fields = ('data', 'filetype', 'filename')

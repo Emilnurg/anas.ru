@@ -12,7 +12,8 @@ from snippets.models.enumerates import StatusEnum
 
 CREATED_VERBOSE = _('Создано')
 UPDATED_VERBOSE = _('Обновлено')
-UTIL_FIELDS = ('id', 'created', 'updated', 'ordering', 'status')
+LASTMOD_FIELDS = ('created', 'updated')
+UTIL_FIELDS = ('id', 'ordering', 'status') + LASTMOD_FIELDS
 
 
 class BaseQuerySet(QuerySet):
@@ -35,11 +36,19 @@ class BasicModel(models.Model):
 
     def collect_fields(self):
         fields = []
-        has_status_ordering = False
+        has_status = False
+        has_ordering = False
+        has_last_mod = False
 
         for field in self._meta.fields:
             if field.attname == 'status':
-                has_status_ordering = True
+                has_status = True
+
+            if field.attname == 'ordering':
+                has_ordering = True
+
+            if field.attname in LASTMOD_FIELDS:
+                has_last_mod = True
 
             if field.attname in UTIL_FIELDS:
                 continue
@@ -51,7 +60,18 @@ class BasicModel(models.Model):
                 fields.append(field.attname.replace('_id', ''))
             else:
                 fields.append(field.attname)
-        return fields + (['status', 'ordering'] if has_status_ordering else [])
+
+        # служебные поля в самый конец
+        if has_status:
+            fields.append('status')
+
+        if has_ordering:
+            fields.append('ordering')
+
+        if has_last_mod:
+            fields.extend(LASTMOD_FIELDS)
+
+        return fields
 
     def __repr__(self):
         return self.__str__()

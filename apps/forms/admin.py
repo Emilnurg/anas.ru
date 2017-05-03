@@ -11,15 +11,16 @@ from jinja2.filters import do_wordwrap
 
 from forms import models
 from forms.enums import FormRequestReadStatusEnum
+from snippets.admin import IsNullFieldListFilter
 
 
 class BaseFormRequestAdmin(admin.ModelAdmin):
     """Базовый класс для админ.части запросов из форм"""
-    list_display = ('id', 'language', 'created')
-    search_fields = ('=id',)
-    ordering = ('-created',)
     date_hierarchy = 'created'
+    list_display = ('id', 'language', 'created')
     list_filter = ('read_status', 'language')
+    ordering = ('-created',)
+    search_fields = ('=id',)
 
     @staticmethod
     def suit_row_attributes(obj, request):
@@ -45,8 +46,8 @@ class BaseFormRequestAdmin(admin.ModelAdmin):
 
 class BaseNamePhoneRequestAdmin(BaseFormRequestAdmin):
     """Базовый класс для админ.части запросов из форм с именем и телефоном"""
-    list_display_links = ('id', 'name')
     list_display = ('id', 'name', 'telephone', 'language', 'created')
+    list_display_links = ('id', 'name')
     search_fields = BaseFormRequestAdmin.search_fields + ('name', 'telephone')
 
 
@@ -65,17 +66,18 @@ class CommentAdminMixin(admin.ModelAdmin):
 @admin.register(models.Comment)
 class CommentAdmin(CommentAdminMixin, BaseFormRequestAdmin):
     """Админ.часть для комментариев"""
-    list_display_links = ('id', 'name')
     list_display = (
         'id', 'name', 'telephone_email', 'comment_short', 'is_answer', 'language', 'created'
     )
-    search_fields = BaseFormRequestAdmin.search_fields + \
-        ('name', 'telephone_email', 'comment', 'object_id')
+    list_display_links = ('id', 'name')
     # noinspection PyTypeChecker
     list_filter = BaseFormRequestAdmin.list_filter + (
-        'content_type', ('parent', admin.BooleanFieldListFilter)
+        'content_type', ('parent', IsNullFieldListFilter)
     )
     raw_id_fields = ('parent', 'upload')
+    search_fields = BaseFormRequestAdmin.search_fields + (
+        'name', 'telephone_email', 'comment', 'object_id'
+    )
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
@@ -93,10 +95,10 @@ class EducationFormRequestAdmin(BaseNamePhoneRequestAdmin):
     """Админ.часть запросов на обучение"""
     # TODO: раскомментировать
     # list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
+    # list_filter = BaseNamePhoneRequestAdmin.list_filter + ('education__categories',)
     # search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
     # for language in settings.LANGUAGE_CODES:
     #     search_fields.append('education__title_' + language)
-    # list_filter = BaseNamePhoneRequestAdmin.list_filter + ('education__categories',)
 
 
 @admin.register(models.FeedbackFormRequest)
@@ -120,10 +122,30 @@ class PartnershipFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
 class PurchaseFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
     """Админ.часть запросов закупки"""
     list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
+    list_filter = BaseNamePhoneRequestAdmin.list_filter + ('product__categories',)
     search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
     for language in settings.LANGUAGE_CODES:
         search_fields.append('product__title_' + language)
+
+
+@admin.register(models.ProductProposalRequest)
+class ProductProposalRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
+    """Админ.часть запросов КП по товарам"""
+    list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
     list_filter = BaseNamePhoneRequestAdmin.list_filter + ('product__categories',)
+    search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
+    for language in settings.LANGUAGE_CODES:
+        search_fields.append('product__title_' + language)
+
+
+@admin.register(models.ProductQuestionRequest)
+class ProductQuestionRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
+    """Админ.часть вопросов по товарам"""
+    list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
+    list_filter = BaseNamePhoneRequestAdmin.list_filter + ('product__categories',)
+    search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
+    for language in settings.LANGUAGE_CODES:
+        search_fields.append('product__title_' + language)
 
 
 @admin.register(models.ProductProposalRequest)

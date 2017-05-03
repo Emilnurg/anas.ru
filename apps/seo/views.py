@@ -13,7 +13,7 @@ class SitemapView(BaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SitemapView, self).get_context_data(**kwargs)
-        pages = Page.objects.published().only('id', 'slug')
+        pages = Page.objects.published().only('id', 'slug').order_by('ordering')
 
         context.update({
             'querysets': (pages,),
@@ -29,7 +29,7 @@ class RobotsView(BaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(RobotsView, self).get_context_data(**kwargs)
-        user_agents = Robot.objects.published()
+        user_agents = Robot.objects.published().order_by('ordering')
 
         context.update({
             'user_agents': user_agents,

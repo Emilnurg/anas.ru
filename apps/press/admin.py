@@ -9,17 +9,18 @@ from press import models
 
 class NewsSectionInline(TranslationStackedInline):
     """Секции новости"""
-    model = models.NewsSection
     extra = 0
     fields = models.NewsSection().collect_fields()
+    model = models.NewsSection
+    ordering = ('ordering',)
 
 
 class NewsRelatedInline(admin.TabularInline):
     """Связанные новости"""
-    model = models.News.related_news.through
     extra = 0
-    raw_id_fields = ('to_news',)
     fk_name = 'from_news'
+    model = models.News.related_news.through
+    raw_id_fields = ('to_news',)
 
 
 @admin.register(models.News)

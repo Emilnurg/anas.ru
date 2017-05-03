@@ -33,6 +33,7 @@ LANGUAGE_CODE = 'ru-RU'
 LANGUAGES = (
     ('ru', gettext_noop('Русский')),
     ('en', gettext_noop('English')),
+    ('fr', gettext_noop('Français'))
 )
 LANGUAGE_CODES = tuple([x[0] for x in LANGUAGES])
 DEFAULT_LANGUAGE = MODELTRANSLATION_DEFAULT_LANGUAGE = LANGUAGES[0][0]

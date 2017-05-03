@@ -67,14 +67,10 @@ class SuperUserDeletableAdminMixin(object):
         return request.user.is_superuser
 
 
-class VirtualDeleteAdminMixin(object):
-    readonly_fields = ('is_deleted',)
-    list_filter = ('is_deleted',)
-
-    @staticmethod
-    def suit_row_attributes(obj, request):
-        return {'class': 'is-deleted' if obj.is_deleted else ''}
-
-
 class BaseModelAdmin(ModelAdmin):
-    pass
+    """Базовый класс для админ.части модели BaseModel"""
+    list_display = ('id', 'status', 'ordering', 'created')
+    list_editable = ('status', 'ordering')
+    list_filter = ('status',)
+    ordering = ('ordering',)
+    readonly_fields = ('created', 'updated')

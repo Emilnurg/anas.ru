@@ -4,9 +4,9 @@ from django.contrib.auth.admin import UserAdmin, GroupAdmin as DjangoGroupAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
 
+from snippets.admin import activate_action, deactivate_action
 from users.forms import UserAdminForm, UserCreationForm
 from users import models
-from snippets.admin import activate_action, deactivate_action, BaseModelAdmin
 
 
 admin.site.unregister(Group)
@@ -18,14 +18,10 @@ class GroupAdmin(DjangoGroupAdmin):
 
 
 @admin.register(models.User)
-class UserAdmin(UserAdmin, BaseModelAdmin):
-    form = UserAdminForm
-    add_form = UserCreationForm
-    list_display = ('username', 'get_full_name', 'is_active')
+class UserAdmin(UserAdmin):
+    """Пользователи"""
     actions = (activate_action, deactivate_action)
-    list_filter = ('is_active', 'is_staff', 'is_superuser', 'groups')
-    search_fields = ('=id', 'username', 'full_name', 'email')
-    readonly_fields = ('last_login', 'date_joined', 'created')
+    add_form = UserCreationForm
     fieldsets = (
         (None, {
             'classes': ('suit-tab', 'suit-tab-general'),
@@ -44,7 +40,11 @@ class UserAdmin(UserAdmin, BaseModelAdmin):
             'fields': ('is_staff', 'is_superuser')
         })
     )
-
+    form = UserAdminForm
+    list_display = ('username', 'get_full_name', 'is_active')
+    list_filter = ('is_active', 'is_staff', 'is_superuser', 'groups')
+    readonly_fields = ('last_login', 'date_joined', 'created')
+    search_fields = ('=id', 'username', 'full_name', 'email')
     suit_form_tabs = (
         ('general', _('Общее')),
         ('permission', _('Права'))

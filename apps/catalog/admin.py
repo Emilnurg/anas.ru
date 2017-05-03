@@ -5,33 +5,34 @@ from modeltranslation.admin import TranslationAdmin
 from mptt.admin import MPTTModelAdmin
 
 from catalog import models
+from snippets.admin import BaseModelAdmin
 
 
 @admin.register(models.ProductCategory)
-class ProductCategoryAdmin(TranslationAdmin, MPTTModelAdmin):
+class ProductCategoryAdmin(BaseModelAdmin, TranslationAdmin, MPTTModelAdmin):
     """Категории продуктов"""
-    list_display_links = ('image_thumb', 'title')
-    list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
-    search_fields = ('=id', 'title', 'slug', 'image')
-    list_filter = ('status', 'parent')
-    list_editable = ('status', 'ordering')
     fields = models.ProductCategory().collect_fields()
+    list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
+    list_display_links = ('image_thumb', 'title')
+    list_editable = ('status', 'ordering')
+    list_filter = ('status', 'parent')
     ordering = ('ordering', 'title')
+    search_fields = ('=id', 'title', 'slug', 'image')
 
     class Media:
         js = ('admin/js/translit.js',)
 
 
 @admin.register(models.Product)
-class ProductAdmin(TranslationAdmin):
+class ProductAdmin(BaseModelAdmin, TranslationAdmin):
     """Продукты"""
-    list_display_links = ('image_thumb', 'title')
-    list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
-    search_fields = ('=id', 'title', 'slug', 'image')
-    list_filter = ('status',)
-    list_editable = ('status', 'ordering')
     fields = models.Product().collect_fields()
+    list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
+    list_display_links = ('image_thumb', 'title')
+    list_editable = ('status', 'ordering')
+    list_filter = ('status',)
     ordering = ('ordering', 'title')
+    search_fields = ('=id', 'title', 'slug', 'image')
 
     class Media:
         js = ('admin/js/translit.js',)

@@ -21,7 +21,6 @@ class SEOPage(BaseModel, SEOMixin):
         return '%s: %s' % (self.url, self.seo_title)
 
     class Meta:
-        ordering = ('ordering',)
         verbose_name = _('SEO параметр')
         verbose_name_plural = _('SEO параметры')
 
@@ -50,7 +49,6 @@ class Redirect(BaseModel):
         )
 
     class Meta:
-        ordering = ('ordering',)
         verbose_name = _('Редирект')
         verbose_name_plural = _('Редиректы')
 
@@ -68,7 +66,6 @@ class Robot(BaseModel):
         return self.title
 
     class Meta:
-        ordering = ('ordering',)
         verbose_name = _('Робот (User-agent)')
         verbose_name_plural = _('Robots.txt')
 
@@ -82,7 +79,6 @@ class RobotDisallow(BaseModel):
     objects = BaseManager()
 
     class Meta:
-        ordering = ('ordering',)
         verbose_name = _('Disallow')
         verbose_name_plural = _('Disallow (Запреты)')
 
@@ -96,7 +92,6 @@ class RobotAllow(BaseModel):
     objects = BaseManager()
 
     class Meta:
-        ordering = ('ordering',)
         verbose_name = _('Allow')
         verbose_name_plural = _('Allow (Разрешения)')
 
@@ -111,7 +106,6 @@ class RobotCleanparam(BaseModel):
     objects = BaseManager()
 
     class Meta:
-        ordering = ('ordering',)
         verbose_name = _('Clean-param')
         verbose_name_plural = _('Параметры Clean-param')
 
@@ -125,6 +119,5 @@ class RobotSitemap(BaseModel):
     objects = BaseManager()
 
     class Meta:
-        ordering = ('ordering',)
         verbose_name = _('Sitemap')
         verbose_name_plural = _('Sitemap (Карты сайта XML)')

@@ -15,15 +15,15 @@ handler500 = 'snippets.basics.views.e500'
 urlpatterns = (
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('pages.urls', namespace='pages')),
     url(r'^', include('catalog.urls', namespace='catalog')),
-    url(r'^', include('press.urls', namespace='press')),
-    url(r'^', include('knowledge.urls', namespace='knowledge')),
-    url(r'^', include('projects.urls', namespace='projects')),
     url(r'^', include('education.urls', namespace='education')),
+    url(r'^', include('forms.urls', namespace='forms')),
+    url(r'^', include('knowledge.urls', namespace='knowledge')),
+    url(r'^', include('pages.urls', namespace='pages')),
+    url(r'^', include('press.urls', namespace='press')),
+    url(r'^', include('projects.urls', namespace='projects')),
     url(r'^', include('search.urls', namespace='search')),
-    url(r'^', include('seo.urls', namespace='seo')),
-    url(r'^', include('forms.urls', namespace='forms'))
+    url(r'^', include('seo.urls', namespace='seo'))
 )
 
 if settings.DEBUG is True:

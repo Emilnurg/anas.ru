@@ -7,6 +7,18 @@ from solo.models import SingletonModel
 from snippets.models import LastModMixin, BaseModel, BasicModel
 
 
+class City(BaseModel):
+    """Города"""
+    title = models.CharField(_('Название'), max_length=255, db_index=True, unique=True)
+
+    class Meta:
+        verbose_name = _('Город')
+        verbose_name_plural = _('Города')
+
+    def __str__(self):
+        return self.title
+
+
 class SiteConfiguration(SingletonModel, LastModMixin, BasicModel):
     """Настройки сайта"""
     def __str__(self):
