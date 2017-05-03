@@ -2,7 +2,7 @@
 from mimetypes import guess_type
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt
 
@@ -12,7 +12,6 @@ from snippets.views import BaseView
 from uploadifive.db import NonceException
 from uploadifive.jinjaglobals import nonce
 from uploadifive.models import Nonce, Upload
-from uploadifive.utils import JSONResponse
 
 
 class NonceView(BaseView):
@@ -63,7 +62,7 @@ class UploadView(BaseView):
         try:
             nonce_obj = Nonce.objects.lookup(nonce_key)
         except NonceException as e:
-            response = JSONResponse({
+            response = JsonResponse({
                 'status': 'error',
                 'message': str(e)
             })
@@ -76,7 +75,7 @@ class UploadView(BaseView):
             data, error = processor(data)
 
             if error:
-                response = JSONResponse({
+                response = JsonResponse({
                     'status': 'error',
                     'message': error
                 })
@@ -91,7 +90,7 @@ class UploadView(BaseView):
                 upload.user_id = nonce_obj.user_id
                 upload.save()
 
-                response = JSONResponse({
+                response = JsonResponse({
                     'status': 'ok',
                     'url': upload.data.url
                 })

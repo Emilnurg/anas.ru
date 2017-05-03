@@ -4,10 +4,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from solo.models import SingletonModel
 
-from snippets.models import LastModMixin, BaseModel
+from snippets.models import LastModMixin, BaseModel, BasicModel
 
 
-class SiteConfiguration(SingletonModel, LastModMixin):
+class SiteConfiguration(SingletonModel, LastModMixin, BasicModel):
     """Настройки сайта"""
     def __str__(self):
         return _('Настройки сайта')

@@ -19,15 +19,15 @@ class Page(BaseModel):
     )
     body = RichTextUploadingField(_('Контент'))
 
+    class Meta:
+        verbose_name = _('Простая страница')
+        verbose_name_plural = _('Простые страницы')
+
     def __str__(self):
         return self.title
 
     def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
         return reverse('core:flatpage', kwargs={'lang': lang, 'slug': self.slug})
-
-    class Meta:
-        verbose_name = _('Простая страница')
-        verbose_name_plural = _('Простые страницы')
 
 
 class Gallery(ImageMixin, BaseModel):
@@ -39,12 +39,12 @@ class Gallery(ImageMixin, BaseModel):
         help_text=_('Для идентификации в административной части сайта')
     )
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = _('Галерея фотографий')
         verbose_name_plural = _('Галереи фотографий')
+
+    def __str__(self):
+        return self.title
 
 
 class GalleryPhoto(ImageMixin, BaseModel):
@@ -54,9 +54,9 @@ class GalleryPhoto(ImageMixin, BaseModel):
     alt = models.CharField(_('Текст вместо фото (alt)'), blank=True, null=False, max_length=255)
     body = RichTextUploadingField(_('Описание фото'), blank=True, null=False)
 
-    def __str__(self):
-        return self.alt if self.alt else str(self.pk)
-
     class Meta:
         verbose_name = _('Фотография галереи')
         verbose_name_plural = _('Фотографии галереи')
+
+    def __str__(self):
+        return self.alt if self.alt else str(self.pk)

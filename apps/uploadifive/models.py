@@ -3,7 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from snippets.models import LastModMixin
+from snippets.models import LastModMixin, BasicModel
 from snippets.models.image import ImageMixin
 from uploadifive import NONCE_LENGTH
 from uploadifive.db import NonceManager
@@ -11,7 +11,7 @@ from uploadifive.enums import UploadTypeEnum
 from uploadifive.utils import upload_path_generator
 
 
-class Nonce(LastModMixin):
+class Nonce(LastModMixin, BasicModel):
     """Токены"""
     key = models.CharField(
         _('Токен'), max_length=NONCE_LENGTH, unique=True, blank=False, null=False
@@ -31,7 +31,7 @@ class Nonce(LastModMixin):
             if self.user_id else _('Ключ: %s') % self.key
 
 
-class Upload(ImageMixin, LastModMixin):
+class Upload(ImageMixin, LastModMixin, BasicModel):
     """Файл загрузки"""
     image_field = 'data'
     data = models.FileField(

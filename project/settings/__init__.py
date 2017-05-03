@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     'knowledge',
     'users',
     'dicts',
+    'forms',
     'search',
     'seo',
     'uploadifive'

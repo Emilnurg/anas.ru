@@ -23,6 +23,7 @@ urlpatterns = (
     url(r'^', include('education.urls', namespace='education')),
     url(r'^', include('search.urls', namespace='search')),
     url(r'^', include('seo.urls', namespace='seo')),
+    url(r'^', include('forms.urls', namespace='forms'))
 )
 
 if settings.DEBUG is True:
