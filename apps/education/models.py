@@ -22,6 +22,8 @@ class Teacher(ImageMixin, BaseModel):
         'Course', verbose_name=_('Курсы'), through='CourseTeacher', blank=True
     )
 
+    translation_fields = ('title',)
+
     class Meta:
         verbose_name = _('Преподаватель')
         verbose_name_plural = _('Преподаватели')
@@ -52,6 +54,10 @@ class Course(BaseArticle):
         Teacher, verbose_name=_('Преподаватели'), through='CourseTeacher'
     )
 
+    translation_fields = BaseArticle.translation_fields + (
+        'body_about', 'body_detail', 'body_schedule'
+    )
+
     class Meta:
         verbose_name = _('Курс')
         verbose_name_plural = _('Курсы')
@@ -66,6 +72,8 @@ class CourseTeacher(BaseModel):
         help_text=_('Например, "лектор"')
     )
 
+    translation_fields = ('teacher_role',)
+
     class Meta:
         verbose_name = _('Преподаватель курса')
         verbose_name_plural = _('Преподаватели курса')
@@ -79,6 +87,8 @@ class CourseSchedule(BaseModel):
     )
     schedule_time = models.TimeField(_('Время'))
     title = models.CharField(_('Мероприятие'), max_length=255)
+
+    translation_fields = ('title',)
 
     class Meta:
         verbose_name = _('Строка расписания курса')

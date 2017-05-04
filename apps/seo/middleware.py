@@ -4,7 +4,7 @@ from django.http import HttpResponseGone, HttpResponsePermanentRedirect,\
 from django.conf import settings
 from django.http.response import HttpResponseRedirectBase
 
-from seo.db import RedirectCodes
+from seo.enums import RedirectCodes
 from seo.models import SEOPage
 from seo.router import router
 

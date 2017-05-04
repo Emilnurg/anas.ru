@@ -12,6 +12,8 @@ class DbConfig(BaseModel):
     verbose_title = models.CharField(_('Что означает'), max_length=250)
     value = models.TextField(_('Значение'), blank=True, null=False)
 
+    translation_fields = ('value',)
+
     class Meta:
         verbose_name = _('Переменная')
         verbose_name_plural = _('Переменные шаблонов')
@@ -54,6 +56,8 @@ class MenuItem(BaseModel):
     url = models.CharField(_('Ссылка'), max_length=255)
     title = models.CharField(_('Заголовок'), max_length=255, blank=True, null=False)
     alt = models.CharField(_('Текст при наведении'), blank=True, null=True, max_length=255)
+
+    translation_fields = ('url', 'title', 'alt')
 
     class Meta:
         verbose_name = _('Пункт меню')

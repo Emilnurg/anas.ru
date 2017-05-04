@@ -19,6 +19,8 @@ class Page(BaseModel):
     )
     body = RichTextUploadingField(_('Контент'))
 
+    translation_fields = ('title', 'body')
+
     class Meta:
         verbose_name = _('Простая страница')
         verbose_name_plural = _('Простые страницы')
@@ -39,6 +41,8 @@ class Gallery(ImageMixin, BaseModel):
         help_text=_('Для идентификации в административной части сайта')
     )
 
+    translation_fields = ('title',)
+
     class Meta:
         verbose_name = _('Галерея фотографий')
         verbose_name_plural = _('Галереи фотографий')
@@ -53,6 +57,8 @@ class GalleryPhoto(ImageMixin, BaseModel):
     image = models.ImageField(_('Фотография'), upload_to='galleries/photos/%Y/%m/%d')
     alt = models.CharField(_('Текст вместо фото (alt)'), blank=True, null=False, max_length=255)
     body = RichTextUploadingField(_('Описание фото'), blank=True, null=False)
+
+    translation_fields = ('alt', 'body')
 
     class Meta:
         verbose_name = _('Фотография галереи')

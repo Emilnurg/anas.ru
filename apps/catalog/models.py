@@ -33,6 +33,8 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
     )
     body = RichTextUploadingField(_('Контент'), blank=True, null=False)
 
+    translation_fields = ('title', 'body')
+
     class MPTTMeta:
         order_insertion_by = ['ordering']
 
@@ -64,6 +66,8 @@ class Product(ImageMixin, BaseModel):
         blank=True
     )
 
+    translation_fields = ('title', 'body', 'features_body')
+
     def __str__(self):
         return self.title
 
@@ -75,6 +79,8 @@ class Product(ImageMixin, BaseModel):
 class Feature(BaseModel):
     """Характеристика"""
     title = models.CharField(_('Заголовок'), max_length=255, unique=True)
+
+    translation_fields = ('title',)
 
     class Meta:
         verbose_name = _('Характеристика')
@@ -90,6 +96,8 @@ class ProductDocument(BaseModel):
     document = models.FileField(_('Документ'), max_length=255, upload_to='products/docs')
     title = models.CharField(_('Заголовок'), max_length=255, blank=True, null=True)
     publish_date = models.DateTimeField(_('Дата публикации'), db_index=True, default=utcnow)
+
+    translation_fields = ('document', 'title')
 
     def __str__(self):
         return '%s: %s' % (self.product, self.title)
@@ -107,6 +115,8 @@ class ProductFeature(BaseModel):
     )
     value = models.CharField(_('Значение'), max_length=255)
 
+    translation_fields = ('value',)
+
     class Meta:
         verbose_name = _('Характеристика товара')
         verbose_name_plural = _('Характеристики товара')
@@ -123,6 +133,8 @@ class ProductImage(ImageMixin, BaseModel):
         _('Подпись (alt)'), max_length=255, blank=True, null=True,
         help_text=_('Альтернативный текст вместо изображения')
     )
+
+    translation_fields = ('alt',)
 
     def __str__(self):
         return str(self.pk)

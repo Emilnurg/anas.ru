@@ -7,24 +7,19 @@ from snippets.modeltranslation import BaseTranslationOptions
 
 @register(models.AboutPage)
 class AboutPageTranslationOptions(BaseTranslationOptions):
-    fields = (
-        'title', 'subtitle', 'quote_image', 'quote', 'quoted_person', 'main_body',
-        'guarantee_title', 'guarantee_body', 'questions_title', 'questions_subtitle'
-    )
+    fields = models.AboutPage.translation_fields
 
 
 @register(models.ContactsPage)
 class ContactsPageTranslationOptions(BaseTranslationOptions):
-    fields = (
-        'title', 'address', 'questions_title', 'questions_subtitle', 'map_x', 'map_y', 'map_zoom'
-    )
+    fields = models.ContactsPage.translation_fields
 
 
 @register(models.HomePage)
 class HomePageTranslationOptions(BaseTranslationOptions):
-    fields = ('title', 'subtitle')
+    fields = models.HomePage.translation_fields
 
 
 @register(models.HomeAdvantage)
 class HomeAdvantageTranslationOptions(BaseTranslationOptions):
-    fields = ('title',)
+    fields = models.HomeAdvantage.translation_fields

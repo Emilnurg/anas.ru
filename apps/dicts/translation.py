@@ -7,14 +7,14 @@ from snippets.modeltranslation import BaseTranslationOptions
 
 @register(models.City)
 class CityTranslationOptions(BaseTranslationOptions):
-    fields = ('title',)
+    fields = models.City.translation_fields
 
 
 @register(models.SiteConfiguration)
 class SiteConfigurationTranslationOptions(BaseTranslationOptions):
-    fields = ()
+    fields = models.SiteConfiguration.translation_fields
 
 
 @register(models.SocialNetwork)
 class SocialNetworkTranslationOptions(BaseTranslationOptions):
-    fields = ('title', 'url')
+    fields = models.SocialNetwork.translation_fields

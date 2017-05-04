@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from modeltranslation.admin import TranslationAdmin
 
+from base import models
 from snippets.admin import BaseModelAdmin
+from snippets.modeltranslation import get_model_translation_fields
 
 
 class BaseArticleAdmin(BaseModelAdmin, TranslationAdmin):
@@ -11,7 +13,7 @@ class BaseArticleAdmin(BaseModelAdmin, TranslationAdmin):
     list_display_links = ('image_thumb', 'title')
     list_editable = ('status', 'ordering', 'publish_date')
     ordering = ('-publish_date', 'ordering')
-    search_fields = ('=id', 'title', 'slug', 'excerpt', 'image', 'body')
+    search_fields = ['=id', 'slug', 'image'] + get_model_translation_fields(models.BaseArticle)
 
     class Media:
         js = ('admin/js/translit.js',)

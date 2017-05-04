@@ -33,6 +33,7 @@ BaseManager.use_for_related_fields = True
 
 class BasicModel(models.Model):
     objects = Manager()
+    translation_fields = tuple()
 
     def collect_fields(self):
         fields = []

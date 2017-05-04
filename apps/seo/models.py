@@ -2,11 +2,46 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from seo.db import RedirectCodes, SEOMixin
+from seo.enums import RedirectCodes
 from snippets.models import BaseModel, BaseManager
 
 
-class SEOPage(BaseModel, SEOMixin):
+class SEOMixin(models.Model):
+    """Базовый класс для SEO-параметров модели"""
+    seo_title = models.CharField(_('SEO Заголовок (title)'), max_length=254, blank=True, null=True)
+    seo_description = models.TextField(_('META Description'), blank=True, null=True)
+    seo_keywords = models.TextField(_('META Keywords'), blank=True, null=True)
+
+    translation_fields = ('seo_title', 'seo_description', 'seo_keywords')
+
+    def collect_fieldsets(self, extra_general=None):
+        fields = self.collect_fields()
+        if extra_general:
+            fields += extra_general
+        return [
+            (_('Основное'), {
+                'classes': ('suit-tab suit-tab-general',),
+                'fields': fields
+            }),
+            ('SEO', {
+                'classes': ('suit-tab suit-tab-seo',),
+                'fields': ['seo_title', 'seo_description', 'seo_keywords']
+            }),
+        ]
+
+    def apply_seo_params(self, request):
+        request.seo_params = {
+            'seo_title': self.seo_title or getattr(self, 'title', None),
+            'seo_description': self.seo_description,
+            'seo_keywords': self.seo_keywords,
+        }
+        return request
+
+    class Meta:
+        abstract = True
+
+
+class SEOPage(SEOMixin, BaseModel):
     """SEO properties"""
     url = models.CharField(
         _('Ссылка (URL)'), max_length=255, blank=False, null=False,

@@ -11,6 +11,8 @@ class City(BaseModel):
     """Города"""
     title = models.CharField(_('Название'), max_length=255, db_index=True, unique=True)
 
+    translation_fields = ('title',)
+
     class Meta:
         verbose_name = _('Город')
         verbose_name_plural = _('Города')
@@ -19,7 +21,7 @@ class City(BaseModel):
         return self.title
 
 
-class SiteConfiguration(SingletonModel, LastModMixin, BasicModel):
+class SiteConfiguration(BasicModel, LastModMixin, SingletonModel):
     """Настройки сайта"""
     def __str__(self):
         return _('Настройки сайта')
@@ -35,6 +37,8 @@ class SocialNetwork(BaseModel):
     class_name = models.CharField(
         _('CSS-класс для ссылки (a тэг)'), blank=True, null=True, max_length=50
     )
+
+    translation_fields = ('title', 'url')
 
     class Meta:
         verbose_name = _('Социальная сеть')

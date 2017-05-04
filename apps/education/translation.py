@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
 from modeltranslation.decorators import register
 
-from base.trnaslation import BaseArticleTranslationOptions
+from base.translation import BaseArticleTranslationOptions
 from education import models
 from snippets.modeltranslation import BaseTranslationOptions
 
 
 @register(models.Course)
 class CourseTranslationOptions(BaseArticleTranslationOptions):
-    fields = BaseArticleTranslationOptions.fields + ('body_about', 'body_detail', 'body_schedule')
+    fields = models.Course.translation_fields
 
 
 @register(models.Teacher)
 class TeacherTranslationOptions(BaseTranslationOptions):
-    fields = ('title',)
+    fields = models.Teacher.translation_fields
 
 
 @register(models.CourseTeacher)
 class CourseTeacherTranslationOptions(BaseTranslationOptions):
-    fields = ('teacher_role',)
+    fields = models.CourseTeacher.translation_fields
 
 
 @register(models.CourseSchedule)
 class CourseScheduleTranslationOptions(BaseTranslationOptions):
-    fields = ('title',)
+    fields = models.CourseSchedule.translation_fields

@@ -31,6 +31,8 @@ class NewsSection(BaseModel):
         related_name='news_sections'
     )
 
+    translation_fields = ('title', 'body')
+
     def __str__(self):
         return str(self.pk) if self.pk else ''
 

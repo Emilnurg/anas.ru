@@ -7,4 +7,4 @@ from snippets.modeltranslation import BaseTranslationOptions
 
 @register(models.SEOPage)
 class SEOPageTranslationOptions(BaseTranslationOptions):
-    fields = ('seo_title', 'seo_description', 'seo_keywords')
+    fields = models.SEOPage.translation_fields

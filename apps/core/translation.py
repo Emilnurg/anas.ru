@@ -7,14 +7,14 @@ from snippets.modeltranslation import BaseTranslationOptions
 
 @register(models.Page)
 class PageTranslationOptions(BaseTranslationOptions):
-    fields = ('title', 'body')
+    fields = models.Page.translation_fields
 
 
 @register(models.Gallery)
 class GalleryTranslationOptions(BaseTranslationOptions):
-    fields = ('title',)
+    fields = models.Gallery.translation_fields
 
 
 @register(models.GalleryPhoto)
 class GalleryPhotoTranslationOptions(BaseTranslationOptions):
-    fields = ('alt', 'body')
+    fields = models.GalleryPhoto.translation_fields

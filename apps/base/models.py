@@ -33,6 +33,8 @@ class BaseArticle(ImageMixin, BaseModel):
         _('Контент'), blank=True, null=False, help_text=_('Выводится выше всех секций')
     )
 
+    translation_fields = ('title', 'excerpt', 'body')
+
     class Meta:
         abstract = True
 

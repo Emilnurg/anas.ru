@@ -7,9 +7,9 @@ from snippets.modeltranslation import BaseTranslationOptions
 
 @register(models.DbConfig)
 class DbConfigTranslationOptions(BaseTranslationOptions):
-    fields = ('value',)
+    fields = models.DbConfig.translation_fields
 
 
 @register(models.MenuItem)
 class MenuItemTranslationOptions(BaseTranslationOptions):
-    fields = ('url', 'title', 'alt')
+    fields = models.MenuItem.translation_fields
