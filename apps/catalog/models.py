@@ -1,16 +1,36 @@
 # -*- coding: utf-8 -*-
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
-from ckeditor_uploader.fields import RichTextUploadingField
 from image_cropping import ImageCropField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
 from catalog.enums import ImagePositionEnum
-from snippets.datetime import utcnow
 from snippets.models import BaseModel
 from snippets.models.image import ImageMixin
+from snippets.utils.datetime import utcnow
+
+
+class Manufacturer(ImageMixin, BaseModel):
+    """Производитель"""
+    title = models.CharField(_('Название'), max_length=255, db_index=True)
+    slug = models.SlugField(
+        _('Алиас'), max_length=150, db_index=True, unique=True,
+        help_text=_('Латинские буквы и цифры')
+    )
+    image = models.ImageField(
+        _('Лого'), max_length=255, upload_to='manufacturers', blank=True, null=True
+    )
+
+    translation_fields = ('title',)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _('Производитель')
+        verbose_name_plural = _('Производители')
 
 
 class ProductCategory(ImageMixin, BaseModel, MPTTModel):
@@ -53,6 +73,9 @@ class Product(ImageMixin, BaseModel):
         _('Алиас'), max_length=150, db_index=True, unique=True,
         help_text=_('Латинские буквы и цифры')
     )
+    sku = models.CharField(
+        _('Артикул'), max_length=255, blank=True, null=True, db_index=True, unique=True
+    )
     image = ImageCropField(
         _('Главное изображение'), max_length=255, upload_to='products', blank=True, null=True
     )
@@ -61,6 +84,10 @@ class Product(ImageMixin, BaseModel):
         _('Контент над характеристиками'), blank=True, null=False
     )
 
+    manufacturer = models.ForeignKey(
+        Manufacturer, related_name='products', verbose_name=_('Производитель'),
+        blank=True
+    )
     categories = models.ManyToManyField(
         ProductCategory, verbose_name=_('Категории'), related_name='products',
         blank=True

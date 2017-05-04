@@ -29,5 +29,6 @@ class MenuAdmin(SuperUserDeletableAdminMixin, BaseModelAdmin):
     fields = models.Menu().collect_fields()
     list_display = ('slug', 'comment', 'status', 'created')
     list_editable = ('status',)
+    ordering = BaseModelAdmin.ordering + ('slug',)
     search_fields = ['=id', 'slug', 'comment'] + \
         ['items__%s' % x for x in get_model_translation_fields(models.MenuItem)]

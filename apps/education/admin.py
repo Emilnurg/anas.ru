@@ -30,7 +30,7 @@ class CourseAdmin(BaseArticleAdmin):
     fields = models.Course().collect_fields()
     inlines = (CourseTeacherInline, CourseScheduleInline)
     list_display = (
-        'image_thumb', 'title', 'date_start', 'date_finish', 'ordering', 'status', 'created'
+        'id', 'image_thumb', 'title', 'date_start', 'date_finish', 'ordering', 'status', 'created'
     )
     list_editable = ('status', 'ordering')
     list_filter = BaseArticleAdmin.list_filter + ('city',)
@@ -45,6 +45,7 @@ class CourseAdmin(BaseArticleAdmin):
 class TeacherAdmin(BaseModelAdmin, TranslationAdmin):
     """Преподаватели"""
     fields = models.Teacher().collect_fields()
-    list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
-    list_display_links = ('image_thumb', 'title')
+    list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'created')
+    list_display_links = ('id', 'image_thumb', 'title')
+    ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id'] + get_model_translation_fields(models.Teacher)

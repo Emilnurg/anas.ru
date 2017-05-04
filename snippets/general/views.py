@@ -3,8 +3,8 @@ from django.http import HttpResponseForbidden, HttpResponseBadRequest, HttpRespo
     HttpResponseServerError
 from django.template.loader import render_to_string
 
-from snippets.i18n import get_language
 from snippets.slimmer.decorator import compress_html
+from snippets.utils.i18n import get_language
 
 
 @compress_html

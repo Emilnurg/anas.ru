@@ -12,7 +12,7 @@ from snippets.models.image import ImageMixin
 
 class Teacher(ImageMixin, BaseModel):
     """Преподаватель"""
-    title = models.CharField(_('Имя'), max_length=255)
+    title = models.CharField(_('Имя'), max_length=255, db_index=True)
     image = ImageCropField(
         _('Аватар'), max_length=254, blank=True, null=True, upload_to='teachers'
     )

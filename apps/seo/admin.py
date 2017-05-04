@@ -60,6 +60,7 @@ class SEOPageAdmin(BaseModelAdmin):
     """SEO-параметры страниц"""
     fields = models.SEOPage().collect_fields()
     list_display = ('url', 'seo_title', 'ordering', 'status', 'created')
+    ordering = ('url',)
     search_fields = ['url'] + get_model_translation_fields(models.SEOPage)
 
 
@@ -68,4 +69,5 @@ class RedirectAdmin(BaseModelAdmin):
     """HTTP-редиректы"""
     fields = models.Redirect().collect_fields()
     list_display = ('old_path', 'new_path', 'http_code', 'ordering', 'status', 'created')
+    ordering = ('old_path',)
     search_fields = ('old_path', 'new_path', 'http_code')

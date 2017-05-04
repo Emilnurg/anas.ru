@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from collections import defaultdict
 import datetime
+from collections import defaultdict
 
 from django.conf import settings
 
 from snippets.general.models import DbConfig
-from snippets.datetime import utcnow
 from snippets.models.enumerates import StatusEnum
+from snippets.utils.datetime import utcnow
 
 CACHE_TIMEOUT = datetime.timedelta(0, 30)
 

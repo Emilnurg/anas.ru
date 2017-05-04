@@ -48,7 +48,7 @@ class AboutPage(BasicModel, SingletonModel):
         verbose_name = _('Страница "О компании"')
 
 
-class AboutAdvantage(BasicModel, BaseModel):
+class AboutAdvantage(BaseModel):
     """Преимущества на странице "О компании" """
     about_page = models.ForeignKey(
         AboutPage, verbose_name=_('Страница "О компании"'), related_name='advantages'

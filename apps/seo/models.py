@@ -62,11 +62,10 @@ class SEOPage(SEOMixin, BaseModel):
 
 class Redirect(BaseModel):
     """Location redirects"""
-    old_path = models.CharField(_('Откуда'), max_length=255, blank=False, null=False)
-    new_path = models.CharField(_('Куда'), max_length=255, blank=True, null=False)
+    old_path = models.TextField(_('Откуда'), max_length=1024, db_index=True, unique=True)
+    new_path = models.TextField(_('Куда'), max_length=1024)
     http_code = models.PositiveIntegerField(
-        _('Код состояния'), blank=False, null=False,
-        choices=RedirectCodes.get_choices(), default=RedirectCodes.C301
+        _('Код состояния'), choices=RedirectCodes.get_choices(), default=RedirectCodes.C301
     )
     objects = BaseManager()
 

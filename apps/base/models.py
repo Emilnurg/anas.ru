@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
-from ckeditor_uploader.fields import RichTextUploadingField
 from image_cropping import ImageCropField, ImageRatioField
 
-from snippets.datetime import utcnow
 from snippets.models import BaseModel
 from snippets.models.image import ImageMixin
+from snippets.utils.datetime import utcnow
 
 
 class BaseArticle(ImageMixin, BaseModel):
     """Базовая модель для статей и новостей"""
-    title = models.CharField(_('Заголовок'), max_length=255)
+    title = models.CharField(_('Заголовок'), max_length=255, db_index=True)
     slug = models.SlugField(
         _('Алиас'), max_length=150, db_index=True, unique=True,
         help_text=_(

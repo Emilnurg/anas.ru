@@ -14,8 +14,7 @@ class PageAdmin(BaseModelAdmin, TranslationAdmin):
     fields = models.Page().collect_fields()
     list_display = ('id', 'title', 'slug', 'ordering', 'status', 'created')
     list_display_links = ('id', 'title')
-    list_editable = ('status', 'ordering')
-    ordering = ('ordering', 'title')
+    ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id', 'slug'] + get_model_translation_fields(models.Page)
 
     class Media:
@@ -28,8 +27,7 @@ class GalleryAdmin(BaseModelAdmin, TranslationAdmin):
     fields = models.Gallery().collect_fields()
     list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
     list_display_links = ('image_thumb', 'title')
-    list_editable = ('status', 'ordering')
-    ordering = ('ordering', 'title')
+    ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id'] + get_model_translation_fields(models.Gallery)
 
     class Media:

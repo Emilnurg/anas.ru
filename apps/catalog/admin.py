@@ -9,15 +9,28 @@ from snippets.admin import BaseModelAdmin
 from snippets.modeltranslation import get_model_translation_fields
 
 
+@admin.register(models.Manufacturer)
+class ManufacturerAdmin(BaseModelAdmin, TranslationAdmin):
+    """Производители"""
+    fields = models.Manufacturer().collect_fields()
+    list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'created')
+    list_display_links = ('id', 'image_thumb', 'title')
+    ordering = BaseModelAdmin.ordering + ('title',)
+    search_fields = ['=id', 'slug', 'image'] + get_model_translation_fields(models.Manufacturer)
+
+    class Media:
+        js = ('admin/js/translit.js',)
+
+
 @admin.register(models.ProductCategory)
 class ProductCategoryAdmin(BaseModelAdmin, TranslationAdmin, MPTTModelAdmin):
     """Категории продуктов"""
     fields = models.ProductCategory().collect_fields()
-    list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
-    list_display_links = ('image_thumb', 'title')
+    list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'created')
+    list_display_links = ('id', 'image_thumb', 'title')
     list_editable = ('status', 'ordering')
-    list_filter = ('status', 'parent')
-    ordering = ('ordering', 'title')
+    list_filter = BaseModelAdmin.list_filter + ('parent',)
+    ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id', 'slug', 'image'] + get_model_translation_fields(models.ProductCategory)
 
     class Media:
@@ -30,9 +43,7 @@ class ProductAdmin(BaseModelAdmin, TranslationAdmin):
     fields = models.Product().collect_fields()
     list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
     list_display_links = ('image_thumb', 'title')
-    list_editable = ('status', 'ordering')
-    list_filter = ('status',)
-    ordering = ('ordering', 'title')
+    ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id', 'slug', 'image'] + get_model_translation_fields(models.Product)
 
     class Media:

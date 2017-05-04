@@ -4,7 +4,7 @@ from copy import deepcopy
 from django.utils.translation import ugettext_lazy as _
 
 from forms import forms
-from snippets.response import success_response, form_validation_error_response
+from snippets.http.response import success_response, form_validation_error_response
 from snippets.views import BaseView
 
 

@@ -22,7 +22,7 @@ class FaqSection(BaseModel):
 
 class FaqQuestion(BaseModel):
     """Вопрос FAQ"""
-    title = models.CharField(_('Вопрос'), max_length=255)
+    title = models.CharField(_('Вопрос'), max_length=255, db_index=True)
     body = RichTextUploadingField(_('Ответ'), blank=True, null=False)
 
     sections = models.ManyToManyField(
