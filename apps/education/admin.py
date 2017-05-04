@@ -34,7 +34,7 @@ class CourseAdmin(BaseArticleAdmin):
     )
     list_editable = ('status', 'ordering')
     list_filter = BaseArticleAdmin.list_filter + ('city',)
-    ordering = ('-date_start', '-date_end', 'ordering')
+    ordering = ('-date_start', '-date_finish', 'ordering')
     search_fields = ['=id', 'slug', 'image'] + get_model_translation_fields(models.Course)
 
     class Media:

@@ -91,7 +91,7 @@ class CommentAdmin(CommentAdminMixin, BaseFormRequestAdmin):
 
 
 @admin.register(models.EducationFormRequest)
-class EducationFormRequestAdmin(BaseNamePhoneRequestAdmin):
+class EducationFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
     """Админ.часть запросов на обучение"""
     list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
     list_filter = BaseNamePhoneRequestAdmin.list_filter + ('course',)
