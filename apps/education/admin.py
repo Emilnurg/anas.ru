@@ -6,6 +6,7 @@ from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 from base.admin import BaseArticleAdmin
 from education import models
 from snippets.admin import BaseModelAdmin
+from snippets.modeltranslation import get_model_translation_fields
 
 
 class CourseTeacherInline(TranslationTabularInline):
@@ -34,7 +35,7 @@ class CourseAdmin(BaseArticleAdmin):
     list_editable = ('status', 'ordering')
     list_filter = BaseArticleAdmin.list_filter + ('city',)
     ordering = ('-date_start', '-date_end', 'ordering')
-    search_fields = BaseArticleAdmin.search_fields + ('body_about', 'body_detail', 'body_schedule')
+    search_fields = ['=id', 'slug', 'image'] + get_model_translation_fields(models.Course)
 
     class Media:
         js = ('admin/js/translit.js',)
@@ -46,4 +47,4 @@ class TeacherAdmin(BaseModelAdmin, TranslationAdmin):
     fields = models.Teacher().collect_fields()
     list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
     list_display_links = ('image_thumb', 'title')
-    search_fields = ('=id', 'title')
+    search_fields = ['=id'] + get_model_translation_fields(models.Teacher)

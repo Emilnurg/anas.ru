@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from seo import models
 from snippets.admin import BaseModelAdmin
+from snippets.modeltranslation import get_model_translation_fields
 
 
 class SEOAdminMixin(object):
@@ -59,7 +60,7 @@ class SEOPageAdmin(BaseModelAdmin):
     """SEO-параметры страниц"""
     fields = models.SEOPage().collect_fields()
     list_display = ('url', 'seo_title', 'ordering', 'status', 'created')
-    search_fields = ('url', 'seo_title', 'seo_keywords', 'seo_description')
+    search_fields = ['url'] + get_model_translation_fields(models.SEOPage)
 
 
 @admin.register(models.Redirect)

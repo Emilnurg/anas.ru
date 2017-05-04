@@ -5,6 +5,7 @@ from modeltranslation.admin import TranslationAdmin
 
 from core import models
 from snippets.admin import BaseModelAdmin
+from snippets.modeltranslation import get_model_translation_fields
 
 
 @admin.register(models.Page)
@@ -15,7 +16,7 @@ class PageAdmin(BaseModelAdmin, TranslationAdmin):
     list_display_links = ('id', 'title')
     list_editable = ('status', 'ordering')
     ordering = ('ordering', 'title')
-    search_fields = ('=id', 'title', 'slug', 'body')
+    search_fields = ['=id', 'slug'] + get_model_translation_fields(models.Page)
 
     class Media:
         js = ('admin/js/translit.js',)
@@ -29,7 +30,7 @@ class GalleryAdmin(BaseModelAdmin, TranslationAdmin):
     list_display_links = ('image_thumb', 'title')
     list_editable = ('status', 'ordering')
     ordering = ('ordering', 'title')
-    search_fields = ('=id', 'title', 'body')
+    search_fields = ['=id'] + get_model_translation_fields(models.Gallery)
 
     class Media:
         js = ('admin/js/translit.js',)

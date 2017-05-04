@@ -6,6 +6,7 @@ from mptt.admin import MPTTModelAdmin
 
 from catalog import models
 from snippets.admin import BaseModelAdmin
+from snippets.modeltranslation import get_model_translation_fields
 
 
 @admin.register(models.ProductCategory)
@@ -17,7 +18,7 @@ class ProductCategoryAdmin(BaseModelAdmin, TranslationAdmin, MPTTModelAdmin):
     list_editable = ('status', 'ordering')
     list_filter = ('status', 'parent')
     ordering = ('ordering', 'title')
-    search_fields = ('=id', 'title', 'slug', 'image')
+    search_fields = ['=id', 'slug', 'image'] + get_model_translation_fields(models.ProductCategory)
 
     class Media:
         js = ('admin/js/translit.js',)
@@ -32,7 +33,7 @@ class ProductAdmin(BaseModelAdmin, TranslationAdmin):
     list_editable = ('status', 'ordering')
     list_filter = ('status',)
     ordering = ('ordering', 'title')
-    search_fields = ('=id', 'title', 'slug', 'image')
+    search_fields = ['=id', 'slug', 'image'] + get_model_translation_fields(models.Product)
 
     class Media:
         js = ('admin/js/translit.js',)
