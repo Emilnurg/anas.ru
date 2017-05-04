@@ -17,7 +17,7 @@ class Page(BaseModel):
         _('Алиас'), max_length=150, db_index=True, unique=True,
         help_text=_('Латинские буквы и цифры')
     )
-    body = RichTextUploadingField(_('Контент'))
+    body = RichTextUploadingField(_('Контент'), blank=True, null=False)
 
     translation_fields = ('title', 'body')
 

@@ -93,12 +93,9 @@ class CommentAdmin(CommentAdminMixin, BaseFormRequestAdmin):
 @admin.register(models.EducationFormRequest)
 class EducationFormRequestAdmin(BaseNamePhoneRequestAdmin):
     """Админ.часть запросов на обучение"""
-    # TODO: раскомментировать
-    # list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
-    # list_filter = BaseNamePhoneRequestAdmin.list_filter + ('education__categories',)
-    # search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
-    # for language in settings.LANGUAGE_CODES:
-    #     search_fields.append('education__title_' + language)
+    list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
+    list_filter = BaseNamePhoneRequestAdmin.list_filter + ('course',)
+    search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
 
 
 @admin.register(models.FeedbackFormRequest)
@@ -148,26 +145,6 @@ class ProductQuestionRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
         search_fields.append('product__title_' + language)
 
 
-@admin.register(models.ProductProposalRequest)
-class ProductProposalRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
-    """Админ.часть запросов КП по товарам"""
-    list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
-    search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
-    for language in settings.LANGUAGE_CODES:
-        search_fields.append('product__title_' + language)
-    list_filter = BaseNamePhoneRequestAdmin.list_filter + ('product__categories',)
-
-
-@admin.register(models.ProductQuestionRequest)
-class ProductQuestionRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
-    """Админ.часть вопросов по товарам"""
-    list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
-    search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
-    for language in settings.LANGUAGE_CODES:
-        search_fields.append('product__title_' + language)
-    list_filter = BaseNamePhoneRequestAdmin.list_filter + ('product__categories',)
-
-
 @admin.register(models.ServiceFormRequest)
 class ServiceFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
     """Админ.часть для запросов сервисного центра"""
@@ -176,3 +153,18 @@ class ServiceFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
 
 
 ServiceFormRequestAdmin.comment_short.short_description = _('Проблема')
+
+
+@admin.register(models.SupportFormRequest)
+class SupportFormRequestAdmin(CommentAdminMixin, BaseFormRequestAdmin):
+    """Админ.часть для запросов тех.поддержки"""
+    list_display = (
+        'id', 'name', 'email', 'product_code', 'comment_short', 'language', 'created'
+    )
+    list_display_links = ('id', 'name')
+    search_fields = BaseFormRequestAdmin.search_fields + (
+        'name', 'email', 'product_code', 'comment'
+    )
+
+
+SupportFormRequestAdmin.comment_short.short_description = _('Сообщение')

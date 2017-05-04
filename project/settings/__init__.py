@@ -150,18 +150,20 @@ INSTALLED_APPS = (
     'base',
     # контрибы веб-студии
     'snippets.general',
+    # приложения проекта
     'catalog',
     'core',
+    'dicts',
+    'education',
+    'faq',
+    'forms',
+    'knowledge',
     'pages',
     'press',
-    'education',
-    'knowledge',
-    'users',
-    'dicts',
-    'forms',
     'search',
     'seo',
-    'uploadifive'
+    'uploadifive',
+    'users'
 )
 
 LOGIN_URL = reverse_lazy('auth_login')
@@ -222,6 +224,7 @@ SUIT_CONFIG = {
         'education',
         'knowledge',
         'projects',
+        'faq',
         'general',
         'dicts',
         'pages',

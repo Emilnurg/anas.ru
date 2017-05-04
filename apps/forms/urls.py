@@ -36,5 +36,9 @@ urlpatterns = (
     url(
         r'^(?P<lang>\w{2})/forms/service/$',
         views.ServiceRequestView.as_view(), name='service'
+    ),
+    url(
+        r'^(?P<lang>\w{2})/forms/support/$',
+        views.SupportRequestView.as_view(), name='support'
     )
 )

@@ -6,17 +6,6 @@ from django.utils.translation import ugettext_lazy as _
 from snippets.models import BaseEnumerate
 
 
-class BackgroundPositionEnum(BaseEnumerate):
-    """Варианты позиций фона в блоке"""
-    BOTTOM_CENTER = 'bottom_center'
-    BOTTOM_RIGHT = 'bottom_right'
-
-    values = OrderedDict((
-        (BOTTOM_CENTER, _('Снизу посередине')),
-        (BOTTOM_RIGHT, _('Снизу справа'))
-    ))
-
-
 class IconEnum(BaseEnumerate):
     """Перечисление медицинских иконок"""
     ANTIBIOTIC = 'antibiotic'

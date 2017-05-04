@@ -7,7 +7,7 @@ from image_cropping import ImageCropField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
-from base.enums import BackgroundPositionEnum
+from catalog.enums import ImagePositionEnum
 from snippets.datetime import utcnow
 from snippets.models import BaseModel
 from snippets.models.image import ImageMixin
@@ -27,9 +27,9 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
     image = ImageCropField(
         _('Изображение'), max_length=255, upload_to='products', blank=True, null=True
     )
-    background_position = models.CharField(
-        _('Позиция фона'), choices=BackgroundPositionEnum.get_choices(),
-        default=BackgroundPositionEnum.BOTTOM_CENTER, max_length=50
+    image_position = models.CharField(
+        _('Расположение изображения'), choices=ImagePositionEnum.get_choices(),
+        default=ImagePositionEnum.CENTER, max_length=50
     )
     body = RichTextUploadingField(_('Контент'), blank=True, null=False)
 

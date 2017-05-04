@@ -11,9 +11,9 @@ class BaseTranslationOptions(TranslationOptions):
 
 def get_model_translation_fields(model, with_original_fields=True):
     """
-    Получает список всех переводимых полей для модели 
+    Получает список всех переводимых полей для модели
     :param model - модель, для которой ищутся переводимые поля
-    :param with_original_fields - добавляет оригинальные поля переводов (fallback поля)  
+    :param with_original_fields - добавляет оригинальные поля переводов (fallback поля)
     """
     fields = []
     if with_original_fields:

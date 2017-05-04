@@ -64,3 +64,8 @@ class PurchaseRequestView(BaseFormRequestView):
 class ServiceRequestView(BaseFormRequestView):
     """Обработчик формы сервисного центра"""
     form_class = forms.ServiceRequestForm
+
+
+class SupportRequestView(BaseFormRequestView):
+    """Обработчик формы тех.поддержки"""
+    form_class = forms.SupportRequestForm

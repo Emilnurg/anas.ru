@@ -83,3 +83,10 @@ class ServiceRequestForm(BaseRequestForm):
     class Meta:
         model = models.ServiceFormRequest
         fields = '__all__'
+
+
+class SupportRequestForm(BaseRequestForm):
+    """Форма поддержки"""
+    class Meta:
+        model = models.SupportFormRequest
+        fields = '__all__'

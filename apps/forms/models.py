@@ -151,3 +151,18 @@ class ServiceFormRequest(BaseNamePhoneRequest):
     class Meta:
         verbose_name = _('Запрос сервисного центра')
         verbose_name_plural = _('Сервисный центр')
+
+
+class SupportFormRequest(BaseFormRequest):
+    """Запросы сервисного центра"""
+    name = models.CharField(_('Имя'), max_length=255)
+    email = models.EmailField(_('E-mail'))
+    product_code = models.CharField(_('Полное название товара, серия'), max_length=255)
+    comment = models.TextField(_('Сообщение'), max_length=32768, blank=True, null=True)
+
+    class Meta:
+        verbose_name = _('Запрос тех.поддержки')
+        verbose_name_plural = _('Тех.поддержка')
+
+    def __str__(self):
+        return '%s <%s>' % (self.name, self.email)
