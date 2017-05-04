@@ -3,6 +3,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 from catalog.models import Product
+from education.models import Course
 from forms import models
 
 
@@ -21,6 +22,10 @@ class CommentForm(BaseRequestForm):
 
 class EducationFormRequestForm(BaseRequestForm):
     """Форма заявки на обучение"""
+    course = forms.ModelChoiceField(
+        label=_('Курс'), queryset=Course.objects.published(), required=False
+    )
+
     class Meta:
         model = models.EducationFormRequest
         fields = '__all__'
@@ -42,6 +47,9 @@ class PartnershipRequestForm(BaseRequestForm):
 
 class ProductProposalRequestForm(BaseRequestForm):
     """Форма КП по продукту"""
+    product = forms.ModelChoiceField(
+        label=_('Продукт'), queryset=Product.objects.published(), required=True
+    )
 
     class Meta:
         model = models.ProductProposalRequest
@@ -50,6 +58,10 @@ class ProductProposalRequestForm(BaseRequestForm):
 
 class ProductQuestionRequestForm(BaseRequestForm):
     """Форма вопроса по продукту"""
+    product = forms.ModelChoiceField(
+        label=_('Продукт'), queryset=Product.objects.published(), required=True
+    )
+
     class Meta:
         model = models.ProductQuestionRequest
         fields = '__all__'
@@ -58,7 +70,7 @@ class ProductQuestionRequestForm(BaseRequestForm):
 class PurchaseRequestForm(BaseRequestForm):
     """Форма закупки"""
     product = forms.ModelChoiceField(
-        label=_('Продукт'), queryset=Product.objects.published(), required=True
+        label=_('Продукт'), queryset=Product.objects.published(), required=False
     )
 
     class Meta:

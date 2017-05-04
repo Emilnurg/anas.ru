@@ -76,7 +76,10 @@ class Comment(BaseFormRequest):
 
 class EducationFormRequest(BaseNamePhoneRequest):
     """Запросы на обучение"""
-    # TODO ссылка на обучение
+    course = models.ForeignKey(
+        'education.Course', verbose_name=_('Курс'), related_name=_('course_requests'),
+        blank=True, null=True
+    )
 
     class Meta:
         verbose_name = _('Запрос на обучение')
@@ -130,7 +133,8 @@ class ProductQuestionRequest(BaseNamePhoneRequest):
 class PurchaseFormRequest(BaseNamePhoneRequest):
     """Запросы закупки"""
     product = models.ForeignKey(
-        'catalog.Product', verbose_name=_('Продукт'), related_name=_('purchase_requests')
+        'catalog.Product', verbose_name=_('Продукт'), related_name=_('purchase_requests'),
+        blank=True, null=True
     )
     comment = models.TextField(_('Комментарий'), max_length=32768, blank=True, null=True)
 
