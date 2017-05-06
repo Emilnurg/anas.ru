@@ -23,3 +23,8 @@ class HomePageTranslationOptions(BaseTranslationOptions):
 @register(models.HomeAdvantage)
 class HomeAdvantageTranslationOptions(BaseTranslationOptions):
     fields = models.HomeAdvantage.translation_fields
+
+
+@register(models.HomeSlide)
+class HomeSlideTranslationOptions(BaseTranslationOptions):
+    fields = models.HomeSlide.translation_fields

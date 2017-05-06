@@ -5,5 +5,5 @@ from faq import views
 
 
 urlpatterns = (
-    url(r'^(?P<lang>\w{2})/$', views.FaqIndexView.as_view(), name='faq_index'),
+    url(r'^(?P<lang>\w{2})/faq/$', views.FaqIndexView.as_view(), name='faq_index'),
 )

@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
+
 from snippets.admin import BaseModelAdmin, SuperUserDeletableAdminMixin
 from snippets.general import models
 from snippets.modeltranslation import get_model_translation_fields
 
 
 @admin.register(models.DbConfig)
-class DbConfigAdmin(SuperUserDeletableAdminMixin, BaseModelAdmin):
+class DbConfigAdmin(SuperUserDeletableAdminMixin, BaseModelAdmin, TranslationAdmin):
     """Переменные шаблонов"""
     fields = models.DbConfig().collect_fields()
     list_display = ('key', 'verbose_title', 'status', 'created')
@@ -16,7 +18,7 @@ class DbConfigAdmin(SuperUserDeletableAdminMixin, BaseModelAdmin):
     search_fields = ['=id', 'key', 'verbose_title'] + get_model_translation_fields(models.DbConfig)
 
 
-class MenuItemInline(admin.TabularInline):
+class MenuItemInline(TranslationTabularInline):
     """Пункты меню"""
     extra = 0
     fields = models.MenuItem().collect_fields()

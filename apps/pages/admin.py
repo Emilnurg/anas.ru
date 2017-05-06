@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 from solo.admin import SingletonModelAdmin
 
 from pages import models
@@ -19,7 +19,21 @@ class ContactsPageAdmin(SingletonModelAdmin, TranslationAdmin):
     pass
 
 
+class HomeAdvantageInline(TranslationTabularInline):
+    """Преимущества на главной странице"""
+    extra = 0
+    fields = models.HomeAdvantage().collect_fields()
+    model = models.HomeAdvantage
+
+
+class HomeSlideInline(TranslationTabularInline):
+    """Слайды на главной"""
+    extra = 0
+    fields = models.HomeSlide().collect_fields()
+    model = models.HomeSlide
+
+
 @admin.register(models.HomePage)
 class HomePageAdmin(SingletonModelAdmin, TranslationAdmin):
     """Главная страница"""
-    pass
+    inlines = (HomeAdvantageInline, HomeSlideInline)

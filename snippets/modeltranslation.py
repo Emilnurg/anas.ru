@@ -23,3 +23,13 @@ def get_model_translation_fields(model, with_original_fields=True):
         fields.extend('%s_%s' % (x, language) for x in model.translation_fields)
 
     return fields
+
+
+def get_model_translation_suit_tabs(model):
+    """
+    Получает список языковых табов для вывода в карточке объекта
+    """
+    fields_maps = {x.attname: x.verbose_name for x in model._meta.fields}
+    return (('general', 'Основное'),) + tuple(
+        (x, fields_maps.get(x, x)) for x in model.translation_fields
+    )

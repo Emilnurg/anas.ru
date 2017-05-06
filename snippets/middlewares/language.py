@@ -8,8 +8,13 @@ from django.utils.translation import ugettext_lazy as _
 class LanguageMiddleware(object):
     """Language middleware"""
     @staticmethod
-    def process_view(request, view_func, view_args, view_kwargs):
-        request_lang = view_kwargs.get('lang', None)
+    def process_request(request):
+        full_path_parts = request.get_full_path().split('/')
+        request_lang = None
+
+        if len(full_path_parts) > 2 and len(full_path_parts[1]) == 2:
+            request_lang = full_path_parts[1]
+
         lang = (
             request_lang
             or translation.get_language_from_request(request, check_path=False)

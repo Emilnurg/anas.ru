@@ -8,6 +8,7 @@ from solo.models import SingletonModel
 
 from base.enums import IconEnum
 from snippets.models import BaseModel, BasicModel
+from snippets.models.image import ImageMixin
 
 
 class AboutPage(BasicModel, SingletonModel):
@@ -126,3 +127,26 @@ class HomeAdvantage(BaseModel):
     class Meta:
         verbose_name = _('Преимущество')
         verbose_name_plural = _('Преимущества на странице "О компании"')
+
+
+class HomeSlide(ImageMixin, BaseModel):
+    """Преимущества на главной странице"""
+    home_page = models.ForeignKey(
+        HomePage, verbose_name=_('Главная страница'), related_name='slides'
+    )
+    image = models.ImageField(
+        _('Изображение'), max_length=255, upload_to='homepage_slides'
+    )
+    title = models.CharField(_('Заголовок'), max_length=255, blank=True, null=True)
+    subtitle = models.CharField(_('Подзаголовок'), max_length=255, blank=True, null=True)
+    url = models.CharField(_('Ссылка кнопки'), max_length=255, blank=True, null=True)
+    button_caption = models.CharField(_('Текст кнопки'), max_length=255, blank=True, null=True)
+
+    translation_fields = ('title', 'subtitle', 'url', 'button_caption')
+
+    def __str__(self):
+        return self.title if self.title else str(self.pk)
+
+    class Meta:
+        verbose_name = _('Слайд на главной')
+        verbose_name_plural = _('Слайды на главной')

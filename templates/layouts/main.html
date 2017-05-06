@@ -1,40 +1,349 @@
 {%- set languages = get_languages() -%}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ request.LANGUAGE_CODE }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=yes">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="utf-8">
     <title>
-        {%- if request.seo_params -%}
-        {{- request.seo_params['seo_title'] -}}
-        {%- else -%}
-        {{- var('SEO_TITLE_PREFIX', request) -}}
-        {%- block PAGE_TITLE %}{% endblock -%}
-        {{- var('SEO_TITLE_POSTFIX', request) -}}
-        {%- endif -%}
+			{{- var('SEO_TITLE_PREFIX', request) -}}
+			{%- if request.seo_params -%}
+			{{- request.seo_params['seo_title'] -}}
+			{%- else -%}
+			{%- block PAGE_TITLE %}{% endblock -%}
+			{%- endif -%}
+			{{- var('SEO_TITLE_POSTFIX', request) -}}
     </title>
     <meta name="description" content="
-        {%- if request.seo_params -%}
-        {{- request.seo_params['seo_description'] -}}
-        {%- endif -%}
+			{%- if request.seo_params -%}
+			{{- request.seo_params['seo_description'] -}}
+			{%- endif -%}
     ">
     <meta name="keywords" content="
-        {%- if request.seo_params -%}
-        {{- request.seo_params['seo_keywords'] -}}
-        {%- endif -%}
+			{%- if request.seo_params -%}
+			{{- request.seo_params['seo_keywords'] -}}
+			{%- endif -%}
     ">
+    <meta name="viewport" content="width=device-width, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.png">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
     {%- block EXTRA_STYLES %}{% endblock -%}
-    {%- block EXTRA_META %}{% endblock -%}
-    {%- for language in get_languages() -%}
-    {%- if language[0] != request.LANGUAGE_CODE -%}
-    <link rel="alternate" href="{{ site_url() }}{{ get_language_href(request, language[0]) }}" hreflang="{{ language[0] }}" />
-    {%- endif -%}
+    <script src="{{ STATIC_URL }}js/critical.js" async></script>
+    {%- for language in languages -%}
+			{%- if language[0] != request.LANGUAGE_CODE -%}
+      <link rel="alternate" href="{{ site_url() }}{{ get_language_href(request, language[0]) }}" hreflang="{{ language[0] }}" />
+    	{%- endif -%}
     {%- endfor -%}
-</head>
-<body class="{% block BODY_CLASSES %}{% endblock %}">
-    {%- block PAGE_CONTENT %}{%- endblock -%}
-    {%- block EXTRA_SCRIPTS %}{% endblock -%}
+		<!--[if lt IE 9]>
+			<link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon">
+			<script src="{{ STATIC_URL }}js/html5.js"></script>
+		<![endif]-->
+	  {%- block EXTRA_META %}{% endblock -%}
+  </head>
+  <body class="page skrollr-body {% block BODY_CLASSES %}{% endblock %}" id="top">
+    <div class="page__layout">
+      <header class="header"
+							data-start="transform: translateY(0px)"
+							data-top-bottom="transform: translateY(-100px)">
+        <div class="header__top">
+          <div class="container">
+            <button class="menu-toggle">
+              <span></span><span></span><span></span>
+            </button>
+            <a href="javascript:" class="logo header__logo header__logo--sm">
+              <img src="{{ STATIC_URL }}images/logo_sm.png" alt=""/>
+						</a>
+            <nav class="header__menu">
+              <ul class="header__menu-list">
+                <li>
+                  <a href="javascript:">О компании</a>
+                </li>
+                <li>
+                  <a href="javascript:">Новости</a>
+                </li>
+                <li>
+                  <a href="javascript:">База знаний</a>
+                </li>
+                <li>
+                  <a href="javascript:">Сервисный центр</a>
+                </li>
+                <li>
+                  <a href="javascript:">Контакты</a>
+                </li>
+              </ul>
+            </nav>
+            <div class="header__contacts">
+              <a href="mailto:info@anas.com" class="email-link header__email">info@anas.com</a>
+              <a href="tel:+74956265459" class="tel-link header__tel">+7 (495) 626-54-59</a>
+              <a href="javascript:" class="header__callback">Заказать звонок</a>
+            </div>
+          </div>
+        </div>
+        <div class="header__bottom">
+          <div class="header__search">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <form action="#" class="search-form">
+                    <input type="text" name="search" class="search-form__field">
+                    <button type="submit" class="search-form__button" disabled>Найти</button>
+                    <a href="javascript:" class="search-form__clear"></a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="header__bottom-left">
+              <a href="javascript:" class="logo header__logo">
+                <img src="{{ STATIC_URL }}images/logo.svg" class="img-responsive" alt=""> </a>
+              <nav class="header__nav">
+                <ul class="header__nav-list">
+                  <li class="header__nav-item header__nav-item--dropdown">
+                    <a href="javascript:" class="header__nav-link"> Стоматологическое оборудование
+                      <span></span>
+                    </a>
+                    <div class="header__nav-dropdown">
+                      <div>
+                        <div>
+                          <h4>
+                            <a href="javascript:">Гигиена</a>
+                          </h4>
+                          <ul>
+                            <li class="is-active">
+                              <a href="javascript:">Гигиенические рукавицы</a>
+                            </li>
+                            <li>
+                              <a href="javascript:">Гигиенические пакеты</a>
+                            </li>
+                            <li>
+                              <a href="javascript:">Суперабсорбенты</a>
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4>
+                            <a href="javascript:">Аэрозольная дезинфекция</a>
+                          </h4>
+                          <ul>
+                            <li>
+                              <a href="javascript:">Аппарат для аэрозольной дезинфекции помещений</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="header__nav-item header__nav-item--dropdown">
+                    <a href="javascript:" class="header__nav-link"> Гигиена и дезинфекция
+                      <span></span>
+                    </a>
+                    <div class="header__nav-dropdown">
+                      <div>
+                        <div>
+                          <h4>
+                            <a href="javascript:">Гигиена</a>
+                          </h4>
+                          <ul>
+                            <li class="is-active">
+                              <a href="javascript:">Гигиенические рукавицы</a>
+                            </li>
+                            <li>
+                              <a href="javascript:">Гигиенические пакеты</a>
+                            </li>
+                            <li>
+                              <a href="javascript:">Суперабсорбенты</a>
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4>
+                            <a href="javascript:">Аэрозольная дезинфекция</a>
+                          </h4>
+                          <ul>
+                            <li>
+                              <a href="javascript:">Аппарат для аэрозольной дезинфекции помещений</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="header__nav-item">
+                    <a href="javascript:" class="header__nav-link"> Обучение </a>
+                  </li>
+                  <li class="header__nav-item">
+                    <a href="javascript:" class="header__nav-link"> Техническая поддержка </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="header__bottom-right">
+              <div class="search header__search-open">
+                <a href="javascript:" class="search__toggle">
+                  <span>Поиск</span>
+                </a>
+              </div>
+              <div class="lang header__lang">
+                <div class="lang__selected"> {{ request.LANGUAGE_CODE|upper }} </div>
+                <ul class="lang__dropdown">
+									{%- for language in languages -%}
+									{%- if language[0] != request.LANGUAGE_CODE -%}
+										<li>
+											<a href="{{ site_url() }}{{ get_language_href(request, language[0]) }}">{{ language[0]|upper }}</a>
+										</li>
+										{%- endif -%}
+									{%- endfor -%}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="header__mobile">
+          <div class="container">
+            <div class="search header__search-open">
+              <a href="javascript:" class="search__toggle">
+                <span>Поиск</span>
+              </a>
+            </div>
+            <div class="header__scroll">
+              <nav class="header__menu">
+                <ul class="header__menu-list">
+                  <li>
+                    <a href="javascript:">О компании</a>
+                  </li>
+                  <li>
+                    <a href="javascript:">Новости</a>
+                  </li>
+                  <li>
+                    <a href="javascript:">База знаний</a>
+                  </li>
+                  <li>
+                    <a href="javascript:">Сервисный центр</a>
+                  </li>
+                  <li>
+                    <a href="javascript:">Контакты</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div class="header__contacts">
+            <div class="container">
+              <a href="javascript:" class="header__callback">Заказать звонок</a>
+              <a href="tel:+74956265459" class="tel-link header__tel">+7 (495) 626-54-59</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <header class="header-fixed">
+        <div class="container">
+          <div class="header-fixed__left">
+            <a href="javascript:" class="logo">
+              <img src="{{ STATIC_URL }}images/logo_sm.png" class="img-responsive" alt="">
+            </a>
+          </div>
+          <div class="header-fixed__right">
+            <a href="tel:+74956265459" class="tel-link header__tel">+7 (495) 626-54-59</a>
+            <a href="javascript:" class="header__callback">Заказать звонок</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        {%- block PAGE_CONTENT %}{% endblock -%}
+      </main>
+      <footer class="footer">
+        <div class="footer__top">
+          <div class="container">
+            <div class="footer__left">
+              <a href="javascript:" class="logo footer__logo">
+                <img src="{{ STATIC_URL }}images/logo2.png" class="img-responsive" alt=""> </a>
+            </div>
+            <div class="footer__right">
+              <div class="footer__menu">
+                <ul class="footer__nav">
+                  <li>
+                    <a href="javascript:">О компании</a>
+                  </li>
+                  <li>
+                    <a href="javascript:">Новости</a>
+                  </li>
+                  <li>
+                    <a href="javascript:">База знаний</a>
+                  </li>
+                </ul>
+                <ul class="footer__nav">
+                  <li>
+                    <a href="javascript:">Сервисный центр</a>
+                  </li>
+                  <li>
+                    <a href="javascript:">Реализованные проекты</a>
+                  </li>
+                  <li>
+                    <a href="javascript:">Контакты</a>
+                  </li>
+                </ul>
+                <ul class="footer__nav">
+                  <li>
+                    <a href="javascript:">Стоматологическое оборудование</a>
+                  </li>
+                  <li>
+                    <a href="javascript:">Гигиена и дизенфекция</a>
+                  </li>
+                </ul>
+                <ul class="footer__nav">
+                  <li>
+                    <a href="javascript:">Обучение</a>
+                  </li>
+                  <li>
+                    <a href="javascript:">Техническая поддержка</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__middle">
+          <div class="container">
+            <address class="address footer__address">
+              <a href="javascript:" class="address__link">105064, г. Москва, ул. Земляной Вал, д. 2/50-31</a>
+            </address>
+            <div class="footer__middle-right">
+              <ul class="socials footer__socials">
+                <li>
+                  <a href="javascript:" class="social-link social-link--facebook"></a>
+                </li>
+                <li>
+                  <a href="javascript:" class="social-link social-link--youtube"></a>
+                </li>
+                <li>
+                  <a href="javascript:" class="social-link social-link--twitter"></a>
+                </li>
+                <li>
+                  <a href="javascript:" class="social-link social-link--instagram"></a>
+                </li>
+              </ul>
+              <div class="footer__contacts">
+                <a href="tel:+74956265459" class="tel-link footer__tel">+7 (495) 626-54-59</a>
+                <a href="mailto:info@anas.com" class="email-link footer__email">info@anas.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <div class="container">
+            <small class="copyright"> © 2006–2016 AnasMedical.
+              <span>Все права защищены.</span>
+            </small>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="{{ STATIC_URL }}js/main.js" async></script>
+		{%- block EXTRA_SCRIPTS %}{% endblock -%}
     {%- block EXTRA_BODY %}{% endblock -%}
-</body>
+  </body>
 </html>

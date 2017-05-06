@@ -25,7 +25,7 @@ class ProjectSection(BaseModel):
     )
     gallery = models.ForeignKey(
         'core.Gallery', verbose_name=_('Галерея фотографий'), blank=True, null=True,
-        related_name='article_sections'
+        related_name='project_sections'
     )
 
     translation_fields = ('title', 'body')

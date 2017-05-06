@@ -42,12 +42,7 @@ MODELTRANSLATION_CUSTOM_FIELDS = ('RichTextUploadingField',)
 
 SITE_ID = 1
 SITE_NAME = 'anas.ru'
-SITE_URL = 'https://%s' % SITE_NAME
-CSRF_TRUSTED_ORIGINS = [SITE_NAME]
-ALLOWED_HOSTS = [SITE_NAME, 'www.' + SITE_NAME]
-
-CORS_ORIGIN_WHITELIST = ALLOWED_HOSTS + ['localhost:8080', '127.0.0.1:8080']
-CORS_URLS_REGEX = r'^/api/.*$'
+SITE_PROTOCOL = 'https://'
 
 USE_I18N = True
 USE_L10N = True
@@ -125,7 +120,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'snippets.middlewares.language.LanguageMiddleware',
-    'seo.middleware.SEOMiddleware'
+    'snippets.seo.middleware.SEOMiddleware'
 )
 
 ROOT_URLCONF = 'project.urls'
@@ -159,9 +154,10 @@ INSTALLED_APPS = (
     'forms',
     'knowledge',
     'pages',
+    'projects',
     'press',
     'search',
-    'seo',
+    'snippets.seo',
     'uploadifive',
     'users'
 )
@@ -214,7 +210,7 @@ EMAIL_BATCH_SIZE = 100
 
 SUIT_CONFIG = {
     'SEARCH_URL': 'admin:catalog_product_changelist',
-    'ADMIN_NAME': 'Anas.ru',
+    'ADMIN_NAME': 'АНАС Медикал',
     'MENU_OPEN_FIRST_CHILD': True,
     'MENU': [
         'catalog',
@@ -347,6 +343,12 @@ try:
 except ImportError:
     pass
 
+
+SITE_URL = SITE_PROTOCOL + SITE_NAME
+CSRF_TRUSTED_ORIGINS = [SITE_NAME]
+ALLOWED_HOSTS = [SITE_NAME, 'www.' + SITE_NAME]
+if ':' in SITE_NAME:
+    ALLOWED_HOSTS.append(SITE_NAME.split(':')[0])
 
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 TEMPLATES[1]['OPTIONS']['cache_size'] = 1000000 if DEBUG else -1
