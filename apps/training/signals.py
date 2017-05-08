@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db.models.signals import post_save, pre_delete
 
-from education.models import Course
+from training.models import Course
 from search.indexes.courses import delete_course_from_index, index_new_course
 from snippets.models.enumerates import StatusEnum
 

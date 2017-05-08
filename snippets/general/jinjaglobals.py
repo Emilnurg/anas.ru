@@ -7,7 +7,7 @@ from snippets.template_backends.jinja2 import jinjaglobal
 
 @jinjaglobal
 def menu(request, menu_slug, li=True, li_classes=None, link_classes=None, target_blank=False,
-         icon=False, active_class='active'):
+         active_class='active'):
     try:
         menu_obj = Menu.objects.published().get(slug=menu_slug)
     except Menu.DoesNotExist:
@@ -24,19 +24,21 @@ def menu(request, menu_slug, li=True, li_classes=None, link_classes=None, target
         if item.url == active_url:
             classes += ' ' + active_class
 
-        link = '<a href="{link}"{classes}{target_blank}{title}>{icon}{caption}</a>'.format(
+        if item.a_class_name:
+            classes += ' ' + item.a_class_name
+
+        link = '<a href="{link}"{classes}{target_blank}{title}>{caption}</a>'.format(
             link=escape(item.url),
             classes=(' class="%s"' % classes) if classes else '',
             target_blank=' target="_blank"' if target_blank else '',
             title=(' title="%s"' % item.alt) if item.alt else '',
-            icon=('<i class="%s"></i>' % item.class_name) if icon and item.class_name else '',
             caption=item.title
         )
 
         if li:
             classes = li_classes if li_classes else ''
-            if not icon and item.class_name:
-                classes += ' ' + item.class_name
+            if item.li_class_name:
+                classes += ' ' + item.li_class_name
             link = '<li{classes}>{link}</li>'.format(
                 classes=(' class="%s"' % classes) if classes else '',
                 link=link

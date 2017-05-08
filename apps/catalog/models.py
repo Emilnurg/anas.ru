@@ -34,7 +34,7 @@ class Manufacturer(ImageMixin, BaseModel):
 
 
 class ProductCategory(ImageMixin, BaseModel, MPTTModel):
-    """Категории"""
+    """Категории продуктов"""
     title = models.CharField(_('Наименование'), max_length=255, db_index=True)
     slug = models.SlugField(
         _('Алиас'), max_length=150, db_index=True, unique=True,
@@ -62,8 +62,11 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
         return self.title
 
     class Meta:
-        verbose_name = _('Продукт')
-        verbose_name_plural = _('Продукты')
+        verbose_name = _('Категория продуктов')
+        verbose_name_plural = _('Категории продуктов')
+
+
+ProductCategory._meta.get_field('level').verbose_name = _('Уровень')
 
 
 class Product(ImageMixin, BaseModel):

@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('contenttypes', '0002_remove_content_type_name'),
         ('catalog', '0001_initial'),
-        ('education', '0001_initial'),
+        ('training', '0001_initial'),
     ]
 
     operations = [
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='EducationFormRequest',
+            name='TrainingFormRequest',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created', models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Создано')),
@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
                 ('read_status', models.SmallIntegerField(choices=[(-1, 'Новый'), (1, 'Прочитан')], default=-1, verbose_name='Статус прочтения')),
                 ('name', models.CharField(max_length=255, verbose_name='Имя')),
                 ('telephone', models.CharField(max_length=100, verbose_name='Телефон')),
-                ('course', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='course_requests', to='education.Course', verbose_name='Курс')),
+                ('course', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='course_requests', to='training.Course', verbose_name='Курс')),
             ],
             options={
                 'verbose_name': 'Запрос на обучение',

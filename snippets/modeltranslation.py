@@ -6,6 +6,7 @@ from modeltranslation.translator import TranslationOptions
 
 class BaseTranslationOptions(TranslationOptions):
     required_languages = (settings.DEFAULT_LANGUAGE,)
+    fallback_languages = {'default': settings.LANGUAGE_CODES}
     empty_values = ''
 
 

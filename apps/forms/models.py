@@ -74,10 +74,10 @@ class Comment(BaseFormRequest):
         verbose_name_plural = _('Комментарии')
 
 
-class EducationFormRequest(BaseNamePhoneRequest):
+class TrainingFormRequest(BaseNamePhoneRequest):
     """Запросы на обучение"""
     course = models.ForeignKey(
-        'education.Course', verbose_name=_('Курс'), related_name=_('course_requests'),
+        'training.Course', verbose_name=_('Курс'), related_name=_('course_requests'),
         blank=True, null=True
     )
 

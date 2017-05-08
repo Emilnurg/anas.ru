@@ -80,7 +80,7 @@ class Migration(migrations.Migration):
                 ('title_ru', models.CharField(max_length=255, null=True, verbose_name='Мероприятие')),
                 ('title_en', models.CharField(max_length=255, null=True, verbose_name='Мероприятие')),
                 ('title_fr', models.CharField(max_length=255, null=True, verbose_name='Мероприятие')),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='schedule', to='education.Course', verbose_name='Курс')),
+                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='schedule', to='training.Course', verbose_name='Курс')),
             ],
             options={
                 'verbose_name': 'Строка расписания курса',
@@ -99,7 +99,7 @@ class Migration(migrations.Migration):
                 ('teacher_role_ru', models.CharField(blank=True, help_text='Например, "лектор"', max_length=100, null=True, verbose_name='Роль преподавателя')),
                 ('teacher_role_en', models.CharField(blank=True, help_text='Например, "лектор"', max_length=100, null=True, verbose_name='Роль преподавателя')),
                 ('teacher_role_fr', models.CharField(blank=True, help_text='Например, "лектор"', max_length=100, null=True, verbose_name='Роль преподавателя')),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='education.Course', verbose_name='Курс')),
+                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='training.Course', verbose_name='Курс')),
             ],
             options={
                 'verbose_name': 'Преподаватель курса',
@@ -120,7 +120,7 @@ class Migration(migrations.Migration):
                 ('title_fr', models.CharField(db_index=True, max_length=255, null=True, verbose_name='Имя')),
                 ('image', image_cropping.fields.ImageCropField(blank=True, max_length=254, null=True, upload_to='teachers', verbose_name='Аватар')),
                 ('image_thumb', image_cropping.fields.ImageRatioField('image', '180x180', adapt_rotation=False, allow_fullsize=False, free_crop=True, help_text=None, hide_image_field=False, size_warning=False, verbose_name='Эскиз')),
-                ('courses', models.ManyToManyField(blank=True, through='education.CourseTeacher', to='education.Course', verbose_name='Курсы')),
+                ('courses', models.ManyToManyField(blank=True, through='training.CourseTeacher', to='training.Course', verbose_name='Курсы')),
             ],
             options={
                 'verbose_name': 'Преподаватель',
@@ -130,11 +130,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='courseteacher',
             name='teacher',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='education.Teacher', verbose_name='Преподаватель'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='training.Teacher', verbose_name='Преподаватель'),
         ),
         migrations.AddField(
             model_name='course',
             name='teachers',
-            field=models.ManyToManyField(through='education.CourseTeacher', to='education.Teacher', verbose_name='Преподаватели'),
+            field=models.ManyToManyField(through='training.CourseTeacher', to='training.Teacher', verbose_name='Преподаватели'),
         ),
     ]

@@ -4,7 +4,7 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from base.admin import BaseArticleAdmin
-from education import models
+from training import models
 from snippets.admin import BaseModelAdmin
 from snippets.modeltranslation import get_model_translation_fields
 

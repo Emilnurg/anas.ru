@@ -90,14 +90,6 @@ class CommentAdmin(CommentAdminMixin, BaseFormRequestAdmin):
     is_answer.short_description = _('Ответ')
 
 
-@admin.register(models.EducationFormRequest)
-class EducationFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
-    """Админ.часть запросов на обучение"""
-    list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
-    list_filter = BaseNamePhoneRequestAdmin.list_filter + ('course',)
-    search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']
-
-
 @admin.register(models.FeedbackFormRequest)
 class FeedbackFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
     """Админ.часть запросов обратной связи"""
@@ -168,3 +160,11 @@ class SupportFormRequestAdmin(CommentAdminMixin, BaseFormRequestAdmin):
 
 
 SupportFormRequestAdmin.comment_short.short_description = _('Сообщение')
+
+
+@admin.register(models.TrainingFormRequest)
+class TrainingFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
+    """Админ.часть запросов на обучение"""
+    list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
+    list_filter = BaseNamePhoneRequestAdmin.list_filter + ('course',)
+    search_fields = list(BaseNamePhoneRequestAdmin.search_fields) + ['comment']

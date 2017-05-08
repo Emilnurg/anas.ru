@@ -14,8 +14,8 @@ urlpatterns = (
         views.SearchSectionView.as_view(), name='search_index', kwargs={'section': 'products'}
     ),
     url(
-        r'^(?P<lang>\w{2})/search/education/$',
-        views.SearchSectionView.as_view(), name='search_index', kwargs={'section': 'education'}
+        r'^(?P<lang>\w{2})/search/courses/$',
+        views.SearchSectionView.as_view(), name='search_index', kwargs={'section': 'courses'}
     ),
     url(
         r'^(?P<lang>\w{2})/search/knowledge/$',

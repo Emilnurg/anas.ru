@@ -109,12 +109,12 @@ class Migration(migrations.Migration):
                 ('lft', models.PositiveIntegerField(db_index=True, editable=False)),
                 ('rght', models.PositiveIntegerField(db_index=True, editable=False)),
                 ('tree_id', models.PositiveIntegerField(db_index=True, editable=False)),
-                ('level', models.PositiveIntegerField(db_index=True, editable=False)),
+                ('level', models.PositiveIntegerField(db_index=True, editable=False, verbose_name='Уровень')),
                 ('parent', mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='children', to='catalog.ProductCategory', verbose_name='Родительская категория')),
             ],
             options={
-                'verbose_name': 'Продукт',
-                'verbose_name_plural': 'Продукты',
+                'verbose_name': 'Категория продуктов',
+                'verbose_name_plural': 'Категории продуктов',
             },
             managers=[
                 ('_tree_manager', django.db.models.manager.Manager()),

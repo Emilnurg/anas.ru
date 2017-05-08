@@ -25,10 +25,10 @@ class DbConfig(BaseModel):
 class Menu(BaseModel):
     """Меню"""
     slug = models.SlugField(_('Алиас'), db_index=True, unique=True)
-    comment = models.TextField(_('Комментарий'), blank=True, null=True)
+    title = models.CharField(_('Название'), max_length=255, db_index=True, unique=True)
 
     def __str__(self):
-        return self.slug
+        return '%s (%s)' % (self.title, self.slug)
 
     class Meta:
         verbose_name = _('Меню')

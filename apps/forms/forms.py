@@ -3,7 +3,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 from catalog.models import Product
-from education.models import Course
+from training.models import Course
 from forms import models
 
 
@@ -20,14 +20,14 @@ class CommentForm(BaseRequestForm):
         fields = '__all__'
 
 
-class EducationFormRequestForm(BaseRequestForm):
+class TrainingFormRequestForm(BaseRequestForm):
     """Форма заявки на обучение"""
     course = forms.ModelChoiceField(
         label=_('Курс'), queryset=Course.objects.published(), required=False
     )
 
     class Meta:
-        model = models.EducationFormRequest
+        model = models.TrainingFormRequest
         fields = '__all__'
 
 

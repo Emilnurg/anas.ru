@@ -17,7 +17,7 @@ urlpatterns = (
     url(r'^admin/', include(admin.site.urls)),
     url(r'^uploadifive/', include('uploadifive.urls', namespace='uploadifive')),
     url(r'^', include('catalog.urls', namespace='catalog')),
-    url(r'^', include('education.urls', namespace='education')),
+    url(r'^', include('training.urls', namespace='training')),
     url(r'^', include('faq.urls', namespace='faq')),
     url(r'^', include('forms.urls', namespace='forms')),
     url(r'^', include('knowledge.urls', namespace='knowledge')),

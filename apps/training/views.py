@@ -2,6 +2,6 @@
 from snippets.views import BaseTemplateView
 
 
-class EducationIndexView(BaseTemplateView):
+class TrainingIndexView(BaseTemplateView):
     """Главная страница обучения"""
-    template_name = 'education/education_index.html'
+    template_name = 'training/training_index.html'

@@ -10,7 +10,7 @@ from django.utils import translation
 
 from elasticsearch import Elasticsearch, TransportError
 
-from education.models import Course, Teacher
+from training.models import Course, Teacher
 from search.exceptions import SearchError
 from search.utils import get_standard_es_settings
 

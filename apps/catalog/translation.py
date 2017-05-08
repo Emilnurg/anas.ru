@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
+
 from modeltranslation.decorators import register
 
 from catalog import models
@@ -18,6 +20,7 @@ class ManufacturerTranslationOptions(BaseTranslationOptions):
 @register(models.ProductCategory)
 class ProductCategoryTranslationOptions(BaseTranslationOptions):
     fields = models.ProductCategory.translation_fields
+    required_languages = {settings.DEFAULT_LANGUAGE: ('title',), 'default': ()}
 
 
 @register(models.ProductDocument)

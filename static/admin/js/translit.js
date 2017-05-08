@@ -24,12 +24,12 @@ String.prototype.translit = (function(){
 })();
 
 $(document).ready(function(e){
-	$('#id_title').blur(function() {
-		var aliasField = $('#id_alias');
-		var aliasVal = $.trim(aliasField.val());
-		var maxLength = aliasField.attr('maxlength') || 100;
-		if(!aliasVal) {
-			aliasField.val($.trim($(this).val()).translit().substr(0, maxLength));
+	$('#id_title,#id_title_en,#id_title_ru').blur(function() {
+		var slugField = $('#id_slug');
+		var slugVal = $.trim(slugField.val());
+		var maxLength = slugField.attr('maxlength') || 100;
+		if(!slugVal) {
+			slugField.val($.trim($(this).val()).translit().substr(0, maxLength));
 		}
 	});
 });

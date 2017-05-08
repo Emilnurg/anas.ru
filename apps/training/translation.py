@@ -2,7 +2,7 @@
 from modeltranslation.decorators import register
 
 from base.translation import BaseArticleTranslationOptions
-from education import models
+from training import models
 from snippets.modeltranslation import BaseTranslationOptions
 
 

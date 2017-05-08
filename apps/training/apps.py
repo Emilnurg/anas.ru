@@ -4,8 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class AppConfig(BaseAppConfig):
-    name = 'education'
+    name = 'training'
     verbose_name = _('Обучение')
 
     def ready(self):
-        from education import signals  # flake8: NOQA
+        from training import signals  # flake8: NOQA

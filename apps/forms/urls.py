@@ -10,8 +10,8 @@ urlpatterns = (
         views.CommentView.as_view(), name='comment'
     ),
     url(
-        r'^(?P<lang>\w{2})/forms/education/$',
-        views.EducationRequestView.as_view(), name='education'
+        r'^(?P<lang>\w{2})/forms/training/$',
+        views.TrainingRequestView.as_view(), name='training'
     ),
     url(
         r'^(?P<lang>\w{2})/forms/feedback/$',

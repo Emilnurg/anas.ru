@@ -31,9 +31,9 @@ class CommentView(BaseFormRequestView):
     form_class = forms.CommentForm
 
 
-class EducationRequestView(BaseFormRequestView):
+class TrainingRequestView(BaseFormRequestView):
     """Обработчик заявки на обучение"""
-    form_class = forms.EducationFormRequestForm
+    form_class = forms.TrainingFormRequestForm
 
 
 class FeedbackRequestView(BaseFormRequestView):
