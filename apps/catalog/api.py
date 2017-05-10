@@ -28,7 +28,7 @@ def get_categories_tree():
         else:
             # если это не первый элемент (который очевидно корневой)
             # и при этом левый показатель меньше, то есть новый (2й и более) корень:
-            if root_lft < curr_lft:
+            if node_level == 0 and root_lft < curr_lft:
                 root_level = node_level
                 root_lft = curr_lft
                 current_path = []

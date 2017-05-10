@@ -7,6 +7,11 @@ class CatalogIndexView(BaseTemplateView):
     template_name = 'catalog/catalog_index.html'
 
 
+class ProductCategoryView(BaseTemplateView):
+    """Страница категории продуктов"""
+    template_name = 'catalog/category.html'
+
+
 class ProductView(BaseTemplateView):
     """Страница продукта"""
     template_name = 'catalog/product.html'

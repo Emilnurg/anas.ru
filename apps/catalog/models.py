@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from image_cropping import ImageCropField
 from mptt.fields import TreeForeignKey
@@ -55,15 +56,21 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
 
     translation_fields = ('title', 'body')
 
+    class Meta:
+        verbose_name = _('Категория продуктов')
+        verbose_name_plural = _('Категории продуктов')
+
     class MPTTMeta:
         order_insertion_by = ['ordering']
 
     def __str__(self):
         return self.title
 
-    class Meta:
-        verbose_name = _('Категория продуктов')
-        verbose_name_plural = _('Категории продуктов')
+    def get_absolute_url(self, request):
+        return reverse('catalog:category', kwargs={
+            'lang': request.LANGUAGE_CODE,
+            'slug': self.slug
+        })
 
 
 ProductCategory._meta.get_field('level').verbose_name = _('Уровень')
@@ -98,12 +105,18 @@ class Product(ImageMixin, BaseModel):
 
     translation_fields = ('title', 'body', 'features_body')
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = _('Продукт')
         verbose_name_plural = _('Продукты')
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self, request):
+        return reverse('catalog:product', kwargs={
+            'lang': request.LANGUAGE_CODE,
+            'slug': self.slug
+        })
 
 
 class Feature(BaseModel):

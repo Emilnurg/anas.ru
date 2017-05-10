@@ -120,7 +120,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'snippets.middlewares.language.LanguageMiddleware',
-    'snippets.seo.middleware.SEOMiddleware'
+    'snippets.seo.middleware.SEOMiddleware',
+    'snippets.middlewares.compress.CompressMiddleware'
 )
 
 ROOT_URLCONF = 'project.urls'

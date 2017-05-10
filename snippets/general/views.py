@@ -3,11 +3,9 @@ from django.http import HttpResponseForbidden, HttpResponseBadRequest, HttpRespo
     HttpResponseServerError
 from django.template.loader import render_to_string
 
-from snippets.slimmer.decorator import compress_html
 from snippets.utils.i18n import get_language
 
 
-@compress_html
 def e400(request, **kwargs):
     """400 handler"""
     message = kwargs.get('message', '')
@@ -22,7 +20,6 @@ def e400(request, **kwargs):
     )
 
 
-@compress_html
 def e403(request, **kwargs):
     """403 handler"""
     message = kwargs.get('message', '')
@@ -37,7 +34,6 @@ def e403(request, **kwargs):
     )
 
 
-@compress_html
 def e404(request, **kwargs):
     """404 handler"""
     message = kwargs.get('message', '')
@@ -52,7 +48,6 @@ def e404(request, **kwargs):
     )
 
 
-@compress_html
 def e500(request, **kwargs):
     """500 handler"""
     message = kwargs.get('message', '')

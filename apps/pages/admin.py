@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline, \
+    TranslationStackedInline
 from solo.admin import SingletonModelAdmin
 
 from pages import models
@@ -26,7 +27,7 @@ class HomeAdvantageInline(TranslationTabularInline):
     model = models.HomeAdvantage
 
 
-class HomeSlideInline(TranslationTabularInline):
+class HomeSlideInline(TranslationStackedInline):
     """Слайды на главной"""
     extra = 0
     fields = models.HomeSlide().collect_fields()

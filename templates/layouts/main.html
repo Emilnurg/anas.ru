@@ -1,6 +1,6 @@
 {%- set languages = get_languages() -%}
 {%- set home_url = url('core:homepage', kwargs={'lang': request.LANGUAGE_CODE}) -%}
-{%- set catalog_tree = categories_tree() %}
+{%- set catalog_tree = categories_tree() -%}
 <!DOCTYPE html>
 <html lang="{{ request.LANGUAGE_CODE }}">
   <head>
@@ -64,13 +64,15 @@
             </nav>
             <div class="header__contacts">
 							{%- if var('EMAIL_PUBLIC', request) -%}
-              <a href="mailto:{{ var('EMAIL_PUBLIC', request) }}" class="email-link header__email">
+              <a href="mailto:{{ var('EMAIL_PUBLIC', request) }}"
+								 class="email-link header__email">
 								{{- var('EMAIL_PUBLIC', request) -}}
 							</a>
 							{%- endif -%}
 
               {%- if var('TELEPHONE_PUBLIC', request) -%}
-							<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}" class="tel-link header__tel">
+							<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
+								 class="tel-link header__tel">
 								{{- var('TELEPHONE_PUBLIC', request) -}}
 							</a>
               {%- endif -%}
@@ -88,7 +90,8 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  <form action="#" class="search-form">
+                  <form action="{{ url('search:search_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+												class="search-form">
                     <input type="text" name="search" class="search-form__field">
                     <button type="submit" class="search-form__button" disabled>Найти</button>
                     <a href="javascript:" class="search-form__clear"></a>
@@ -100,92 +103,68 @@
           <div class="container">
             <div class="header__bottom-left">
               <a href="{{ home_url }}" class="logo header__logo">
-                <img src="{{ STATIC_URL }}images/logo.svg" class="img-responsive" alt=""> </a>
+                <img src="{{ STATIC_URL }}images/logo.svg" class="img-responsive" alt=""/>
+							</a>
+
+							{%- if catalog_tree -%}
               <nav class="header__nav">
                 <ul class="header__nav-list">
+
+									{%- for category_1 in catalog_tree -%}
                   <li class="header__nav-item header__nav-item--dropdown">
-                    <a href="javascript:" class="header__nav-link"> Стоматологическое оборудование
-                      <span></span>
+                    <a href="{{ category_1['obj'].get_absolute_url(request) }}"
+											 class="header__nav-link">
+											{{- category_1['obj'].title|e -}}
+											{%- if category_1['children'] -%}
+                      &nbsp;<span></span>
+											{%- endif -%}
                     </a>
+
+										{%- if category_1['children'] -%}
                     <div class="header__nav-dropdown">
                       <div>
+												{%- for category_2 in category_1['children'] -%}
                         <div>
                           <h4>
-                            <a href="javascript:">Гигиена</a>
+                            <a href="{{ category_2['obj'].get_absolute_url(request) }}">
+															{{- category_2['obj'].title|e -}}
+														</a>
                           </h4>
+
+													{%- if category_2['children'] -%}
                           <ul>
-                            <li class="is-active">
-                              <a href="javascript:">Гигиенические рукавицы</a>
+														{%- for category_3 in category_2['children'] -%}
+                            <li{% if current_category is defined() and current_category.id == category_3['obj'].id %} class="is-active"{% endif %}>
+                              <a href="{{ category_3['obj'].get_absolute_url(request) }}">
+																{{- category_3['obj'].title|e -}}
+															</a>
                             </li>
-                            <li>
-                              <a href="javascript:">Гигиенические пакеты</a>
-                            </li>
-                            <li>
-                              <a href="javascript:">Суперабсорбенты</a>
-                            </li>
+                            {%- endfor -%}
                           </ul>
+													{%- endif -%}
                         </div>
-                        <div>
-                          <h4>
-                            <a href="javascript:">Аэрозольная дезинфекция</a>
-                          </h4>
-                          <ul>
-                            <li>
-                              <a href="javascript:">Аппарат для аэрозольной дезинфекции помещений</a>
-                            </li>
-                          </ul>
-                        </div>
+                        {%- endfor -%}
                       </div>
                     </div>
+										{%- endif -%}
                   </li>
-                  <li class="header__nav-item header__nav-item--dropdown">
-                    <a href="javascript:" class="header__nav-link"> Гигиена и дезинфекция
-                      <span></span>
-                    </a>
-                    <div class="header__nav-dropdown">
-                      <div>
-                        <div>
-                          <h4>
-                            <a href="javascript:">Гигиена</a>
-                          </h4>
-                          <ul>
-                            <li class="is-active">
-                              <a href="javascript:">Гигиенические рукавицы</a>
-                            </li>
-                            <li>
-                              <a href="javascript:">Гигиенические пакеты</a>
-                            </li>
-                            <li>
-                              <a href="javascript:">Суперабсорбенты</a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h4>
-                            <a href="javascript:">Аэрозольная дезинфекция</a>
-                          </h4>
-                          <ul>
-                            <li>
-                              <a href="javascript:">Аппарат для аэрозольной дезинфекции помещений</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                  {%- endfor -%}
                   {{- menu(request, 'TOP_CATALOG_MENU') -}}
                 </ul>
               </nav>
+							{%- endif -%}
             </div>
+
             <div class="header__bottom-right">
               <div class="search header__search-open">
-                <a href="{{ url('search:search_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+                <a href="javascript:"
 									 class="search__toggle">
                   <span>Поиск</span>
                 </a>
               </div>
+
               <div class="lang header__lang">
-                <div class="lang__selected"> {{ request.LANGUAGE_CODE|upper }} </div>
+                <div class="lang__selected">{{ request.LANGUAGE_CODE|upper }}</div>
                 <ul class="lang__dropdown">
 									{%- for language in languages -%}
 									{%- if language[0] != request.LANGUAGE_CODE -%}
@@ -203,32 +182,20 @@
         <div class="header__mobile">
           <div class="container">
             <div class="search header__search-open">
-              <a href="javascript:" class="search__toggle">
+              <a href="{{ url('search:search_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+								 class="search__toggle">
                 <span>Поиск</span>
               </a>
             </div>
             <div class="header__scroll">
               <nav class="header__menu">
                 <ul class="header__menu-list">
-                  <li>
-                    <a href="javascript:">О компании</a>
-                  </li>
-                  <li>
-                    <a href="javascript:">Новости</a>
-                  </li>
-                  <li>
-                    <a href="javascript:">База знаний</a>
-                  </li>
-                  <li>
-                    <a href="javascript:">Сервисный центр</a>
-                  </li>
-                  <li>
-                    <a href="javascript:">Контакты</a>
-                  </li>
+                  {{- menu(request, 'TOP_MAIN_MENU') -}}
                 </ul>
               </nav>
             </div>
           </div>
+
           <div class="header__contacts">
             <div class="container">
               <a href="javascript:" class="header__callback">Заказать звонок</a>

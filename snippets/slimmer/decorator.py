@@ -15,7 +15,7 @@ def compress_html(view_func):
         response = view_func(request, *args, **kwargs)
         if isinstance(response, HttpResponse) \
                 and not isinstance(response, HttpResponseRedirectBase) \
-                and response.get('Content-Type', None).find('text/html;') == 0:
+                and response.get('Content-Type', None).find('text/html') == 0:
             response.content = slimmer.xhtml_slimmer(response.content)
         return response
     return wraps(view_func)(_wrapped_view_func)

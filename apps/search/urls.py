@@ -11,14 +11,14 @@ urlpatterns = (
     ),
     url(
         r'^(?P<lang>\w{2})/search/products/$',
-        views.SearchSectionView.as_view(), name='search_index', kwargs={'section': 'products'}
+        views.SearchSectionView.as_view(), name='search_products', kwargs={'section': 'products'}
     ),
     url(
         r'^(?P<lang>\w{2})/search/courses/$',
-        views.SearchSectionView.as_view(), name='search_index', kwargs={'section': 'courses'}
+        views.SearchSectionView.as_view(), name='search_courses', kwargs={'section': 'courses'}
     ),
     url(
         r'^(?P<lang>\w{2})/search/knowledge/$',
-        views.SearchSectionView.as_view(), name='search_index', kwargs={'section': 'knowledge'}
+        views.SearchSectionView.as_view(), name='search_knowledge', kwargs={'section': 'knowledge'}
     ),
 )
