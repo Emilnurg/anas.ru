@@ -19,9 +19,9 @@ class CityAdmin(BaseModelAdmin, SuperUserDeletableAdminMixin, TranslationAdmin):
 
 
 @admin.register(models.SiteConfiguration)
-class SiteConfigurationAdmin(SingletonModelAdmin, TranslationAdmin):
+class SiteConfigurationAdmin(TranslationAdmin, SingletonModelAdmin):
     """Настройки сайта"""
-    pass
+    group_fieldsets = True
 
 
 @admin.register(models.SocialNetwork)

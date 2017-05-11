@@ -24,12 +24,17 @@ class HomeView(BaseTemplateView):
         home_slides = home_page.slides.published()
         home_advantages = home_page.advantages.published()
 
-        kwargs.extend(
+        kwargs.update(
             home_advantages=home_advantages,
             home_page=home_page,
             home_slides=home_slides
         )
         return kwargs
+
+
+class ContactsView(BaseTemplateView):
+    """Контакты"""
+    template_name = 'core/contacts.html'
 
 
 class FlatpageView(BaseTemplateView):

@@ -24,7 +24,7 @@ class City(BaseModel):
 class SiteConfiguration(BasicModel, LastModMixin, SingletonModel):
     """Настройки сайта"""
     def __str__(self):
-        return _('Настройки сайта')
+        return str(_('Настройки сайта'))
 
     class Meta:
         verbose_name = _('Настройки сайта')

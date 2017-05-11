@@ -10,6 +10,7 @@ class CompressMiddleware(object):
     def process_response(request, response):
         if isinstance(response, HttpResponse) \
                 and not isinstance(response, HttpResponseRedirectBase) \
-                and response.get('Content-Type', None).find('text/html') == 0:
+                and response.get('Content-Type', None).find('text/html') == 0\
+                and response.status_code < 400:
             response.content = slimmer.xhtml_slimmer(response.content)
         return response

@@ -199,7 +199,8 @@
           <div class="header__contacts">
             <div class="container">
               <a href="javascript:" class="header__callback">Заказать звонок</a>
-              <a href="tel:+74956265459" class="tel-link header__tel">+7 (495) 626-54-59</a>
+              <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
+								 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
             </div>
           </div>
         </div>
@@ -213,7 +214,8 @@
             </a>
           </div>
           <div class="header-fixed__right">
-            <a href="tel:+74956265459" class="tel-link header__tel">+7 (495) 626-54-59</a>
+            <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
+							 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
             <a href="javascript:" class="header__callback">Заказать звонок</a>
           </div>
         </div>
@@ -226,48 +228,22 @@
         <div class="footer__top">
           <div class="container">
             <div class="footer__left">
-              <a href="javascript:" class="logo footer__logo">
+              <a href="{{ home_url }}" class="logo footer__logo">
                 <img src="{{ STATIC_URL }}images/logo2.png" class="img-responsive" alt=""> </a>
             </div>
             <div class="footer__right">
               <div class="footer__menu">
                 <ul class="footer__nav">
-                  <li>
-                    <a href="javascript:">О компании</a>
-                  </li>
-                  <li>
-                    <a href="javascript:">Новости</a>
-                  </li>
-                  <li>
-                    <a href="javascript:">База знаний</a>
-                  </li>
+                  {{- menu(request, 'FOOTER_MENU_COL1') -}}
                 </ul>
                 <ul class="footer__nav">
-                  <li>
-                    <a href="javascript:">Сервисный центр</a>
-                  </li>
-                  <li>
-                    <a href="javascript:">Реализованные проекты</a>
-                  </li>
-                  <li>
-                    <a href="javascript:">Контакты</a>
-                  </li>
+                  {{- menu(request, 'FOOTER_MENU_COL2') -}}
                 </ul>
                 <ul class="footer__nav">
-                  <li>
-                    <a href="javascript:">Стоматологическое оборудование</a>
-                  </li>
-                  <li>
-                    <a href="javascript:">Гигиена и дизенфекция</a>
-                  </li>
+                  {{- menu(request, 'FOOTER_MENU_COL3') -}}
                 </ul>
                 <ul class="footer__nav">
-                  <li>
-                    <a href="javascript:">Обучение</a>
-                  </li>
-                  <li>
-                    <a href="javascript:">Техническая поддержка</a>
-                  </li>
+									{{- menu(request, 'FOOTER_MENU_COL4') -}}
                 </ul>
               </div>
             </div>
@@ -275,35 +251,35 @@
         </div>
         <div class="footer__middle">
           <div class="container">
+						{%- if var('ADDRESS', request) -%}
             <address class="address footer__address">
-              <a href="javascript:" class="address__link">105064, г. Москва, ул. Земляной Вал, д. 2/50-31</a>
+              <a href="{{ url('core:contacts', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+								 class="address__link">{{ var('ADDRESS', request) }}</a>
             </address>
+						{%- endif -%}
             <div class="footer__middle-right">
               <ul class="socials footer__socials">
-                <li>
-                  <a href="javascript:" class="social-link social-link--facebook"></a>
-                </li>
-                <li>
-                  <a href="javascript:" class="social-link social-link--youtube"></a>
-                </li>
-                <li>
-                  <a href="javascript:" class="social-link social-link--twitter"></a>
-                </li>
-                <li>
-                  <a href="javascript:" class="social-link social-link--instagram"></a>
-                </li>
+								{{- menu(request, 'FOOTER_SOCIALS') -}}
               </ul>
               <div class="footer__contacts">
-                <a href="tel:+74956265459" class="tel-link footer__tel">+7 (495) 626-54-59</a>
-                <a href="mailto:info@anas.com" class="email-link footer__email">info@anas.com</a>
+								{%- if var('TELEPHONE_PUBLIC', request) -%}
+                <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
+									 class="tel-link footer__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
+								{%- endif -%}
+								{%- if var('EMAIL_PUBLIC', request) -%}
+                <a href="{{ var('EMAIL_PUBLIC', request)|e }}" class="email-link footer__email">
+									{{- var('EMAIL_PUBLIC', request) -}}
+								</a>
+								{%- endif -%}
               </div>
             </div>
           </div>
         </div>
         <div class="footer__bottom">
           <div class="container">
-            <small class="copyright"> © 2006–2016 AnasMedical.
-              <span>Все права защищены.</span>
+            <small class="copyright">
+							{{- var('FOOTER_COPYRIGHT_LEFT', request) -}}
+              <span>{{ var('FOOTER_COPYRIGHT_RIGHT', request) }}</span>
             </small>
           </div>
         </div>
