@@ -1,23 +1,12 @@
-{%- set languages = get_languages() -%}
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-{%- for lang in languages %}
-	<url>
-		<loc>{{ site_url }}{{ url('core:homepage', kwargs={'lang': lang}) }}</loc>
-	</url>
+    {%- for url in urls %}
     <url>
-		<loc>{{ site_url }}{{ url('pages:contacts', kwargs={'lang': lang}) }}</loc>
-	</url>
-    {%- for qs in querysets %}
-    {%- for obj in qs %}
-    <url>
-		<loc>{{ site_url }}{{ obj.get_absolute_url(lang) }}</loc>
+		<loc>{{ site_url }}{{ url }}</loc>
 	</url>
     {%- endfor %}
-    {%- endfor %}
-{%- endfor %}
 </urlset>

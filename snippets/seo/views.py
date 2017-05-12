@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 
-from core.models import Page
 from snippets.seo.models import Robot
+from snippets.seo.utils import collect_sitemap_urls
 from snippets.views import BaseTemplateView
 
 
@@ -13,10 +13,9 @@ class SitemapView(BaseTemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SitemapView, self).get_context_data(**kwargs)
-        pages = Page.objects.published().only('id', 'slug').order_by('ordering')
 
         context.update({
-            'querysets': (pages,),
+            'urls': collect_sitemap_urls(),
             'site_url': settings.SITE_URL
         })
         return context

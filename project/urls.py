@@ -21,7 +21,6 @@ urlpatterns = (
     url(r'^', include('faq.urls', namespace='faq')),
     url(r'^', include('forms.urls', namespace='forms')),
     url(r'^', include('knowledge.urls', namespace='knowledge')),
-    url(r'^', include('pages.urls', namespace='pages')),
     url(r'^', include('press.urls', namespace='press')),
     url(r'^', include('projects.urls', namespace='projects')),
     url(r'^', include('search.urls', namespace='search')),
@@ -37,5 +36,5 @@ if getattr(settings, 'ENV', 'production') == 'dev':
     urlpatterns += tuple(staticfiles_urlpatterns())
 
 urlpatterns += (
-    url(r'^', include('core.urls', namespace='core')),
+    url(r'^', include('pages.urls', namespace='pages')),
 )

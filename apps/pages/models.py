@@ -97,10 +97,6 @@ class ContactsPage(BasicModel, SingletonModel):
 
 class HomePage(BasicModel, SingletonModel):
     """Главная страница"""
-    title = models.CharField(_('Заголовок страницы'), max_length=255)
-    subtitle = RichTextUploadingField(_('Подзаголовок'), max_length=4096, blank=True, null=True)
-
-    translation_fields = ('title', 'subtitle')
 
     def __str__(self):
         return _('Главная страница')

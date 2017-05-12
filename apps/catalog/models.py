@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -66,9 +67,9 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self, request):
+    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
         return reverse('catalog:category', kwargs={
-            'lang': request.LANGUAGE_CODE,
+            'lang': lang,
             'slug': self.slug
         })
 
@@ -112,9 +113,9 @@ class Product(ImageMixin, BaseModel):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self, request):
+    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
         return reverse('catalog:product', kwargs={
-            'lang': request.LANGUAGE_CODE,
+            'lang': lang,
             'slug': self.slug
         })
 

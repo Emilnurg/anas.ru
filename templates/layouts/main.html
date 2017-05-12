@@ -1,5 +1,5 @@
 {%- set languages = get_languages() -%}
-{%- set home_url = url('core:homepage', kwargs={'lang': request.LANGUAGE_CODE}) -%}
+{%- set home_url = url('pages:homepage', kwargs={'lang': request.LANGUAGE_CODE}) -%}
 {%- set catalog_tree = categories_tree() -%}
 <!DOCTYPE html>
 <html lang="{{ request.LANGUAGE_CODE }}">
@@ -93,7 +93,9 @@
                   <form action="{{ url('search:search_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 												class="search-form">
                     <input type="text" name="search" class="search-form__field">
-                    <button type="submit" class="search-form__button" disabled>Найти</button>
+                    <button type="submit" class="search-form__button" disabled>
+											{{- var('FIND_BUTTON', request) -}}
+										</button>
                     <a href="javascript:" class="search-form__clear"></a>
                   </form>
                 </div>
@@ -109,7 +111,6 @@
 							{%- if catalog_tree -%}
               <nav class="header__nav">
                 <ul class="header__nav-list">
-
 									{%- for category_1 in catalog_tree -%}
                   <li class="header__nav-item header__nav-item--dropdown">
                     <a href="{{ category_1['obj'].get_absolute_url(request) }}"
@@ -159,7 +160,7 @@
               <div class="search header__search-open">
                 <a href="javascript:"
 									 class="search__toggle">
-                  <span>Поиск</span>
+                  <span>{{ var('SEARCH_BUTTON', request) }}</span>
                 </a>
               </div>
 
@@ -184,7 +185,7 @@
             <div class="search header__search-open">
               <a href="{{ url('search:search_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 								 class="search__toggle">
-                <span>Поиск</span>
+                <span>{{ var('SEARCH_BUTTON', request) }}</span>
               </a>
             </div>
             <div class="header__scroll">
@@ -198,7 +199,9 @@
 
           <div class="header__contacts">
             <div class="container">
-              <a href="javascript:" class="header__callback">Заказать звонок</a>
+              <a href="javascript:" class="header__callback">
+								{{- var('CALLBACK_REQUEST_TEXT', request) -}}
+							</a>
               <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
 								 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
             </div>
@@ -210,13 +213,15 @@
         <div class="container">
           <div class="header-fixed__left">
             <a href="{{ home_url }}" class="logo">
-              <img src="{{ STATIC_URL }}images/logo_sm.png" class="img-responsive" alt="">
+              <img src="{{ STATIC_URL }}images/logo_sm.png" class="img-responsive" alt=""/>
             </a>
           </div>
           <div class="header-fixed__right">
             <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
 							 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
-            <a href="javascript:" class="header__callback">Заказать звонок</a>
+            <a href="javascript:" class="header__callback">
+							{{- var('CALLBACK_REQUEST_TEXT', request) -}}
+						</a>
           </div>
         </div>
       </header>
@@ -224,12 +229,14 @@
       <main class="main">
         {%- block PAGE_CONTENT %}{% endblock -%}
       </main>
+
       <footer class="footer">
         <div class="footer__top">
           <div class="container">
             <div class="footer__left">
               <a href="{{ home_url }}" class="logo footer__logo">
-                <img src="{{ STATIC_URL }}images/logo2.png" class="img-responsive" alt=""> </a>
+                <img src="{{ STATIC_URL }}images/logo2.png" class="img-responsive" alt=""/>
+							</a>
             </div>
             <div class="footer__right">
               <div class="footer__menu">
@@ -253,8 +260,10 @@
           <div class="container">
 						{%- if var('ADDRESS', request) -%}
             <address class="address footer__address">
-              <a href="{{ url('core:contacts', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-								 class="address__link">{{ var('ADDRESS', request) }}</a>
+              <a href="{{ url('pages:contacts', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+								 class="address__link">
+								{{- var('ADDRESS', request) -}}
+							</a>
             </address>
 						{%- endif -%}
             <div class="footer__middle-right">
@@ -264,7 +273,9 @@
               <div class="footer__contacts">
 								{%- if var('TELEPHONE_PUBLIC', request) -%}
                 <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
-									 class="tel-link footer__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
+									 class="tel-link footer__tel">
+									{{- var('TELEPHONE_PUBLIC', request) -}}
+								</a>
 								{%- endif -%}
 								{%- if var('EMAIL_PUBLIC', request) -%}
                 <a href="{{ var('EMAIL_PUBLIC', request)|e }}" class="email-link footer__email">
