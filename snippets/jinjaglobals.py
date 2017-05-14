@@ -265,7 +265,7 @@ whitespace_re = re.compile(r'(\s|-|\)|\()+', re.MULTILINE)
 
 
 @jinjaglobal
-def static_asset(file_path):
+def static_with_mtime(file_path):
     filemtime = int(
         os.path.getmtime(os.path.join(settings.STATIC_ROOT, file_path))
     )

@@ -32,3 +32,27 @@ class GalleryAdmin(BaseModelAdmin, TranslationAdmin):
 
     class Media:
         js = ('admin/js/translit.js',)
+
+
+@admin.register(models.HomeAdvantage)
+class HomeAdvantageAdmin(BaseModelAdmin, TranslationAdmin):
+    """Преимущества на главной странице"""
+    fields = models.HomeAdvantage().collect_fields()
+    group_fieldsets = True
+    list_display = ('id', 'title', 'icon', 'ordering', 'status', 'created')
+    list_display_links = ('id', 'title')
+    ordering = BaseModelAdmin.ordering + ('title',)
+    save_as = True
+    search_fields = ['=id', 'icon'] + get_model_translation_fields(models.HomeAdvantage)
+
+
+@admin.register(models.HomeSlide)
+class HomeSlideAdmin(BaseModelAdmin, TranslationAdmin):
+    """Слайды на главной"""
+    fields = models.HomeSlide().collect_fields()
+    group_fieldsets = True
+    list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'created')
+    list_display_links = ('id', 'image_thumb', 'title')
+    ordering = BaseModelAdmin.ordering + ('title',)
+    save_as = True
+    search_fields = ['=id'] + get_model_translation_fields(models.HomeSlide)

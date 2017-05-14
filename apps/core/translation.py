@@ -18,3 +18,13 @@ class GalleryTranslationOptions(BaseTranslationOptions):
 @register(models.GalleryPhoto)
 class GalleryPhotoTranslationOptions(BaseTranslationOptions):
     fields = models.GalleryPhoto.translation_fields
+
+
+@register(models.HomeAdvantage)
+class HomeAdvantageTranslationOptions(BaseTranslationOptions):
+    fields = models.HomeAdvantage.translation_fields
+
+
+@register(models.HomeSlide)
+class HomeSlideTranslationOptions(BaseTranslationOptions):
+    fields = models.HomeSlide.translation_fields

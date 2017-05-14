@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from ckeditor_uploader.fields import RichTextUploadingField
 
+from base.enums import IconEnum
 from snippets.models import BaseModel
 from snippets.models.image import ImageMixin
 
@@ -66,3 +67,40 @@ class GalleryPhoto(ImageMixin, BaseModel):
 
     def __str__(self):
         return self.alt if self.alt else str(self.pk)
+
+
+class HomeAdvantage(BaseModel):
+    """Преимущества на главной странице"""
+    icon = models.CharField(
+        _('Иконка'), choices=IconEnum.get_choices(), blank=True, null=True, max_length=50
+    )
+    title = models.CharField(_('Заголовок'), max_length=255)
+
+    translation_fields = ('title',)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _('Преимущество')
+        verbose_name_plural = _('Преимущества на главной странице')
+
+
+class HomeSlide(ImageMixin, BaseModel):
+    """Преимущества на главной странице"""
+    image = models.ImageField(
+        _('Изображение'), max_length=255, upload_to='homepage_slides', blank=True, null=True
+    )
+    title = models.CharField(_('Заголовок'), max_length=255, blank=True, null=True)
+    subtitle = models.CharField(_('Подзаголовок'), max_length=255, blank=True, null=True)
+    url = models.CharField(_('Ссылка кнопки'), max_length=255, blank=True, null=True)
+    button_caption = models.CharField(_('Текст кнопки'), max_length=255, blank=True, null=True)
+
+    translation_fields = ('title', 'subtitle', 'url', 'button_caption')
+
+    def __str__(self):
+        return self.title if self.title else str(self.pk)
+
+    class Meta:
+        verbose_name = _('Слайд на главной')
+        verbose_name_plural = _('Слайды на главной')

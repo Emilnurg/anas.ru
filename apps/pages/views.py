@@ -2,6 +2,7 @@
 from django.conf import settings
 from django.http import HttpResponseRedirect
 
+from core.models import HomeAdvantage, HomeSlide
 from core.utils import get_flat_page
 from pages.models import HomePage
 from snippets.views import BaseTemplateView
@@ -21,8 +22,8 @@ class HomeView(BaseTemplateView):
     def get_context_data(self, **kwargs):
         kwargs = super(HomeView, self).get_context_data(**kwargs)
         home_page = HomePage.get_solo()
-        home_slides = home_page.slides.published()
-        home_advantages = home_page.advantages.published()
+        home_slides = HomeSlide.objects.published().order_by('ordering')
+        home_advantages = HomeAdvantage.objects.published().order_by('ordering')
 
         kwargs.update(
             home_advantages=home_advantages,
@@ -30,6 +31,11 @@ class HomeView(BaseTemplateView):
             home_slides=home_slides
         )
         return kwargs
+
+
+class AboutView(BaseTemplateView):
+    """О компании"""
+    template_name = 'pages/about.html'
 
 
 class ContactsView(BaseTemplateView):

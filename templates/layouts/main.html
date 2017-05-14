@@ -28,9 +28,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="format-detection" content="telephone=no">
     <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.png">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
-    {%- block EXTRA_STYLES %}{% endblock -%}
-    <script src="{{ STATIC_URL }}js/critical.js" async></script>
+
     {%- for language in languages -%}
 			{%- if language[0] != request.LANGUAGE_CODE -%}
       <link rel="alternate" href="{{ site_url() }}{{ get_language_href(request, language[0]) }}" hreflang="{{ language[0] }}" />
@@ -40,10 +38,11 @@
 			<link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" type="image/x-icon">
 			<script src="{{ STATIC_URL }}js/html5.js"></script>
 		<![endif]-->
+
 	  {%- block EXTRA_META %}{% endblock -%}
   </head>
 
-  <body class="page skrollr-body {% block BODY_CLASSES %}{% endblock %}" id="top">
+  <body class="page skrollr-body {% block BODY_CLASSES %}{% endblock %}" id="top" style="opacity:0">
     <div class="page__layout">
       <header class="header"
 							data-start="transform: translateY(0px)"
@@ -113,7 +112,7 @@
                 <ul class="header__nav-list">
 									{%- for category_1 in catalog_tree -%}
                   <li class="header__nav-item header__nav-item--dropdown">
-                    <a href="{{ category_1['obj'].get_absolute_url(request) }}"
+                    <a href="{{ category_1['obj'].get_absolute_url(request.LANGUAGE_CODE) }}"
 											 class="header__nav-link">
 											{{- category_1['obj'].title|e -}}
 											{%- if category_1['children'] -%}
@@ -127,7 +126,7 @@
 												{%- for category_2 in category_1['children'] -%}
                         <div>
                           <h4>
-                            <a href="{{ category_2['obj'].get_absolute_url(request) }}">
+                            <a href="{{ category_2['obj'].get_absolute_url(request.LANGUAGE_CODE) }}">
 															{{- category_2['obj'].title|e -}}
 														</a>
                           </h4>
@@ -136,7 +135,7 @@
                           <ul>
 														{%- for category_3 in category_2['children'] -%}
                             <li{% if current_category is defined() and current_category.id == category_3['obj'].id %} class="is-active"{% endif %}>
-                              <a href="{{ category_3['obj'].get_absolute_url(request) }}">
+                              <a href="{{ category_3['obj'].get_absolute_url(request.LANGUAGE_CODE) }}">
 																{{- category_3['obj'].title|e -}}
 															</a>
                             </li>
@@ -296,7 +295,13 @@
         </div>
       </footer>
     </div>
-    <script src="{{ STATIC_URL }}js/main.js" async></script>
+
+		<link rel="stylesheet" href="{{ static_with_mtime('css/style.css') }}">
+    {%- block EXTRA_STYLES %}{% endblock -%}
+
+    <script src="{{ static_with_mtime('js/critical.js') }}"></script>
+		<script src="{{ static_with_mtime('js/main.js') }}" async></script>
+		<script src="{{ static_with_mtime('js/core.js') }}"></script>
 		{%- block EXTRA_SCRIPTS %}{% endblock -%}
     {%- block EXTRA_BODY %}{% endblock -%}
   </body>

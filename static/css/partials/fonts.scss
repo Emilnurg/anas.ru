@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'ProximaNovaRg';
+  src: url('../fonts/ProximaNova-Regular.woff2') format('woff2'),
+       url('../fonts/ProximaNova-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@mixin f-reg {
+  font-family: 'ProximaNovaRg';
+  font-weight: 400;
+}

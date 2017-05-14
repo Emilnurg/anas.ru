@@ -1,0 +1,44 @@
+.row.no-pad {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+
+  & > [class*='col-'] {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+.row--flex {
+  display: flex;
+  flex-wrap: wrap;
+
+  &:before, &:after {
+    display: none;
+  }
+}
+
+.row--equal {
+  display: flex;
+  flex-wrap: wrap;
+
+  &:before, &:after {
+    display: none;
+  }
+
+  >div {
+    display: flex;
+  }
+}
+
+
+@media (min-width: 992px) {
+  .container {
+      width: 970px;
+  }
+}
+
+@media (min-width: 1265px) {
+  .container {
+    width: 1240px;
+  }
+}

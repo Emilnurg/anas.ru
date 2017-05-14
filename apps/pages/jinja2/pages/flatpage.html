@@ -1,8 +1,8 @@
 {%- extends 'layouts/main.html' -%}
 
-{%- block PAGE_TITLE %}{% endblock -%}
+{%- block PAGE_TITLE %}{{ current_page.title|e }}{% endblock -%}
 
-{% block BODY_CLASSES %}{% endblock %}
+{%- block BODY_CLASSES %}body-flatpage{% endblock -%}
 
 {%- block PAGE_CONTENT -%}
 

@@ -14,6 +14,10 @@ urlpatterns = (
         views.HomeView.as_view(), name='homepage'
     ),
     url(
+        r'^(?P<lang>\w{2})/about/$',
+        views.AboutView.as_view(), name='about'
+    ),
+    url(
         r'^(?P<lang>\w{2})/contacts/$',
         views.ContactsView.as_view(), name='contacts'
     ),
