@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 
 from core.models import HomeAdvantage, HomeSlide
 from core.utils import get_flat_page
-from pages.models import HomePage
+from pages.models import HomePage, ContactsPage, AboutPage, AboutAdvantage
 from snippets.views import BaseTemplateView
 
 
@@ -22,8 +22,8 @@ class HomeView(BaseTemplateView):
     def get_context_data(self, **kwargs):
         kwargs = super(HomeView, self).get_context_data(**kwargs)
         home_page = HomePage.get_solo()
-        home_slides = HomeSlide.objects.published().order_by('ordering')
-        home_advantages = HomeAdvantage.objects.published().order_by('ordering')
+        home_slides = HomeSlide.objects.published().order_by('ordering')[:20]
+        home_advantages = HomeAdvantage.objects.published().order_by('ordering')[:5]
 
         kwargs.update(
             home_advantages=home_advantages,
@@ -37,10 +37,28 @@ class AboutView(BaseTemplateView):
     """О компании"""
     template_name = 'pages/about.html'
 
+    def get_context_data(self, **kwargs):
+        kwargs = super(AboutView, self).get_context_data(**kwargs)
+        about_page = AboutPage.get_solo()
+        advantages = AboutAdvantage.objects.published().order_by('ordering')[:3]
+
+        kwargs.update(
+            about_page=about_page,
+            advantages=advantages
+        )
+        return kwargs
+
 
 class ContactsView(BaseTemplateView):
     """Контакты"""
     template_name = 'pages/contacts.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs = super(ContactsView, self).get_context_data(**kwargs)
+        contacts_page = ContactsPage.get_solo()
+
+        kwargs.update(contacts_page=contacts_page)
+        return kwargs
 
 
 class FlatpageView(BaseTemplateView):

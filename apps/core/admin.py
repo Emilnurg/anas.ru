@@ -49,7 +49,6 @@ class HomeAdvantageAdmin(BaseModelAdmin, TranslationAdmin):
 @admin.register(models.HomeSlide)
 class HomeSlideAdmin(BaseModelAdmin, TranslationAdmin):
     """Слайды на главной"""
-    fields = models.HomeSlide().collect_fields()
     group_fieldsets = True
     list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'created')
     list_display_links = ('id', 'image_thumb', 'title')

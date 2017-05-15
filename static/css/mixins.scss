@@ -1,0 +1,74 @@
+@mixin background-image-retina($file, $type) {
+  background-image: url($file + '.' + $type);
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 144dpi) {
+    & {
+      background-image: url($file + '@2x.' + $type);
+    }
+  }
+}
+
+@mixin placeholder-color($color, $colorFocus) {
+  input::placeholder {
+    color: $color !important;
+  }
+  input:focus::placeholder{
+    color: $colorFocus !important;
+  }
+  textarea::placeholder {
+    color: $color !important;
+    &:focus {
+      color: $colorFocus !important;
+    }
+  }
+  textarea:focus::placeholder{
+    color: $colorFocus !important;
+  }
+}
+
+@mixin cf {
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin gray {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: url(resources.svg#desaturate);
+  filter: gray;
+  -webkit-filter: grayscale(1);
+}
+
+@mixin responsiveImg {
+  &:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 1px;
+    height: 100%;
+    margin-right: -1px;
+  }
+
+  img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+@mixin f-reg {
+  font-family: 'ProximaNovaRg', sans-serif;
+  font-weight: 400;
+}
+

@@ -1,11 +1,11 @@
-@import 'partials/bootstrap.scss';
+@import 'bootstrap';
 @import '../vendors/fancybox/dist/jquery.fancybox.scss';
 @import '../vendors/slick/slick/slick-theme.scss';
 @import '../vendors/slick/slick/slick.scss';
 @import '../vendors/waves/dist/waves.scss';
 @import '../vendors/perfect-scrollbar/css/perfect-scrollbar.scss';
 
-@import 'partials/fonts.scss';
-@import 'partials/grid.scss';
-@import 'partials/base.scss';
-@import 'partials/main.scss';
+@import 'fonts';
+@import 'grid';
+@import 'base';
+@import 'main';

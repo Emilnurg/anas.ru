@@ -1,6 +1,6 @@
 {%- extends 'layouts/main.html' -%}
 
-{%- block PAGE_TITLE %}{% endblock -%}
+{%- block PAGE_TITLE %}{{ contacts_page.title|e }}{% endblock -%}
 
 {%- block BODY_CLASSES %}body-contacts{% endblock -%}
 
@@ -9,23 +9,31 @@
 	<div class="b-contacts__left">
 		<div class="b-contacts__body">
 			<div class="main-title">
-				<h3>Контакты</h3>
+				<h3>{{ contacts_page.title|e }}</h3>
 			</div>
 			<div class="b-contacts__contacts">
-				<a href="tel:+74956265455" class="b-contacts__tel">+7 (495) 626-54-55</a>
+				<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}" class="b-contacts__tel">
+					{{- var('TELEPHONE_PUBLIC', request) -}}
+				</a>
 				<div class="b-contacts__email"> E-mail:
-					<a href="mailto:info@anas.ru">info@anas.ru</a>
+					<a href="mailto:{{ var('EMAIL_PUBLIC', request) }}">{{ var('EMAIL_PUBLIC', request) }}</a>
 				</div>
+				{%- if contacts_page.address -%}
 				<div class="b-contacts__address"> Адрес:
-					<address>г. Москва, ул. Земляной Вал, д. 2/50-31</address>
+					<address>{{ contacts_page.address|e }}</address>
 				</div>
-				<a href="#" class="btn">Региональные дилеры</a>
+				{%- endif -%}
+				{# <a href="#" class="btn">{{ var('REGIONAL_DEALERS_BUTTON', request) }}</a> #}
 			</div>
 			<form action="#" class="form">
+				{%- if contacts_page.questions_title -%}
 				<div class="form__heading">
-					<h4>Есть вопросы?</h4>
-					<p> Оставьте контакты, мы свяжемся с вами по телефону </p>
+					<h4>{{ contacts_page.questions_title|e }}</h4>
+					{%- if contacts_page.questions_subtitle -%}
+					<p>{{ contacts_page.questions_subtitle|e }}</p>
+					{%- endif -%}
 				</div>
+				{%- endif -%}
 				<div class="form__content">
 					<div class="form__group">
 						<input type="text" name="name" class="form__field required" placeholder=""
@@ -51,11 +59,17 @@
 			</form>
 		</div>
 	</div>
+
+	{%- if contacts_page.map_x and contacts_page.map_y -%}
 	<script async defer
 					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGgAHCr6yyc5mrD9QyXJxFZd8LJtTZ2lM&callback=initMap">
 	</script>
 	<div class="contacts-map">
-		<div id="map"></div>
+		<div id="map"
+				 data-coord-lon="{{ contacts_page.map_x }}"
+				 data-coord-lat="{{ contacts_page.map_y }}"
+		     data-coord-alt="{{ contacts_page.map_zoom }}"></div>
 	</div>
+	{%- endif -%}
 </div>
 {%- endblock -%}

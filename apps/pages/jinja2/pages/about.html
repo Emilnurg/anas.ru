@@ -1,9 +1,116 @@
 {%- extends 'layouts/main.html' -%}
 
-{%- block PAGE_TITLE %}{% endblock -%}
+{%- block PAGE_TITLE %}{{ about_page.title|e }}{% endblock -%}
 
 {%- block BODY_CLASSES %}body-about{% endblock -%}
 
 {%- block PAGE_CONTENT -%}
+<div class="b-about">
+	<div class="b-about__bg">
+		<div class="parallax-window" data-bleed="10" data-parallax="scroll"
+				 data-image-src="{{ STATIC_URL }}images/about_bg.jpg"></div>
+		<div class="container">
+			<div class="main-title">
+				<h3>{{ about_page.title|e }}</h3>
+				{%- if about_page.subtitle -%}
+				<div class="b-about__subtitle">{{ about_page.subtitle }}</div>
+				{%- endif -%}
+			</div>
+		</div>
+	</div>
+
+	{%- if about_page.main_body -%}
+	<div class="container">
+		<div class="b-about__text">
+			<div>{{ about_page.main_body }}</div>
+		</div>
+	</div>
+	{%- endif -%}
+</div>
+
+{%- if advantages -%}
+<div class="b-advantages">
+	<div class="container">
+		<div class="row">
+			{%- for advantage in advantages -%}
+			<div class="col-sm-4">
+				<div class="advantage">
+
+					{%- if advantage.icon -%}
+					<div class="advantage__icon">
+						<img src="{{ STATIC_URL }}images/icons/svg/{{ advantage.icon }}.svg" alt="">
+					</div>
+					{%- endif -%}
+					<h4>{{ advantage.title|e }}</h4>
+
+					{%- if advantage.subtitle -%}
+					<div class="advantage__content">
+						{{- advantage.subtitle -}}
+					</div>
+					{%- endif -%}
+				</div>
+			</div>
+			{%- endfor -%}
+		</div>
+	</div>
+</div>
+{%- endif -%}
+
+{%- if about_page.guarantee_title or about_page.guarantee_body -%}
+<div class="b-guarantee">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2">
+				<div class="section-title">
+					{%- if about_page.guarantee_title -%}
+					<h4>{{ about_page.guarantee_title|e }}</h4>
+					{%- endif -%}
+
+					{%- if about_page.guarantee_body -%}
+					<p>
+						<span>{{ about_page.guarantee_body }}</span>
+					</p>
+					{%- endif -%}
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{%- endif -%}
+
+{%- if about_page.questions_title -%}
+<div class="b-form">
+	<div class="container">
+		<form action="#" class="form b-feedback__form">
+			<div class="form__heading">
+				{%- if about_page.questions_title -%}
+				<h4>{{ about_page.questions_title|e }}</h4>
+				{%- endif -%}
+
+				{%- if about_page.questions_subtitle -%}
+				<p>{{ about_page.questions_subtitle }}</p>
+				{%- endif -%}
+			</div>
+
+			<div class="form__content">
+				<div class="form__group">
+					<input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
+					<div class="form__placeholder"> Имя </div>
+				</div>
+				<div class="form__group">
+					<input type="text" name="tel" class="form__field required" placeholder="" data-validate="tel">
+					<div class="form__placeholder"> Телефон </div>
+				</div>
+			</div>
+			<div class="form__button">
+				<button type="submit" class="btn btn--black">Отправить</button>
+				<!-- <div class="form__err">
+		не правильно введен адрес
+	</div> --></div>
+		</form>
+	</div>
+</div>
+{%- endif -%}
 
 {%- endblock -%}
