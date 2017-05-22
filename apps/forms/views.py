@@ -26,11 +26,6 @@ class BaseFormRequestView(BaseView):
             return form_validation_error_response(form.errors)
 
 
-class CommentView(BaseFormRequestView):
-    """Обработчик формы комментария"""
-    form_class = forms.CommentForm
-
-
 class TrainingRequestView(BaseFormRequestView):
     """Обработчик заявки на обучение"""
     form_class = forms.TrainingFormRequestForm

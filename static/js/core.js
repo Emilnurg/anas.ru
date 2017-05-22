@@ -20,7 +20,7 @@ function initMap() {
         lat: lat,
         lng: lon
       },
-      icon: '/static/images/map_pin_logo.png'
+      icon: '/static/images/map_pin_logo.svg'
     });
   }
 }

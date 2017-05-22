@@ -63,33 +63,6 @@ class CommentAdminMixin(admin.ModelAdmin):
     comment_short.short_description = _('Комментарий')
 
 
-@admin.register(models.Comment)
-class CommentAdmin(CommentAdminMixin, BaseFormRequestAdmin):
-    """Админ.часть для комментариев"""
-    list_display = (
-        'id', 'name', 'telephone_email', 'comment_short', 'is_answer', 'language', 'created'
-    )
-    list_display_links = ('id', 'name')
-    # noinspection PyTypeChecker
-    list_filter = BaseFormRequestAdmin.list_filter + (
-        'content_type', ('parent', IsNullFieldListFilter)
-    )
-    raw_id_fields = ('parent', 'upload')
-    search_fields = BaseFormRequestAdmin.search_fields + (
-        'name', 'telephone_email', 'comment', 'object_id'
-    )
-
-    def __init__(self, model, admin_site):
-        super().__init__(model, admin_site)
-        self.jinja2_env = engines['jinja2'].env
-
-    def is_answer(self, obj):
-        return bool(obj.parent_id)
-
-    is_answer.allow_tags = False
-    is_answer.short_description = _('Ответ')
-
-
 @admin.register(models.FeedbackFormRequest)
 class FeedbackFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
     """Админ.часть запросов обратной связи"""

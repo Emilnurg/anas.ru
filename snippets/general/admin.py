@@ -42,7 +42,8 @@ class MenuAdmin(SuperUserDeletableAdminMixin, BaseModelAdmin):
 class MenuItemAdmin(SuperUserDeletableAdminMixin, BaseModelAdmin):
     """Пункты меню"""
     fields = models.MenuItem().collect_fields()
-    list_display = ('title', 'parent_item', 'menu', 'status', 'ordering', 'created')
+    list_display = ('id', 'title', 'parent_item', 'menu', 'status', 'ordering', 'created')
+    list_display_links = ('id', 'title')
     list_filter = BaseModelAdmin.list_filter + ('menu',)
     ordering = BaseModelAdmin.ordering
     raw_id_fields = ('parent_item',)

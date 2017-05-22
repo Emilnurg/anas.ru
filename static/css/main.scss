@@ -100,8 +100,8 @@
   &:before, &:after {
     content: "";
     position: absolute;
-    background: url(../images/ico_map_button.png) no-repeat 0 0;
-    width: 15px;
+    background: url(../images/ico_map_button.svg) no-repeat 0 0;
+    width: 14px;
     height: 21px;
     left: 32px;
     top: 50%;
@@ -111,7 +111,7 @@
 
   &:after {
     opacity: 0;
-    background: url(../images/ico_map_button_white.png) no-repeat 0 0;
+    background: url(../images/ico_map_button_white.svg) no-repeat 0 0;
   }
 
   &:hover {
@@ -137,7 +137,7 @@
   &:before, &:after {
     content: "";
     position: absolute;
-    background: url(../images/ico_view_mode.png) no-repeat 0 0;
+    background: url(../images/ico_view_mode.svg) no-repeat 0 0;
     width: 19px;
     height: 15px;
     left: 29px;
@@ -148,7 +148,7 @@
 
   &:after {
     opacity: 0;
-    background: url(../images/ico_view_mode_white.png) no-repeat 0 0;
+    background: url(../images/ico_view_mode_white.svg) no-repeat 0 0;
   }
 
   &:hover {
@@ -627,7 +627,7 @@
     position: absolute;
     width: 15px;
     height: 15px;
-    background: url(../images/ico_tel_white.png) no-repeat 0 0;
+    background: url(../images/ico_tel_white.svg) no-repeat 0 0;
     left: 0;
     top: 50%;
     margin-top: -7px;
@@ -664,7 +664,7 @@
     position: absolute;
     width: 16px;
     height: 13px;
-    background: url(../images/ico_email_white.png) no-repeat 0 0;
+    background: url(../images/ico_email_white.svg) no-repeat 0 0;
     left: 0;
     top: 50%;
     margin-top: -8px;
@@ -863,7 +863,7 @@
     text-transform: uppercase;
 
     a {
-      border: 2px rgba(#d2205c, 0);
+      border-bottom: 2px solid rgba(#d2205c, 0);
 
       &:hover {
         border-color: #d2205c;
@@ -1232,7 +1232,7 @@
     position: absolute;
     width: 10px;
     height: 11px;
-    background: url(../images/ico_search_white.png) no-repeat 0 0;
+    background: url(../images/ico_search_white.svg) no-repeat 0 0;
     left: 0;
     top: 50%;
     margin-top: -5px;
@@ -2265,7 +2265,7 @@
 *                   b-feedback                   *
 *************************************************/
 .b-feedback {
-  background: url(../images/bg_feedback.jpg) no-repeat center top;
+  background: url(../images/raster/bg_feedback.jpg) no-repeat center top;
   background-size: 100% auto;
   padding-top: 70px;
   padding-bottom: 53px;
@@ -2516,14 +2516,14 @@
     position: absolute;
     width: 18px;
     height: 26px;
-    background: url(../images/ico_pin.png) no-repeat 0 0;
+    background: url(../images/ico_pin.svg) no-repeat 0 0;
     left: 0;
     top: -2px;
     transition: all 0.3s;
   }
 
   &:after {
-    background: url(../images/ico_pin_hover.png) no-repeat 0 0;
+    background: url(../images/ico_pin_hover.svg) no-repeat 0 0;
     opacity: 0;
   }
 
@@ -2608,11 +2608,11 @@
     height: 23px;
 
     &:before {
-      background: url(../images/ico_facebook.png) no-repeat 0 0;
+      background: url(../images/ico_facebook.svg) no-repeat 0 0;
     }
 
     &:after {
-      background: url(../images/ico_facebook_hover.png) no-repeat 0 0;
+      background: url(../images/ico_facebook_hover.svg) no-repeat 0 0;
     }
   }
 
@@ -2621,11 +2621,11 @@
     height: 17px;
 
     &:before {
-      background: url(../images/ico_youtube.png) no-repeat 0 0;
+      background: url(../images/ico_youtube.svg) no-repeat 0 0;
     }
 
     &:after {
-      background: url(../images/ico_youtube_hover.png) no-repeat 0 0;
+      background: url(../images/ico_youtube_hover.svg) no-repeat 0 0;
     }
   }
 
@@ -2634,11 +2634,11 @@
     height: 18px;
 
     &:before {
-      background: url(../images/ico_twitter.png) no-repeat 0 0;
+      background: url(../images/ico_twitter.svg) no-repeat 0 0;
     }
 
     &:after {
-      background: url(../images/ico_twitter_hover.png) no-repeat 0 0;
+      background: url(../images/ico_twitter_hover.svg) no-repeat 0 0;
     }
   }
 
@@ -2647,11 +2647,11 @@
     height: 20px;
 
     &:before {
-      background: url(../images/ico_instagram.png) no-repeat 0 0;
+      background: url(../images/ico_instagram.svg) no-repeat 0 0;
     }
 
     &:after {
-      background: url(../images/ico_instagram_hover.png) no-repeat 0 0;
+      background: url(../images/ico_instagram_hover.svg) no-repeat 0 0;
     }
   }
 }
@@ -3134,7 +3134,7 @@
     left: 50%;
     top: 0;
     height: 100%;
-    background: url(../images/b_form_bg.jpg) no-repeat 100% 50%;
+    background: url(../images/raster/b_form_bg.jpg) no-repeat 100% 50%;
     z-index: -1;
   }
 
@@ -3727,7 +3727,7 @@
     top: 50%;
     margin-top: -54px;
     margin-left: -54px;
-    background: url(../images/ico_play.png) no-repeat center;
+    background: url(../images/ico_play.svg) no-repeat center;
     background-size: contain;
   }
 
@@ -3813,15 +3813,15 @@
     height: 14px;
 
     span {
-      background: url(../images/share_vk.png) no-repeat 0 0;
+      background: url(../images/share_vk.svg) no-repeat 0 0;
     }
 
     &:before {
-      background: url(../images/share_vk_hover.png) no-repeat 0 0;
+      background: url(../images/share_vk_hover.svg) no-repeat 0 0;
     }
 
     &:after {
-      background: url(../images/share_vk_active.png) no-repeat 0 0;
+      background: url(../images/share_vk_active.svg) no-repeat 0 0;
     }
   }
 
@@ -3830,15 +3830,15 @@
     height: 19px;
 
     span {
-      background: url(../images/share_facebook.png) no-repeat 0 0;
+      background: url(../images/share_facebook.svg) no-repeat 0 0;
     }
 
     &:before {
-      background: url(../images/share_facebook_hover.png) no-repeat 0 0;
+      background: url(../images/share_facebook_hover.svg) no-repeat 0 0;
     }
 
     &:after {
-      background: url(../images/share_facebook_active.png) no-repeat 0 0;
+      background: url(../images/share_facebook_active.svg) no-repeat 0 0;
     }
   }
 
@@ -3847,15 +3847,15 @@
     height: 19px;
 
     span {
-      background: url(../images/share_instagram.png) no-repeat 0 0;
+      background: url(../images/share_instagram.svg) no-repeat 0 0;
     }
 
     &:before {
-      background: url(../images/share_instagram_hover.png) no-repeat 0 0;
+      background: url(../images/share_instagram_hover.svg) no-repeat 0 0;
     }
 
     &:after {
-      background: url(../images/share_instagram_active.png) no-repeat 0 0;
+      background: url(../images/share_instagram_active.svg) no-repeat 0 0;
     }
   }
 
@@ -3864,15 +3864,15 @@
     height: 16px;
 
     span {
-      background: url(../images/share_youtube.png) no-repeat 0 0;
+      background: url(../images/share_youtube.svg) no-repeat 0 0;
     }
 
     &:before {
-      background: url(../images/share_youtube_hover.png) no-repeat 0 0;
+      background: url(../images/share_youtube_hover.svg) no-repeat 0 0;
     }
 
     &:after {
-      background: url(../images/share_youtube_active.png) no-repeat 0 0;
+      background: url(../images/share_youtube_active.svg) no-repeat 0 0;
     }
   }
 }
@@ -3990,7 +3990,7 @@
     position: absolute;
     width: 13px;
     height: 11px;
-    background: url(../images/ico_reply.png) no-repeat 0 0;
+    background: url(../images/ico_reply.svg) no-repeat 0 0;
     left: 0;
     top: 50%;
     margin-top: -7px;
@@ -4054,7 +4054,7 @@
     position: absolute;
     width: 38px;
     height: 27px;
-    background: url(../images/ico_photo.png) no-repeat 0 0;
+    background: url(../images/ico_photo.svg) no-repeat 0 0;
     left: 50%;
     top: 50%;
     margin-left: -19px;
@@ -4073,7 +4073,7 @@
     line-height: 9px;
     @include f-reg;
     text-transform: uppercase;
-    background: #d2205c url(../images/ico_photo_sm.png) no-repeat 50% 14px;
+    background: #d2205c url(../images/ico_photo_sm.svg) no-repeat 50% 14px;
     border-radius: 50%;
     color: #fff;
     text-align: center;
@@ -4828,7 +4828,7 @@
     position: absolute;
     width: 179px;
     height: 490px;
-    background: url(../images/service_parallax1.png) no-repeat 0 0;
+    background: url(../images/raster/service_parallax1.png) no-repeat 0 0;
     top: 0;
     right: 0;
   }
@@ -4836,7 +4836,7 @@
     position: absolute;
     width: 360px;
     height: 351px;
-    background: url(../images/service_parallax2.png) no-repeat 0 0;
+    background: url(../images/raster/service_parallax2.png) no-repeat 0 0;
     bottom: 0;
     left: 0;
   }
@@ -4906,7 +4906,7 @@
     position: absolute;
     width: 572px;
     height: 800px;
-    background: url(../images/b_form_parallax1.png) no-repeat 0 0;
+    background: url(../images/raster/b_form_parallax1.png) no-repeat 0 0;
     bottom: 0;
     left: 0;
   }
@@ -4914,7 +4914,7 @@
     position: absolute;
     width: 554px;
     height: 581px;
-    background: url(../images/b_form_parallax2.png) no-repeat 0 0;
+    background: url(../images/raster/b_form_parallax2.png) no-repeat 0 0;
     top: 241px;
     right: 85px;
   }
@@ -5313,7 +5313,7 @@
     position: absolute;
     width: 390px;
     height: 568px;
-    background: url(../images/become_dealer_parallax1.png) no-repeat 0 0;
+    background: url(../images/raster/become_dealer_parallax1.png) no-repeat 0 0;
     bottom: 0;
     left: 0;
   }
@@ -6626,17 +6626,17 @@
 
     &:nth-child(1) {
       &:after {
-        background: url(../images/course_icon1.png) no-repeat center top;
+        background: url(../images/course_icon1.svg) no-repeat center top;
       }
     }
     &:nth-child(2) {
       &:after {
-        background: url(../images/course_icon2.png) no-repeat center top;
+        background: url(../images/icon_wallet.svg) no-repeat center top;
       }
     }
     &:nth-child(3) {
       &:after {
-        background: url(../images/course_icon3.png) no-repeat center top;
+        background: url(../images/icon-location.svg) no-repeat center top;
       }
     }
   }
@@ -7283,7 +7283,7 @@
     position: absolute;
     width: 100%;
     height: 415px;
-    background: url(../images/bg_contacts.jpg) no-repeat center bottom;
+    background: url(../images/raster/bg_contacts.jpg) no-repeat center bottom;
     background-size: cover;
     bottom: 0;
     left: 0;
@@ -7472,7 +7472,7 @@
           left: 60px;
           width: 488px;
           height: 650px;
-          background: url(../images/b_404_parallax1.jpg) no-repeat 0 0;
+          background: url(../images/raster/b_404_parallax1.jpg) no-repeat 0 0;
         }
       }
 
@@ -7482,7 +7482,7 @@
           right: 130px;
           width: 488px;
           height: 650px;
-          background: url(../images/b_404_parallax2.jpg) no-repeat 0 0;
+          background: url(../images/raster/b_404_parallax2.jpg) no-repeat 0 0;
         }
       }
     }
@@ -7588,12 +7588,12 @@
       top: 0;
       height: 100%;
       border-radius: 16px;
-      background: url(../images/ico_search_b.png) no-repeat center;
+      background: url(../images/ico_search_b.svg) no-repeat center;
       transition: all 0.3s;
     }
 
     &:after {
-      background: url(../images/ico_search_white.png) no-repeat center;
+      background: url(../images/ico_search_white.svg) no-repeat center;
       opacity: 0;
     }
 

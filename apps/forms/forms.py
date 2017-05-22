@@ -13,13 +13,6 @@ class BaseRequestForm(forms.ModelForm):
         fields = '__all__'
 
 
-class CommentForm(BaseRequestForm):
-    """Форма комментария"""
-    class Meta:
-        model = models.Comment
-        fields = '__all__'
-
-
 class TrainingFormRequestForm(BaseRequestForm):
     """Форма заявки на обучение"""
     course = forms.ModelChoiceField(

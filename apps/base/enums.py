@@ -13,6 +13,7 @@ class IconEnum(BaseEnumerate):
     BRACES = 'braces'
     CARDIOGRAM = 'cardiogram'
     DENTAL_DRILL = 'dental-drill'
+    DENTAL_PIN = 'dental-pin'
     ELECTRIC_TOOTHBRUSH = 'electric-toothbrush'
     IMPLANTS = 'implants'
     MEDICAL_RECORDS = 'medical-records'
@@ -39,6 +40,7 @@ class IconEnum(BaseEnumerate):
         (BRACES, _('Брекеты')),
         (CARDIOGRAM, _('Кардиограмма')),
         (DENTAL_DRILL, _('Бормашина')),
+        (DENTAL_PIN, _('Зубы и штифт')),
         (ELECTRIC_TOOTHBRUSH, _('Электрическая зубная щетка')),
         (IMPLANTS, _('Имплант')),
         (MEDICAL_RECORDS, _('Врачебная запись')),

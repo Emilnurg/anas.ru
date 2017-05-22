@@ -37,43 +37,6 @@ class BaseNamePhoneRequest(BaseFormRequest):
         return '%s (%s)' % (self.name, self.telephone)
 
 
-class Comment(BaseFormRequest):
-    """Комментарий"""
-    name = models.CharField(_('Имя и фамилия'), max_length=255)
-    telephone_email = models.CharField(_('Телефон или email'), max_length=254)
-    comment = models.TextField(_('Комментарий'), max_length=32768)
-    upload = models.ForeignKey(
-        Upload, verbose_name=_('Аватар'), related_name='comments', blank=True, null=True
-    )
-
-    limit = models.Q(app_label='catalog', model='product') | \
-        models.Q(app_label='press', model='news') | \
-        models.Q(app_label='projects', model='project')
-    content_type = models.ForeignKey(
-        ContentType, verbose_name=_('Тип объекта'), limit_choices_to=limit
-    )
-    object_id = models.PositiveIntegerField(_('ID объекта'))
-    content_object = GenericForeignKey('content_type', 'object_id')
-
-    parent = models.ForeignKey(
-        'self', related_name='children', verbose_name=_('Ответы'), blank=True
-    )
-    status = models.SmallIntegerField(
-        _('Статус'), default=StatusEnum.DRAFT, choices=StatusEnum.get_choices(),
-        help_text=_('При отключении публикации будут скрываться и ответы на комментарий')
-    )
-    admin_comment = models.TextField(
-        _('Комментарий'), help_text=_('для внутренного использования, не выводится на сайте!'),
-        blank=True, null=True
-    )
-
-    objects = BaseManager()
-
-    class Meta:
-        verbose_name = _('Комментарий')
-        verbose_name_plural = _('Комментарии')
-
-
 class TrainingFormRequest(BaseNamePhoneRequest):
     """Запросы на обучение"""
     course = models.ForeignKey(

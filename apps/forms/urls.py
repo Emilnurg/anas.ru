@@ -6,10 +6,6 @@ from forms import views
 
 urlpatterns = (
     url(
-        r'^(?P<lang>\w{2})/forms/comment/$',
-        views.CommentView.as_view(), name='comment'
-    ),
-    url(
         r'^(?P<lang>\w{2})/forms/training/$',
         views.TrainingRequestView.as_view(), name='training'
     ),
