@@ -2,11 +2,6 @@
 from snippets.views import BaseTemplateView
 
 
-class CatalogIndexView(BaseTemplateView):
-    """Главная страница каталог"""
-    template_name = 'catalog/catalog_index.html'
-
-
 class ProductCategoryView(BaseTemplateView):
     """Страница категории продуктов"""
     template_name = 'catalog/category.html'

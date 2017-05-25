@@ -13,7 +13,7 @@ def menu(request, menu_slug, li=True, li_classes=None, link_classes=None, target
     except Menu.DoesNotExist:
         return ''
 
-    items = menu_obj.items.published()
+    items = menu_obj.items.published().order_by('ordering')
     result = ''
     active_url = request.path_info
     if getattr(request, 'active_url', None):

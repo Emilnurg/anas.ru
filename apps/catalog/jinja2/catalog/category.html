@@ -5,5 +5,250 @@
 {%- block BODY_CLASSES %}body-category{% endblock -%}
 
 {%- block PAGE_CONTENT -%}
-
+<div class="b-catalog">
+	<div class="container">
+		<div class="page-back">
+			<a href="javascript:" class="page-back__link"> Стоматологическое оборудование </a>
+		</div>
+		<div class="main-title">
+			<h3> Хирургия </h3>
+		</div>
+		<div class="catalog-filter">
+			<div class="catalog-filter__categories">
+				<div class="sld">
+					<label>
+						<input type="checkbox" name="catalog-category">
+						<span>Хирургия</span>
+					</label>
+				</div>
+				<div class="sld">
+					<label>
+						<input type="checkbox" name="catalog-category" checked>
+						<span>Пиезохирургия</span>
+					</label>
+				</div>
+				<div class="sld">
+					<label>
+						<input type="checkbox" name="catalog-category" checked>
+						<span>Насадки для Piezosurger</span>
+					</label>
+				</div>
+				<div class="sld">
+					<label>
+						<input type="checkbox" name="catalog-category">
+						<span>Импланталогия</span>
+					</label>
+				</div>
+				<div class="sld">
+					<label>
+						<input type="checkbox" name="catalog-category">
+						<span>Ультразвуковые скалеры</span>
+					</label>
+				</div>
+				<div class="sld">
+					<label>
+						<input type="checkbox" name="catalog-category">
+						<span>Аппараты для пескоструйной полировки</span>
+					</label>
+				</div>
+				<div class="sld">
+					<label>
+						<input type="checkbox" name="catalog-category">
+						<span>Светополимеризационные лампы (LED)</span>
+					</label>
+				</div>
+				<div class="sld">
+					<label>
+						<input type="checkbox" name="catalog-category">
+						<span>Стомотологические установки</span>
+					</label>
+				</div>
+				<div class="sld">
+					<label>
+						<input type="checkbox" name="catalog-category">
+						<span>Стомотологическая мебель</span>
+					</label>
+				</div>
+				<div class="sld">
+					<label>
+						<input type="checkbox" name="catalog-category">
+						<span>Освещение</span>
+					</label>
+				</div>
+			</div>
+			<div class="catalog-filter__brands">
+				<p>Выберите бренд</p>
+				<div class="select-brand">
+					<div class="sld">
+						<label>
+							<input type="radio" name="catalog-brand">
+							<span>
+								<img src="{{ STATIC_URL }}images/raster/brand_logo1.png" alt=""> </span>
+						</label>
+					</div>
+					<div class="sld">
+						<label>
+							<input type="radio" name="catalog-brand">
+							<span>
+								<img src="{{ STATIC_URL }}images/raster/brand_logo2.png" alt=""> </span>
+						</label>
+					</div>
+					<div class="sld">
+						<label>
+							<input type="radio" name="catalog-brand" checked>
+							<span>
+								<img src="{{ STATIC_URL }}images/raster/brand_logo3.png" alt=""> </span>
+						</label>
+					</div>
+					<div class="sld">
+						<label>
+							<input type="radio" name="catalog-brand">
+							<span>
+								<img src="{{ STATIC_URL }}images/raster/brand_logo4.png" alt=""> </span>
+						</label>
+					</div>
+					<div class="sld">
+						<label>
+							<input type="radio" name="catalog-brand">
+							<span>
+								<img src="{{ STATIC_URL }}images/raster/brand_logo5.png" alt=""> </span>
+						</label>
+					</div>
+					<div class="sld">
+						<label>
+							<input type="radio" name="catalog-brand">
+							<span>
+								<img src="{{ STATIC_URL }}images/raster/brand_logo6.png" alt=""> </span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="catalog__row row">
+			<div class="col-xs-12 col-sm-6 catalog__col">
+				<a href="javascript:" class="catalog-item">
+					<h3>Кресло Techno</h3>
+					<p> Производитель: Idem </p>
+					<div class="catalog-item__image text-right">
+						<img src="{{ STATIC_URL }}images/raster/catalog_item1.png" alt=""> </div>
+				</a>
+			</div>
+			<div class="col-xs-12 col-sm-6 catalog__col">
+				<a href="javascript:" class="catalog-item catalog-item--high">
+					<h3>Полимеризационная лампа Starlight S</h3>
+					<p> Производитель: Idem </p>
+					<div class="catalog-item__image text-center">
+						<img src="{{ STATIC_URL }}images/raster/catalog_item2.png" alt=""> </div>
+				</a>
+			</div>
+			<div class="col-xs-12 col-sm-6 catalog__col">
+				<a href="javascript:" class="catalog-item">
+					<h3>Ультразвуковой скаллер Micropiezo s</h3>
+					<p> Производитель: Idem </p>
+					<div class="catalog-item__image text-center">
+						<img src="{{ STATIC_URL }}images/raster/catalog_item3.png" alt=""> </div>
+				</a>
+			</div>
+			<div class="col-xs-12 col-sm-6 catalog__col">
+				<a href="javascript:" class="catalog-item catalog-item--high">
+					<h3>Гигиенические рукавицы
+						<br>Aqua Total Hygiene</h3>
+					<p> Производитель: Idem </p>
+					<div class="catalog-item__image text-left">
+						<img src="{{ STATIC_URL }}images/raster/catalog_item4.png" alt=""> </div>
+				</a>
+			</div>
+			<div class="col-xs-12 col-sm-6 catalog__col">
+				<a href="javascript:" class="catalog-item">
+					<h3>Аппарат для аэрозольной дезинфекции помещений Nocospray</h3>
+					<p> Производитель: Idem </p>
+					<div class="catalog-item__image text-center">
+						<img src="{{ STATIC_URL }}images/raster/catalog_item5.png" alt=""> </div>
+				</a>
+			</div>
+			<div class="col-xs-12 col-sm-6 catalog__col">
+				<a href="javascript:" class="catalog-item">
+					<h3>Сухожаровой шкаф
+						<br>Dry Heat 255</h3>
+					<p> Производитель: Idem </p>
+					<div class="catalog-item__image text-right">
+						<img src="{{ STATIC_URL }}images/raster/catalog_item6.png" alt=""> </div>
+				</a>
+			</div>
+			<div class="col-xs-12 col-sm-6 catalog__col">
+				<a href="javascript:" class="catalog-item">
+					<h3>Ультразвуковой
+						<br>наконечник</h3>
+					<p> Производитель: Idem </p>
+					<div class="catalog-item__image text-right">
+						<img src="{{ STATIC_URL }}images/raster/catalog_item7.png" alt=""> </div>
+				</a>
+			</div>
+			<div class="col-xs-12 col-sm-6 catalog__col">
+				<a href="javascript:" class="catalog-item catalog-item--high">
+					<h3>PIEZOSURGERY®
+						<br>белый</h3>
+					<p> Производитель: Idem </p>
+					<div class="catalog-item__image text-center">
+						<img src="{{ STATIC_URL }}images/raster/catalog_item8.png" alt=""> </div>
+				</a>
+			</div>
+			<div class="col-xs-12 col-sm-6 catalog__col">
+				<a href="javascript:" class="catalog-item">
+					<h3>EMZYMEC</h3>
+					<p> Производитель: Idem </p>
+					<div class="catalog-item__image text-right">
+						<img src="{{ STATIC_URL }}images/raster/catalog_item10.png" alt=""> </div>
+				</a>
+			</div>
+		</div>
+		<div class="page-controls">
+			<div class="page-controls__buttons">
+				<div>
+					<a href="javascript:" class="page-control page-control--prev"> Предыдущая </a>
+				</div>
+				<div>
+					<a href="javascript:" class="page-control page-control--next"> Следующая </a>
+				</div>
+			</div>
+			<ul class="pagination">
+				<li>
+					<a href="javascript:">1</a>
+				</li>
+				<li>
+					<a href="javascript:">2</a>
+				</li>
+				<li class="is-active">
+					<a href="javascript:">3</a>
+				</li>
+				<li>
+					<a href="javascript:">4</a>
+				</li>
+				<li>
+					<a href="javascript:">5</a>
+				</li>
+				<li>
+					<a href="javascript:">6</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="b-seo-text">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 hidden-sm hidden-xs">
+				<img src="{{ STATIC_URL }}images/raster/seo_text_img.png" class="img-responsive" alt=""> </div>
+			<div class="col-md-7">
+				<div class="b-seo-text__text">
+					<h2 class="promo">Заголовок к тексту</h2>
+					<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis
+						parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum
+						laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra
+						vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. </p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {%- endblock -%}

@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from forms.enums import FormRequestReadStatusEnum
-from snippets.models import LastModMixin, BasicModel, BaseManager
-from snippets.models.enumerates import StatusEnum
-from uploadifive.models import Upload
+from snippets.models import LastModMixin, BasicModel
 
 
 class BaseFormRequest(LastModMixin, BasicModel):

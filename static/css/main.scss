@@ -1924,11 +1924,11 @@
   }
 
   &:before {
-    background: url(../images/catalog_arrow.png) no-repeat 0 0;
+    background: url(../images/catalog_arrow.svg) no-repeat 0 0;
   }
 
   &:after {
-    background: url(../images/catalog_arrow_hover.png) no-repeat 0 0;
+    background: url(../images/catalog_arrow_hover.svg) no-repeat 0 0;
   }
 
   h3 {
@@ -3364,6 +3364,7 @@
       color: #8d8d8d;
       line-height: 47px;
       padding: 0;
+      margin-left: 0;
 
       &:hover, &:focus {
         background: none;

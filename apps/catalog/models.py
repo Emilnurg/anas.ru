@@ -8,7 +8,7 @@ from image_cropping import ImageCropField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
-from catalog.enums import ImagePositionEnum
+from catalog.enums import ImagePositionEnum, CatalogBlockShapeEnum
 from snippets.models import BaseModel
 from snippets.models.image import ImageMixin
 from snippets.utils.datetime import utcnow
@@ -46,13 +46,6 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
         'self', verbose_name=_('Родительская категория'),
         null=True, blank=True, related_name='children', db_index=True, on_delete=models.SET_NULL
     )
-    image = ImageCropField(
-        _('Изображение'), max_length=255, upload_to='products', blank=True, null=True
-    )
-    image_position = models.CharField(
-        _('Расположение изображения'), choices=ImagePositionEnum.get_choices(),
-        default=ImagePositionEnum.CENTER, max_length=50
-    )
     body = RichTextUploadingField(_('Контент'), blank=True, null=False)
 
     translation_fields = ('title', 'body')
@@ -87,24 +80,47 @@ class Product(ImageMixin, BaseModel):
     sku = models.CharField(
         _('Артикул'), max_length=255, blank=True, null=True, db_index=True, unique=True
     )
+    block_shape = models.CharField(
+        _('Форма блока'), choices=CatalogBlockShapeEnum.get_choices(),
+        default=CatalogBlockShapeEnum.default, max_length=30
+    )
     image = ImageCropField(
         _('Главное изображение'), max_length=255, upload_to='products', blank=True, null=True
     )
+    image_position = models.CharField(
+        _('Расположение изображения'), choices=ImagePositionEnum.get_choices(),
+        default=ImagePositionEnum.default, max_length=30
+    )
     body = RichTextUploadingField(_('Основной контент'), blank=True, null=False)
     features_body = RichTextUploadingField(
-        _('Контент над характеристиками'), blank=True, null=False
+        _('Контент вкладки "Характеристики"'), blank=True, null=False
+    )
+    training_body = RichTextUploadingField(
+        _('Контент вкладки "Обучение"'), blank=True, null=False
+    )
+    testing_body = RichTextUploadingField(
+        _('Контент вкладки "Тестирование"'), blank=True, null=False
+    )
+    docs_body = RichTextUploadingField(
+        _('Контент вкладки "Документация"'), blank=True, null=False
     )
 
     manufacturer = models.ForeignKey(
         Manufacturer, related_name='products', verbose_name=_('Производитель'),
-        blank=True
+        blank=True, null=True
     )
     categories = models.ManyToManyField(
         ProductCategory, verbose_name=_('Категории'), related_name='products',
         blank=True
     )
+    product_set = models.ForeignKey(
+        'self', verbose_name=_('Входит в комплект'), related_name='set_components',
+        blank=True, null=True
+    )
 
-    translation_fields = ('title', 'body', 'features_body')
+    translation_fields = (
+        'title', 'body', 'features_body', 'training_body', 'testing_body', 'docs_body'
+    )
 
     class Meta:
         verbose_name = _('Продукт')

@@ -86,6 +86,61 @@ class HomeAdvantage(BaseModel):
         verbose_name_plural = _('Преимущества на главной странице')
 
 
+class HomeCatalog(BaseModel):
+    """Каталог на главной"""
+    title = models.CharField(_('Заголовок'), max_length=255)
+    subtitle = models.CharField(_('Подзаголовок'), max_length=255, blank=True, null=True)
+    link = models.CharField(_('Ссылка кнопки'), max_length=255, blank=True, null=True)
+    button_caption = models.CharField(_('Текст кнопки'), max_length=255, blank=True, null=True)
+    banner_title = models.CharField(_('Заголовок баннера'), max_length=255, blank=True, null=True)
+    banner_subtitle = models.CharField(
+        _('Подзаголовок баннера'), max_length=255, blank=True, null=True
+    )
+
+    translation_fields = (
+        'title', 'subtitle', 'link', 'button_caption',  'banner_title', 'banner_subtitle'
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _('Каталог на главной')
+        verbose_name_plural = _('Каталоги на главной')
+
+
+class HomeCatalogManufacturer(BaseModel):
+    """Производители каталога на главной"""
+    catalog = models.ForeignKey(
+        HomeCatalog, related_name='manufacturers', verbose_name=_('Каталог')
+    )
+    manufacturer = models.ForeignKey(
+        'catalog.Manufacturer', related_name='home_catalogs', verbose_name=_('Производитель')
+    )
+
+    def __str__(self):
+        return '%s - %s' % (self.catalog.title, self.manufacturer.title)
+
+    class Meta:
+        verbose_name = _('Производитель каталога на главной')
+        verbose_name_plural = _('Производители каталога главной')
+
+
+class HomeCatalogProduct(BaseModel):
+    """Продукты каталога на главной"""
+    catalog = models.ForeignKey(HomeCatalog, related_name='products', verbose_name=_('Каталог'))
+    product = models.ForeignKey(
+        'catalog.Product', related_name='home_catalogs', verbose_name=_('Продукт')
+    )
+
+    def __str__(self):
+        return '%s - %s' % (self.catalog.title, self.product.title)
+
+    class Meta:
+        verbose_name = _('Продукт каталога на главной')
+        verbose_name_plural = _('Продукты каталога главной')
+
+
 class HomeSlide(ImageMixin, BaseModel):
     """Преимущества на главной странице"""
     image = models.ImageField(

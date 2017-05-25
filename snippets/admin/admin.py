@@ -4,7 +4,7 @@ from django.contrib.admin import ModelAdmin
 
 class SuperUserDeletableAdminMixin(object):
     @staticmethod
-    def has_delete_permission(request, obj=None):
+    def has_delete_permission(request, **kwargs):
         return request.user.is_superuser
 
 

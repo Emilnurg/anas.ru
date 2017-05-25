@@ -11,7 +11,6 @@ from jinja2.filters import do_wordwrap
 
 from forms import models
 from forms.enums import FormRequestReadStatusEnum
-from snippets.admin import IsNullFieldListFilter
 
 
 class BaseFormRequestAdmin(admin.ModelAdmin):
