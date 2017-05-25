@@ -27,8 +27,8 @@ class ManufacturerAdmin(BaseModelAdmin, TranslationAdmin):
 class ProductCategoryAdmin(BaseModelAdmin, TranslationAdmin, MPTTModelAdmin):
     """Категории продуктов"""
     group_fieldsets = True
-    list_display = ('id', 'title', 'ordering', 'status', 'created')
-    list_display_links = ('id', 'title')
+    list_display = ('title', 'id', 'ordering', 'status', 'created')
+    list_display_links = ('title', 'id')
     list_editable = ('status', 'ordering')
     list_filter = BaseModelAdmin.list_filter + ('parent', 'level')
     ordering = BaseModelAdmin.ordering + ('title',)
