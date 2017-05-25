@@ -27,12 +27,12 @@ class ManufacturerAdmin(BaseModelAdmin, TranslationAdmin):
 class ProductCategoryAdmin(BaseModelAdmin, TranslationAdmin, MPTTModelAdmin):
     """Категории продуктов"""
     group_fieldsets = True
-    list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
-    list_display_links = ('image_thumb', 'title')
+    list_display = ('id', 'title', 'ordering', 'status', 'created')
+    list_display_links = ('id', 'title')
     list_editable = ('status', 'ordering')
     list_filter = BaseModelAdmin.list_filter + ('parent', 'level')
     ordering = BaseModelAdmin.ordering + ('title',)
-    search_fields = ['=id', 'slug', 'image'] + get_model_translation_fields(models.ProductCategory)
+    search_fields = ['=id', 'slug'] + get_model_translation_fields(models.ProductCategory)
 
     class Media:
         js = ('admin/js/translit.js',)
