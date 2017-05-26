@@ -1329,7 +1329,7 @@
     color: #000;
 
     &:before {
-      background: url(../images/ico_tel_l.png) no-repeat 0 0;
+      background: url(../images/ico_tel_l.svg) no-repeat 0 0;
       background-size: contain;
     }
   }
@@ -5283,7 +5283,7 @@
   &:before {
     width: 23px;
     height: 23px;
-    background: url(../images/ico_tel_l.png) no-repeat 0 0;
+    background: url(../images/ico_tel_l.svg) no-repeat 0 0;
     margin-top: -12px;
   }
 }
@@ -5294,7 +5294,7 @@
   &:before {
     width: 25px;
     height: 20px;
-    background: url(../images/ico_email_l.png) no-repeat 0 0;
+    background: url(../images/ico_email_l.svg) no-repeat 0 0;
     margin-top: -10px;
   }
 }
@@ -5626,6 +5626,8 @@
   .sld {
     outline: none;
     display: inline-block;
+    border-bottom: 0 none;
+    color: #000;
   }
 }
 
@@ -5693,6 +5695,7 @@
   .sld {
     outline: none;
     display: inline-block;
+    border-bottom: 0 none;
   }
 }
 
@@ -7333,7 +7336,7 @@
     top: 50%;
     width: 23px;
     height: 23px;
-    background: url(../images/ico_tel_l.png) no-repeat 0 0;
+    background: url(../images/ico_tel_l.svg) no-repeat 0 0;
     margin-top: -12px;
   }
 }

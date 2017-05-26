@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-def get_page(request, get_param='p'):
+def get_page(page):
     """Получает номер страницы пагинации"""
-    page = request.GET.get(get_param, 0)
-
     try:
         page = int(page)
     except ValueError:

@@ -1,0 +1,11 @@
+<a href="{{ product.get_absolute_url(request.LANGUAGE_CODE) }}" class="catalog-item catalog-item--{{ product.block_shape }}">
+	<h3>{{ product.title|e }}</h3>
+	{%- if product.manufacturer_id -%}
+	<p>{{ var('PRODUCT_MANUFACTURER_LABEL', request) }} {{ product.manufacturer.title }}</p>
+	{%- endif -%}
+	{%- if product.image -%}
+	<div class="catalog-item__image text-{{ product.image_position }}">{# -#}
+		<img src="{{ product.image|thumbnail('600x600', background='#FFFFFF') }}" alt=""/>{# -#}
+	</div>
+	{%- endif -%}
+</a>

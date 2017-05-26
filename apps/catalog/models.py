@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
+
+from ckeditor_uploader.fields import RichTextUploadingField
 from image_cropping import ImageCropField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
 from catalog.enums import ImagePositionEnum, CatalogBlockShapeEnum
-from snippets.models import BaseModel
+from snippets.models import BaseModel, BaseManager
 from snippets.models.image import ImageMixin
 from snippets.utils.datetime import utcnow
 
@@ -48,7 +49,13 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
     )
     body = RichTextUploadingField(_('Контент'), blank=True, null=False)
 
-    translation_fields = ('title', 'body')
+    seo_block_title = models.CharField(
+        _('Заголовок SEO-блока'), blank=True, null=True, max_length=255
+    )
+    seo_block_body = RichTextUploadingField(_('Контент SEO-блока'), blank=True, null=False)
+    objects = BaseManager()
+
+    translation_fields = ('title', 'body', 'seo_block_title', 'seo_block_body')
 
     class Meta:
         verbose_name = _('Категория продуктов')
@@ -60,11 +67,18 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
-        return reverse('catalog:category', kwargs={
+    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE, page=None):
+        kwargs = {
             'lang': lang,
             'slug': self.slug
-        })
+        }
+
+        if page is not None:
+            kwargs['page'] = page
+
+        return reverse(
+            'catalog:category' if page is None else 'catalog:category_paged', kwargs=kwargs
+        )
 
 
 ProductCategory._meta.get_field('level').verbose_name = _('Уровень')
