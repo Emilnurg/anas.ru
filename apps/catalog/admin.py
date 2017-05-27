@@ -70,9 +70,10 @@ class ProductCategoryAdmin(ModelTranlsationFieldsetsMixin, BaseModelAdmin, Trans
 @admin.register(models.Product)
 class ProductAdmin(ModelTranlsationFieldsetsMixin, BaseModelAdmin, TranslationAdmin):
     """Продукты"""
+    filter_horizontal = ('categories',)
     group_fieldsets = True
-    list_display = ('image_thumb', 'title', 'ordering', 'status', 'updated')
-    list_display_links = ('image_thumb', 'title')
+    list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'updated')
+    list_display_links = ('id', 'image_thumb', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)
     raw_id_fields = ('product_set',)
     save_as = True
@@ -96,3 +97,9 @@ class ProductAdmin(ModelTranlsationFieldsetsMixin, BaseModelAdmin, TranslationAd
 
     class Media:
         js = ('admin/js/translit.js',)
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super(ProductAdmin, self).get_fieldsets(request, obj=obj)
+
+        fieldsets[0][1]['fields'].append('categories')
+        return fieldsets

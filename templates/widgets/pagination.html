@@ -5,7 +5,7 @@
 				<div>
 					<a href="
 						{{- base_url -}}
-						{%- if paginator_page.previous_page_number() != 1 %}page/{{ paginator_page.previous_page_number() }}{% endif %}{{ get_params or '' }}"
+						{%- if paginator_page.previous_page_number() != 1 %}page/{{ paginator_page.previous_page_number() }}/{% endif %}{{ get_params or '' }}"
 						 class="page-control page-control--prev">
 						{{- var('PAGE_PREVIOUS', request) -}}
 					</a>
@@ -16,7 +16,7 @@
 				<div>
 					<a href="
 						{{- base_url -}}
-						{%- if paginator_page.next_page_number() != 1 %}page/{{ paginator_page.next_page_number() }}{% endif %}{{ get_params or '' }}"
+						{%- if paginator_page.next_page_number() != 1 %}page/{{ paginator_page.next_page_number() }}/{% endif %}{{ get_params or '' }}"
 						 class="page-control page-control--next">
 						{{- var('PAGE_NEXT', request) -}}
 					</a>
@@ -29,7 +29,7 @@
 				<li{% if paginator_page.number == i %} class="is-active"{% endif %}>
 					{%- if i -%}
 						{%- if paginator_page.number == i -%}
-							{{- i -}}
+							<span>{{ i }}</span>
 						{%- else -%}
 							<a href="{{ base_url }}{% if 1 != i %}page/{{ i }}/{% endif %}{{ get_params or '' }}">{{ i }}</a>
 						{%- endif -%}

@@ -32,14 +32,15 @@ class ProductCategoryView(BaseTemplateView):
 
         manufacturers = models.Manufacturer.objects.published()\
             .filter(products__in=products_qs.values_list('id'))\
-            .order_by('ordering')
+            .order_by('ordering')\
+            .distinct()
 
         current_manufacturer = None
         get_params = ''
         if kwargs['view'].request.GET.get('manufacturer'):
             current_manufacturer = get_object_or_404(
                 models.Manufacturer,
-                slug__exact=kwargs['request'].GET['manufacturer'],
+                slug__exact=kwargs['view'].request.GET['manufacturer'],
                 status=StatusEnum.PUBLIC
             )
             get_params = '?manufacturer=%s' % current_manufacturer.slug

@@ -16,5 +16,5 @@ class SearchSectionView(BaseTemplateView):
     template_name = 'search/search_partial.html'
 
     def get(self, request, lang=None, *args, **kwargs):
-        page = self.get_page()
+        # page = self.get_page()
         return super(SearchSectionView, self).get(request, *args, **kwargs)

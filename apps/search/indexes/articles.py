@@ -30,7 +30,6 @@ def config_index_articles():
                 'article_%s' % language: {
                     '_all': {
                         'analyzer': 'russian_morphology'
-                        if language == 'ru' else 'english_morphology'
                     },
                     'properties': {
                         'suggest': {
@@ -75,7 +74,7 @@ def config_index_articles():
             })
         )
 
-        requests.post('http://{host}:{port}/articles/_open'.format(**settings.SEARCH))
+    requests.post('http://{host}:{port}/articles/_open'.format(**settings.SEARCH))
 
 
 def bind_article_body(target):

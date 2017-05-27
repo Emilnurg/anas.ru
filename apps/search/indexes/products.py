@@ -31,7 +31,6 @@ def config_index_products():
                 'product_%s' % language: {
                     '_all': {
                         'analyzer': 'russian_morphology'
-                        if language == 'ru' else 'english_morphology'
                     },
                     'properties': {
                         'suggest': {
@@ -86,7 +85,7 @@ def config_index_products():
             })
         )
 
-        requests.post('http://{host}:{port}/products/_open'.format(**settings.SEARCH))
+    requests.post('http://{host}:{port}/products/_open'.format(**settings.SEARCH))
 
 
 def bind_product_body(target):

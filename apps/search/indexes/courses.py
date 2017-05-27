@@ -30,7 +30,6 @@ def config_index_courses():
                 'course_%s' % language: {
                     '_all': {
                         'analyzer': 'russian_morphology'
-                        if language == 'ru' else 'english_morphology'
                     },
                     'properties': {
                         'suggest': {
@@ -75,7 +74,7 @@ def config_index_courses():
             })
         )
 
-        requests.post('http://{host}:{port}/courses/_open'.format(**settings.SEARCH))
+    requests.post('http://{host}:{port}/courses/_open'.format(**settings.SEARCH))
 
 
 def bind_course_body(target):

@@ -38,11 +38,15 @@
 				<p>Выберите бренд</p>
 				<div class="select-brand">
 					{%- for manufacturer in manufacturers -%}
-					<a class="sld" href="{{ base_url }}?manufacturer={{ manufacturer.slug|e }}">
-						<label>
-							<input type="radio" name="catalog-brand"
-									{%- if current_manufacturer and current_manufacturer.id == manufacturer.id %} checked
-									{%- endif %}>
+					<a class="sld" href="{{ base_url }}?
+							{%- if current_manufacturer and current_manufacturer.id == manufacturer.id -%}
+							{%- else -%}
+							manufacturer={{ manufacturer.slug|e -}}
+							{%- endif -%}">
+						<label class="{%- if current_manufacturer and current_manufacturer.id == manufacturer.id %}active{% endif %}">
+{#							<input type="radio" name="catalog-brand"#}
+{#									{%- if current_manufacturer and current_manufacturer.id == manufacturer.id %} checked#}
+{#									{%- endif %}>#}
 							<span>
 								<img src="{{ manufacturer.image.url }}" alt="{{ manufacturer.title }}">
 							</span>
