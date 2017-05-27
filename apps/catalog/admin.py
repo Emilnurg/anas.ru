@@ -9,7 +9,6 @@ from catalog import models
 from snippets.admin import BaseModelAdmin
 from snippets.admin.admin import ModelTranlsationFieldsetsMixin
 from snippets.modeltranslation import get_model_translation_fields
-from snippets.utils.array import move_list_element_to_end
 
 
 @admin.register(models.Feature)
@@ -36,7 +35,8 @@ class ManufacturerAdmin(BaseModelAdmin, TranslationAdmin):
 
 
 @admin.register(models.ProductCategory)
-class ProductCategoryAdmin(BaseModelAdmin, TranslationAdmin, MPTTModelAdmin):
+class ProductCategoryAdmin(ModelTranlsationFieldsetsMixin, BaseModelAdmin, TranslationAdmin,
+                           MPTTModelAdmin):
     """Категории продуктов"""
     group_fieldsets = True
     list_display = ('title', 'id', 'ordering', 'status', 'updated')
@@ -45,14 +45,25 @@ class ProductCategoryAdmin(BaseModelAdmin, TranslationAdmin, MPTTModelAdmin):
     list_filter = BaseModelAdmin.list_filter + ('parent', 'level')
     ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id', 'slug'] + get_model_translation_fields(models.ProductCategory)
+    suit_form_tabs = (
+        ('general', _('Основное')),
+        ('body', _('Основной контент')),
+        ('seo', _('SEO-блок'))
+    )
+    tabs_mapping = {
+        '': 'general',
+        'Контент': 'body',
+        'Заголовок seo-блока': 'seo',
+        'Контент seo-блока': 'seo',
+        'Изображение в seo-блоке': 'seo'
+    }
 
     class Media:
         js = ('admin/js/translit.js',)
 
     def get_fieldsets(self, request, obj=None):
         fieldsets = super(ProductCategoryAdmin, self).get_fieldsets(request, obj=obj)
-        for field in ('status', 'ordering'):
-            move_list_element_to_end(fieldsets[0][1]['fields'], field)
+
         return fieldsets
 
 

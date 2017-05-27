@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib.admin import ModelAdmin
 
+from snippets.utils.array import move_list_element_to_end
+
 
 class SuperUserDeletableAdminMixin(object):
     @staticmethod
@@ -50,5 +52,8 @@ class ModelTranlsationFieldsetsMixin(object):
         if fieldsets_to_remove:
             for fieldset in fieldsets_to_remove:
                 fieldsets.remove(fieldset)
+
+        for field in ('status', 'ordering'):
+            move_list_element_to_end(fieldsets[0][1]['fields'], field)
 
         return fieldsets
