@@ -252,7 +252,7 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                 // Create the file item template
                 if (settings.itemTemplate == false) {
                     $data.queueItem = $('<div class="uploadifive-queue-item">\
-                        <a class="close" href="#">X</a>\
+                        <a class="close" href="javascript:">X</a>\
                         <div><span class="filename"></span><span class="fileinfo"></span></div>\
                         <div class="progress">\
                             <div class="progress-bar"></div>\

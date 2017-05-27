@@ -5926,6 +5926,34 @@
   }
 }
 
+.body-product-print .product__descr {
+  min-height: 0;
+  margin-bottom: 40px;
+}
+
+.product-slider-print {
+  max-height: 400px;
+
+  img {
+    max-height: 400px;
+    max-width: 400px;
+  }
+}
+
+.product-slider-print-images {
+  text-align: center;
+
+  img {
+    max-height: 300px;
+    max-width: 100%;
+
+  }
+}
+
+.body-product-print .product-tabs {
+  padding: 40px 0 0;
+}
+
 .product__name {
   max-width: 500px;
   line-height: 1.2;
@@ -5958,6 +5986,7 @@
     justify-content: center;
     align-items: flex-end;
     height: auto;
+    max-height: 400px;
 
     img {
       display: inline-block;

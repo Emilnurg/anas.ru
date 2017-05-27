@@ -142,8 +142,7 @@ class CacheExtension(Extension):
 
 
 @jinjafilter
-def cropped_thumbnail(instance, field_name, width=None, height=None, scale=None, upscale=False,
-                      detail=False, bw=False):
+def cropped_thumbnail(instance, field_name, width=None, height=None, scale=None, **opts):
     """Cropper"""
     ratiofield = instance._meta.get_field(field_name)
     image = getattr(instance, ratiofield.image_field)
@@ -151,6 +150,7 @@ def cropped_thumbnail(instance, field_name, width=None, height=None, scale=None,
         image = getattr(image, ratiofield.image_fk_field)
     if not image:
         return ''
+
     size = (int(ratiofield.width), int(ratiofield.height))
     box = getattr(instance, field_name)
 
@@ -158,6 +158,13 @@ def cropped_thumbnail(instance, field_name, width=None, height=None, scale=None,
         scale = float(scale)
         width = size[0] * scale
         height = size[1] * scale
+    elif width and height:
+        width = float(width)
+        h = size[1] * width / size[0]
+        if h > height:
+            width = height * size[0] / size[1]
+        else:
+            height = h
     elif width:
         width = float(width)
         height = size[1] * width / size[0]
@@ -176,10 +183,7 @@ def cropped_thumbnail(instance, field_name, width=None, height=None, scale=None,
     thumbnail_options = {
         'size': size,
         'box': box,
-        'crop': True,
-        'detail': bool(detail),
-        'upscale': bool(upscale),
-        'bw': bool(bw)
+        **opts
     }
     try:
         return thumbnailer.get_thumbnail(thumbnail_options).url

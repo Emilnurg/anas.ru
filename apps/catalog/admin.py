@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
+from image_cropping import ImageCroppingMixin
 
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline, \
+    TranslationStackedInline
 from mptt.admin import MPTTModelAdmin
 
 from catalog import models
@@ -67,11 +69,50 @@ class ProductCategoryAdmin(ModelTranlsationFieldsetsMixin, BaseModelAdmin, Trans
         return fieldsets
 
 
+class ProductDocumentInline(TranslationStackedInline):
+    """Документы продукта"""
+    extra = 0
+    fields = models.ProductDocument().collect_fields()
+    model = models.ProductDocument
+    suit_classes = 'suit-tab suit-tab-docs'
+
+
+class BaseProductFeatureInline(TranslationTabularInline):
+    """Характеристики продукта"""
+    extra = 0
+    suit_classes = 'suit-tab suit-tab-features'
+
+
+class ProductFeatureInline(BaseProductFeatureInline):
+    """Характеристики продукта"""
+    fields = models.ProductFeature().collect_fields()
+    model = models.ProductFeature
+
+
+class ProductFeatureMainInline(BaseProductFeatureInline):
+    """Главные характеристики продукта"""
+    fields = models.ProductFeatureMain().collect_fields()
+    model = models.ProductFeatureMain
+
+
+class ProductImageMainInline(ImageCroppingMixin, TranslationTabularInline):
+    """Изображения продукта"""
+    extra = 0
+    fields = models.ProductImage().collect_fields()
+    model = models.ProductImage
+    suit_classes = 'suit-tab suit-tab-images'
+
+
 @admin.register(models.Product)
-class ProductAdmin(ModelTranlsationFieldsetsMixin, BaseModelAdmin, TranslationAdmin):
+class ProductAdmin(ModelTranlsationFieldsetsMixin, ImageCroppingMixin, BaseModelAdmin,
+                   TranslationAdmin):
     """Продукты"""
     filter_horizontal = ('categories',)
     group_fieldsets = True
+    inlines = (
+        ProductImageMainInline, ProductFeatureMainInline, ProductFeatureInline,
+        ProductDocumentInline
+    )
     list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'updated')
     list_display_links = ('id', 'image_thumb', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)
@@ -81,6 +122,7 @@ class ProductAdmin(ModelTranlsationFieldsetsMixin, BaseModelAdmin, TranslationAd
     suit_form_tabs = (
         ('general', _('Основное')),
         ('body', _('Основной контент')),
+        ('images', _('Изображения')),
         ('features', _('Характеристики')),
         ('training', _('Обучение')),
         ('testing', _('Тестирование')),
@@ -89,6 +131,7 @@ class ProductAdmin(ModelTranlsationFieldsetsMixin, BaseModelAdmin, TranslationAd
     tabs_mapping = {
         '': 'general',
         'Основной контент': 'body',
+        'Короткое описание': 'body',
         'Контент вкладки "характеристики"': 'features',
         'Контент вкладки "обучение"': 'training',
         'Контент вкладки "тестирование"': 'testing',

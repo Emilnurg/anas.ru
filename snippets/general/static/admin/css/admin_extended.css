@@ -53,8 +53,16 @@ input.btn {
   min-width: 260px;
 }
 
+.jcrop-holder {
+  background: #FFF !important;
+}
+
 .jcrop-holder img {
   max-width: none;
+}
+
+.jcrop-holder.jcrop-image div img {
+    max-width: none;
 }
 
 .tabular .vLargeTextField {

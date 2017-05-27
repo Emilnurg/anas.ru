@@ -1,0 +1,294 @@
+{%- extends 'layouts/main.html' -%}
+
+{%- block PAGE_TITLE %}{{ current_product.title|e }}{% endblock -%}
+
+{%- block BODY_CLASSES %}body-product{% endblock -%}
+
+{%- block PAGE_CONTENT -%}
+<div class="product">
+	<div class="container">
+		<div class="page-back">
+			{%- if main_category -%}
+			<a href="{{ main_category.get_absolute_url(lang) }}" class="page-back__link">{{ main_category.title|e }}</a>
+			{%- endif -%}
+			<a href="{{ url('catalog:product_print', kwargs={'lang': lang, 'slug': current_product.slug}) }}"
+				 class="print-link" target="_blank">Распечатать информацию</a>
+		</div>
+		<div class="row">
+			<div class="col-lg-6 col-md-7">
+				<h2 class="product__name">{{ current_product.title|e }}</h2>
+				<div class="product__descr">
+					{%- if current_product.manufacturer_id -%}
+					<dl>
+						<dt>Производитель</dt>
+						<dd>{{ current_product.manufacturer.title|e }}</dd>
+					</dl>
+					{%- endif -%}
+
+					{%- for feature in features_main -%}
+					<dl>
+						<dt>{{ feature.feature.title|e }}</dt>
+						<dd>
+							{{- feature.value -}}
+							{%- if feature.hint -%}
+							<div class="info-tooltip">
+								<span>{{ feature.hint }}</span>
+							</div>
+							{%- endif -%}
+						</dd>
+					</dl>
+					{%- endfor -%}
+				</div>
+				<div class="product__buttons">
+					<a href="javascript:" class="btn">Запрос КП</a>
+					<a href="javascript:" class="btn btn--link">Задать вопрос</a>
+				</div>
+			</div>
+
+			{%- if images -%}
+			<div class="col-lg-6 col-md-5">
+				<div class="product-slider">
+					<div class="product-slider-large">
+						{%- for image in images -%}
+						<div class="sld">
+							<img src="{{ image|cropped_thumbnail('thumb_images') }}"
+									 class="img-responsive" alt="{{ image.alt or '' }}"/>
+						</div>
+						{%- endfor -%}
+					</div>
+
+					<div class="product-slider-small">
+						{%- for image in images -%}
+						<div class="sld">
+							<img src="{{ image|cropped_thumbnail('thumb_images', width=120, height=68, background='#FFFFFF') }}"
+									 class="img-responsive" alt="{{ image.alt or '' }}"/>
+						</div>
+						{%- endfor -%}
+					</div>
+				</div>
+			</div>
+			{%- endif -%}
+		</div>
+	</div>
+</div>
+
+{%- if set_components -%}
+<div class="b-products-additional">
+	<div class="container">
+		<div class="products-additional-slider">
+			{%- for product in set_components -%}
+			<div class="sld">
+				<a href="{{ product.get_absolute_url(lang) }}" class="product-additional">
+					<div class="product-additional__text">
+						<div class="product-additional__name">{{ product.title|e }}</div>
+						{%- if product.short_description -%}
+						<div class="product-additional__descr">{{ product.short_description }}</div>
+						{%- endif -%}
+					</div>
+					<div class="product-additional__image">
+						<img src="{{ product.image|thumbnail('200x200') }}" alt=""/>
+					</div>
+				</a>
+			</div>
+			{%- endfor -%}
+		</div>
+	</div>
+</div>
+{%- endif -%}
+
+<div class="product-tabs">
+	<div class="container">
+		<div class="product-tabs__links">
+			<div class="sld active">
+				<a href="#product-description" class="product-tabs__tab">Описание</a>
+			</div>
+
+			{%- if features -%}
+			<div class="sld">
+				<a href="#product-features" class="product-tabs__tab">Технические характеристики</a>
+			</div>
+			{%- endif -%}
+
+			{%- if current_product.training_body -%}
+			<div class="sld">
+				<a href="#product-training" class="product-tabs__tab">Бесплатное обучение</a>
+			</div>
+			{%- endif -%}
+
+			{%- if current_product.testing_body -%}
+			<div class="sld">
+				<a href="#product-testing" class="product-tabs__tab">Бесплатное тестирование</a>
+			</div>
+			{%- endif -%}
+
+			{%- if current_product.docs_body or docs -%}
+			<div class="sld">
+				<a href="#product-docs" class="product-tabs__tab">Документация</a>
+			</div>
+			{%- endif -%}
+		</div>
+
+		<div class="product-tabs__content tab-content">
+			<div class="product-tabs__pane tab-pane fade in active" id="product-description">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+						<div class="content-block">{{ current_product.body -}}</div>
+					</div>
+				</div>
+			</div>
+
+			{%- if features -%}
+			<div class="product-tabs__pane tab-pane fade" id="product-features">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+						{%- if current_product.features_body -%}
+						<div class="content-block">{{ current_product.features_body }}</div>
+						{%- endif -%}
+
+						<table class="table product-table">
+							<tbody>
+								{%- for feature in features -%}
+								<tr>
+									<td>{{ feature.feature.title|e }}</td>
+									<td>
+										{{- feature.value -}}
+										{%- if feature.hint -%}
+										<div class="info-tooltip">
+											<span>{{ feature.hint }}</span>
+										</div>
+										{%- endif -%}
+									</td>
+								</tr>
+								{%- endfor -%}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			{%- endif -%}
+
+			{%- if current_product.training_body -%}
+			<div class="product-tabs__pane tab-pane fade" id="product-training">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+						<div class="content-block">{{ current_product.training_body }}</div>
+					</div>
+				</div>
+			</div>
+			{%- endif -%}
+
+			{%- if current_product.testing_body -%}
+			<div class="product-tabs__pane tab-pane fade" id="product-testing">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+						<div class="content-block">{{ current_product.testing_body }}</div>
+					</div>
+				</div>
+			</div>
+			{%- endif -%}
+
+			{%- if current_product.docs_body or docs -%}
+			<div class="product-tabs__pane tab-pane fade" id="product-docs">
+				<div class="row">
+					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+						{%- if current_product.docs_body -%}
+						<div class="content-block">{{ current_product.docs_body }}</div>
+						{%- endif -%}
+
+						{%- if docs -%}
+						<div class="doc-list">
+							{%- for doc in docs -%}
+							<div class="doc-item">
+								<a href="{{ doc.document.url }}" class="doc-link">
+									<span class="doc-link__icon">{{ doc.get_extension()|upper }}</span>
+									{%- if doc.title -%}
+									<span class="doc-link__name">{{ doc.title|e }}</span>
+									{%- endif -%}
+									<span class="doc-link__date">{{ doc.publish_date|date('d E Y') }}</span>
+									<span class="doc-link__size">{{ doc.document.size|filesizeformat }}</span>
+								</a>
+							</div>
+							{%- endfor -%}
+						</div>
+						{%- endif -%}
+					</div>
+				</div>
+			</div>
+			{%- endif -%}
+		</div>
+	</div>
+</div>
+
+<div class="b-feedback b-feedback2">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="b-feedback__contacts">
+					<h4> По вопросам звоните по телефону или пишите на почту </h4>
+					<div>
+						<a href="tel:+74956265455" class="b-feedback__tel">+7 (495) 626-54-55</a>
+					</div>
+					<div>
+						<a href="javascript:" class="b-feedback__email">info@anas.com</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<form action="#" class="form b-feedback__form">
+					<div class="form__heading">
+						<h4>Хотите обсудить сотрудничество?</h4>
+						<p> Оставьте контакты, мы свяжемся с вами по телефону </p>
+					</div>
+					<div class="form__content">
+						<div class="form__group">
+							<input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
+							<div class="form__placeholder"> Имя </div>
+						</div>
+						<div class="form__group">
+							<input type="text" name="tel" class="form__field required" placeholder="" data-validate="tel">
+							<div class="form__placeholder"> Телефон </div>
+						</div>
+						<div class="form__group">
+							<input type="text" name="comment" class="form__field required" placeholder="" data-validate="notEmpty">
+							<div class="form__placeholder"> Комментарии </div>
+						</div>
+					</div>
+					<div class="form__button">
+						<button type="submit" class="btn btn--black">Отправить</button>
+						<!-- <div class="form__err">
+					не правильно введен адрес
+				</div> --></div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{%- if siblings -%}
+<div class="page-nav page-nav--product">
+	{%- if siblings[0] -%}
+	<a href="{{ siblings[0].get_absolute_url() }}" class="page-nav__prev">
+		<div class="page-nav__text page-nav__text--center">
+			<div class="page-nav__name">{{ siblings[0].title }}</div>
+			<div class="page-nav__arrow"></div>
+		</div>
+		<div class="page-nav__image">
+			<span style="background-image: url({{ siblings[0]|cropped_thumbnail('thumb_siblings') }})"></span>
+		</div>
+	</a>
+	{%- endif -%}
+
+	{%- if siblings[1] -%}
+	<a href="{{ siblings[1].get_absolute_url() }}" class="page-nav__next">
+		<div class="page-nav__text page-nav__text--center">
+			<div class="page-nav__name">{{ siblings[1].title }}</div>
+			<div class="page-nav__arrow"></div>
+		</div>
+		<div class="page-nav__image">
+			<span style="background-image: url({{ siblings[1]|cropped_thumbnail('thumb_siblings') }})"></span>
+		</div>
+	</a>
+	{%- endif -%}
+</div>
+{%- endif -%}
+{%- endblock -%}

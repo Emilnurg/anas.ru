@@ -1,6 +1,6 @@
 {%- extends 'layouts/main.html' -%}
 
-{%- block PAGE_TITLE %}{% endblock -%}
+{%- block PAGE_TITLE %}{{ current_category.title|e }}{% endblock -%}
 
 {%- block BODY_CLASSES %}body-category{% endblock -%}
 

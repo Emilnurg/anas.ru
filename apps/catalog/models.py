@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from ckeditor_uploader.fields import RichTextUploadingField
-from image_cropping import ImageCropField
+from image_cropping import ImageCropField, ImageRatioField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
@@ -109,6 +109,9 @@ class Product(ImageMixin, BaseModel):
         default=ImagePositionEnum.default, max_length=30
     )
     body = RichTextUploadingField(_('Основной контент'), blank=True, null=False)
+    short_description = models.TextField(
+        _('Короткое описание'), blank=True, null=True, help_text=_('Применяется в наборах')
+    )
     features_body = RichTextUploadingField(
         _('Контент вкладки "Характеристики"'), blank=True, null=False
     )
@@ -135,8 +138,14 @@ class Product(ImageMixin, BaseModel):
         blank=True, null=True
     )
 
+    thumb_siblings = ImageRatioField(
+        'image', size='170x170', verbose_name=_('Эскиз в навигации'), allow_fullsize=True,
+        free_crop=True
+    )
+
     translation_fields = (
-        'title', 'body', 'features_body', 'training_body', 'testing_body', 'docs_body'
+        'title', 'body', 'short_description', 'features_body', 'training_body', 'testing_body',
+        'docs_body'
     )
 
     class Meta:
@@ -176,12 +185,15 @@ class ProductDocument(BaseModel):
 
     translation_fields = ('document', 'title')
 
-    def __str__(self):
-        return '%s: %s' % (self.product, self.title)
-
     class Meta:
         verbose_name = _('Документ продукта')
         verbose_name_plural = _('Документы продукта')
+
+    def __str__(self):
+        return '%s: %s' % (self.product, self.title)
+
+    def get_extension(self):
+        return self.document.url.split('.')[-1][:3]
 
 
 class ProductFeature(BaseModel):
@@ -212,7 +224,7 @@ class ProductFeatureMain(BaseModel):
     value = models.CharField(_('Значение'), max_length=255)
     hint = models.CharField(_('Подсказка'), max_length=255, blank=True, null=True)
 
-    translation_fields = ('value',)
+    translation_fields = ('value', 'hint')
 
     class Meta:
         verbose_name = _('Главная характеристика товара')
@@ -226,6 +238,11 @@ class ProductImage(ImageMixin, BaseModel):
     """Изображения продукта"""
     product = models.ForeignKey(Product, verbose_name=_('Продукт'), related_name='images')
     image = ImageCropField(_('Изображение'), max_length=255, upload_to='products/images')
+    thumb_images = ImageRatioField(
+        'image', size='800x600', verbose_name=_('Обрезка полей'), allow_fullsize=True,
+        free_crop=True
+    )
+
     alt = models.CharField(
         _('Подпись (alt)'), max_length=255, blank=True, null=True,
         help_text=_('Альтернативный текст вместо изображения')

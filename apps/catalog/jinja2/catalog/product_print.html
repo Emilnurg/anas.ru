@@ -1,0 +1,139 @@
+{%- extends 'layouts/print.html' -%}
+
+{%- block PAGE_TITLE %}{{ current_product.title|e }}{% endblock -%}
+
+{%- block BODY_CLASSES %}body-product body-product-print{% endblock -%}
+
+{%- block PAGE_CONTENT -%}
+<div class="product">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-7">
+				<h1 class="product__name">{{ current_product.title|e }}</h1>
+				<div class="product__descr">
+					{%- if current_product.manufacturer_id -%}
+					<dl>
+						<dt>Производитель</dt>
+						<dd>{{ current_product.manufacturer.title|e }}</dd>
+					</dl>
+					{%- endif -%}
+
+					{%- for feature in features_main -%}
+					<dl>
+						<dt>{{ feature.feature.title|e }}</dt>
+						<dd>
+							{{- feature.value -}}
+							{%- if feature.hint -%}
+							<div class="info-tooltip">
+								<span>{{ feature.hint }}</span>
+							</div>
+							{%- endif -%}
+						</dd>
+					</dl>
+					{%- endfor -%}
+				</div>
+			</div>
+
+			{%- if images -%}
+			<div class="col-lg-6 col-md-5">
+				<div class="product-slider-print">
+						<img src="{{ images[0]|cropped_thumbnail('thumb_images') }}" alt=""/>
+				</div>
+			</div>
+			{%- endif -%}
+		</div>
+
+		{%- set images = images[1:] -%}
+		{%- if images -%}
+		<div class="row product-slider-print-images">
+			{%- for image in images -%}
+			<div class="col-md-3">
+				<img src="{{ image|cropped_thumbnail('thumb_images') }}" class="img" alt=""/>
+			</div>
+			{%- endfor -%}
+		</div>
+		{%- endif -%}
+	</div>
+</div>
+
+<div class="product-tabs">
+	<div class="container">
+		<div class="product-tabs__content tab-content">
+			<div class="product-tabs__pane tab-pane fade in active" id="product-description">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>Описание</h2>
+						<div class="content-block">{{ current_product.body -}}</div>
+					</div>
+				</div>
+			</div>
+
+			{%- if features -%}
+			<div class="product-tabs__pane tab-pane fade in active" id="product-features">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>Технические характеристики</h2>
+						{%- if current_product.features_body -%}
+						<div class="content-block">{{ current_product.features_body }}</div>
+						{%- endif -%}
+
+						<table class="table product-table">
+							<tbody>
+								{%- for feature in features -%}
+								<tr>
+									<td>{{ feature.feature.title|e }}</td>
+									<td>
+										{{- feature.value -}}
+										{%- if feature.hint -%}
+										<div class="info-tooltip">
+											<span>{{ feature.hint }}</span>
+										</div>
+										{%- endif -%}
+									</td>
+								</tr>
+								{%- endfor -%}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			{%- endif -%}
+
+			{%- if current_product.training_body -%}
+			<div class="product-tabs__pane tab-pane fade in active" id="product-training">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>Бесплатное обучение</h2>
+						<div class="content-block">{{ current_product.training_body }}</div>
+					</div>
+				</div>
+			</div>
+			{%- endif -%}
+
+			{%- if current_product.testing_body -%}
+			<div class="product-tabs__pane tab-pane fade in active" id="product-testing">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>Бесплатное тестирование</h2>
+						<div class="content-block">{{ current_product.testing_body }}</div>
+					</div>
+				</div>
+			</div>
+			{%- endif -%}
+
+			{%- if current_product.docs_body or docs -%}
+			<div class="product-tabs__pane tab-pane fade in active" id="product-docs">
+				<div class="row">
+					<div class="col-md-12">
+						<h2>Документация</h2>
+						{%- if current_product.docs_body -%}
+						<div class="content-block">{{ current_product.docs_body }}</div>
+						{%- endif -%}
+					</div>
+				</div>
+			</div>
+			{%- endif -%}
+		</div>
+	</div>
+</div>
+{%- endblock -%}

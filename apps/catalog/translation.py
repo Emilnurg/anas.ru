@@ -31,13 +31,22 @@ class ProductDocumentTranslationOptions(BaseTranslationOptions):
 @register(models.ProductFeature)
 class ProductFeatureTranslationOptions(BaseTranslationOptions):
     fields = models.ProductFeature.translation_fields
+    required_languages = {'default': ()}
+
+
+@register(models.ProductFeatureMain)
+class ProductFeatureTranslationOptions(BaseTranslationOptions):
+    fields = models.ProductFeatureMain.translation_fields
+    required_languages = {'default': ()}
 
 
 @register(models.ProductImage)
 class ProductImageTranslationOptions(BaseTranslationOptions):
     fields = models.ProductImage.translation_fields
+    required_languages = {'default': ()}
 
 
 @register(models.Product)
 class ProductTranslationOptions(BaseTranslationOptions):
     fields = models.Product.translation_fields
+    required_languages = {settings.DEFAULT_LANGUAGE: ('title',), 'default': ()}

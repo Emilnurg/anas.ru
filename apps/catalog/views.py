@@ -5,6 +5,7 @@ from pure_pagination import Paginator
 
 from catalog import models, PRODUCTS_PER_PAGE
 from snippets.models.enumerates import StatusEnum
+from snippets.models.siblings import get_siblings
 from snippets.views import BaseTemplateView
 
 
@@ -83,3 +84,58 @@ class ProductCategoryView(BaseTemplateView):
 class ProductView(BaseTemplateView):
     """Страница продукта"""
     template_name = 'catalog/product.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs = super(ProductView, self).get_context_data(**kwargs)
+        current_product = get_object_or_404(
+            models.Product.objects.published(), slug__exact=kwargs.get('slug')
+        )
+
+        docs = current_product.documents.published().order_by('ordering')
+
+        features = current_product.features.published()\
+            .filter(feature__status=StatusEnum.PUBLIC)\
+            .select_related('feature').order_by('ordering', 'feature__ordering')
+
+        features_main = current_product.features_main.published()\
+            .filter(feature__status=StatusEnum.PUBLIC)\
+            .select_related('feature').order_by('ordering', 'feature__ordering')
+
+        images = current_product.images.published().order_by('ordering')
+
+        main_category = current_product.categories.published()[:1]
+        if main_category:
+            main_category = main_category[0]
+
+        siblings = None
+        if main_category:
+            siblings = get_siblings(
+                main_category.products.published().order_by('ordering'),
+                current_product.pk
+            )
+
+        if current_product.product_set_id:
+            # получаем другие элементы набора
+            set_components = current_product.product_set.set_components.published()\
+                .exclude(pk=current_product.pk).order_by('ordering')
+        else:
+            # или если текущий товар - набор, то выводим его элементы
+            set_components = current_product.set_components.published() or None
+
+        kwargs.update({
+            'current_product': current_product,
+            'docs': docs,
+            'features': features,
+            'features_main': features_main,
+            'images': images,
+            'main_category': main_category,
+            'set_components': set_components,
+            'siblings': siblings
+        })
+
+        return kwargs
+
+
+class ProductPrintView(ProductView):
+    """Страница продукта (печать)"""
+    template_name = 'catalog/product_print.html'

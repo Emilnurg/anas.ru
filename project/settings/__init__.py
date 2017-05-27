@@ -3,6 +3,8 @@ import os
 
 from django.core.urlresolvers import reverse_lazy
 
+from easy_thumbnails.conf import Settings as ThumbnailSettings
+
 
 def gettext_noop(s):
     return s
@@ -245,6 +247,7 @@ REDIS_DB = 0
 CKEDITOR_UPLOAD_PATH = 'upload/'
 CKEDITOR_CONFIGS = {
     'default': {
+        'height': 100,
         'skin': 'moono-lisa',
         'tabSpaces': 4,
         'title': False,
@@ -288,6 +291,14 @@ SEARCH = {
     'host': 'localhost',
     'port': '9200'
 }
+
+# cropper
+THUMBNAIL_QUALITY = 90
+THUMBNAIL_PROGRESSIVE = 100
+THUMBNAIL_PRESERVE_EXTENSIONS = ('jpg',)
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + ThumbnailSettings.THUMBNAIL_PROCESSORS
 
 UPLOADIFIVE_IMAGE_MIMETYPES = (
     'image/jpeg',
