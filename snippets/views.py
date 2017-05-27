@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 
 
 class BaseTemplateView(TemplateView):
+    """Базовый класс для представлений c шаблоном"""
     template_name = None
     template_engine = 'jinja2'
     content_type = 'text/html'
@@ -13,7 +14,7 @@ class BaseTemplateView(TemplateView):
         page = self.kwargs.get('page')
         try:
             page = int(page)
-        except ValueError:
+        except (ValueError, TypeError):
             page = 1
 
         if page < 1:
@@ -23,4 +24,5 @@ class BaseTemplateView(TemplateView):
 
 
 class BaseView(View):
+    """Базовый класс для представлений"""
     pass
