@@ -115,13 +115,13 @@ def sync_articles():
     """Bulk Synchronization of articles from DB source"""
     es = Elasticsearch()
     qs = Article.objects.published()\
-        .prefetch_related(
+        .prefetch_related((
             Prefetch(
                 'categories',
                 queryset=ArticleCategory.objects.published(),
                 to_attr='categories_cache'
-            )
-        )
+            ),
+        ))
 
     count = qs.count()
     print('%s articles to sync' % count)

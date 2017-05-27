@@ -25,7 +25,7 @@
 				{%- for category in children_categories -%}
 				<a class="sld" href="{{ category.get_absolute_url(lang) }}">
 					<label>
-						<input type="checkbox" name="catalog-category">
+						{# <input type="checkbox" name="catalog-category"> #}
 						<span>{{ category.title|e }}</span>
 					</label>
 				</a>
@@ -41,7 +41,8 @@
 					<a class="sld" href="{{ base_url }}?manufacturer={{ manufacturer.slug|e }}">
 						<label>
 							<input type="radio" name="catalog-brand"
-									{%- if current_manufacturer and current_manufacturer.id == manufacturer.id %} checked{% endif %}>
+									{%- if current_manufacturer and current_manufacturer.id == manufacturer.id %} checked
+									{%- endif %}>
 							<span>
 								<img src="{{ manufacturer.image.url }}" alt="{{ manufacturer.title }}">
 							</span>
@@ -77,7 +78,7 @@
 			</div>
 			{%- endif -%}
 
-			<div class="col-md-7 col-sm-12">
+			<div class="{%- if parent_category.seo_block_image -%}col-md-7{% endif %} col-sm-12">
 				<div class="b-seo-text__text">
 					<h2 class="promo">{{ parent_category.seo_block_title }}</h2>
 					{%- if parent_category.seo_block_body -%}

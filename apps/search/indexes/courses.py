@@ -115,13 +115,13 @@ def sync_courses():
     """Bulk Synchronization of courses from DB source"""
     es = Elasticsearch()
     qs = Course.objects.published()\
-        .prefetch_related(
+        .prefetch_related((
             Prefetch(
                 'teachers',
                 queryset=Teacher.objects.published(),
                 to_attr='teachers_cache'
-            )
-        )
+            ),
+        ))
 
     count = qs.count()
     print('%s courses to sync' % count)

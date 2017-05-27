@@ -25,7 +25,7 @@ class UserAdmin(UserAdmin):
     fieldsets = (
         (None, {
             'classes': ('suit-tab', 'suit-tab-general'),
-            'fields': ('is_active', 'username', 'password', 'created')
+            'fields': ('is_active', 'username', 'password', 'created', 'updated')
         }),
         (_('Персональная информация'), {
             'classes': ('suit-tab', 'suit-tab-general'),
@@ -43,7 +43,7 @@ class UserAdmin(UserAdmin):
     form = UserAdminForm
     list_display = ('username', 'get_full_name', 'is_active')
     list_filter = ('is_active', 'is_staff', 'is_superuser', 'groups')
-    readonly_fields = ('last_login', 'date_joined', 'created')
+    readonly_fields = ('last_login', 'date_joined', 'created', 'updated')
     search_fields = ('=id', 'username', 'full_name', 'email')
     suit_form_tabs = (
         ('general', _('Общее')),

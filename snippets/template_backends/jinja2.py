@@ -21,6 +21,7 @@ def environment(**options):
         'static': staticfiles_storage.url,
         'url': reverse,
         'getattr': getattr,
+        'hasattr': hasattr,
         'STATIC_URL': settings.STATIC_URL,
         'MEDIA_URL': settings.MEDIA_URL
     })

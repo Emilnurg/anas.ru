@@ -12,7 +12,7 @@ ALL_INDEXES = ('articles', 'courses', 'products')
 
 def get_standard_es_settings(**kwargs):
     with open(
-        os.path.join(settings.SETTINGS_PATH, 'deploy', 'es_stopwords.txt'),
+        os.path.join(settings.PROJECT_DIR, 'deploy', 'es_stopwords.txt'),
         'r'
     ) as sw_file:
         conf = {

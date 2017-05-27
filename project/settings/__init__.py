@@ -8,7 +8,8 @@ def gettext_noop(s):
     return s
 
 
-SITE_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SITE_ROOT = os.path.dirname(PROJECT_DIR)
 
 DEBUG = False
 

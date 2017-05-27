@@ -14,7 +14,7 @@ from snippets.modeltranslation import get_model_translation_fields
 class FaqSectionAdmin(BaseModelAdmin, TranslationAdmin):
     """Категории продуктов"""
     fields = models.FaqSection().collect_fields()
-    list_display = ('id', 'title', 'ordering', 'status', 'created')
+    list_display = ('id', 'title', 'ordering', 'status', 'updated')
     list_display_links = ('id', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id'] + get_model_translation_fields(models.FaqSection)
@@ -24,7 +24,7 @@ class FaqSectionAdmin(BaseModelAdmin, TranslationAdmin):
 class FaqQuestionAdmin(BaseModelAdmin, TranslationAdmin):
     """Категории продуктов"""
     fields = models.FaqQuestion().collect_fields() + ['sections']
-    list_display = ('id', 'title', 'ordering', 'get_sections', 'status', 'created')
+    list_display = ('id', 'title', 'ordering', 'get_sections', 'status', 'updated')
     list_display_links = ('id', 'title')
     list_filter = BaseModelAdmin.list_filter + ('sections',)
     ordering = BaseModelAdmin.ordering + ('title',)

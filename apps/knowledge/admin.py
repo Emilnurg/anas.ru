@@ -13,7 +13,7 @@ from snippets.modeltranslation import get_model_translation_fields
 class ArticleCategoryAdmin(BaseModelAdmin):
     """Категории статей базы знаний"""
     fields = models.ArticleCategory().collect_fields()
-    list_display = ('id', 'title', 'ordering', 'status', 'created')
+    list_display = ('id', 'title', 'ordering', 'status', 'updated')
     list_display_links = ('id', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id', 'slug'] + get_model_translation_fields(models.ArticleCategory)

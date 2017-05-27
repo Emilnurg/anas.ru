@@ -111,8 +111,10 @@
               <nav class="header__nav">
                 <ul class="header__nav-list">
 									{%- for category_1 in catalog_tree -%}
-                  <li class="header__nav-item header__nav-item--dropdown">
-                    <a href="{{ category_1['obj'].get_absolute_url(request.LANGUAGE_CODE) }}"
+									{%- set cat1_url = category_1['obj'].get_absolute_url(request.LANGUAGE_CODE) -%}
+                  <li class="header__nav-item header__nav-item--dropdown
+										{%- if hasattr(request, 'active_url') and cat1_url == request.active_url %} active{% endif %}">
+                    <a href="{{ cat1_url }}"
 											 class="header__nav-link">
 											{{- category_1['obj'].title|e -}}
 											{%- if category_1['children'] -%}

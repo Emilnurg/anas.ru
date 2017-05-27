@@ -4,7 +4,6 @@ from django.shortcuts import get_object_or_404
 from pure_pagination import Paginator
 
 from catalog import models, PRODUCTS_PER_PAGE
-from snippets.http.request import get_page
 from snippets.models.enumerates import StatusEnum
 from snippets.views import BaseTemplateView
 
@@ -49,7 +48,7 @@ class ProductCategoryView(BaseTemplateView):
 
         # paginator
         paginator_page = None
-        page = get_page(kwargs.get('page', 1))
+        page = self.get_page()
         paginator = Paginator(products_qs, PRODUCTS_PER_PAGE, allow_empty_first_page=False)
 
         try:
@@ -57,6 +56,11 @@ class ProductCategoryView(BaseTemplateView):
             products_list = paginator_page.object_list
         except (EmptyPage, InvalidPage):
             products_list = []
+
+        if current_category.is_root_node():
+            kwargs['view'].request.active_url = current_category.get_absolute_url()
+        else:
+            kwargs['view'].request.active_url = current_category.get_root().get_absolute_url()
 
         kwargs.update({
             'base_url': current_category.get_absolute_url(lang=kwargs.get('lang')),

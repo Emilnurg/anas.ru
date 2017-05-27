@@ -53,6 +53,9 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
         _('Заголовок SEO-блока'), blank=True, null=True, max_length=255
     )
     seo_block_body = RichTextUploadingField(_('Контент SEO-блока'), blank=True, null=False)
+    seo_block_image = models.ImageField(
+        _('Изображение в SEO-блоке'), upload_to='categories/seo', blank=True, null=True
+    )
     objects = BaseManager()
 
     translation_fields = ('title', 'body', 'seo_block_title', 'seo_block_body')
@@ -182,18 +185,38 @@ class ProductDocument(BaseModel):
 
 
 class ProductFeature(BaseModel):
-    """Характеристика товара"""
+    """Характеристики товара"""
     product = models.ForeignKey(Product, verbose_name=_('Товар'), related_name='features')
     feature = models.ForeignKey(
         Feature, related_name='product_features', verbose_name=_('Характеристика'),
     )
     value = models.CharField(_('Значение'), max_length=255)
+    hint = models.CharField(_('Подсказка'), max_length=255, blank=True, null=True)
 
-    translation_fields = ('value',)
+    translation_fields = ('value', 'hint')
 
     class Meta:
         verbose_name = _('Характеристика товара')
         verbose_name_plural = _('Характеристики товара')
+
+    def __str__(self):
+        return '%s: %s' % (self.feature, self.value)
+
+
+class ProductFeatureMain(BaseModel):
+    """Главные характеристики товара"""
+    product = models.ForeignKey(Product, verbose_name=_('Товар'), related_name='features_main')
+    feature = models.ForeignKey(
+        Feature, related_name='product_features_main', verbose_name=_('Характеристика'),
+    )
+    value = models.CharField(_('Значение'), max_length=255)
+    hint = models.CharField(_('Подсказка'), max_length=255, blank=True, null=True)
+
+    translation_fields = ('value',)
+
+    class Meta:
+        verbose_name = _('Главная характеристика товара')
+        verbose_name_plural = _('Главные характеристики товара')
 
     def __str__(self):
         return '%s: %s' % (self.feature, self.value)

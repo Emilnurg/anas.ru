@@ -12,7 +12,7 @@ from snippets.modeltranslation import get_model_translation_fields
 class PageAdmin(BaseModelAdmin, TranslationAdmin):
     """Простые страницы"""
     fields = models.Page().collect_fields()
-    list_display = ('id', 'title', 'slug', 'ordering', 'status', 'created')
+    list_display = ('id', 'title', 'slug', 'ordering', 'status', 'updated')
     list_display_links = ('id', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id', 'slug'] + get_model_translation_fields(models.Page)
@@ -25,7 +25,7 @@ class PageAdmin(BaseModelAdmin, TranslationAdmin):
 class GalleryAdmin(BaseModelAdmin, TranslationAdmin):
     """Галереи"""
     fields = models.Gallery().collect_fields()
-    list_display = ('image_thumb', 'title', 'ordering', 'status', 'created')
+    list_display = ('image_thumb', 'title', 'ordering', 'status', 'updated')
     list_display_links = ('image_thumb', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id'] + get_model_translation_fields(models.Gallery)
@@ -38,7 +38,7 @@ class GalleryAdmin(BaseModelAdmin, TranslationAdmin):
 class HomeAdvantageAdmin(BaseModelAdmin, TranslationAdmin):
     """Преимущества на главной странице"""
     group_fieldsets = True
-    list_display = ('id', 'title', 'icon', 'ordering', 'status', 'created')
+    list_display = ('id', 'title', 'icon', 'ordering', 'status', 'updated')
     list_display_links = ('id', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)
     save_as = True
@@ -66,7 +66,7 @@ class HomeCatalogManufacturerInline(admin.TabularInline):
 class HomeCatalogAdmin(BaseModelAdmin, TranslationAdmin):
     """Каталоги на главной странице"""
     group_fieldsets = True
-    list_display = ('id', 'title', 'ordering', 'status', 'created')
+    list_display = ('id', 'title', 'ordering', 'status', 'updated')
     list_display_links = ('id', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)
     search_fields = ['=id'] + get_model_translation_fields(models.HomeCatalog)
@@ -77,7 +77,7 @@ class HomeCatalogAdmin(BaseModelAdmin, TranslationAdmin):
 class HomeSlideAdmin(BaseModelAdmin, TranslationAdmin):
     """Слайды на главной"""
     group_fieldsets = True
-    list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'created')
+    list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'updated')
     list_display_links = ('id', 'image_thumb', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)
     save_as = True

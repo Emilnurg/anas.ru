@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# from snippets.request import get_page
 from snippets.views import BaseTemplateView
 
 
@@ -17,5 +16,5 @@ class SearchSectionView(BaseTemplateView):
     template_name = 'search/search_partial.html'
 
     def get(self, request, lang=None, *args, **kwargs):
-        # page = get_page(request)
+        page = self.get_page()
         return super(SearchSectionView, self).get(request, *args, **kwargs)

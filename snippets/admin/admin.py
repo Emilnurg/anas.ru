@@ -16,23 +16,39 @@ class BaseModelAdmin(ModelAdmin):
     ordering = ('ordering',)
     readonly_fields = ('created', 'updated')
 
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super(BaseModelAdmin, self).get_fieldsets(request, obj=obj)
+
+        for field in ('created', 'updated'):
+            if field not in fieldsets[0][1]['fields']:
+                fieldsets[0][1]['fields'].append(field)
+
+        return fieldsets
+
 
 class ModelTranlsationFieldsetsMixin(object):
     def get_fieldsets(self, request, obj=None):
         fieldsets = super(ModelTranlsationFieldsetsMixin, self).get_fieldsets(request, obj=obj)
-        fieldsets[0] = (None, {
-            'fields': fieldsets[0][1]['fields'],
-            'classes': ('suit-tab', 'suit-tab-general')
-        })
 
-        for i, fieldset in enumerate(fieldsets[1:], start=1):
-            fieldsets[i] = (
-                fieldset[0],
-                dict(
-                    fields=fieldset[1]['fields'],
-                    classes=('suit-tab', 'suit-tab-%s' % '_'.join(
-                        fieldset[1]['fields'][0].split('_')[:-1]
-                    ))
+        if not hasattr(self, 'tabs_mapping'):
+            return fieldsets
+
+        fieldsets_to_remove = []
+        for i, fieldset in enumerate(fieldsets):
+            title = fieldset[0]
+            if title in self.tabs_mapping:
+                if 'classes' not in fieldset[1]:
+                    fieldset[1]['classes'] = ()
+                fieldset[1]['classes'] += (
+                    ('suit-tab', 'suit-tab-%s' % self.tabs_mapping[title])
                 )
-            )
+            elif i != 0:
+                for field in reversed(fieldset[1]['fields']):
+                    fieldsets[0][1]['fields'].insert(0, field)
+                fieldsets_to_remove.append(fieldset)
+
+        if fieldsets_to_remove:
+            for fieldset in fieldsets_to_remove:
+                fieldsets.remove(fieldset)
+
         return fieldsets

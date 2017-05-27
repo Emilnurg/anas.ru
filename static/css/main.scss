@@ -775,6 +775,13 @@
   }
 
   &--dropdown {
+    &.active {
+      .header__nav-link {
+        border-bottom-color: #d2205c;
+        color: #000;
+        text-decoration: none;
+      }
+    }
     .header__nav-link {
       padding-right: 11px;
     }

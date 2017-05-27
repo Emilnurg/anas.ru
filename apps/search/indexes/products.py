@@ -10,7 +10,7 @@ from django.utils import translation
 
 from elasticsearch import Elasticsearch, TransportError
 
-from catalog.models import Product, ProductCategory, ProductFeature
+from catalog.models import Product, ProductCategory, ProductFeature, ProductFeatureMain
 from search.exceptions import SearchError
 from search.utils import get_standard_es_settings
 from snippets.models.enumerates import StatusEnum
@@ -95,19 +95,24 @@ def bind_product_body(target):
     to JSON elasticsearch index
     :param target: Product instance
     """
-    body = {
-        'suggest': [{
+    suggest = [{
+        'input': tuple(
+            filter(lambda x: x, re.split(r'[\s_\-?,.+|()]', target.title.lower()))
+        ),
+        'weight': 3
+    }, {
+        'input': target.title.lower(),
+        'weight': 1
+    }]
+
+    if target.sku:
+        suggest.insert(0, {
             'input': re.sub(r'[\s ,\-+|()]', '', target.sku.lower()),
             'weight': 30
-        }, {
-            'input': tuple(
-                filter(lambda x: x, re.split(r'[\s_\-?,.+|()]', target.title.lower()))
-            ),
-            'weight': 3
-        }, {
-            'input': target.title.lower(),
-            'weight': 1
-        }],
+        })
+
+    body = {
+        'suggest': suggest,
         'body': target.body,
         'manufacturer_title': target.manufacturer.title if target.manufacturer_id else '',
         'ordering': target.ordering,
@@ -123,14 +128,26 @@ def bind_product_body(target):
             x.title for x in target.categories.published().iterator()
         )
 
+    features = []
     if hasattr(target, 'features_cache'):
-        body['features'] = ', '.join('%s %s' % x for x in target.features_cache)
+        body['features'] = ['%s %s' % x for x in target.features_cache]
     else:
-        body['features'] = ', '.join(
+        body['features'] = [
             '%s %s' % x
-            for x in target.features.published().filter(filter__status=StatusEnum.PUBLIC)
+            for x in target.features.published().filter(feature__status=StatusEnum.PUBLIC)
             .values_list('feature__title', 'value').iterator()
-        )
+        ]
+
+    if hasattr(target, 'features_main_cache'):
+        body['features'].extend(['%s %s' % x for x in target.features_main_cache])
+    else:
+        body['features'].extend([
+            '%s %s' % x
+            for x in target.features_main.published().filter(feature__status=StatusEnum.PUBLIC)
+            .values_list('feature__title', 'value').iterator()
+        ])
+
+    body['features'] = ', '.join(features)
 
     return body
 
@@ -144,14 +161,18 @@ def sync_products():
                 'categories',
                 queryset=ProductCategory.objects.published(),
                 to_attr='categories_cache'
-            )
-        )\
-        .prefetch_related(
+            ),
             Prefetch(
                 'features',
                 queryset=ProductFeature.objects.published()
                 .filter(feature__status=StatusEnum.PUBLIC).values_list('feature__title', 'value'),
                 to_attr='features_cache'
+            ),
+            Prefetch(
+                'features_main',
+                queryset=ProductFeatureMain.objects.published()
+                .filter(feature__status=StatusEnum.PUBLIC).values_list('feature__title', 'value'),
+                to_attr='features_cache_main'
             )
         )
 

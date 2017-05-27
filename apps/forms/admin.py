@@ -16,7 +16,7 @@ from forms.enums import FormRequestReadStatusEnum
 class BaseFormRequestAdmin(admin.ModelAdmin):
     """Базовый класс для админ.части запросов из форм"""
     date_hierarchy = 'created'
-    list_display = ('id', 'language', 'created')
+    list_display = ('id', 'language', 'updated')
     list_filter = ('read_status', 'language')
     ordering = ('-created',)
     search_fields = ('=id',)
@@ -45,7 +45,7 @@ class BaseFormRequestAdmin(admin.ModelAdmin):
 
 class BaseNamePhoneRequestAdmin(BaseFormRequestAdmin):
     """Базовый класс для админ.части запросов из форм с именем и телефоном"""
-    list_display = ('id', 'name', 'telephone', 'language', 'created')
+    list_display = ('id', 'name', 'telephone', 'language', 'updated')
     list_display_links = ('id', 'name')
     search_fields = BaseFormRequestAdmin.search_fields + ('name', 'telephone')
 
@@ -123,7 +123,7 @@ ServiceFormRequestAdmin.comment_short.short_description = _('Проблема')
 class SupportFormRequestAdmin(CommentAdminMixin, BaseFormRequestAdmin):
     """Админ.часть для запросов тех.поддержки"""
     list_display = (
-        'id', 'name', 'email', 'product_code', 'comment_short', 'language', 'created'
+        'id', 'name', 'email', 'product_code', 'comment_short', 'language', 'updated'
     )
     list_display_links = ('id', 'name')
     search_fields = BaseFormRequestAdmin.search_fields + (
