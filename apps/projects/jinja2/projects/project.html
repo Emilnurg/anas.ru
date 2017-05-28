@@ -2,7 +2,7 @@
 
 {%- block PAGE_TITLE %}{{ current_article.title|e }}{% endblock -%}
 
-{%- block BODY_CLASSES %}body-article{% endblock -%}
+{%- block BODY_CLASSES %}body-project{% endblock -%}
 
 {%- block EXTRA_META %}
 	<meta property="og:title" content="{{ current_article.title|e }}">
@@ -17,20 +17,33 @@
 {%- endblock -%}
 
 {%- block PAGE_CONTENT -%}
-<div class="enter">
-	<div class="container">
-		<div class="page-back">
-			<a href="{{ list_url }}"
-				 class="page-back__link">{{ var('NEWS_TITLE', request) }}</a>
+<div class="b-project">
+	<div class="b-project__bg">
+		{%- if current_article.bg -%}
+		<div class="parallax-window" data-bleed="10" data-parallax="scroll"
+				 data-image-src="{{ current_article.bg|thumbnail('2000x0') }}">
 		</div>
-		<div class="main-title">
-			<h3>{{ current_article.title }}</h3>
-			{%- if current_article.excerpt -%}
-			<div class="content-block">
-				{{- current_article.excerpt -}}
+		{%- endif -%}
+
+		<div class="container">
+			<div class="page-back">
+				<a href="{{ list_url }}" class="page-back__link">{{ var('COMPLETED_PROJECTS_TITLE', request) }}</a>
 			</div>
-			{%- endif -%}
-			<div class="main-title__date">{{ current_article.publish_date|date('d E Y') }}</div>
+			<div class="main-title">
+				<h3>{{ current_article.title|e }}</h3>
+				<div class="content-block">
+					{{- current_article.excerpt -}}
+				</div>
+				<div class="main-title__date">{{ current_article.publish_date|date('d.m.Y') }}</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="b-project__text">
+			<div class="content-block">
+				{{- current_article.body -}}
+			</div>
 		</div>
 	</div>
 </div>
@@ -39,26 +52,41 @@
 {%- if section.gallery_id -%}
 {%- set slides = section.gallery.photos.published() -%}
 {%- if slides -%}
-<div class="b-slider">
+<div class="b-slider b-slider--project">
 	<div class="container">
-		<div class="slider">
+		<div class="section-title">
+			{%- if section.title -%}
+			<h4>{{ section.title }}</h4>
+			{%- endif -%}
+
+			{%- if section.body -%}
+			<div class="content-block">
+				{{- section.body -}}
+			</div>
+			{%- endif -%}
+		</div>
+
+		<div class="slider slider--thumbnails">
 			{%- for slide in slides -%}
 			<div class="sld">
 				<div class="slide">
 					<div class="slide__image">
-						<img src="{{ slide.image|thumbnail('1000x667') }}" class="img-responsive" alt="{{ slide.alt or '' }}"/>
+						<img src="{{ slide.image|thumbnail('1200x500') }}" class="img-responsive" alt="{{ slide.alt or '' }}"/>
 						<div class="slide__nums">
 							<span>1</span>
 							<span>1</span>
 						</div>
 					</div>
-					{%- if slide.body -%}
-					<div class="slide__text">
-						<div class="content-block">
-							{{- slide.body -}}
-						</div>
-					</div>
-					{%- endif -%}
+				</div>
+			</div>
+			{%- endfor -%}
+		</div>
+
+		<div class="slider-thumbnails">
+			{%- for slide in slides -%}
+			<div class="sld">
+				<div class="slide-thumbnail">
+					<span style="background-image: url({{ slide.image|thumbnail('174x72') }})"></span>
 				</div>
 			</div>
 			{%- endfor -%}
@@ -68,7 +96,8 @@
 {%- endif -%}
 
 {%- else -%}
-	{%- include 'articles/_article_video.html' -%}
+{%- include 'articles/_article_video.html' -%}
+
 {%- endif -%}
 {%- endfor -%}
 

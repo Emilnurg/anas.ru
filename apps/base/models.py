@@ -38,7 +38,7 @@ class BaseArticle(ImageMixin, BaseModel):
         _('Дата публикации'), db_index=True, default=utcnow, help_text=_('Можно задать на будущее')
     )
     image = ImageCropField(
-        _('Изображение'), upload_to='news', max_length=255, blank=True, null=True
+        _('Изображение'), upload_to='articles/%Y/%m/', max_length=255, blank=True, null=True
     )
     thumb_list = ImageRatioField(
         'image', '580x720', verbose_name=_('Эскиз в списке'), allow_fullsize=True, free_crop=True
