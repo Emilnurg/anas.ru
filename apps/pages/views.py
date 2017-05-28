@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from collections import defaultdict
+
 from django.conf import settings
 from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
@@ -28,26 +30,23 @@ class HomeView(BaseTemplateView):
         home_slides = HomeSlide.objects.published().order_by('ordering')[:20]
         home_advantages = HomeAdvantage.objects.published().order_by('ordering')[:5]
 
-        home_catalogs = HomeCatalog.objects.published().order_by('ordering')\
-            .prefetch_related((
-                Prefetch(
-                    'manufacturers',
-                    queryset=HomeCatalogManufacturer.objects.published().order_by('ordering')
-                    .select_related('manufacturer'),
-                    to_attr='manufacturers_cache'
-                ),
-            )).prefetch_related((
-                Prefetch(
-                    'products',
-                    queryset=HomeCatalogProduct.objects.published().order_by('ordering')
-                    .select_related('product'),
-                    to_attr='products_cache'
-                ),
-            ))
+        home_catalogs = HomeCatalog.objects.published().order_by('ordering')
+
+        home_catalog_products = defaultdict(list)
+        for product in HomeCatalogProduct.objects.published()\
+                .select_related('product').order_by('ordering').iterator():
+            home_catalog_products[product.catalog_id].append(product.product)
+
+        home_catalog_manufacturers = defaultdict(list)
+        for manufacturer in HomeCatalogManufacturer.objects.published()\
+                .select_related('manufacturer').order_by('ordering').iterator():
+            home_catalog_manufacturers[manufacturer.catalog_id].append(manufacturer.manufacturer)
 
         kwargs.update(
             home_advantages=home_advantages,
             home_catalogs=home_catalogs,
+            home_catalog_manufacturers=home_catalog_manufacturers,
+            home_catalog_products=home_catalog_products,
             home_page=home_page,
             home_slides=home_slides
         )

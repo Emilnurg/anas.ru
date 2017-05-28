@@ -71,11 +71,10 @@
 			{%- endif -%}
 		</div>
 
-		{%- if catalog.products_cache -%}
+		{%- if home_catalog_products[catalog.id] -%}
 		<div class="catalog__row row">
-			{%- for product in catalog.products_cache -%}
+			{%- for product in home_catalog_products[catalog.id] -%}
 			<div class="col-xs-12 col-sm-6 catalog__col">
-				{%- set product = product.product -%}
 				{%- include 'catalog/_product_block.html' -%}
 			</div>
 			{%- endfor -%}
@@ -100,13 +99,12 @@
 		</div>
 		{%- endif -%}
 
-		{%- if catalog.manufacturers_cache -%}
+		{%- if home_catalog_manufacturers[catalog.id] -%}
 		<div class="brands-carousel">
-			{%- for manufacturer in catalog.manufacturers_cache -%}
+			{%- for manufacturer in home_catalog_manufacturers[catalog.id] -%}
 			<div class="sld">
 				<a href="javascript:" class="brand-link">
-					<img src="{{ manufacturer.manufacturer.image.url }}"
-							 alt="{{ manufacturer.manufacturer.title|e }}"/>
+					<img src="{{ manufacturer.image.url }}" alt="{{ manufacturer.title|e }}"/>
 				</a>
 			</div>
 			{%- endfor -%}
