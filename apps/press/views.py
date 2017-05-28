@@ -17,18 +17,21 @@ class PressIndexView(BaseTemplateView):
 
     def get_context_data(self, **kwargs):
         kwargs = super(PressIndexView, self).get_context_data(**kwargs)
-        news_list = models.News.objects.published().actual().order_by('ordering', '-publish_date')
+        articles_list = models.News.objects\
+            .published()\
+            .actual()\
+            .order_by('ordering', '-publish_date')
 
         # paginator
         paginator_page = None
         page = self.get_page()
-        paginator = Paginator(news_list, ARTICLES_PER_PAGE, allow_empty_first_page=False)
+        paginator = Paginator(articles_list, ARTICLES_PER_PAGE, allow_empty_first_page=False)
 
         try:
             paginator_page = paginator.page(page)
-            news_list = paginator_page.object_list
+            articles_list = paginator_page.object_list
         except (EmptyPage, InvalidPage):
-            news_list = []
+            articles_list = []
 
         kwargs['view'].request.active_url = reverse(
             'press:press_index', kwargs={'lang': kwargs['lang']}
@@ -37,7 +40,7 @@ class PressIndexView(BaseTemplateView):
         kwargs.update({
             'base_url': kwargs['view'].request.active_url,
             'get_params': '',
-            'news_list': news_list,
+            'articles_list': articles_list,
             'paginator': paginator,
             'paginator_page': paginator_page,
             'page': page
@@ -57,9 +60,11 @@ class PressView(BaseTemplateView):
         current_news = get_object_or_404(base_qs, slug__exact=kwargs.get('slug'))
         sections = current_news.sections.published().order_by('ordering')
         siblings = get_siblings(base_qs.order_by('ordering'), current_news.pk)
+        list_url = reverse('press:press_index', kwargs={'lang': kwargs.get('lang')})
 
         kwargs.update({
             'current_article': current_news,
+            'list_url': list_url,
             'sections': sections,
             'siblings': siblings
         })

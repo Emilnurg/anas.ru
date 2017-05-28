@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from image_cropping import ImageCroppingMixin
 
 from modeltranslation.admin import TranslationStackedInline
 
 from base.admin import BaseArticleAdmin
 from knowledge import models
 from snippets.admin import BaseModelAdmin
+from snippets.admin.admin import ModelTranlsationFieldsetsMixin
 from snippets.modeltranslation import get_model_translation_fields
 
 
@@ -28,14 +30,20 @@ class ArticleSectionInline(TranslationStackedInline):
     fields = models.ArticleSection().collect_fields()
     model = models.ArticleSection
     ordering = ('ordering',)
+    suit_classes = 'suit-tab suit-tab-sections'
 
 
 @admin.register(models.Article)
-class ArticleAdmin(BaseArticleAdmin):
+class ArticleAdmin(ImageCroppingMixin, ModelTranlsationFieldsetsMixin, BaseArticleAdmin):
     """Статьи базы знаний"""
-    fields = models.Article().collect_fields() + ['categories']
-    filter_vertical = ('categories',)
+    filter_horizontal = ('categories',)
     inlines = (ArticleSectionInline,)
 
     class Media:
         js = ('admin/js/translit.js',)
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super(ArticleAdmin, self).get_fieldsets(request, obj=obj)
+
+        fieldsets[0][1]['fields'].append('categories')
+        return fieldsets

@@ -35,7 +35,7 @@ class ProductFeatureTranslationOptions(BaseTranslationOptions):
 
 
 @register(models.ProductFeatureMain)
-class ProductFeatureTranslationOptions(BaseTranslationOptions):
+class ProductFeatureMainTranslationOptions(BaseTranslationOptions):
     fields = models.ProductFeatureMain.translation_fields
     required_languages = {'default': ()}
 

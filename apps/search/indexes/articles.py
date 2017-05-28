@@ -54,11 +54,6 @@ def config_index_articles():
                             'store': False,
                             'index': 'not_analyzed'
                         },
-                        'publish_date': {
-                            'type': 'integer',
-                            'store': False,
-                            'index': 'not_analyzed'
-                        },
                         'slug': {
                             'type': 'text',
                             'store': False,
@@ -95,7 +90,6 @@ def bind_article_body(target):
         }],
         'body': target.body,
         'ordering': target.ordering,
-        'publish_date': target.publish_date,
         'slug': target.slug,
         'title': target.title
     }

@@ -13,21 +13,21 @@
 <div class="b-news">
 	<div class="container">
 		<div class="row row--equal">
-			{%- for news in news_list -%}
+			{%- for article in articles_list -%}
 			<div class="col-lg-6 col-xs-12">
-				<a href="{{ news.get_absolute_url(lang) }}" class="article-preview">
+				<a href="{{ article.get_absolute_url(lang) }}" class="article-preview">
 					<div class="article-preview__text">
-						<div class="article-preview__date">{{ news.publish_date|date('d E Y') }}</div>
-						<h3 class="article-preview__name">{{ news.title }}</h3>
-						{%- if news.excerpt -%}
+						<div class="article-preview__date">{{ article.publish_date|date('d E Y') }}</div>
+						<h3 class="article-preview__name">{{ article.title }}</h3>
+						{%- if article.excerpt -%}
 						<div class="article-preview__descr">
-							<p>{{ news.excerpt }}</p>
+							<p>{{ article.excerpt }}</p>
 						</div>
 						{%- endif -%}
 					</div>
-					{%- if news.image -%}
+					{%- if article.image -%}
 					<div class="article-preview__image">
-						<span style="background-image: url({{ news|cropped_thumbnail('thumb_list') }})"></span>
+						<span style="background-image: url({{ article|cropped_thumbnail('thumb_list') }})"></span>
 					</div>
 					{%- endif -%}
 				</a>
