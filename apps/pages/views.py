@@ -36,12 +36,13 @@ class HomeView(BaseTemplateView):
                     .select_related('manufacturer'),
                     to_attr='manufacturers_cache'
                 ),
+            )).prefetch_related((
                 Prefetch(
                     'products',
                     queryset=HomeCatalogProduct.objects.published().order_by('ordering')
                     .select_related('product'),
                     to_attr='products_cache'
-                )
+                ),
             ))
 
         kwargs.update(
