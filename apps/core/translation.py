@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
+
 from modeltranslation.decorators import register
 
 from core import models
@@ -29,6 +31,7 @@ class HomeAdvantageTranslationOptions(BaseTranslationOptions):
 @register(models.HomeCatalog)
 class HomeCatalogTranslationOptions(BaseTranslationOptions):
     fields = models.HomeCatalog.translation_fields
+    required_languages = {settings.DEFAULT_LANGUAGE: ('title',), 'default': ()}
 
 
 @register(models.HomeSlide)

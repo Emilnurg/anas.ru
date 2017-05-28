@@ -1867,10 +1867,12 @@
 
 
 /*************************************************
-*               b-dental-equipment                *
+*                     catalog                    *
 *************************************************/
-.b-dental-equipment {
-  background: #fafafa;
+.catalog {
+  &:nth-child(2n) {
+    background: #fafafa;
+  }
 }
 
 .section-title {
@@ -2085,29 +2087,9 @@
   min-height: 760px;
 }
 
-.b-recomend {
-  background: #fdfdfd;
-}
-
-.b-hygiene {
-  background: #fff;
-  .brands-carousel {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-bottom: 58px;
-  }
-}
-
-
 @media (max-width: 1264px) {
   .brands-carousel {
     padding: 50px 35px;
-  }
-
-  .b-hygiene {
-    .brands-carousel {
-      margin-bottom: 50px;
-    }
   }
 
   .catalog-item {
@@ -2216,12 +2198,6 @@
     padding-top: 5px;
     padding-bottom: 40px;
   }
-
-  .b-hygiene {
-    .brands-carousel {
-      margin-bottom: 38px;
-    }
-  }
 }
 
 @media (max-width: 767px) {
@@ -2273,12 +2249,6 @@
   .catalog__button {
     padding-top: 15px;
     padding-bottom: 40px;
-  }
-
-  .b-hygiene {
-    .brands-carousel {
-      margin-bottom: 25px;
-    }
   }
 }
 

@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
+from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
 
-from core.models import HomeAdvantage, HomeSlide
+from core.models import HomeAdvantage, HomeSlide, HomeCatalog, HomeCatalogProduct, \
+    HomeCatalogManufacturer
 from core.utils import get_flat_page
+from knowledge.models import ArticleCategory
 from pages.models import HomePage, ContactsPage, AboutPage, AboutAdvantage
 from snippets.views import BaseTemplateView
 
@@ -25,8 +28,25 @@ class HomeView(BaseTemplateView):
         home_slides = HomeSlide.objects.published().order_by('ordering')[:20]
         home_advantages = HomeAdvantage.objects.published().order_by('ordering')[:5]
 
+        home_catalogs = HomeCatalog.objects.published().order_by('ordering')\
+            .prefetch_related((
+                Prefetch(
+                    'manufacturers',
+                    queryset=HomeCatalogManufacturer.objects.published().order_by('ordering')
+                    .select_related('manufacturer'),
+                    to_attr='manufacturers_cache'
+                ),
+                Prefetch(
+                    'products',
+                    queryset=HomeCatalogProduct.objects.published().order_by('ordering')
+                    .select_related('product'),
+                    to_attr='products_cache'
+                )
+            ))
+
         kwargs.update(
             home_advantages=home_advantages,
+            home_catalogs=home_catalogs,
             home_page=home_page,
             home_slides=home_slides
         )

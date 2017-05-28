@@ -2,20 +2,16 @@
 from django.contrib import admin
 
 from image_cropping import ImageCroppingMixin
-from modeltranslation.admin import TranslationStackedInline
 
-from base.admin import BaseArticleAdmin
+from base.admin import BaseArticleAdmin, BaseArticleSectionInline
 from press import models
 from snippets.admin.admin import ModelTranlsationFieldsetsMixin
 
 
-class NewsSectionInline(TranslationStackedInline):
+class NewsSectionInline(BaseArticleSectionInline):
     """Секции новости"""
-    extra = 0
     fields = models.NewsSection().collect_fields()
     model = models.NewsSection
-    ordering = ('ordering',)
-    suit_classes = 'suit-tab suit-tab-sections'
 
 
 @admin.register(models.News)

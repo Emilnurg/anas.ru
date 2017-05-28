@@ -61,182 +61,61 @@
 </div>
 {%- endif -%}
 
-<div class="catalog b-dental-equipment">
+{%- for catalog in home_catalogs -%}
+<div class="catalog">
 	<div class="container">
 		<div class="section-title">
-			<h4>Стоматологическое оборудование</h4>
-			<p> Лучшие предложения</p>
+			<h4>{{ catalog.title }}</h4>
+			{%- if catalog.subtitle -%}
+			<p>{{ catalog.subtitle }}</p>
+			{%- endif -%}
 		</div>
+
+		{%- if catalog.products_cache -%}
 		<div class="catalog__row row">
+			{%- for product in catalog.products_cache -%}
 			<div class="col-xs-12 col-sm-6 catalog__col">
-				<a href="javascript:" class="catalog-item">
-					<h3>Кресло Techno</h3>
-					<p> Производитель: Idem</p>
-					<div class="catalog-item__image text-right">
-						<img src="{{ STATIC_URL }}images/raster/catalog_item1.png" alt=""> </div>
-				</a>
+				{%- set product = product.product -%}
+				{%- include 'catalog/_product_block.html' -%}
 			</div>
-			<div class="col-xs-12 col-sm-6 catalog__col">
-				<a href="javascript:" class="catalog-item catalog-item--high">
-					<h3>Полимеризационная лампа Starlight S</h3>
-					<p> Производитель: Idem</p>
-					<div class="catalog-item__image text-center">
-						<img src="{{ STATIC_URL }}images/raster/catalog_item2.png" alt=""> </div>
-				</a>
-			</div>
-			<div class="col-xs-12 col-sm-6 catalog__col">
-				<a href="javascript:" class="catalog-item">
-					<h3>Ультразвуковой скаллер Micropiezo s</h3>
-					<p> Производитель: Idem</p>
-					<div class="catalog-item__image text-center">
-						<img src="{{ STATIC_URL }}images/raster/catalog_item3.png" alt=""> </div>
-				</a>
-			</div>
+			{%- endfor -%}
 		</div>
+		{%- endif -%}
+
+		{%- if catalog.link and catalog.button_caption -%}
 		<div class="catalog__button">
-			<a href="javascript:" class="btn">Все оборудование</a>
+			<a href="{{ catalog.link }}" class="btn">{{ catalog.button_caption }}</a>
 		</div>
+		{%- endif -%}
+
+		{%- if catalog.banner_title or catalog.banner_subtitle -%}
 		<div class="catalog__discount">
-			<h4>10% скидка оптовым закупщикам</h4>
-			<p> Мы предосставляем выгодные условия для наших партнёров. </p>
+			{%- if catalog.banner_title -%}
+			<h4>{{ catalog.banner_title }}</h4>
+			{%- endif -%}
+
+			{%- if catalog.banner_subtitle -%}
+			<p>{{ catalog.banner_subtitle }}</p>
+			{%- endif -%}
 		</div>
+		{%- endif -%}
+
+		{%- if catalog.manufacturers_cache -%}
 		<div class="brands-carousel">
+			{%- for manufacturer in catalog.manufacturers_cache -%}
 			<div class="sld">
 				<a href="javascript:" class="brand-link">
-					<img src="{{ STATIC_URL }}images/raster/brand_logo1.png" alt="">
+					<img src="{{ manufacturer.manufacturer.image.url }}"
+							 alt="{{ manufacturer.manufacturer.title|e }}"/>
 				</a>
 			</div>
-			<div class="sld">
-				<a href="javascript:" class="brand-link">
-					<img src="{{ STATIC_URL }}images/raster/brand_logo2.png" alt="">
-				</a>
-			</div>
-			<div class="sld">
-				<a href="javascript:" class="brand-link">
-					<img src="{{ STATIC_URL }}images/raster/brand_logo3.png" alt="">
-				</a>
-			</div>
-			<div class="sld">
-				<a href="javascript:" class="brand-link">
-					<img src="{{ STATIC_URL }}images/raster/brand_logo4.png" alt="">
-				</a>
-			</div>
-			<div class="sld">
-				<a href="javascript:" class="brand-link">
-					<img src="{{ STATIC_URL }}images/raster/brand_logo5.png" alt="">
-				</a>
-			</div>
-			<div class="sld">
-				<a href="javascript:" class="brand-link">
-					<img src="{{ STATIC_URL }}images/raster/brand_logo6.png" alt="">
-				</a>
-			</div>
+			{%- endfor -%}
 		</div>
+		{%- endif -%}
 	</div>
 </div>
-<div class="catalog b-hygiene">
-	<div class="container">
-		<div class="section-title">
-			<h4>Гигиена и дезинфекция</h4>
-			<p> Лучшие предложения </p>
-		</div>
-		<div class="catalog__row row">
-			<div class="col-xs-12 col-sm-6 catalog__col">
-				<a href="javascript:" class="catalog-item catalog-item--high">
-					<h3>Гигиенические рукавицы
-						<br>Aqua Total Hygiene</h3>
-					<p> Производитель: Idem </p>
-					<div class="catalog-item__image text-left">
-						<img src="{{ STATIC_URL }}images/raster/catalog_item4.png" alt=""> </div>
-				</a>
-			</div>
-			<div class="col-xs-12 col-sm-6 catalog__col">
-				<a href="javascript:" class="catalog-item">
-					<h3>Аппарат для аэрозольной дезинфекции помещений Nocospray</h3>
-					<p> Производитель: Idem </p>
-					<div class="catalog-item__image text-center">
-						<img src="{{ STATIC_URL }}images/raster/catalog_item5.png" alt=""> </div>
-				</a>
-			</div>
-			<div class="col-xs-12 col-sm-6 catalog__col">
-				<a href="javascript:" class="catalog-item">
-					<h3>Сухожаровой шкаф
-						<br>Dry Heat 255</h3>
-					<p> Производитель: Idem </p>
-					<div class="catalog-item__image text-right">
-						<img src="{{ STATIC_URL }}images/raster/catalog_item6.png" alt=""> </div>
-				</a>
-			</div>
-		</div>
-		<div class="catalog__button">
-			<a href="javascript:" class="btn">Все оборудование</a>
-		</div>
-		<div class="brands-carousel">
-			<div class="sld">
-				<a href="javascript:" class="brand-link">
-					<img src="{{ STATIC_URL }}images/raster/brand_logo1.png" alt="">
-				</a>
-			</div>
-			<div class="sld">
-				<a href="javascript:" class="brand-link">
-					<img src="{{ STATIC_URL }}images/raster/brand_logo2.png" alt="">
-				</a>
-			</div>
-			<div class="sld">
-				<a href="javascript:" class="brand-link">
-					<img src="{{ STATIC_URL }}images/raster/brand_logo3.png" alt="">
-				</a>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="catalog b-recomend">
-	<div class="container">
-		<div class="section-title">
-			<h4>Рекомендуем</h4>
-			<p> Лучшие предложения </p>
-		</div>
-		<div class="catalog__row row">
-			<div class="col-xs-12 col-sm-6 catalog__col">
-				<a href="javascript:" class="catalog-item">
-					<h3>Ультразвуковой
-						<br>наконечник</h3>
-					<p> Производитель: Idem </p>
-					<div class="catalog-item__image text-right">
-						<img src="{{ STATIC_URL }}images/raster/catalog_item7.png" alt=""> </div>
-				</a>
-			</div>
-			<div class="col-xs-12 col-sm-6 catalog__col">
-				<a href="javascript:" class="catalog-item catalog-item--high">
-					<h3>PIEZOSURGERY®
-						<br>белый</h3>
-					<p> Производитель: Idem </p>
-					<div class="catalog-item__image text-center">
-						<img src="{{ STATIC_URL }}images/raster/catalog_item8.png" alt=""> </div>
-				</a>
-			</div>
-			<div class="col-xs-12 col-sm-6 catalog__col">
-				<a href="javascript:" class="catalog-item catalog-item--high">
-					<h3>IM2A</h3>
-					<p> Производитель: Idem </p>
-					<div class="catalog-item__image text-center">
-						<img src="{{ STATIC_URL }}images/raster/catalog_item9.png" alt=""> </div>
-				</a>
-			</div>
-			<div class="col-xs-12 col-sm-6 catalog__col">
-				<a href="javascript:" class="catalog-item">
-					<h3>EMZYMEC</h3>
-					<p> Производитель: Idem </p>
-					<div class="catalog-item__image text-right">
-						<img src="{{ STATIC_URL }}images/raster/catalog_item10.png" alt=""> </div>
-				</a>
-			</div>
-		</div>
-		<div class="catalog__button">
-			<a href="javascript:" class="btn">Все рекомендуемое</a>
-		</div>
-	</div>
-</div>
+{%- endfor -%}
+
 <div class="b-feedback">
 	<div class="container">
 		<div class="row">

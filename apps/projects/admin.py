@@ -2,20 +2,16 @@
 from django.contrib import admin
 
 from image_cropping import ImageCroppingMixin
-from modeltranslation.admin import TranslationStackedInline
 
-from base.admin import BaseArticleAdmin
+from base.admin import BaseArticleAdmin, BaseArticleSectionInline
 from projects import models
 from snippets.admin.admin import ModelTranlsationFieldsetsMixin
 
 
-class ProjectSectionInline(TranslationStackedInline):
+class ProjectSectionInline(BaseArticleSectionInline):
     """Секции проекта"""
-    extra = 0
     fields = models.ProjectSection().collect_fields()
     model = models.ProjectSection
-    ordering = ('ordering',)
-    suit_classes = 'suit-tab suit-tab-sections'
 
 
 @admin.register(models.Project)

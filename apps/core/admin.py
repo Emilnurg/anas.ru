@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
@@ -74,11 +75,12 @@ class HomeCatalogManufacturerInline(admin.TabularInline):
 class HomeCatalogAdmin(BaseModelAdmin, TranslationAdmin):
     """Каталоги на главной странице"""
     group_fieldsets = True
+    inlines = (HomeCatalogProductInline, HomeCatalogManufacturerInline)
     list_display = ('id', 'title', 'ordering', 'status', 'updated')
     list_display_links = ('id', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)
+    save_as = True
     search_fields = ['=id'] + get_model_translation_fields(models.HomeCatalog)
-    inlines = (HomeCatalogProductInline, HomeCatalogManufacturerInline)
 
 
 @admin.register(models.HomeSlide)

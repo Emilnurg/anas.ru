@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.utils.translation import ugettext_lazy as _
 
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
 
 from base import models
 from snippets.admin import BaseModelAdmin
@@ -30,3 +30,10 @@ class BaseArticleAdmin(BaseModelAdmin, TranslationAdmin):
 
     class Media:
         js = ('admin/js/translit.js',)
+
+
+class BaseArticleSectionInline(TranslationStackedInline):
+    """Базовая админ.часть для входимой админки секций статей"""
+    extra = 0
+    ordering = ('ordering',)
+    suit_classes = 'suit-tab suit-tab-sections'

@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+
 from image_cropping import ImageCroppingMixin
 
-from modeltranslation.admin import TranslationStackedInline
-
-from base.admin import BaseArticleAdmin
+from base.admin import BaseArticleAdmin, BaseArticleSectionInline
 from knowledge import models
 from snippets.admin import BaseModelAdmin
 from snippets.admin.admin import ModelTranlsationFieldsetsMixin
@@ -24,13 +23,10 @@ class ArticleCategoryAdmin(BaseModelAdmin):
         js = ('admin/js/translit.js',)
 
 
-class ArticleSectionInline(TranslationStackedInline):
+class ArticleSectionInline(BaseArticleSectionInline):
     """Секции статьи"""
-    extra = 0
     fields = models.ArticleSection().collect_fields()
     model = models.ArticleSection
-    ordering = ('ordering',)
-    suit_classes = 'suit-tab suit-tab-sections'
 
 
 @admin.register(models.Article)
