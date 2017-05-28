@@ -10,12 +10,12 @@
 		{%- if parent_category -%}
 		<div class="page-back">
 			<a href="{{ parent_category.get_absolute_url(lang) }}"
-				 class="page-back__link">{{ parent_category.title|e }}</a>
+				 class="page-back__link">{{ parent_category.title }}</a>
 		</div>
 		{%- endif -%}
 
 		<div class="main-title">
-			<h3>{{ current_category.title|e }}</h3>
+			<h3>{{ current_category.title }}</h3>
 		</div>
 
 		{%- if children_categories or brands -%}
@@ -25,8 +25,8 @@
 				{%- for category in children_categories -%}
 				<a class="sld" href="{{ category.get_absolute_url(lang) }}">
 					<label>
-						{# <input type="checkbox" name="catalog-category"> #}
-						<span>{{ category.title|e }}</span>
+						{#- <input type="checkbox" name="catalog-category"> -#}
+						<span>{{ category.title }}</span>
 					</label>
 				</a>
 				{%- endfor -%}

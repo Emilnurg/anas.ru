@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 
+from image_cropping import ImageCroppingMixin
 from modeltranslation.admin import TranslationStackedInline
 
 from base.admin import BaseArticleAdmin
 from press import models
+from snippets.admin.admin import ModelTranlsationFieldsetsMixin
 
 
 class NewsSectionInline(TranslationStackedInline):
@@ -13,21 +16,25 @@ class NewsSectionInline(TranslationStackedInline):
     fields = models.NewsSection().collect_fields()
     model = models.NewsSection
     ordering = ('ordering',)
-
-
-class NewsRelatedInline(admin.TabularInline):
-    """Связанные новости"""
-    extra = 0
-    fk_name = 'from_news'
-    model = models.News.related_news.through
-    raw_id_fields = ('to_news',)
+    suit_classes = 'suit-tab suit-tab-sections'
 
 
 @admin.register(models.News)
-class NewsAdmin(BaseArticleAdmin):
+class NewsAdmin(ImageCroppingMixin, ModelTranlsationFieldsetsMixin, BaseArticleAdmin):
     """Новости и события"""
-    fields = models.News().collect_fields()
-    inlines = (NewsSectionInline, NewsRelatedInline)
+    group_fieldsets = True
+    inlines = (NewsSectionInline,)
+    ordering = ('ordering', '-publish_date')
+    suit_form_tabs = (
+        ('general', _('Основное')),
+        ('body', _('Основной контент')),
+        ('sections', _('Секции'))
+    )
+    tabs_mapping = {
+        '': 'general',
+        'Контент': 'body',
+        'Анонс': 'body'
+    }
 
     class Media:
         js = ('admin/js/translit.js',)

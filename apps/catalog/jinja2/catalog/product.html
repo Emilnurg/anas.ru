@@ -9,25 +9,25 @@
 	<div class="container">
 		<div class="page-back">
 			{%- if main_category -%}
-			<a href="{{ main_category.get_absolute_url(lang) }}" class="page-back__link">{{ main_category.title|e }}</a>
+			<a href="{{ main_category.get_absolute_url(lang) }}" class="page-back__link">{{ main_category.title }}</a>
 			{%- endif -%}
 			<a href="{{ url('catalog:product_print', kwargs={'lang': lang, 'slug': current_product.slug}) }}"
 				 class="print-link" target="_blank">Распечатать информацию</a>
 		</div>
 		<div class="row">
 			<div class="col-lg-6 col-md-7">
-				<h2 class="product__name">{{ current_product.title|e }}</h2>
+				<h2 class="product__name">{{ current_product.title }}</h2>
 				<div class="product__descr">
 					{%- if current_product.manufacturer_id -%}
 					<dl>
 						<dt>Производитель</dt>
-						<dd>{{ current_product.manufacturer.title|e }}</dd>
+						<dd>{{ current_product.manufacturer.title }}</dd>
 					</dl>
 					{%- endif -%}
 
 					{%- for feature in features_main -%}
 					<dl>
-						<dt>{{ feature.feature.title|e }}</dt>
+						<dt>{{ feature.feature.title }}</dt>
 						<dd>
 							{{- feature.value -}}
 							{%- if feature.hint -%}
@@ -80,7 +80,7 @@
 			<div class="sld">
 				<a href="{{ product.get_absolute_url(lang) }}" class="product-additional">
 					<div class="product-additional__text">
-						<div class="product-additional__name">{{ product.title|e }}</div>
+						<div class="product-additional__name">{{ product.title }}</div>
 						{%- if product.short_description -%}
 						<div class="product-additional__descr">{{ product.short_description }}</div>
 						{%- endif -%}
@@ -149,7 +149,7 @@
 							<tbody>
 								{%- for feature in features -%}
 								<tr>
-									<td>{{ feature.feature.title|e }}</td>
+									<td>{{ feature.feature.title }}</td>
 									<td>
 										{{- feature.value -}}
 										{%- if feature.hint -%}
@@ -202,7 +202,7 @@
 								<a href="{{ doc.document.url }}" class="doc-link">
 									<span class="doc-link__icon">{{ doc.get_extension()|upper }}</span>
 									{%- if doc.title -%}
-									<span class="doc-link__name">{{ doc.title|e }}</span>
+									<span class="doc-link__name">{{ doc.title }}</span>
 									{%- endif -%}
 									<span class="doc-link__date">{{ doc.publish_date|date('d E Y') }}</span>
 									<span class="doc-link__size">{{ doc.document.size|filesizeformat }}</span>

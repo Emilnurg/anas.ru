@@ -1,43 +1,43 @@
 {%- if base_url and paginator_page and paginator_page.has_other_pages() -%}
-	<div class="page-controls">
-		<div class="page-controls__buttons">
-			{%- if paginator_page.has_previous() -%}
-				<div>
-					<a href="
-						{{- base_url -}}
-						{%- if paginator_page.previous_page_number() != 1 %}page/{{ paginator_page.previous_page_number() }}/{% endif %}{{ get_params or '' }}"
-						 class="page-control page-control--prev">
-						{{- var('PAGE_PREVIOUS', request) -}}
-					</a>
-				</div>
-			{%- endif -%}
+<div class="page-controls">
+	<div class="page-controls__buttons">
+		{%- if paginator_page.has_previous() -%}
+			<div>
+				<a href="
+					{{- base_url -}}
+					{%- if paginator_page.previous_page_number() != 1 %}page/{{ paginator_page.previous_page_number() }}/{% endif %}{{ get_params or '' }}"
+					 class="page-control page-control--prev">
+					{{- var('PAGE_PREVIOUS', request) -}}
+				</a>
+			</div>
+		{%- endif -%}
 
-			{%- if paginator_page.has_next() -%}
-				<div>
-					<a href="
-						{{- base_url -}}
-						{%- if paginator_page.next_page_number() != 1 %}page/{{ paginator_page.next_page_number() }}/{% endif %}{{ get_params or '' }}"
-						 class="page-control page-control--next">
-						{{- var('PAGE_NEXT', request) -}}
-					</a>
-				</div>
-			{%- endif -%}
-		</div>
-
-		<ul class="pagination">
-			{%- for i in paginator_page.pages() -%}
-				<li{% if paginator_page.number == i %} class="is-active"{% endif %}>
-					{%- if i -%}
-						{%- if paginator_page.number == i -%}
-							<span>{{ i }}</span>
-						{%- else -%}
-							<a href="{{ base_url }}{% if 1 != i %}page/{{ i }}/{% endif %}{{ get_params or '' }}">{{ i }}</a>
-						{%- endif -%}
-					{%- else -%}
-						...
-					{%- endif -%}
-				</li>
-			{%- endfor -%}
-		</ul>
+		{%- if paginator_page.has_next() -%}
+			<div>
+				<a href="
+					{{- base_url -}}
+					{%- if paginator_page.next_page_number() != 1 %}page/{{ paginator_page.next_page_number() }}/{% endif %}{{ get_params or '' }}"
+					 class="page-control page-control--next">
+					{{- var('PAGE_NEXT', request) -}}
+				</a>
+			</div>
+		{%- endif -%}
 	</div>
+
+	<ul class="pagination">
+		{%- for i in paginator_page.pages() -%}
+			<li{% if paginator_page.number == i %} class="is-active"{% endif %}>
+				{%- if i -%}
+					{%- if paginator_page.number == i -%}
+						<span>{{ i }}</span>
+					{%- else -%}
+						<a href="{{ base_url }}{% if 1 != i %}page/{{ i }}/{% endif %}{{ get_params or '' }}">{{ i }}</a>
+					{%- endif -%}
+				{%- else -%}
+					...
+				{%- endif -%}
+			</li>
+		{%- endfor -%}
+	</ul>
+</div>
 {%- endif -%}

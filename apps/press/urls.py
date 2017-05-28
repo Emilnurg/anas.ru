@@ -15,6 +15,6 @@ urlpatterns = (
     ),
     url(
         r'^(?P<lang>\w{2})/press/(?P<slug>[-\w]{1,150})/$',
-        views.PressView.as_view(), name='race'
+        views.PressView.as_view(), name='press_page'
     )
 )

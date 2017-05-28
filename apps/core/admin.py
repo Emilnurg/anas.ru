@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from core import models
 from snippets.admin import BaseModelAdmin
@@ -21,10 +21,18 @@ class PageAdmin(BaseModelAdmin, TranslationAdmin):
         js = ('admin/js/translit.js',)
 
 
+class GalleryPhotoInline(TranslationTabularInline):
+    """Фото галереи"""
+    extra = 0
+    fields = models.GalleryPhoto().collect_fields()
+    model = models.GalleryPhoto
+
+
 @admin.register(models.Gallery)
 class GalleryAdmin(BaseModelAdmin, TranslationAdmin):
     """Галереи"""
     fields = models.Gallery().collect_fields()
+    inlines = (GalleryPhotoInline,)
     list_display = ('image_thumb', 'title', 'ordering', 'status', 'updated')
     list_display_links = ('image_thumb', 'title')
     ordering = BaseModelAdmin.ordering + ('title',)

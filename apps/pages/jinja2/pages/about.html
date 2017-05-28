@@ -11,7 +11,7 @@
 				 data-image-src="{{ STATIC_URL }}images/raster/about_bg.jpg"></div>
 		<div class="container">
 			<div class="main-title">
-				<h3>{{ about_page.title|e }}</h3>
+				<h3>{{ about_page.title }}</h3>
 				{%- if about_page.subtitle -%}
 				<div class="b-about__subtitle">{{ about_page.subtitle }}</div>
 				{%- endif -%}
@@ -41,7 +41,7 @@
 						<img src="{{ STATIC_URL }}images/icons/svg/{{ advantage.icon }}.svg" alt="">
 					</div>
 					{%- endif -%}
-					<h4>{{ advantage.title|e }}</h4>
+					<h4>{{ advantage.title }}</h4>
 
 					{%- if advantage.subtitle -%}
 					<div class="advantage__content">
@@ -63,7 +63,7 @@
 			<div class="col-lg-8 col-lg-offset-2">
 				<div class="section-title">
 					{%- if about_page.guarantee_title -%}
-					<h4>{{ about_page.guarantee_title|e }}</h4>
+					<h4>{{ about_page.guarantee_title }}</h4>
 					{%- endif -%}
 
 					{%- if about_page.guarantee_body -%}
@@ -85,7 +85,7 @@
 		<form action="#" class="form b-feedback__form">
 			<div class="form__heading">
 				{%- if about_page.questions_title -%}
-				<h4>{{ about_page.questions_title|e }}</h4>
+				<h4>{{ about_page.questions_title }}</h4>
 				{%- endif -%}
 
 				{%- if about_page.questions_subtitle -%}

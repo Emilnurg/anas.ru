@@ -11,7 +11,7 @@ urlpatterns = (
     ),
     url(
         r'^(?P<lang>\w{2})/catalog/(?P<slug>[-\w]{1,150})/page/(?P<page>\d{1,5})/$',
-        views.ProductCategoryView.as_view(), name='category_paged'
+        views.ProductCategoryView.as_view(), name='category_with_page'
     ),
     url(
         r'^(?P<lang>\w{2})/catalog/product/(?P<slug>[-\w]{1,150})/$',

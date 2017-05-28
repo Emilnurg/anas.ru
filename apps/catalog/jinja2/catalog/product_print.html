@@ -9,18 +9,18 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-7">
-				<h1 class="product__name">{{ current_product.title|e }}</h1>
+				<h1 class="product__name">{{ current_product.title }}</h1>
 				<div class="product__descr">
 					{%- if current_product.manufacturer_id -%}
 					<dl>
 						<dt>Производитель</dt>
-						<dd>{{ current_product.manufacturer.title|e }}</dd>
+						<dd>{{ current_product.manufacturer.title }}</dd>
 					</dl>
 					{%- endif -%}
 
 					{%- for feature in features_main -%}
 					<dl>
-						<dt>{{ feature.feature.title|e }}</dt>
+						<dt>{{ feature.feature.title }}</dt>
 						<dd>
 							{{- feature.value -}}
 							{%- if feature.hint -%}
@@ -81,7 +81,7 @@
 							<tbody>
 								{%- for feature in features -%}
 								<tr>
-									<td>{{ feature.feature.title|e }}</td>
+									<td>{{ feature.feature.title }}</td>
 									<td>
 										{{- feature.value -}}
 										{%- if feature.hint -%}

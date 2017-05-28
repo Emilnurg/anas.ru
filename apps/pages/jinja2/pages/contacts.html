@@ -9,7 +9,7 @@
 	<div class="b-contacts__left">
 		<div class="b-contacts__body">
 			<div class="main-title">
-				<h3>{{ contacts_page.title|e }}</h3>
+				<h3>{{ contacts_page.title }}</h3>
 			</div>
 			<div class="b-contacts__contacts">
 				<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}" class="b-contacts__tel">
@@ -20,17 +20,17 @@
 				</div>
 				{%- if contacts_page.address -%}
 				<div class="b-contacts__address"> Адрес:
-					<address>{{ contacts_page.address|e }}</address>
+					<address>{{ contacts_page.address }}</address>
 				</div>
 				{%- endif -%}
-				{# <a href="javascript:" class="btn">{{ var('REGIONAL_DEALERS_BUTTON', request) }}</a> #}
+				{#- <a href="javascript:" class="btn">{{ var('REGIONAL_DEALERS_BUTTON', request) }}</a> -#}
 			</div>
 			<form action="#" class="form">
 				{%- if contacts_page.questions_title -%}
 				<div class="form__heading">
-					<h4>{{ contacts_page.questions_title|e }}</h4>
+					<h4>{{ contacts_page.questions_title }}</h4>
 					{%- if contacts_page.questions_subtitle -%}
-					<p>{{ contacts_page.questions_subtitle|e }}</p>
+					<p>{{ contacts_page.questions_subtitle }}</p>
 					{%- endif -%}
 				</div>
 				{%- endif -%}

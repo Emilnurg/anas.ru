@@ -80,7 +80,7 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
             kwargs['page'] = page
 
         return reverse(
-            'catalog:category' if page is None else 'catalog:category_paged', kwargs=kwargs
+            'catalog:category' if page is None else 'catalog:category_with_page', kwargs=kwargs
         )
 
 

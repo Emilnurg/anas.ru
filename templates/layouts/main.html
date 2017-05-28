@@ -117,7 +117,7 @@
 										{%- if hasattr(request, 'active_url') and cat1_url == request.active_url %} active{% endif %}">
                     <a href="{{ cat1_url }}"
 											 class="header__nav-link">
-											{{- category_1['obj'].title|e -}}
+											{{- category_1['obj'].title -}}
 											{%- if category_1['children'] -%}
                       &nbsp;<span></span>
 											{%- endif -%}
@@ -130,7 +130,7 @@
                         <div>
                           <h4>
                             <a href="{{ category_2['obj'].get_absolute_url(request.LANGUAGE_CODE) }}">
-															{{- category_2['obj'].title|e -}}
+															{{- category_2['obj'].title -}}
 														</a>
                           </h4>
 
@@ -139,7 +139,7 @@
 														{%- for category_3 in category_2['children'] -%}
                             <li{% if current_category is defined() and current_category.id == category_3['obj'].id %} class="is-active"{% endif %}>
                               <a href="{{ category_3['obj'].get_absolute_url(request.LANGUAGE_CODE) }}">
-																{{- category_3['obj'].title|e -}}
+																{{- category_3['obj'].title -}}
 															</a>
                             </li>
                             {%- endfor -%}

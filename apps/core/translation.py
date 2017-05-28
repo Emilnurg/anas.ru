@@ -18,6 +18,7 @@ class GalleryTranslationOptions(BaseTranslationOptions):
 @register(models.GalleryPhoto)
 class GalleryPhotoTranslationOptions(BaseTranslationOptions):
     fields = models.GalleryPhoto.translation_fields
+    required_languages = {'default': ()}
 
 
 @register(models.HomeAdvantage)

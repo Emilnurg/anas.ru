@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(help_text='Разрешены только латинские символы, цифры, символ подчеркивания и дефис (минус)', max_length=150, unique=True, verbose_name='Алиас')),
                 ('publish_date', models.DateTimeField(db_index=True, default=snippets.utils.datetime.utcnow, help_text='Можно задать на будущее', verbose_name='Дата публикации')),
                 ('image', image_cropping.fields.ImageCropField(blank=True, max_length=255, null=True, upload_to='news', verbose_name='Изображение')),
-                ('thumb_list', image_cropping.fields.ImageRatioField('image', '200x400', adapt_rotation=False, allow_fullsize=False, free_crop=False, help_text=None, hide_image_field=False, size_warning=False, verbose_name='Эскиз в списке')),
+                ('thumb_list', image_cropping.fields.ImageRatioField('image', '580x720', adapt_rotation=False, allow_fullsize=False, free_crop=False, help_text=None, hide_image_field=False, size_warning=False, verbose_name='Эскиз в списке')),
                 ('excerpt', ckeditor_uploader.fields.RichTextUploadingField(blank=True, null=True, verbose_name='Анонс')),
                 ('excerpt_ru', ckeditor_uploader.fields.RichTextUploadingField(blank=True, null=True, verbose_name='Анонс')),
                 ('excerpt_en', ckeditor_uploader.fields.RichTextUploadingField(blank=True, null=True, verbose_name='Анонс')),
