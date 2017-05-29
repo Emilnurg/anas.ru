@@ -2,14 +2,12 @@
 from collections import defaultdict
 
 from django.conf import settings
-from django.db.models import Prefetch
 from django.http import HttpResponseRedirect
 
 from core.models import HomeAdvantage, HomeSlide, HomeCatalog, HomeCatalogProduct, \
     HomeCatalogManufacturer
 from core.utils import get_flat_page
-from knowledge.models import ArticleCategory
-from pages.models import HomePage, ContactsPage, AboutPage, AboutAdvantage
+from pages.models import ContactsPage, AboutPage, AboutAdvantage, ServiceCenterPage
 from snippets.views import BaseTemplateView
 
 
@@ -26,7 +24,6 @@ class HomeView(BaseTemplateView):
 
     def get_context_data(self, **kwargs):
         kwargs = super(HomeView, self).get_context_data(**kwargs)
-        home_page = HomePage.get_solo()
         home_slides = HomeSlide.objects.published().order_by('ordering')[:20]
         home_advantages = HomeAdvantage.objects.published().order_by('ordering')[:5]
 
@@ -47,7 +44,6 @@ class HomeView(BaseTemplateView):
             home_catalogs=home_catalogs,
             home_catalog_manufacturers=home_catalog_manufacturers,
             home_catalog_products=home_catalog_products,
-            home_page=home_page,
             home_slides=home_slides
         )
         return kwargs
@@ -91,3 +87,15 @@ class FlatpageView(BaseTemplateView):
             'current_page': get_flat_page(kwargs.get('slug'))
         })
         return context
+
+
+class ServiceCenterView(BaseTemplateView):
+    """Сервис-центр"""
+    template_name = 'pages/service_center.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs = super(ServiceCenterView, self).get_context_data(**kwargs)
+        service_page = ServiceCenterPage.get_solo()
+
+        kwargs.update(service_page=service_page)
+        return kwargs

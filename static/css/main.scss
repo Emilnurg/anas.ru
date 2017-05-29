@@ -830,7 +830,7 @@
     text-decoration: none;
   }
 
-  &:hover {
+  &:hover, &.active {
     border-bottom-color: #d2205c;
     color: #000;
     text-decoration: none;
@@ -6893,6 +6893,7 @@
     position: absolute;
     right: 0;
     bottom: 0;
+    max-height: none;
   }
 }
 

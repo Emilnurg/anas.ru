@@ -1,0 +1,200 @@
+{%- extends 'layouts/main.html' -%}
+
+{%- block PAGE_TITLE %}{{ current_course.title|e }}{% endblock -%}
+
+{%- block BODY_CLASSES %}body-training-course{% endblock -%}
+
+{%- block PAGE_CONTENT -%}
+<div class="b-course">
+	<div class="container">
+		<div class="page-back">
+			<a href="{{ list_url }}" class="page-back__link">{{ var('TRAINING_TITLE', request) }}</a>
+		</div>
+		<div class="main-title">
+			<h3>{{ current_course.title }}</h3>
+		</div>
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<div class="b-course__header">
+					<ul class="b-course__info">
+						{%- if current_course.participants_count -%}
+						<li>Количество участников: {{ current_course.participants_count }}</li>
+						{%- endif -%}
+
+						{%- if current_course.price -%}
+						<li>Цена: {{ current_course.price|intcomma }} руб</li>
+						{%- endif -%}
+
+						{%- if current_course.city_id -%}
+						<li>Место проведения: {{ current_course.city.title }}</li>
+						{%- endif -%}
+					</ul>
+
+					{%- if current_course.date_start %}
+					<p>Начало курса с {{ current_course.date_start|date('d E') }}</p>
+					{%- endif -%}
+					<a href="javascript:" class="btn btn--black">Записаться</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="b-course-tabs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<div class="course-tabs">
+
+					{%- if current_course.body_about or teachers -%}
+					<div class="sld active">
+						<a href="#course-about" data-toggle="tab">О курсе</a>
+					</div>
+					{%- endif -%}
+
+					{%- if current_course.body_detail -%}
+					<div class="sld">
+						<a href="#course-detail" data-toggle="tab">Подробная информация</a>
+					</div>
+					{%- endif -%}
+
+					{%- if current_course.body_schedule or schedule -%}
+					<div class="sld">
+						<a href="#course-schedule" data-toggle="tab">Расписание</a>
+					</div>
+					{%- endif -%}
+				</div>
+
+				<div class="tab-content">
+					{%- if current_course.body_about or teachers -%}
+					<div class="tab-pane fade active in" id="course-about">
+						<div class="about-course">
+							<dl>
+								<dt>Обучаем на практике</dt>
+								<dd>Отработаны практические навыки по удалению зубов и одномоментной имплантации</dd>
+							</dl>
+							<dl>
+								<dt>Предоставляем все необходимое</dt>
+								<dd>Курсантам предоставляются все необходимые материалы и оборудование</dd>
+							</dl>
+						</div>
+						{%- if teachers -%}
+						<div class="lecturer">
+							<div class="lecturer__left">
+								{%- for teacher in teachers -%}
+								<div class="lecturer__info">
+									{%- if teacher.teacher.image -%}
+									<div class="lecturer__photo">
+										<span style="background-image: url({{ teacher.teacher|cropped_thumbnail('image_thumb') }})"></span>
+									</div>
+									{%- endif -%}
+
+									{%- if teacher.teacher_role -%}
+									<div class="lecturer__name">{{ teacher.teacher_role }}</div>
+									{%- endif -%}
+
+									<div class="lecturer__descr">{{ teacher.teacher.title }}</div>
+									{#- <a href="javascript:" class="lecturer__link">О преподавателе</a> -#}
+								</div>
+								{%- endfor -%}
+							</div>
+							<div class="lecturer__right">
+								<div class="lecturer__image">
+									<img src="{{ STATIC_URL }}images/raster/lecturer_img.png" class="img-responsive" alt=""> </div>
+							</div>
+						</div>
+						{%- endif -%}
+					</div>
+					{%- endif -%}
+
+					{%- if current_course.body_detail -%}
+					<div class="tab-pane fade" id="course-detail">
+						<div class="content-block">{{ current_course.body_detail }}</div>
+						<div class="lecturer__img">
+							<img src="{{ STATIC_URL }}images/raster/lecturer_info_img.png" class="img-responsive" alt=""/>
+						</div>
+					</div>
+					{%- endif -%}
+
+					{%- if current_course.body_schedule or schedule -%}
+					<div class="tab-pane fade" id="course-schedule">
+						<div class="schedule">
+							{%- if current_course.body_schedule -%}
+							<div class="schedule__head">
+								{{- current_course.body_schedule -}}
+							</div>
+							{%- endif -%}
+
+							{%- if schedule -%}
+							<div class="schedule__body">
+								{%- for row in schedule -%}
+								<dl class="schedule__line">
+									<dt>{{ row.period }}</dt>
+									<dd>{{ row.title }}</dd>
+								</dl>
+								{%- endfor -%}
+							</div>
+							{%- endif -%}
+						</div>
+					</div>
+					{%- endif -%}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="b-feedback b-feedback--education">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="b-feedback__text">
+					<h4>Обучение в ANAS</h4>
+					<p>Наша компания занимается комплексным обучением стоматологов уже более 10 лет. Пройдя курсы специалист становится не только профессионалом но и мастером. </p>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<form action="#" class="form b-feedback__form">
+					<div class="form__heading">
+						<h4>Подать заявку на обучение</h4>
+						<p> Оставьте контакты, мы свяжемся с вами по телефону </p>
+					</div>
+					<div class="form__content">
+						<div class="form__group">
+							<input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
+							<div class="form__placeholder"> Имя </div>
+						</div>
+						<div class="form__group">
+							<input type="text" name="tel" class="form__field required" placeholder="" data-validate="tel">
+							<div class="form__placeholder"> Телефон </div>
+						</div>
+					</div>
+					<div class="form__button">
+						<button type="submit" class="btn btn--black">Отправить</button>
+						<!-- <div class="form__err">
+					не правильно введен адрес
+				</div> --></div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-nav">
+	<a href="javascript:" class="page-nav__prev">
+		<div class="page-nav__text page-nav__text--center">
+			<div class="page-nav__name"> Название курса </div>
+			<div class="page-nav__arrow"></div>
+		</div>
+		<div class="page-nav__image">
+			<span style="background-image: url(images/raster/page_nav_prev.jpg)"></span>
+		</div>
+	</a>
+	<a href="javascript:" class="page-nav__next">
+		<div class="page-nav__text page-nav__text--center">
+			<div class="page-nav__name"> Название курса </div>
+			<div class="page-nav__arrow"></div>
+		</div>
+		<div class="page-nav__image">
+			<span style="background-image: url(images/raster/page_nav_next.jpg)"></span>
+		</div>
+	</a>
+</div>
+{%- endblock -%}

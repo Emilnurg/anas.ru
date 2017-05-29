@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -36,12 +38,13 @@ class Course(BaseArticle):
     """Курсы (обучение)"""
     date_start = models.DateField(_('Дата начала'), blank=True, null=True)
     date_finish = models.DateField(_('Дата окончания'), blank=True, null=True)
-    city = models.ForeignKey(
-        'dicts.City', related_name='courses', verbose_name=_('Город'), blank=True, null=True
-    )
-    price = models.PositiveIntegerField(_('Цена'), blank=True, null=True)
+
     participants_count = models.PositiveIntegerField(
         _('Количество участников'), blank=True, null=True
+    )
+    price = models.PositiveIntegerField(_('Цена'), blank=True, null=True)
+    city = models.ForeignKey(
+        'dicts.City', related_name='courses', verbose_name=_('Город'), blank=True, null=True
     )
 
     body_about = RichTextUploadingField(_('О курсе'), blank=True, null=True)
@@ -61,6 +64,12 @@ class Course(BaseArticle):
     class Meta:
         verbose_name = _('Курс')
         verbose_name_plural = _('Курсы')
+
+    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
+        return reverse('training:course_page', kwargs={
+            'lang': lang,
+            'slug': self.slug
+        })
 
 
 class CourseTeacher(BaseModel):
@@ -82,13 +91,10 @@ class CourseTeacher(BaseModel):
 class CourseSchedule(BaseModel):
     """Расписание курса"""
     course = models.ForeignKey(Course, verbose_name=_('Курс'), related_name='schedule')
-    schedule_date = models.DateField(
-        _('Дата'), blank=True, null=True, help_text=_('Не указывайте, если в течение одного дня')
-    )
-    schedule_time = models.TimeField(_('Время'))
-    title = models.CharField(_('Мероприятие'), max_length=255)
+    period = models.CharField(_('Время от/до'), blank=True, null=False, max_length=100)
+    title = models.CharField(_('Мероприятие'), blank=True, null=False, max_length=100)
 
-    translation_fields = ('title',)
+    translation_fields = ('period', 'title',)
 
     class Meta:
         verbose_name = _('Строка расписания курса')

@@ -64,19 +64,19 @@ class ProductCategoryView(BaseTemplateView):
         else:
             kwargs['view'].request.active_url = current_category.get_root().get_absolute_url()
 
-        kwargs.update({
-            'base_url': current_category.get_absolute_url(lang=kwargs.get('lang')),
-            'manufacturers': manufacturers,
-            'children_categories': children_categories,
-            'current_category': current_category,
-            'current_manufacturer': current_manufacturer,
-            'get_params': get_params,
-            'page': page,
-            'paginator': paginator,
-            'paginator_page': paginator_page,
-            'parent_category': parent_category,
-            'products_list': products_list
-        })
+        kwargs.update(
+            base_url=current_category.get_absolute_url(lang=kwargs.get('lang')),
+            manufacturers=manufacturers,
+            children_categories=children_categories,
+            current_category=current_category,
+            current_manufacturer=current_manufacturer,
+            get_params=get_params,
+            page=page,
+            paginator=paginator,
+            paginator_page=paginator_page,
+            parent_category=parent_category,
+            products_list=products_list
+        )
 
         return kwargs
 
@@ -122,16 +122,16 @@ class ProductView(BaseTemplateView):
             # или если текущий товар - набор, то выводим его элементы
             set_components = current_product.set_components.published() or None
 
-        kwargs.update({
-            'current_product': current_product,
-            'docs': docs,
-            'features': features,
-            'features_main': features_main,
-            'images': images,
-            'main_category': main_category,
-            'set_components': set_components,
-            'siblings': siblings
-        })
+        kwargs.update(
+            current_product=current_product,
+            docs=docs,
+            features=features,
+            features_main=features_main,
+            images=images,
+            main_category=main_category,
+            set_components=set_components,
+            siblings=siblings
+        )
 
         return kwargs
 

@@ -5,6 +5,7 @@ import re
 import time
 
 from django.conf import settings
+from django.contrib.humanize.templatetags.humanize import intcomma as int_comma
 from django.template.defaultfilters import floatformat as float_format
 from django.utils import formats
 from django.utils.dateformat import format as date_format
@@ -228,6 +229,11 @@ def get_languages():
 def floatformat(value, digits):
     """Порт floatformat"""
     return float_format(value, digits)
+
+
+@jinjafilter
+def intcomma(value, use_l10n=True):
+    return int_comma(value, use_l10n=use_l10n)
 
 
 phone_re = re.compile(r'(\.|\s|-|\)|\()+')

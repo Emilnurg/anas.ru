@@ -4,12 +4,20 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 from base.models import BaseArticle, BaseArticleSection
 
 
 class Project(BaseArticle):
     """Реализованные проекты"""
     bg = models.ImageField(_('Фон'), max_length=255, upload_to='projects', blank=True, null=True)
+    body = RichTextUploadingField(
+        _('Контент'), blank=True, null=False, help_text=_('Выводится выше всех секций')
+    )
+    excerpt = RichTextUploadingField(_('Анонс'), blank=True, null=True)
+
+    translation_fields = BaseArticle.translation_fields + ('excerpt', 'body')
 
     class Meta:
         verbose_name = _('Проект')

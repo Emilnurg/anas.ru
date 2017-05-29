@@ -20,7 +20,7 @@
 
 		{%- for category in categories -%}
 		<div class="sld{% if current_category and current_category.id == category.id %} is-active{% endif %}">
-			<a href="{{ url('knowledge:knowledge_category', kwargs={'lang': lang, 'slug': category.slug}) }}">
+			<a href="{{ category.get_absolute_url() }}">
 				{{- category.title -}}
 			</a>
 		</div>

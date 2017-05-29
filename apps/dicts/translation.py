@@ -10,11 +10,6 @@ class CityTranslationOptions(BaseTranslationOptions):
     fields = models.City.translation_fields
 
 
-@register(models.SiteConfiguration)
-class SiteConfigurationTranslationOptions(BaseTranslationOptions):
-    fields = models.SiteConfiguration.translation_fields
-
-
 @register(models.SocialNetwork)
 class SocialNetworkTranslationOptions(BaseTranslationOptions):
     fields = models.SocialNetwork.translation_fields

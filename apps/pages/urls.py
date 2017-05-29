@@ -22,6 +22,10 @@ urlpatterns = (
         views.ContactsView.as_view(), name='contacts'
     ),
     url(
+        r'^(?P<lang>\w{2})/service/$',
+        views.ServiceCenterView.as_view(), name='service_center'
+    ),
+    url(
         r'^(?P<lang>\w{2})/(?P<slug>[-\w]{1,150})/$',
         views.FlatpageView.as_view(), name='flatpage'
     )

@@ -46,17 +46,17 @@ class KnowledgeIndexView(BaseTemplateView):
         list_url = reverse('knowledge:knowledge_index', kwargs={'lang': kwargs.get('lang')})
         kwargs['view'].request.active_url = list_url
 
-        kwargs.update({
-            'base_url': kwargs['view'].request.active_url,
-            'categories': categories,
-            'current_category': current_category,
-            'get_params': '',
-            'articles_list': articles_list,
-            'list_url': list_url,
-            'paginator': paginator,
-            'paginator_page': paginator_page,
-            'page': page
-        })
+        kwargs.update(
+            base_url=kwargs['view'].request.active_url,
+            categories=categories,
+            current_category=current_category,
+            get_params='',
+            articles_list=articles_list,
+            list_url=list_url,
+            paginator=paginator,
+            paginator_page=paginator_page,
+            page=page
+        )
 
         return kwargs
 
@@ -74,11 +74,11 @@ class KnowledgeView(BaseTemplateView):
         siblings = get_siblings(base_qs.order_by('ordering'), current_article.pk)
         list_url = reverse('knowledge:knowledge_index', kwargs={'lang': kwargs.get('lang')})
 
-        kwargs.update({
-            'current_article': current_article,
-            'list_url': list_url,
-            'sections': sections,
-            'siblings': siblings
-        })
+        kwargs.update(
+            current_article=current_article,
+            list_url=list_url,
+            sections=sections,
+            siblings=siblings
+        )
 
         return kwargs

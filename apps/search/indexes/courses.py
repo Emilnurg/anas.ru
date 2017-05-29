@@ -39,17 +39,7 @@ def config_index_courses():
                             'max_input_length': 50,
                             'preserve_separators': False
                         },
-                        'body': {
-                            'type': 'text',
-                            'store': False,
-                            'analyzer': 'common_analyzer'
-                        },
                         'ordering': {
-                            'type': 'integer',
-                            'store': False,
-                            'index': 'not_analyzed'
-                        },
-                        'publish_date': {
                             'type': 'integer',
                             'store': False,
                             'index': 'not_analyzed'
@@ -93,9 +83,7 @@ def bind_course_body(target):
             'input': target.title.lower(),
             'weight': 1
         }],
-        'body': target.body,
         'ordering': target.ordering,
-        'publish_date': target.publish_date,
         'slug': target.slug,
         'title': target.title
     }

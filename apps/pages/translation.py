@@ -25,6 +25,7 @@ class ContactsPageTranslationOptions(BaseTranslationOptions):
     required_languages = {settings.DEFAULT_LANGUAGE: ('title',), 'default': ()}
 
 
-@register(models.HomePage)
-class HomePageTranslationOptions(BaseTranslationOptions):
-    fields = models.HomePage.translation_fields
+@register(models.ServiceCenterPage)
+class ServiceCenterPageTranslationOptions(BaseTranslationOptions):
+    fields = models.ServiceCenterPage.translation_fields
+    required_languages = {settings.DEFAULT_LANGUAGE: ('title',), 'default': ()}

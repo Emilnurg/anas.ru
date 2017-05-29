@@ -1,9 +1,48 @@
 {%- extends 'layouts/main.html' -%}
 
-{%- block PAGE_TITLE %}{% endblock -%}
+{%- block PAGE_TITLE %}{{ var('TRAINING_TITLE', request)|e }}{% endblock -%}
 
 {%- block BODY_CLASSES %}body-training-index{% endblock -%}
 
 {%- block PAGE_CONTENT -%}
+<div class="container">
+	<div class="main-title">
+		<h3>{{ var('TRAINING_TITLE', request)|e }}</h3>
+	</div>
+</div>
 
+{%- if courses_list -%}
+<div class="b-courses">
+	<div class="container">
+		<div class="row row--equal">
+			{%- for article in courses_list -%}
+			<div class="col-lg-6 col-xs-12">
+				<a href="{{ article.get_absolute_url(lang) }}" class="article-preview">
+					<div class="article-preview__text">
+						<div class="article-preview__date">
+							{%- if article.date_start -%}
+							{{- article.date_start|date('d E') -}}
+							&nbsp;-&nbsp;
+							{%- endif -%}
+							{%- if article.date_finish -%}
+							{{- article.date_finish|date('d E') -}}
+							{%- endif -%}
+						</div>
+						<h3 class="article-preview__name">{{ article.title }}</h3>
+						{%- if article.city_id -%}
+						<div class="article-preview__city">{{ var('CITY_SHORT', request) }}{{ article.city.title }}</div>
+						{%- endif -%}
+					</div>
+					{%- if article.image -%}
+					<div class="article-preview__image">
+						<span style="background-image: url({{ article|cropped_thumbnail('thumb_list') }})"></span>
+					</div>
+					{%- endif -%}
+				</a>
+			</div>
+			{%- endfor -%}
+		</div>
+	</div>
+</div>
+{%- endif -%}
 {%- endblock -%}

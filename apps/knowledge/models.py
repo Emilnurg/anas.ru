@@ -4,6 +4,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 from base.models import BaseArticle, BaseArticleSection
 from snippets.models import BaseModel
 
@@ -27,6 +29,12 @@ class ArticleCategory(BaseModel):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
+        return reverse('knowledge:knowledge_category', kwargs={
+            'lang': lang,
+            'slug': self.slug
+        })
+
 
 class Article(BaseArticle):
     """Статьи базы знаний"""
@@ -34,6 +42,9 @@ class Article(BaseArticle):
         ArticleCategory, related_name='articles', verbose_name=_('Категории базы знаний'),
         blank=True
     )
+    excerpt = RichTextUploadingField(_('Анонс'), blank=True, null=True)
+
+    translation_fields = BaseArticle.translation_fields + ('excerpt',)
 
     class Meta:
         verbose_name = _('Статья')

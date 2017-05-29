@@ -4,11 +4,16 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 from base.models import BaseArticle, BaseArticleSection
 
 
 class News(BaseArticle):
     """Новости"""
+    excerpt = RichTextUploadingField(_('Анонс'), blank=True, null=True)
+
+    translation_fields = BaseArticle.translation_fields + ('excerpt',)
 
     class Meta:
         verbose_name = _('Новость')

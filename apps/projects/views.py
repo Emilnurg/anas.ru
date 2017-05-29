@@ -33,17 +33,17 @@ class ProjectsIndexView(BaseTemplateView):
             articles_list = []
 
         kwargs['view'].request.active_url = reverse(
-            'projects:project_index', kwargs={'lang': kwargs['lang']}
+            'projects:projects_index', kwargs={'lang': kwargs['lang']}
         )
 
-        kwargs.update({
-            'base_url': kwargs['view'].request.active_url,
-            'get_params': '',
-            'articles_list': articles_list,
-            'paginator': paginator,
-            'paginator_page': paginator_page,
-            'page': page
-        })
+        kwargs.update(
+            base_url=kwargs['view'].request.active_url,
+            get_params='',
+            articles_list=articles_list,
+            paginator=paginator,
+            paginator_page=paginator_page,
+            page=page
+        )
 
         return kwargs
 
@@ -59,13 +59,13 @@ class ProjectView(BaseTemplateView):
         current_news = get_object_or_404(base_qs, slug__exact=kwargs.get('slug'))
         sections = current_news.sections.published().order_by('ordering')
         siblings = get_siblings(base_qs.order_by('ordering'), current_news.pk)
-        list_url = reverse('projects:project_index', kwargs={'lang': kwargs.get('lang')})
+        list_url = reverse('projects:projects_index', kwargs={'lang': kwargs.get('lang')})
 
-        kwargs.update({
-            'current_article': current_news,
-            'list_url': list_url,
-            'sections': sections,
-            'siblings': siblings
-        })
+        kwargs.update(
+            current_article=current_news,
+            list_url=list_url,
+            sections=sections,
+            siblings=siblings
+        )
 
         return kwargs

@@ -27,7 +27,7 @@ class ContactsPageAdmin(SingletonModelAdmin, TranslationAdmin):
     group_fieldsets = True
 
 
-@admin.register(models.HomePage)
-class HomePageAdmin(SingletonModelAdmin, TranslationAdmin):
-    """Главная страница"""
+@admin.register(models.ServiceCenterPage)
+class ServiceCenterPageAdmin(SingletonModelAdmin, TranslationAdmin):
+    """Страница "Сервисный центр" """
     group_fieldsets = True

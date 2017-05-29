@@ -37,14 +37,14 @@ class PressIndexView(BaseTemplateView):
             'press:press_index', kwargs={'lang': kwargs['lang']}
         )
 
-        kwargs.update({
-            'base_url': kwargs['view'].request.active_url,
-            'get_params': '',
-            'articles_list': articles_list,
-            'paginator': paginator,
-            'paginator_page': paginator_page,
-            'page': page
-        })
+        kwargs.update(
+            base_url=kwargs['view'].request.active_url,
+            get_params='',
+            articles_list=articles_list,
+            paginator=paginator,
+            paginator_page=paginator_page,
+            page=page
+        )
 
         return kwargs
 
@@ -62,11 +62,11 @@ class PressView(BaseTemplateView):
         siblings = get_siblings(base_qs.order_by('ordering'), current_news.pk)
         list_url = reverse('press:press_index', kwargs={'lang': kwargs.get('lang')})
 
-        kwargs.update({
-            'current_article': current_news,
-            'list_url': list_url,
-            'sections': sections,
-            'siblings': siblings
-        })
+        kwargs.update(
+            current_article=current_news,
+            list_url=list_url,
+            sections=sections,
+            siblings=siblings
+        )
 
         return kwargs

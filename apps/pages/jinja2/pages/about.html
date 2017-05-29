@@ -7,8 +7,12 @@
 {%- block PAGE_CONTENT -%}
 <div class="b-about">
 	<div class="b-about__bg">
+		{%- if about_page.bg -%}
 		<div class="parallax-window" data-bleed="10" data-parallax="scroll"
-				 data-image-src="{{ STATIC_URL }}images/raster/about_bg.jpg"></div>
+				 data-image-src="{{ about_page.bg|thumbnail('2000x0') }}">
+		</div>
+		{%- endif -%}
+
 		<div class="container">
 			<div class="main-title">
 				<h3>{{ about_page.title }}</h3>

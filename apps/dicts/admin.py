@@ -2,7 +2,6 @@
 from django.contrib import admin
 
 from modeltranslation.admin import TranslationAdmin
-from solo.admin import SingletonModelAdmin
 
 from dicts import models
 from snippets.admin import SuperUserDeletableAdminMixin, BaseModelAdmin
@@ -15,13 +14,8 @@ class CityAdmin(BaseModelAdmin, SuperUserDeletableAdminMixin, TranslationAdmin):
     fields = models.City().collect_fields()
     list_display = ('id', 'title', 'status', 'ordering', 'updated')
     list_display_links = ('id', 'title')
+    ordering = ('ordering', 'title')
     search_fields = ['=id'] + get_model_translation_fields(models.City)
-
-
-@admin.register(models.SiteConfiguration)
-class SiteConfigurationAdmin(TranslationAdmin, SingletonModelAdmin):
-    """Настройки сайта"""
-    group_fieldsets = True
 
 
 @admin.register(models.SocialNetwork)

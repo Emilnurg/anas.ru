@@ -47,12 +47,8 @@ class BaseArticle(ImageMixin, BaseModel):
         'image', size='170x170', verbose_name=_('Эскиз в навигации'), allow_fullsize=True,
         free_crop=True
     )
-    excerpt = RichTextUploadingField(_('Анонс'), blank=True, null=True)
-    body = RichTextUploadingField(
-        _('Контент'), blank=True, null=False, help_text=_('Выводится выше всех секций')
-    )
 
-    translation_fields = ('title', 'excerpt', 'body')
+    translation_fields = ('title',)
     objects = ArticleManager()
 
     class Meta:

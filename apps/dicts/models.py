@@ -2,9 +2,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from solo.models import SingletonModel
-
-from snippets.models import LastModMixin, BaseModel, BasicModel
+from snippets.models import BaseModel
 
 
 class City(BaseModel):
@@ -19,15 +17,6 @@ class City(BaseModel):
 
     def __str__(self):
         return self.title
-
-
-class SiteConfiguration(BasicModel, LastModMixin, SingletonModel):
-    """Настройки сайта"""
-    def __str__(self):
-        return str(_('Настройки сайта'))
-
-    class Meta:
-        verbose_name = _('Настройки сайта')
 
 
 class SocialNetwork(BaseModel):
