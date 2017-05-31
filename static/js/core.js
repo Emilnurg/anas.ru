@@ -25,6 +25,36 @@ function initMap() {
   }
 }
 
+$(document).ready(function() {
+  var body = $('body');
+  if (body.hasClass('body-support-category')) {
+    var qa = $('.b-qa'),
+        sections = $('.support-sections', qa),
+        questionForm = $('.b-feedback__form', qa),
+        questionsBlock = $('.qa', qa),
+        questions = $('.qa__item', questionsBlock);
+    $('a', sections).click(function(e) {
+       e.preventDefault();
+       $(this).toggleClass('active');
+
+       if ($(this).hasClass('active')) {
+         questionForm.hide();
+         questionsBlock.show();
+       } else {
+         questionForm.show();
+         questionsBlock.hide();
+       }
+
+       $(this).parent().siblings().find('a').removeClass('active');
+
+       var sectionID = $(this).data('section');
+       questions.hide().filter('[data-sections*="|' + sectionID + '|"]').show();
+
+       return false;
+     });
+  }
+});
+
 window.Share = {
   getImage: function() {
     var sel = $('meta[property="og:image"]');

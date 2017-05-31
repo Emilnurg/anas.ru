@@ -152,7 +152,59 @@
 										{%- endif -%}
                   </li>
                   {%- endfor -%}
-                  {{- menu(request, 'TOP_CATALOG_MENU') -}}
+
+									{%- set training_url = url('training:training_index', kwargs={'lang': request.LANGUAGE_CODE}) -%}
+									{%- set training_categories = get_training_categories() -%}
+									{%- if training_categories -%}
+                  <li class="header__nav-item header__nav-item--dropdown
+										{%- if hasattr(request, 'active_url') and training_url == request.active_url %} active{% endif %}">
+                    <a href="{{ training_url }}"
+											 class="header__nav-link">
+											{{- var('TRAINING_MENU_ITEM', request) -}}
+                      &nbsp;<span></span>
+                    </a>
+										<div class="header__nav-dropdown">
+                      <div>
+												{%- for category in training_categories -%}
+                        <div>
+                          <h4>
+                            <a href="{{ category.get_absolute_url(request.LANGUAGE_CODE) }}">
+															{{- category.title -}}
+														</a>
+                          </h4>
+                        </div>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+									</li>
+									{%- endif -%}
+
+									{%- set support_url = url('support:support_index', kwargs={'lang': request.LANGUAGE_CODE}) -%}
+									{%- set support_categories = get_support_categories() -%}
+									{%- if support_categories -%}
+                  <li class="header__nav-item header__nav-item--dropdown
+										{%- if hasattr(request, 'active_url') and support_url == request.active_url %} active{% endif %}">
+                    <a href="{{ support_url }}"
+											 class="header__nav-link">
+											{{- var('SUPPORT_MENU_ITEM', request) -}}
+                      &nbsp;<span></span>
+                    </a>
+										<div class="header__nav-dropdown">
+                      <div>
+												{%- for category in support_categories -%}
+                        <div>
+                          <h4>
+                            <a href="{{ category.get_absolute_url(request.LANGUAGE_CODE) }}">
+															{{- category.title -}}
+														</a>
+                          </h4>
+                        </div>
+                        {%- endfor -%}
+                      </div>
+                    </div>
+									</li>
+									{%- endif -%}
+
                 </ul>
               </nav>
 							{%- endif -%}
@@ -306,7 +358,7 @@
     {%- block EXTRA_STYLES %}{% endblock -%}
 
     <script src="{{ static_with_mtime('js/critical.js') }}"></script>
-		<script src="{{ static_with_mtime('js/main.js') }}" async></script>
+		<script src="{{ static_with_mtime('js/main.js') }}"></script>s
 		<script src="{{ static_with_mtime('js/core.js') }}"></script>
 		{%- block EXTRA_SCRIPTS %}{% endblock -%}
     {%- block EXTRA_BODY %}{% endblock -%}

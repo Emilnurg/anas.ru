@@ -18,13 +18,13 @@ urlpatterns = (
     url(r'^uploadifive/', include('uploadifive.urls', namespace='uploadifive')),
     url(r'^', include('catalog.urls', namespace='catalog')),
     url(r'^', include('training.urls', namespace='training')),
-    url(r'^', include('faq.urls', namespace='faq')),
     url(r'^', include('forms.urls', namespace='forms')),
     url(r'^', include('knowledge.urls', namespace='knowledge')),
     url(r'^', include('press.urls', namespace='press')),
     url(r'^', include('projects.urls', namespace='projects')),
     url(r'^', include('search.urls', namespace='search')),
-    url(r'^', include('snippets.seo.urls', namespace='seo'))
+    url(r'^', include('snippets.seo.urls', namespace='seo')),
+    url(r'^', include('support.urls', namespace='support')),
 )
 
 if settings.DEBUG is True:

@@ -34,6 +34,32 @@ class Teacher(ImageMixin, BaseModel):
         return self.title
 
 
+class TrainingCategory(BaseModel):
+    """Категории статей курсов"""
+    title = models.CharField(_('Заголовок'), max_length=255, db_index=True)
+    slug = models.SlugField(
+        _('Алиас'), max_length=150, db_index=True, unique=True,
+        help_text=_(
+            'Разрешены только латинские символы, цифры, символ подчеркивания и дефис (минус)'
+        )
+    )
+
+    translation_fields = ('title',)
+
+    class Meta:
+        verbose_name = _('Категория курсов')
+        verbose_name_plural = _('Категории курсов')
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
+        return reverse('training:training_category', kwargs={
+            'lang': lang,
+            'slug': self.slug
+        })
+
+
 class Course(BaseArticle):
     """Курсы (обучение)"""
     date_start = models.DateField(_('Дата начала'), blank=True, null=True)
@@ -54,7 +80,11 @@ class Course(BaseArticle):
     )
 
     teachers = models.ManyToManyField(
-        Teacher, verbose_name=_('Преподаватели'), through='CourseTeacher'
+        Teacher, verbose_name=_('Преподаватели'), through='CourseTeacher', blank=True
+    )
+
+    categories = models.ManyToManyField(
+        TrainingCategory, verbose_name=_('Категории'), blank=True, related_name='courses'
     )
 
     translation_fields = BaseArticle.translation_fields + (

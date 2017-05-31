@@ -4,4 +4,4 @@ from snippets.views import BaseTemplateView
 
 class PartnersView(BaseTemplateView):
     """Страница партнеров"""
-
+    pass

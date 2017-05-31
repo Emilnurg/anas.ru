@@ -1,13 +1,13 @@
 {%- extends 'layouts/main.html' -%}
 
-{%- block PAGE_TITLE %}{{ var('TRAINING_TITLE', request)|e }}{% endblock -%}
+{%- block PAGE_TITLE %}{{ current_category.title|e }}{% endblock -%}
 
 {%- block BODY_CLASSES %}body-training-index{% endblock -%}
 
 {%- block PAGE_CONTENT -%}
 <div class="container">
 	<div class="main-title">
-		<h3>{{ var('TRAINING_TITLE', request)|e }}</h3>
+		<h3>{{ current_category.title }}</h3>
 	</div>
 </div>
 

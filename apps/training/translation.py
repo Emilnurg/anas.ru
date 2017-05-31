@@ -14,9 +14,10 @@ class CourseTranslationOptions(BaseArticleTranslationOptions):
     required_languages = {settings.DEFAULT_LANGUAGE: ('title',), 'default': ()}
 
 
-@register(models.Teacher)
-class TeacherTranslationOptions(BaseTranslationOptions):
-    fields = models.Teacher.translation_fields
+@register(models.CourseSchedule)
+class CourseScheduleTranslationOptions(BaseTranslationOptions):
+    fields = models.CourseSchedule.translation_fields
+    required_languages = {settings.DEFAULT_LANGUAGE: ('period',), 'default': ()}
 
 
 @register(models.CourseTeacher)
@@ -24,7 +25,11 @@ class CourseTeacherTranslationOptions(BaseTranslationOptions):
     fields = models.CourseTeacher.translation_fields
 
 
-@register(models.CourseSchedule)
-class CourseScheduleTranslationOptions(BaseTranslationOptions):
-    fields = models.CourseSchedule.translation_fields
-    required_languages = {settings.DEFAULT_LANGUAGE: ('period',), 'default': ()}
+@register(models.Teacher)
+class TeacherTranslationOptions(BaseTranslationOptions):
+    fields = models.Teacher.translation_fields
+
+
+@register(models.TrainingCategory)
+class TrainingCategoryTranslationOptions(BaseTranslationOptions):
+    fields = models.TrainingCategory.translation_fields

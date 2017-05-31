@@ -10,7 +10,11 @@ urlpatterns = (
         views.TrainingIndexView.as_view(), name='training_index'
     ),
     url(
-        r'^(?P<lang>\w{2})/press/(?P<slug>[-\w]{1,150})/$',
+        r'^(?P<lang>\w{2})/training/(?P<slug>[-\w]{1,150})/$',
+        views.TrainingCategoryView.as_view(), name='training_category'
+    ),
+    url(
+        r'^(?P<lang>\w{2})/training/course/(?P<slug>[-\w]{1,150})/$',
         views.CourseView.as_view(), name='course_page'
     )
 )

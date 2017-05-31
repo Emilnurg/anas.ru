@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from django.urls import reverse
-
 from training import models
 
 
 def get_page_urls(lang):
     """Получает все известные публичные ссылки для sitemap.xml в рамках текущего приложения"""
-    yield reverse('training:training_index', kwargs={'lang': lang})
+    categories = models.TrainingCategory.objects.published()
+    for category in categories:
+        yield category.get_absolute_url(lang)
 
     courses = models.Course.objects.published()
     for course in courses:

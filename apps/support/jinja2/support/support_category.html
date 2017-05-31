@@ -1,0 +1,101 @@
+{%- extends 'layouts/main.html' -%}
+
+{%- block PAGE_TITLE %}{{ var('TECH_SUPPORT_TITLE', request) }}. {{ current_category.title|e }}{% endblock -%}
+
+{%- block BODY_CLASSES %}body-support-category{% endblock -%}
+
+{%- block PAGE_CONTENT -%}
+<div class="b-support">
+	<div class="container">
+		<div class="page-back">
+			<a href="javascript:" class="page-back__link">Техподдержка</a>
+		</div>
+		<div class="main-title">
+			<h3>{{ var('TECH_SUPPORT_TITLE', request) }}. {{ current_category.title|e }}</h3>
+			<p>
+				{{- var('SUPPORT_CONTENT', request) -}}
+			</p>
+		</div>
+	</div>
+</div>
+<div class="b-qa">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="support-sections support-sections--tabs">
+					<h4> Разделы </h4>
+					<a name="questions"></a>
+					<ul>
+						{%- for section in sections -%}
+						<li>
+							<a href="javascript:" data-section="{{ section.id }}">{{ section.title }}</a>
+						</li>
+						{%- endfor -%}
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<a name="form"></a>
+				<form action="javascript:" class="form b-feedback__form">
+					<div class="form__heading">
+						<h4>Или заполните контактную форму</h4>
+					</div>
+					<div class="form__content">
+						<div class="form__group">
+							<input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
+							<div class="form__placeholder"> Имя </div>
+						</div>
+						<div class="form__group">
+							<input type="text" name="email" class="form__field required" placeholder="" data-validate="email">
+							<div class="form__placeholder"> E-mail, куда придет ответ </div>
+						</div>
+						<div class="form__group">
+							<input type="text" name="message" class="form__field required" placeholder="" data-validate="notEmpty">
+							<div class="form__placeholder"> Полное название товара, серия </div>
+						</div>
+						<div class="form__group">
+							<input type="text" name="message" class="form__field required" placeholder="" data-validate="notEmpty">
+							<div class="form__placeholder"> Сообщение </div>
+						</div>
+					</div>
+					<div class="form__button">
+						<button type="submit" class="btn btn--black">Отправить</button>
+						<!-- <div class="form__err">
+					не правильно введен адрес
+				</div> --></div>
+				</form>
+
+				{%- if questions -%}
+				<div class="qa" style="display: none">
+					{%- for question in questions -%}
+					<div class="qa__item" data-sections="|{% for section in question.sections.all() %}{{ section.pk }}|{% endfor %}|">
+						<a href="javascript:" class="qa__question">{{ question.title }}</a>
+						<div class="qa__answer content-block">
+							{{- question.body -}}
+						</div>
+					</div>
+					{%- endfor -%}
+				</div>
+				{%- endif -%}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="no-answer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="no-answer__text">
+					<h4>Не нашли ответа?</h4>
+					<p> Воспользуйтесь формой и задайте вопрос нашим специалистам </p>
+					<a href="javascript:" class="btn btn--black">Задать вопрос</a>
+				</div>
+			</div>
+			<div class="col-md-6 hidden-xs hidden-sm">
+				<div class="no-answer__image">
+					<img src="{{ STATIC_URL }}images/raster/no_answer.jpg" class="img-responsive" alt=""> </div>
+			</div>
+		</div>
+	</div>
+</div>
+{%- endblock -%}

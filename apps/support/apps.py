@@ -4,5 +4,5 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class AppConfig(BaseAppConfig):
-    name = 'faq'
-    verbose_name = _('FAQ')
+    name = 'support'
+    verbose_name = _('Тех. поддержка')

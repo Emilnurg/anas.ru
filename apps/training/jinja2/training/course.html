@@ -8,7 +8,13 @@
 <div class="b-course">
 	<div class="container">
 		<div class="page-back">
-			<a href="{{ list_url }}" class="page-back__link">{{ var('TRAINING_TITLE', request) }}</a>
+			<a href="{{ list_url }}" class="page-back__link">
+				{%- if category -%}
+				{{- category.title -}}
+				{%- else -%}
+				{{- var('TRAINING_TITLE', request) -}}
+				{%- endif -%}
+			</a>
 		</div>
 		<div class="main-title">
 			<h3>{{ current_course.title }}</h3>
