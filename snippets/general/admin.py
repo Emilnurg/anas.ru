@@ -39,7 +39,7 @@ class MenuAdmin(SuperUserDeletableAdminMixin, BaseModelAdmin):
 
 
 @admin.register(models.MenuItem)
-class MenuItemAdmin(SuperUserDeletableAdminMixin, BaseModelAdmin):
+class MenuItemAdmin(SuperUserDeletableAdminMixin, BaseModelAdmin, TranslationAdmin):
     """Пункты меню"""
     fields = models.MenuItem().collect_fields()
     list_display = ('id', 'title', 'parent_item', 'menu', 'status', 'ordering', 'created')

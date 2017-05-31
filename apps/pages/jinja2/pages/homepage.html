@@ -1,6 +1,6 @@
 {%- extends 'layouts/main.html' -%}
 
-{%- block PAGE_TITLE %}{% endblock -%}
+{%- block PAGE_TITLE %}{{ var('HOMEPAGE_TITLE', request) }}{% endblock -%}
 
 {%- block BODY_CLASSES %}body-home{% endblock -%}
 

@@ -158,6 +158,7 @@ INSTALLED_APPS = (
     'forms',
     'knowledge',
     'pages',
+    'partners',
     'projects',
     'press',
     'search',
@@ -229,6 +230,7 @@ SUIT_CONFIG = {
         'pages',
         'seo',
         'training',
+        'partners',
         'users',
         'auth',
         'uploadifive'
