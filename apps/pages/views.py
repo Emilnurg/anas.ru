@@ -7,7 +7,8 @@ from django.http import HttpResponseRedirect
 from core.models import HomeAdvantage, HomeSlide, HomeCatalog, HomeCatalogProduct, \
     HomeCatalogManufacturer
 from core.utils import get_flat_page
-from pages.models import ContactsPage, AboutPage, AboutAdvantage, ServiceCenterPage
+from pages.models import ContactsPage, AboutPage, AboutAdvantage, ServiceCenterPage, \
+    ServiceRequestOrder
 from snippets.views import BaseTemplateView
 
 
@@ -96,6 +97,10 @@ class ServiceCenterView(BaseTemplateView):
     def get_context_data(self, **kwargs):
         kwargs = super(ServiceCenterView, self).get_context_data(**kwargs)
         service_page = ServiceCenterPage.get_solo()
+        request_order = ServiceRequestOrder.objects.published()
 
-        kwargs.update(service_page=service_page)
+        kwargs.update(
+            service_page=service_page,
+            request_order=request_order
+        )
         return kwargs

@@ -7,35 +7,30 @@
 {%- block PAGE_CONTENT -%}
 <div class="b-service">
 	<div class="b-service__bg">
-		<div class="parallax-window" data-bleed="10" data-parallax="scroll" data-image-src="images/raster/service_center.jpg"></div>
+		{%- if service_page.bg -%}
+		<div class="parallax-window" data-bleed="10" data-parallax="scroll"
+				 data-image-src="{{ service_page.bg.url }}">
+		</div>
+		{%- endif -%}
 		<div class="container">
 			<div class="main-title">
-				<h3>Сервисный центр</h3>
-				<p> Монтаж, обслуживание, ремонт стоматологического оборудования </p>
+				<h3>{{ service_page.title }}</h3>
+				{%- if service_page.subtitle -%}
+				<div class="content-block">
+					{{- service_page.subtitle -}}
+				</div>
+				{%- endif -%}
 			</div>
 		</div>
 	</div>
 	<div class="b-service__inner">
 		<div class="container">
 			<div class="b-service__text">
-				<div>
-					<p> Компания АНАС имеет собственный сертифицированный сервисный центр и осуществляет: </p>
-					<ul>
-						<li>
-							<p> Монтаж, гарантийное и послегарантийное обслуживание, ремонт стоматологического оборудования: ультразвуковых cкалеров, фотополимеризационных ламп, пескоструйных аппаратов и аппаратов для челюстно-лицевой хирургии производства компании
-								Mectron (Италия). Любые запчасти и аксессуары всегда есть в наличии. </p>
-							<p> Ремонт стоматологического оборудования: стоматологических установок, монтаж дополнительного оборудования к стоматологическим установкам производства DKL (Германия), Idem (Италия). </p>
-						</li>
-						<li>
-							<p> Гарантийное и послегарантийное обслуживание, ремонт стоматологического оборудования: турбинных наконечников и наконечников для микромоторов производства MK-dent (Германия). </p>
-							<p> Планировка кабинета, монтаж стоматологической мебели производства Aries (Италия). </p>
-						</li>
-						<li> Расчет оптимального расположения светильников, монтаж и обслуживание потолочных и операционных светильников производства Degre K (Франция). </li>
-						<li> Гарантийное и послегарантийное обслуживание аппаратов для аэрозольной дезинфекции помещений производства Оxy’pharm (Франция), обслуживание аппаратов для измельчения и обеззараживания медицинских отходов STERIFLASH (Франция), стоматологических
-							ламп для отбеливания зубов производства By dental (Франция). </li>
-						<li> Гарантийное и послегарантийное обслуживание систем отбеливания зубов производства By dental (Франция). </li>
-					</ul>
+				{%- if service_page.body -%}
+				<div class="content-block">
+					{{- service_page.body -}}
 				</div>
+				{%- endif -%}
 			</div>
 		</div>
 		<div class="b-service__parallax">
@@ -46,59 +41,51 @@
 </div>
 <div class="b-steps">
 	<div class="container">
+		{%- if service_page.request_order_title -%}
 		<div class="section-title">
-			<h4>Порядок обращения в сервисный центр</h4>
+			<h4>{{ service_page.request_order_title }}</h4>
 		</div>
+		{%- endif -%}
+		{%- if request_order -%}
 		<div class="row row--flex">
+			{%- for step in request_order -%}
 			<div class="col-sm-6 col-xs-12">
 				<div class="step">
+					{%- if step.icon -%}
 					<div class="step__icon">
-						<img src="images/step_icon1.svg" alt="">
+						<img src="{{ step.icon.url }}" alt=""/>
 					</div>
-					<h4> Звонок или заявка </h4>
-					<p> При возникновении неисправности оборудования вам следует обратиться по телефону (495) 626-54-55. </p>
+					{%- endif -%}
+					<h4>{{ step.title }}</h4>
+					{%- if step.subtitle -%}
+					<div class="content-block">
+						{{- step.subtitle -}}
+					</div>
+					{%- endif -%}
 				</div>
 			</div>
-			<div class="col-sm-6 col-xs-12">
-				<div class="step">
-					<div class="step__icon">
-						<img src="images/step_icon2.svg" alt="">
-					</div>
-					<h4> Описание проблемы </h4>
-					<p> юбой из наших сотрудников примет вашу заявку и подскажет дальнейшие действия. </p>
-				</div>
-			</div>
-			<div class="col-sm-6 col-xs-12">
-				<div class="step">
-					<div class="step__icon">
-						<img src="images/step_icon3.svg" alt="">
-					</div>
-					<h4> Отправка оборудования в сервис </h4>
-					<p> Если вы находитесь не в Москве, вы можете выслать оборудование с любой удобной для вас транспортной компанией </p>
-				</div>
-			</div>
-			<div class="col-sm-6 col-xs-12">
-				<div class="step">
-					<div class="step__icon">
-						<img src="images/step_icon4.svg" alt="">
-					</div>
-					<h4> Прием оборудования </h4>
-					<p> При приемке оборудования в ремонт вам выписывается документ, (заявка) подтверждающий факт вашего обращения в сервис. </p>
-				</div>
-			</div>
+			{%- endfor -%}
 		</div>
+		{%- endif -%}
 	</div>
 </div>
 <div class="b-form b-form2">
 	<div class="b-form__parallax">
-		<div></div>
-		<div></div>
+		{%- if service_page.questions_image_left -%}
+		<div style="background-image:url({{ service_page.questions_image_left.url }})"></div>
+		{%- endif -%}
+		{%- if service_page.questions_image_right -%}
+		<div style="background-image:url({{ service_page.questions_image_right.url }})"></div>
+		{%- endif -%}
 	</div>
+	{%- if service_page.questions_title -%}
 	<div class="container">
 		<form action="#" class="form b-feedback__form">
 			<div class="form__heading">
-				<h4>Есть вопросы по сотрудничеству?</h4>
-				<p> Оставьте контакты, мы свяжемся с вами по телефону </p>
+				<h4>{{ service_page.questions_title }}</h4>
+				{%- if service_page.questions_subtitle -%}
+				<div class="content-block">{{ service_page.questions_subtitle }}</div>
+				{%- endif -%}
 			</div>
 			<div class="form__content">
 				<div class="form__group">
@@ -125,5 +112,6 @@
 	</div> --></div>
 		</form>
 	</div>
+	{%- endif -%}
 </div>
 {% endblock -%}

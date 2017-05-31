@@ -4883,7 +4883,9 @@
 }
 
 .step__icon {
-  margin-bottom: 22px;
+  margin: 0 auto 22px;
+  max-width: 50px;
+  max-height: 48px;
 }
 
 .b-form2 {

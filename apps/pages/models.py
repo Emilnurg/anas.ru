@@ -118,8 +118,12 @@ class ServiceCenterPage(BasicModel, SingletonModel):
     questions_subtitle = models.TextField(
         _('Подзаголовок блока "Есть вопросы?"'), blank=True, null=True
     )
-    questions_image = models.ImageField(
-        _('Изображения блока "Есть вопросы?"'), max_length=255, blank=True, null=True,
+    questions_image_left = models.ImageField(
+        _('Изображения блока "Есть вопросы?" (слева)'), max_length=255, blank=True, null=True,
+        upload_to='pages'
+    )
+    questions_image_right = models.ImageField(
+        _('Изображения блока "Есть вопросы?" (справа)'), max_length=255, blank=True, null=True,
         upload_to='pages'
     )
 
@@ -141,8 +145,8 @@ class ServiceRequestOrder(BaseModel):
         ServiceCenterPage, verbose_name=_('Страница "Сервисный центр"'),
         related_name='request_order'
     )
-    icon = models.CharField(
-        _('Иконка'), choices=IconEnum.get_choices(), blank=True, null=True, max_length=50
+    icon = models.FileField(
+        _('Иконка'), blank=True, null=True, max_length=255, upload_to='service'
     )
     title = models.CharField(_('Заголовок'), max_length=255)
     subtitle = RichTextUploadingField(_('Подзаголовок'), max_length=255, blank=True, null=True)

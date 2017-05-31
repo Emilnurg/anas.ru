@@ -27,7 +27,15 @@ class ContactsPageAdmin(SingletonModelAdmin, TranslationAdmin):
     group_fieldsets = True
 
 
+class ServiceRequestOrderInline(TranslationStackedInline):
+    """Порядок обращения"""
+    extra = 0
+    fields = models.ServiceRequestOrder().collect_fields()
+    model = models.ServiceRequestOrder
+
+
 @admin.register(models.ServiceCenterPage)
 class ServiceCenterPageAdmin(SingletonModelAdmin, TranslationAdmin):
     """Страница "Сервисный центр" """
     group_fieldsets = True
+    inlines = (ServiceRequestOrderInline,)
