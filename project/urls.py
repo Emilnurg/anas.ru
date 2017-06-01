@@ -7,10 +7,10 @@ from django.views.static import serve
 
 admin.autodiscover()
 
-handler400 = 'snippets.basics.views.e400'
-handler403 = 'snippets.basics.views.e403'
-handler404 = 'snippets.basics.views.e404'
-handler500 = 'snippets.basics.views.e500'
+handler400 = 'snippets.general.views.e400'
+handler403 = 'snippets.general.views.e403'
+handler404 = 'snippets.general.views.e404'
+handler500 = 'snippets.general.views.e500'
 
 urlpatterns = (
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
