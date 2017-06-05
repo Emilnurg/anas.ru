@@ -271,15 +271,15 @@ def site_url():
     return settings.SITE_URL
 
 
-whitespace_re = re.compile(r'(\s|-|\)|\()+', re.MULTILINE)
-
-
 @jinjaglobal
 def static_with_mtime(file_path):
     filemtime = int(
         os.path.getmtime(os.path.join(settings.STATIC_ROOT, file_path))
     )
     return '%s%s?v=%s' % (settings.STATIC_URL, file_path, filemtime)
+
+
+whitespace_re = re.compile(r'(\s|-|\)|\()+', re.MULTILINE)
 
 
 @jinjafilter

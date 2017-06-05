@@ -16,6 +16,7 @@ urlpatterns = (
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^uploadifive/', include('uploadifive.urls', namespace='uploadifive')),
+    url(r'^', include('base.urls', namespace='base')),
     url(r'^', include('catalog.urls', namespace='catalog')),
     url(r'^', include('training.urls', namespace='training')),
     url(r'^', include('forms.urls', namespace='forms')),
