@@ -7,7 +7,7 @@ from base import views
 urlpatterns = (
     url(
         r'^400/$',
-        views.Error403View.as_view(), name='400'
+        views.Error400View.as_view(), name='400'
     ),
     url(
         r'^403/$',
