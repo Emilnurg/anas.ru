@@ -8830,6 +8830,4 @@ if (function (e, t) {
   }, u.displayEffect = function (e) {
     console.error("Waves.displayEffect() has been deprecated and will be removed in future version. Please use Waves.init() to initialize Waves effect"), u.init(e)
   }, u
-}), $(window).on("load", function () {
-  initScripts()
-});
+}), function() {};
