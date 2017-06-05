@@ -766,11 +766,3 @@ function initScripts() {
   courseTabs();
   parallax();
 }
-
-
-/**
- * First Load Page
- */
-$(window).on('load', function(){
-  initScripts();
-});
