@@ -129,7 +129,7 @@ def bind_product_body(target):
 
     features = []
     if hasattr(target, 'features_cache'):
-        body['features'] = ['%s %s' % x for x in target.features_cache]
+        body['features'] = ['%s %s' % (x.feature.title, x.value) for x in target.features_cache]
     else:
         body['features'] = [
             '%s %s' % x
@@ -138,7 +138,9 @@ def bind_product_body(target):
         ]
 
     if hasattr(target, 'features_main_cache'):
-        body['features'].extend(['%s %s' % x for x in target.features_main_cache])
+        body['features'].extend(
+            ['%s %s' % (x.feature.title, x.value) for x in target.features_main_cache]
+        )
     else:
         body['features'].extend([
             '%s %s' % x
@@ -164,13 +166,15 @@ def sync_products():
             Prefetch(
                 'features',
                 queryset=ProductFeature.objects.published()
-                .filter(feature__status=StatusEnum.PUBLIC).values_list('feature__title', 'value'),
+                .select_related('feature')
+                .filter(feature__status=StatusEnum.PUBLIC),
                 to_attr='features_cache'
             ),
             Prefetch(
                 'features_main',
                 queryset=ProductFeatureMain.objects.published()
-                .filter(feature__status=StatusEnum.PUBLIC).values_list('feature__title', 'value'),
+                .select_related('feature')
+                .filter(feature__status=StatusEnum.PUBLIC),
                 to_attr='features_cache_main'
             )
         )

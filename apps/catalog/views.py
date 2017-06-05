@@ -71,8 +71,6 @@ class ProductCategoryView(BaseTemplateView):
             current_category=current_category,
             current_manufacturer=current_manufacturer,
             get_params=get_params,
-            page=page,
-            paginator=paginator,
             paginator_page=paginator_page,
             parent_category=parent_category,
             products_list=products_list

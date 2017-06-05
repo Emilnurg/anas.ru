@@ -1,4 +1,5 @@
 {%- extends 'layouts/main.html' -%}
+{%- from 'widgets/pagination.html' import pagination -%}
 
 {%- block PAGE_TITLE %}{{ var('KNOWLEDGE_TITLE', request)|e }}{% endblock -%}
 
@@ -34,26 +35,11 @@
 		<div class="row row--equal">
 			{%- for article in articles_list -%}
 			<div class="col-lg-6 col-xs-12">
-				<a href="{{ article.get_absolute_url(lang) }}" class="article-preview">
-					<div class="article-preview__text">
-						<div class="article-preview__date">{{ article.publish_date|date('d E Y') }}</div>
-						<h3 class="article-preview__name">{{ article.title }}</h3>
-						{%- if article.excerpt -%}
-						<div class="article-preview__descr">
-							<p>{{ article.excerpt }}</p>
-						</div>
-						{%- endif -%}
-					</div>
-					{%- if article.image -%}
-					<div class="article-preview__image">
-						<span style="background-image: url({{ article|cropped_thumbnail('thumb_list') }})"></span>
-					</div>
-					{%- endif -%}
-				</a>
+				{%- include 'knowledge/_article.html' -%}
 			</div>
 			{%- endfor -%}
 		</div>
-		{%- include 'widgets/pagination.html' -%}
+		{{- pagination(request, base_url, paginator_page) -}}
 	</div>
 </div>
 {%- endblock -%}

@@ -8,7 +8,7 @@ function maskedInput() {
   $('[name=tel]').inputmask({
     mask: '+7 (999) 999-99-99',
     showMaskOnHover: false,
-    showMaskOnFocus: true,
+    showMaskOnFocus: true
   });
 }
 
@@ -78,33 +78,29 @@ function formValidation() {
     var pp = '';
 
     if (type === 'email') {
-      pp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      pp = /^([a-zA-Z0-9_.\-])+@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     }
 
     if (type === 'onlyNumber') {
       pp = /^([0-9()\/+ -]+)$/;
     }
 
-    if (type == 'tel') {
+    if (type === 'tel') {
       pp = /^\+?[\d()\-\s]*\d+\s*$/;
     }
     if (type === 'notEmpty') {
       pp = /^[A-Za-zА-Яа-я0-9 _]*[A-Za-zА-Яа-я0-9][A-Za-zА-Яа-я0-9 _#()$@8%№;'":,.+?!#*-/\n]*$/;
     }
 
-    if (!field.match(pp)) {
-      return false;
-    }
-    return true;
+    return field.match(pp);
   }
 
   var required = 0;
   var validated = 0;
 
   //проверяем валидность когда нажимается конпка
-  $('body').on('submit','form', function(event) {
+  $('body').on('submit', 'form:not[data-novalidate]', function() {
     var $form = $(this);
-    var yaTarget = $form.data('target');
 
     $form.find('.required').each(function() {
       var fieldType = $(this).data('validate');
@@ -163,8 +159,7 @@ function formValidation() {
  * scroll to anchor
  */
 function scrollToHref() {
-  $('a.scrollto').unbind();
-  $('a.scrollto').on("click", function () {
+  $('a.scrollto').unbind().on("click", function () {
     var offset = 0;
 
     var target = $(this.hash);
@@ -288,8 +283,8 @@ function breakpointsHandler() {
  */
 function parallax() {
   if(!isMobile.any()) {
-    var s = skrollr.init({
-      forceHeight: false,
+    skrollr.init({
+      forceHeight: false
     });
 
     if ($('#mouse-parallax').length) {
@@ -453,25 +448,25 @@ function brands() {
       {
         breakpoint: 1265,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 5
         }
       },
       {
         breakpoint: 992,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 4
         }
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 3
         }
       },
       {
         breakpoint: 500,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 2
         }
       }
     ]
@@ -482,27 +477,28 @@ function brands() {
  * slider
  */
 function slider() {
-  $('.slider:not(.slider--thumbnails)').slick({
+  var slider = $('.slider');
+  slider.filter(':not(.slider--thumbnails)').slick({
     fade: true,
-    dots: false,
+    dots: false
   });
 
-  $('.slider.slider--thumbnails').slick({
+  slider.filter('.slider--thumbnails').slick({
     fade: true,
     dots: false,
     asNavFor: '.slider-thumbnails'
   });
 
-  $('.slider').on('afterChange', function(slick, currentSlide, nextSlide) {
-    $(this).find('.slide__nums span:nth-child(1)').text(nextSlide+1);
-  });
+  slider
+    .on('afterChange', function(slick, currentSlide, nextSlide) {
+      $(this).find('.slide__nums span:nth-child(1)').text(nextSlide + 1);
+    })
+    .each(function() {
+      var getSlick = $(this).slick('getSlick');
+      var length = getSlick.$slides.length;
 
-  $('.slider').each(function(index, el) {
-    var getSlick = $(this).slick('getSlick');
-    var length = getSlick.$slides.length;
-
-    $(this).find('.slide__nums span:nth-child(2)').text(length);
-  });
+      $(this).find('.slide__nums span:nth-child(2)').text(length);
+    });
 
   $('.slider-thumbnails').slick({
     slidesToShow: 6,
@@ -514,25 +510,25 @@ function slider() {
       {
         breakpoint: 1265,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 5
         }
       },
       {
         breakpoint: 992,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 4
         }
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 3
         }
       },
       {
         breakpoint: 640,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 2
         }
       }
     ]
@@ -546,14 +542,14 @@ function videos() {
   function youtube_parser(url){
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
-    return (match&&match[7].length==11)? match[7] : false;
+    return (match&&match[7].length===11)? match[7] : false;
   }
 
-  $('.video-preview').each(function(index, el) {
+  $('.video-preview').each(function() {
     var url = $(this).find('.video-preview__link').attr('href');
     var videoID = youtube_parser(url);
 
-    if (videoID == 'XIMLoLxmTDw') {
+    if (videoID === 'XIMLoLxmTDw') {
       $(this).find('.video-preview__placeholder span').css('background-image', 'url(/static/images/raster/video_placeholder.jpg');
     }else {
       $(this).find('.video-preview__placeholder span').css('background-image', 'url(https://i.ytimg.com/vi/'+videoID+'/sddefault.jpg)');
@@ -602,7 +598,7 @@ function headerSearch() {
     $('.header__search .search-form__field').focus();
   });
 
-  $('.header__search .search-form__field').on('input', function(event) {
+  $('.header__search .search-form__field').on('input', function() {
     if ($(this).val() !== '') {
       $('.header__search .search-form__button').prop('disabled', false);
       $('.header__search .search-form').addClass('is-filled');
@@ -610,7 +606,7 @@ function headerSearch() {
       $('.header__search .search-form__button').prop('disabled', true);
       $('.header__search .search-form').removeClass('is-filled');
     }
-  });
+  }).trigger('input');
 
   $('.header__search .search-form__clear').on('click',  function(event) {
     event.preventDefault();
@@ -671,7 +667,7 @@ function productSlider() {
       {
         breakpoint: 992,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 1
         }
       }
     ]
@@ -712,19 +708,19 @@ function advantagesSlider() {
       {
         breakpoint: 1265,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 4
         }
       },
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 3
         }
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 2
         }
       }
     ]

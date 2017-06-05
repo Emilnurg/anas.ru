@@ -1,4 +1,5 @@
 {%- extends 'layouts/main.html' -%}
+{%- from 'widgets/pagination.html' import pagination -%}
 
 {%- block PAGE_TITLE %}{{ current_category.title|e }}{% endblock -%}
 
@@ -67,7 +68,7 @@
 			</div>
 			{%- endfor -%}
 		</div>
-		{%- include 'widgets/pagination.html' -%}
+		{{- pagination(request, base_url, paginator_page, get_params) -}}
 		{%- endif -%}
 	</div>
 </div>

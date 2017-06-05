@@ -1,9 +1,70 @@
 {%- extends 'layouts/main.html' -%}
+{%- from 'widgets/pagination.html' import pagination -%}
 
-{%- block PAGE_TITLE %}{% endblock -%}
+{%- block PAGE_TITLE %}{{ var('SEARCH_TITLE', request) }}{% endblock -%}
 
 {%- block BODY_CLASSES %}body-search{% endblock -%}
 
 {%- block PAGE_CONTENT -%}
+<div class="b-search">
+	<div class="container">
+		<div data-start="transform: translateY(0px)">
+			<div class="main-title">
+				<h3>{{ var('SEARCH_RESULTS', request) }}</h3>
+			</div>
+			<form action="{{ url('search:search', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+						class="search-form search-form2" method="get" novalidate data-novalidate="">
+				<input type="text" name="q" class="search-form__field" value="{{ q|e }}">
+				<button type="submit" class="search-form__button"></button>
+				<a href="javascript:" class="search-form__clear"></a>
+			</form>
+		</div>
 
+		{%- if products['objects'] -%}
+		<div class="b-search__section">
+			<a name="products"></a>
+			<h2>Продукция</h2>
+			<div class="catalog__row row">
+				{%- for product in products['objects'] -%}
+				<div class="col-xs-12 col-sm-6 catalog__col">
+					{%- include 'catalog/_product_block.html' -%}
+				</div>
+				{%- endfor -%}
+			</div>
+			{{- pagination(request, base_url, paginator_page=products['paginator_page'], get_params=get_params + '&s=products', hashname='products') -}}
+		</div>
+		{%- endif -%}
+
+		{%- if training['objects'] -%}
+		<div class="b-search__section">
+			<a name="training"></a>
+			<h2>Обучение</h2>
+			<div class="row row--equal">
+				{%- for article in training['objects'] -%}
+				<div class="col-lg-6 col-xs-12">
+					{%- include 'training/_course.html' -%}
+				</div>
+				{%- endfor -%}
+			</div>
+			{{- pagination(request, base_url, paginator_page=training['paginator_page'], get_params=get_params + '&s=training', hashname='training') -}}
+		</div>
+		{%- endif -%}
+
+		{%- if articles['objects'] -%}
+		<div class="b-search__section">
+			<a name="knowledge"></a>
+			<h2>База знаний</h2>
+			<div class="row row--equal">
+				{%- for article in articles['objects'] -%}
+				<div class="col-lg-6 col-xs-12">
+					{%- include 'knowledge/_article.html' -%}
+				</div>
+				{%- endfor -%}
+			</div>
+			{{- pagination(request, base_url, paginator_page=training['paginator_page'], get_params=get_params + '&s=articles', hashname='articles') -}}
+		</div>
+		{%- endif -%}
+
+	</div>
+</div>
 {%- endblock -%}

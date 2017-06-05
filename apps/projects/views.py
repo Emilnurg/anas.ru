@@ -6,6 +6,7 @@ from pure_pagination import Paginator
 
 from base import ARTICLES_PER_PAGE
 from projects import models
+from snippets.jinjaglobals import var
 from snippets.models.siblings import get_siblings
 from snippets.views import BaseTemplateView
 
@@ -38,11 +39,8 @@ class ProjectsIndexView(BaseTemplateView):
 
         kwargs.update(
             base_url=kwargs['view'].request.active_url,
-            get_params='',
             articles_list=articles_list,
-            paginator=paginator,
             paginator_page=paginator_page,
-            page=page
         )
 
         return kwargs
@@ -63,6 +61,7 @@ class ProjectView(BaseTemplateView):
 
         kwargs.update(
             current_article=current_news,
+            list_name=var('COMPLETED_PROJECTS_TITLE', kwargs['view'].request),
             list_url=list_url,
             sections=sections,
             siblings=siblings

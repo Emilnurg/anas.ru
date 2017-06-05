@@ -121,7 +121,8 @@
 				<div class="b-feedback__text">
 					<h4>Комплексные проекты</h4>
 					<p> Наша компания занимается комплексным оснащением стоматологических учреждений от этапа проектирования до поставки оборудования. </p>
-					<a href="javascript:" class="btn">Реализованные проекты</a>
+					<a href="{{ url('projects:projects_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+						 class="btn">Реализованные проекты</a>
 				</div>
 			</div>
 			<div class="col-lg-6">

@@ -7,6 +7,7 @@ from pure_pagination import Paginator
 
 from base import ARTICLES_PER_PAGE
 from knowledge import models
+from snippets.jinjaglobals import var
 from snippets.models.siblings import get_siblings
 from snippets.views import BaseTemplateView
 
@@ -17,6 +18,8 @@ class KnowledgeIndexView(BaseTemplateView):
 
     def get_context_data(self, **kwargs):
         kwargs = super(KnowledgeIndexView, self).get_context_data(**kwargs)
+        request = kwargs['view'].request
+
         articles_list = models.Article.objects\
             .published()\
             .actual()\
@@ -44,18 +47,15 @@ class KnowledgeIndexView(BaseTemplateView):
             articles_list = []
 
         list_url = reverse('knowledge:knowledge_index', kwargs={'lang': kwargs.get('lang')})
-        kwargs['view'].request.active_url = list_url
+        request.active_url = list_url
 
         kwargs.update(
             base_url=kwargs['view'].request.active_url,
             categories=categories,
             current_category=current_category,
-            get_params='',
             articles_list=articles_list,
             list_url=list_url,
-            paginator=paginator,
-            paginator_page=paginator_page,
-            page=page
+            paginator_page=paginator_page
         )
 
         return kwargs
@@ -76,6 +76,7 @@ class KnowledgeView(BaseTemplateView):
 
         kwargs.update(
             current_article=current_article,
+            list_name=var('KNOWLEDGE_TITLE', kwargs['view'].request),
             list_url=list_url,
             sections=sections,
             siblings=siblings

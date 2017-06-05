@@ -7,6 +7,7 @@ from pure_pagination import Paginator
 
 from base import ARTICLES_PER_PAGE
 from press import models
+from snippets.jinjaglobals import var
 from snippets.models.siblings import get_siblings
 from snippets.views import BaseTemplateView
 
@@ -39,11 +40,8 @@ class PressIndexView(BaseTemplateView):
 
         kwargs.update(
             base_url=kwargs['view'].request.active_url,
-            get_params='',
             articles_list=articles_list,
-            paginator=paginator,
-            paginator_page=paginator_page,
-            page=page
+            paginator_page=paginator_page
         )
 
         return kwargs
@@ -64,6 +62,7 @@ class PressView(BaseTemplateView):
 
         kwargs.update(
             current_article=current_news,
+            list_name=var('NEWS_TITLE', kwargs['view'].request),
             list_url=list_url,
             sections=sections,
             siblings=siblings

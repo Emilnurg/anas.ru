@@ -90,9 +90,9 @@
             <div class="container">
               <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  <form action="{{ url('search:search_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-												class="search-form">
-                    <input type="text" name="search" class="search-form__field">
+                  <form action="{{ url('search:search', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+												class="search-form" method="get" autocomplete="off" data-novalidate="">
+                    <input type="text" name="q" class="search-form__field" value="{{ request.GET.get('q', '') }}"/>
                     <button type="submit" class="search-form__button" disabled>
 											{{- var('FIND_BUTTON', request) -}}
 										</button>
@@ -237,7 +237,7 @@
         <div class="header__mobile">
           <div class="container">
             <div class="search header__search-open">
-              <a href="{{ url('search:search_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+              <a href="{{ url('search:search', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 								 class="search__toggle">
                 <span>{{ var('SEARCH_BUTTON', request) }}</span>
               </a>
@@ -358,7 +358,8 @@
     {%- block EXTRA_STYLES %}{% endblock -%}
 
     <script src="{{ static_with_mtime('js/critical.js') }}"></script>
-		<script src="{{ static_with_mtime('js/main.js') }}"></script>s
+		<script src="{{ static_with_mtime('js/partials/scripts.js') }}"></script>
+		<script src="{{ static_with_mtime('js/main.js') }}"></script>
 		<script src="{{ static_with_mtime('js/core.js') }}"></script>
 		{%- block EXTRA_SCRIPTS %}{% endblock -%}
     {%- block EXTRA_BODY %}{% endblock -%}

@@ -39,11 +39,6 @@ def config_index_articles():
                             'max_input_length': 50,
                             'preserve_separators': False
                         },
-                        'body': {
-                            'type': 'text',
-                            'store': False,
-                            'analyzer': 'common_analyzer'
-                        },
                         'category_titles': {
                             'type': 'text',
                             'store': False,
@@ -88,7 +83,6 @@ def bind_article_body(target):
             'input': target.title.lower(),
             'weight': 1
         }],
-        'body': target.body,
         'ordering': target.ordering,
         'slug': target.slug,
         'title': target.title

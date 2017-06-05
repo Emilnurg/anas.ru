@@ -9,9 +9,9 @@ class BaseTemplateView(TemplateView):
     template_engine = 'jinja2'
     content_type = 'text/html'
 
-    def get_page(self):
+    def get_page(self, param='page'):
         """Получает номер страницы пагинации"""
-        page = self.kwargs.get('page')
+        page = self.kwargs.get(param)
         try:
             page = int(page)
         except (ValueError, TypeError):

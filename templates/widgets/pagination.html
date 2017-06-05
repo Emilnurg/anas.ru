@@ -1,3 +1,4 @@
+{%- macro pagination(request, base_url, paginator_page, get_params=None, hashname=None) -%}
 {%- if base_url and paginator_page and paginator_page.has_other_pages() -%}
 <div class="page-controls">
 	<div class="page-controls__buttons">
@@ -5,7 +6,9 @@
 			<div>
 				<a href="
 					{{- base_url -}}
-					{%- if paginator_page.previous_page_number() != 1 %}page/{{ paginator_page.previous_page_number() }}/{% endif %}{{ get_params or '' }}"
+					{%- if paginator_page.previous_page_number() != 1 %}page/{{ paginator_page.previous_page_number() }}/{% endif -%}{{ get_params or '' -}}
+					{%- if hashname %}#{{ hashname }}{% endif -%}
+					"
 					 class="page-control page-control--prev">
 					{{- var('PAGE_PREVIOUS', request) -}}
 				</a>
@@ -16,7 +19,9 @@
 			<div>
 				<a href="
 					{{- base_url -}}
-					{%- if paginator_page.next_page_number() != 1 %}page/{{ paginator_page.next_page_number() }}/{% endif %}{{ get_params or '' }}"
+					{%- if paginator_page.next_page_number() != 1 %}page/{{ paginator_page.next_page_number() }}/{% endif %}{{ get_params or '' }}{{ get_params or '' -}}
+					{%- if hashname %}#{{ hashname }}{% endif -%}
+					"
 					 class="page-control page-control--next">
 					{{- var('PAGE_NEXT', request) -}}
 				</a>
@@ -31,7 +36,10 @@
 					{%- if paginator_page.number == i -%}
 						<span>{{ i }}</span>
 					{%- else -%}
-						<a href="{{ base_url }}{% if 1 != i %}page/{{ i }}/{% endif %}{{ get_params or '' }}">{{ i }}</a>
+						<a href="
+							{{- base_url }}{% if 1 != i %}page/{{ i }}/{% endif %}{{ get_params or '' -}}
+							{%- if hashname %}#{{ hashname }}{% endif -%}
+						">{{ i }}</a>
 					{%- endif -%}
 				{%- else -%}
 					...
@@ -41,3 +49,4 @@
 	</ul>
 </div>
 {%- endif -%}
+{%- endmacro -%}
