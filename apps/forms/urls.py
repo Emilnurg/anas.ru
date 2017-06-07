@@ -10,6 +10,10 @@ urlpatterns = (
         views.TrainingRequestView.as_view(), name='training'
     ),
     url(
+        r'^(?P<lang>\w{2})/forms/callback/$',
+        views.CallbackRequestView.as_view(), name='callback'
+    ),
+    url(
         r'^(?P<lang>\w{2})/forms/feedback/$',
         views.FeedbackRequestView.as_view(), name='feedback'
     ),

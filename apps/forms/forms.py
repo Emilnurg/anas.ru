@@ -11,17 +11,15 @@ class BaseRequestForm(forms.ModelForm):
     """Базовый класс для форм запросов с сайта"""
     class Meta:
         fields = '__all__'
+        exclude = ('read_status',)
 
 
-class TrainingFormRequestForm(BaseRequestForm):
-    """Форма заявки на обучение"""
-    course = forms.ModelChoiceField(
-        label=_('Курс'), queryset=Course.objects.published(), required=False
-    )
-
+class CallbackRequestForm(BaseRequestForm):
+    """Форма заказа звонка"""
     class Meta:
-        model = models.TrainingFormRequest
+        model = models.CallbackFormRequest
         fields = '__all__'
+        exclude = ('read_status',)
 
 
 class FeedbackRequestForm(BaseRequestForm):
@@ -29,6 +27,7 @@ class FeedbackRequestForm(BaseRequestForm):
     class Meta:
         model = models.FeedbackFormRequest
         fields = '__all__'
+        exclude = ('read_status',)
 
 
 class PartnershipRequestForm(BaseRequestForm):
@@ -36,6 +35,7 @@ class PartnershipRequestForm(BaseRequestForm):
     class Meta:
         model = models.PartnershipFormRequest
         fields = '__all__'
+        exclude = ('read_status',)
 
 
 class ProductProposalRequestForm(BaseRequestForm):
@@ -47,6 +47,7 @@ class ProductProposalRequestForm(BaseRequestForm):
     class Meta:
         model = models.ProductProposalRequest
         fields = '__all__'
+        exclude = ('read_status',)
 
 
 class ProductQuestionRequestForm(BaseRequestForm):
@@ -58,6 +59,7 @@ class ProductQuestionRequestForm(BaseRequestForm):
     class Meta:
         model = models.ProductQuestionRequest
         fields = '__all__'
+        exclude = ('read_status',)
 
 
 class PurchaseRequestForm(BaseRequestForm):
@@ -69,6 +71,7 @@ class PurchaseRequestForm(BaseRequestForm):
     class Meta:
         model = models.PurchaseFormRequest
         fields = '__all__'
+        exclude = ('read_status',)
 
 
 class ServiceRequestForm(BaseRequestForm):
@@ -76,6 +79,7 @@ class ServiceRequestForm(BaseRequestForm):
     class Meta:
         model = models.ServiceFormRequest
         fields = '__all__'
+        exclude = ('read_status',)
 
 
 class SupportRequestForm(BaseRequestForm):
@@ -83,3 +87,16 @@ class SupportRequestForm(BaseRequestForm):
     class Meta:
         model = models.SupportFormRequest
         fields = '__all__'
+        exclude = ('read_status',)
+
+
+class TrainingFormRequestForm(BaseRequestForm):
+    """Форма заявки на обучение"""
+    course = forms.ModelChoiceField(
+        label=_('Курс'), queryset=Course.objects.published(), required=False
+    )
+
+    class Meta:
+        model = models.TrainingFormRequest
+        fields = '__all__'
+        exclude = ('read_status',)

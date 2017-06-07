@@ -62,6 +62,16 @@ class CommentAdminMixin(admin.ModelAdmin):
     comment_short.short_description = _('Комментарий')
 
 
+@admin.register(models.CallbackFormRequest)
+class CallbackFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
+    """Админ.часть запросов заказа звонка"""
+    list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
+    search_fields = BaseNamePhoneRequestAdmin.search_fields + ('comment',)
+
+
+CallbackFormRequestAdmin.comment_short.short_description = _('Вопрос')
+
+
 @admin.register(models.FeedbackFormRequest)
 class FeedbackFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
     """Админ.часть запросов обратной связи"""

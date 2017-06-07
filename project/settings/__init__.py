@@ -164,7 +164,8 @@ INSTALLED_APPS = (
     'search',
     'snippets.seo',
     'uploadifive',
-    'users'
+    'users',
+    'popups'
 )
 
 LOGIN_URL = reverse_lazy('auth_login')
@@ -231,9 +232,9 @@ SUIT_CONFIG = {
         'training',
         'partners',
         'support',
+        'forms',
         'users',
         'auth',
-        'uploadifive'
         'search'
     ]
 }

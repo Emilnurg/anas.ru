@@ -26,9 +26,9 @@ class BaseFormRequestView(BaseView):
             return form_validation_error_response(form.errors)
 
 
-class TrainingRequestView(BaseFormRequestView):
-    """Обработчик заявки на обучение"""
-    form_class = forms.TrainingFormRequestForm
+class CallbackRequestView(BaseFormRequestView):
+    """Обработчик формы заказа звонка"""
+    form_class = forms.CallbackRequestForm
 
 
 class FeedbackRequestView(BaseFormRequestView):
@@ -64,3 +64,8 @@ class ServiceRequestView(BaseFormRequestView):
 class SupportRequestView(BaseFormRequestView):
     """Обработчик формы тех.поддержки"""
     form_class = forms.SupportRequestForm
+
+
+class TrainingRequestView(BaseFormRequestView):
+    """Обработчик заявки на обучение"""
+    form_class = forms.TrainingFormRequestForm

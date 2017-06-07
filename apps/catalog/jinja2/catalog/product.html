@@ -40,8 +40,16 @@
 					{%- endfor -%}
 				</div>
 				<div class="product__buttons">
-					<a href="javascript:" class="btn">Запрос КП</a>
-					<a href="javascript:" class="btn btn--link">Задать вопрос</a>
+					<a href="javascript:"
+						 data-fancybox
+						 data-type="ajax"
+						 data-src="{{ url('popups:commercial_proposal', kwargs={'lang': request.LANGUAGE_CODE, 'slug': current_product.slug|e}) }}"
+						 class="btn">Запрос КП</a>
+					<a href="javascript:"
+						 data-fancybox
+						 data-type="ajax"
+						 data-src="{{ url('popups:product_question', kwargs={'lang': request.LANGUAGE_CODE, 'slug': current_product.slug|e}) }}"
+						 class="btn btn--link">Задать вопрос</a>
 				</div>
 			</div>
 

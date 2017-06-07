@@ -71,91 +71,6 @@ function fancybox() {
 }
 
 /**
- * validation
- */
-function formValidation() {
-  function validate(field, type) {
-    var pp = '';
-
-    if (type === 'email') {
-      pp = /^([a-zA-Z0-9_.\-])+@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    }
-
-    if (type === 'onlyNumber') {
-      pp = /^([0-9()\/+ -]+)$/;
-    }
-
-    if (type === 'tel') {
-      pp = /^\+?[\d()\-\s]*\d+\s*$/;
-    }
-    if (type === 'notEmpty') {
-      pp = /^[A-Za-zА-Яа-я0-9 _]*[A-Za-zА-Яа-я0-9][A-Za-zА-Яа-я0-9 _#()$@8%№;'":,.+?!#*-/\n]*$/;
-    }
-
-    return field.match(pp);
-  }
-
-  var required = 0;
-  var validated = 0;
-
-  //проверяем валидность когда нажимается конпка
-  $('body').on('submit', 'form:not[data-novalidate]', function() {
-    var $form = $(this);
-
-    $form.find('.required').each(function() {
-      var fieldType = $(this).data('validate');
-      if (!validate($(this).val(), fieldType)) {
-        $(this).parent().removeClass('has-success').addClass('has-error');
-      } else {
-        $(this).parent().removeClass('has-error').addClass('has-success');
-      }
-    });
-
-    required = $form.find('.required').length;
-    validated = $form.find('.has-success').length;
-
-    //если нет ошибок
-    if (required === validated) {
-      var postUrl = $form.attr('action');
-      var data = $form.serialize();
-      $.ajax({
-        type: "POST",
-        url: postUrl,
-        data: data,
-        success: function(){
-          $form.trigger('reset');
-          $(this).find('.has-success').removeClass('has-success');
-
-          $.fancybox.close('all');
-
-        },
-        error: function(){
-
-        }
-      });
-      return false;
-    } else {
-      return false;
-    }
-  });
-
-  //проверяем валидность при изменение текста в инпутах
-  $('body').on('input', '.required', function() {
-    var fieldType = $(this).data('validate');
-
-    if (!validate($(this).val(), fieldType)) {
-      $(this).parent().removeClass('has-success').addClass('has-error');
-
-    } else {
-      $(this).parent().removeClass('has-error').addClass('has-success');
-    }
-
-    required = $(this).parents('form').find('.required').length;
-    validated = $(this).parents('form').find('.has-success').length;
-  });
-}
-
-/**
  * scroll to anchor
  */
 function scrollToHref() {
@@ -744,7 +659,6 @@ function courseTabs() {
 function initScripts() {
   maskedInput();
   fancybox();
-  formValidation();
   scrollToHref();
   breakpointsHandler();
   headerDropdown();
@@ -767,6 +681,288 @@ function initScripts() {
   parallax();
 }
 
+function initMap() {
+  var mapEl = document.getElementById('map'),
+      $map = $(mapEl);
+
+  if ($map.size() > 0) {
+    var lon = parseFloat($map.data('coord-lon')),
+      lat = parseFloat($map.data('coord-lat'));
+
+    var map = new google.maps.Map(mapEl, {
+      center: {
+        lat: lat,
+        lng: lon
+      },
+      scrollwheel: false,
+      zoom: 17
+    });
+    new google.maps.Marker({
+      map: map,
+      position: {
+        lat: lat,
+        lng: lon
+      },
+      icon: '/static/images/map_pin_logo.svg'
+    });
+  }
+}
+
+function openThanksCallback() {
+  $('.thanks_callback').click();
+}
+
+function openThanksRequest() {
+  $('.thanks_request').click();
+}
+
+window.Share = {
+  getImage: function() {
+    var sel = $('meta[property="og:image"]');
+    if (sel.size() > 0) {
+      return encodeURIComponent(sel.attr('content'));
+    }
+    return '';
+  },
+
+  getSummary: function() {
+    var sel = $('meta[property="og:description"]');
+    if (sel.size() > 0) {
+      return encodeURIComponent(sel.attr('content'));
+    }
+    return '';
+  },
+
+  getTitle: function() {
+    var sel = $('meta[property="og:title"]');
+    var title = '';
+    if (sel.size() > 0) {
+      title = sel.attr('content');
+    } else {
+      title = $('title').text();
+    }
+    return encodeURIComponent(title);
+  },
+
+  getUrl: function() {
+    return encodeURIComponent(window.location.href);
+  },
+
+  facebook: function() {
+		var url = 'https://www.facebook.com/sharer.php?s=100';
+		url += '&p[title]=' + Share.getTitle();
+		url += '&p[summary]=' + Share.getSummary();
+		url += '&p[url]=' + Share.getUrl();
+		var img = Share.getImage();
+		if (img) {
+		  url += '&p[images][0]=' + img;
+    }
+
+		Share.popup(url);
+	},
+
+  googleplus: function() {
+		Share.popup('https://plus.google.com/share?url=' + Share.getUrl());
+	},
+
+  ok: function() {
+    Share.popup('https://connect.ok.ru/offer?url=' + Share.getUrl());
+  },
+
+  twitter: function() {
+		var url = 'https://twitter.com/share?';
+		url += 'text='+ Share.getTitle();
+		url += '&url=' + Share.getUrl();
+		url += '&counturl=' + Share.getUrl();
+		Share.popup(url);
+	},
+
+	vk: function() {
+		var url = 'https://vk.com/share.php?';
+		url += 'url=' + Share.getUrl();
+		url += '&title=' + Share.getTitle();
+		url += '&image=' + Share.getImage();
+		url += '&noparse=true';
+		Share.popup(url);
+	},
+
+	popup: function(url) {
+		window.open(url, '', 'toolbar=0,status=0,width=626,height=436');
+	}
+};
+
+function Form() {
+	var T = this;
+	this.button = '.submit,input[type="submit"]';
+	this.message = '.messages';
+	this.error = '.form__err';
+	this.inputs = 'input, select, textarea';
+	this.hasErrorClass = '.has-error';
+	this.hasSuccessClass = '.has-success';
+	this.excludes = 'input[type=radio],input[type=hidden],input[type=submit],input[type=image],input[type=button]';
+
+	this.populateDataAjaxForm = function(form) {
+		var data = {};
+		$(T.inputs, form).each(function(){
+			if($(this).is('input') && $(this).attr('type') === 'checkbox') {
+				data[$(this).attr('name')] = $(this).is(':checked') ? '1' : '0';
+			} else if(typeof($(this).attr('name')) !== 'undefined' && $(this).attr('name') === 'distance') {
+				data[$(this).attr('name')] = parseInt($(this).val());
+			} else {
+				data[$(this).attr('name')] = $(this).val();
+			}
+		});
+		return data;
+	};
+
+	this.clearFormErrors = function(form){
+		$(T.error, form).html('');
+		$(T.hasErrorClass, form).removeClass(this.hasErrorClass.substr(1));
+	};
+
+	this.setFormSuccess = function(form, message) {
+		T.clearFormErrors(form);
+		if(typeof(message) === 'string') {
+			$(T.message, form).addClass('success').removeClass('failure').html(message).fadeIn(200);
+		}
+	};
+
+	this.setFormErrors = function(form, errors) {
+		T.clearFormErrors(form);
+		$(T.inputs, form).each(function() {
+			var name = $(this).attr('name'),
+        line = $(this).parent();
+
+			if (name && name in errors) {
+			  if (errors.hasOwnProperty(name)) {
+			    var error = errors[name].join(';');
+          delete errors[name];
+
+          if (line) {
+            line.addClass(T.hasErrorClass.substr(1))
+              .find(T.error).html(error);
+          }
+        }
+			} else {
+			  line = $(this).parent();
+			  line.addClass(T.hasSuccessClass.substr(1))
+          .find(T.error).html('');
+      }
+		});
+
+		if(errors) {
+			var error = [];
+			for (var i in errors) {
+			  if (errors.hasOwnProperty(i)) {
+			    error.push(errors[i].join(';'));
+        }
+			}
+			error = error.join('<br/>');
+			$(T.message, form).removeClass('success').addClass('failure').html(error).fadeIn(200);
+		}
+	};
+
+	this.clearFormValues = function(form) {
+		$(T.inputs, form).not(T.excludes).val('');
+		$('.checkbox input', form).val('0');
+		$('input[type=radio]', form).removeAttr('checked');
+		$('.form__group', form).removeClass('input--filled has-error has-success');
+	};
+
+	this.manageForm = function(formCont, callback, clearOnSuccess) {
+		callback = typeof(callback) === 'undefined' ? function(){} : callback;
+		clearOnSuccess = typeof(clearOnSuccess) === 'undefined' ? true : clearOnSuccess;
+		formCont = $(formCont);
+		$(T.button, formCont).click(function(e) {
+			e.preventDefault();
+			var inactive = $(this).data('inactive');
+			if(typeof(inactive) === 'undefined' || !inactive){
+				$(this).parents('form').submit();
+			}
+			return false;
+		});
+
+		$(formCont).submit(function(e){
+			e.preventDefault();
+			var form = $(this);
+			$(T.button, form).data('inactive', true).addClass('inactive');
+			$(T.message, form).fadeOut(150);
+			T.clearFormErrors(form);
+			var data = T.populateDataAjaxForm(form);
+
+			var onSuccess = function(data) {
+			  if(data['status'] === 'ok') {
+          if (clearOnSuccess) {
+            T.clearFormValues(form);
+          }
+          T.setFormSuccess(form, data['detail']);
+          callback(data);
+        } else {
+          T.setFormErrors(form, data['detail']['errors']);
+        }
+        $(T.button, form).data('inactive', false).removeClass('inactive');
+      };
+
+			$.ajax({
+				url: form.attr('action'),
+				data: data,
+				dataType: 'json',
+				type: 'POST',
+				timeout: 60000,  // 1 min
+				success: onSuccess,
+				error: function(jqXHR, textStatus) {
+				  if (jqXHR.status > 400) {
+				    console.log(textStatus + ' ' + jqXHR.status + ': ' + jqXHR.statusText);
+
+				    if(jqXHR.statusText) {
+	  					T.setFormErrors(form, {'Server error': [jqXHR.statusText]});
+	  				}
+	  				$(T.button, form).data('inactive', false).removeClass('inactive');
+          } else if (jqXHR.status === 400) {
+				    onSuccess(jqXHR.responseJSON);
+          }
+				}
+			});
+			return false;
+		});
+	};
+}
+
+$(document).ready(function() {
+  var body = $('body');
+  window.F = new Form();
+  var feedbackForm = $('.b-feedback__form');
+  if (feedbackForm.size() > 0) {
+    window.F.manageForm(feedbackForm, openThanksRequest);
+  }
+
+  if (body.hasClass('body-support-category')) {
+    var qa = $('.b-qa'),
+        sections = $('.support-sections', qa),
+        questionForm = $('.b-feedback__form', qa),
+        questionsBlock = $('.qa', qa),
+        questions = $('.qa__item', questionsBlock);
+    $('a', sections).click(function(e) {
+       e.preventDefault();
+       $(this).toggleClass('active');
+
+       if ($(this).hasClass('active')) {
+         questionForm.hide();
+         questionsBlock.show();
+       } else {
+         questionForm.show();
+         questionsBlock.hide();
+       }
+
+       $(this).parent().siblings().find('a').removeClass('active');
+
+       var sectionID = $(this).data('section');
+       questions.hide().filter('[data-sections*="|' + sectionID + '|"]').show();
+
+       return false;
+     });
+  }
+});
 
 /**
  * First Load Page

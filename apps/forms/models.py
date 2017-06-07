@@ -33,21 +33,17 @@ class BaseNamePhoneRequest(BaseFormRequest):
         return '%s (%s)' % (self.name, self.telephone)
 
 
-class TrainingFormRequest(BaseNamePhoneRequest):
-    """Запросы на обучение"""
-    course = models.ForeignKey(
-        'training.Course', verbose_name=_('Курс'), related_name=_('course_requests'),
-        blank=True, null=True
-    )
+class CallbackFormRequest(BaseNamePhoneRequest):
+    """Запросы заказа звонка"""
 
     class Meta:
-        verbose_name = _('Запрос на обучение')
-        verbose_name_plural = _('Обучение')
+        verbose_name = _('Заказ звонка')
+        verbose_name_plural = _('Заказы звонка')
 
 
 class FeedbackFormRequest(BaseNamePhoneRequest):
     """Запросы обратной связи"""
-    comment = models.TextField(_('Вопрос'), max_length=32768, blank=True, null=True)
+    comment = models.TextField(_('Вопрос'), max_length=32768)
 
     class Meta:
         verbose_name = _('Запрос обратной связи')
@@ -125,3 +121,15 @@ class SupportFormRequest(BaseFormRequest):
 
     def __str__(self):
         return '%s <%s>' % (self.name, self.email)
+
+
+class TrainingFormRequest(BaseNamePhoneRequest):
+    """Запросы на обучение"""
+    course = models.ForeignKey(
+        'training.Course', verbose_name=_('Курс'), related_name=_('course_requests'),
+        blank=True, null=True
+    )
+
+    class Meta:
+        verbose_name = _('Запрос на обучение')
+        verbose_name_plural = _('Обучение')

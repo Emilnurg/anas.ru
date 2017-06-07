@@ -78,7 +78,11 @@
               {%- endif -%}
 
 							{%- if var('CALLBACK_REQUEST_TEXT', request) -%}
-							<a href="javascript:" class="header__callback">
+							<a href="javascript:"
+								 data-fancybox
+								 data-type="ajax"
+								 data-src="{{ url('popups:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+								 class="header__callback">
 								{{- var('CALLBACK_REQUEST_TEXT', request) -}}
 							</a>
 							{%- endif -%}
@@ -253,7 +257,11 @@
 
           <div class="header__contacts">
             <div class="container">
-              <a href="javascript:" class="header__callback">
+              <a href="javascript:"
+								 data-fancybox
+								 data-type="ajax"
+								 data-src="{{ url('popups:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+								 class="header__callback">
 								{{- var('CALLBACK_REQUEST_TEXT', request) -}}
 							</a>
               <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
@@ -273,7 +281,11 @@
           <div class="header-fixed__right">
             <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
 							 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
-            <a href="javascript:" class="header__callback">
+            <a href="javascript:"
+							 data-fancybox
+							 data-type="ajax"
+							 data-src="{{ url('popups:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+							 class="header__callback">
 							{{- var('CALLBACK_REQUEST_TEXT', request) -}}
 						</a>
           </div>
@@ -312,6 +324,7 @@
             </div>
           </div>
         </div>
+
         <div class="footer__middle">
           <div class="container">
 						{%- if var('ADDRESS', request) -%}
@@ -354,13 +367,24 @@
 			{%- endblock FOOTER -%}
     </div>
 
+		<a href="javascript:"
+			data-fancybox
+			data-type="ajax"
+			data-src="{{ url('popups:thanks_callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+			class="hide thanks_callback"></a>
+
+		<a href="javascript:"
+			data-fancybox
+			data-type="ajax"
+			data-src="{{ url('popups:thanks_request', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+			class="hide thanks_request"></a>
+
 		<link rel="stylesheet" href="{{ static_with_mtime('css/style.css') }}">
     {%- block EXTRA_STYLES %}{% endblock -%}
 
     <script src="{{ static_with_mtime('js/critical.js') }}"></script>
 		<script src="{{ static_with_mtime('js/main.js') }}"></script>
 		<script src="{{ static_with_mtime('js/partials/scripts.js') }}"></script>
-		<script src="{{ static_with_mtime('js/core.js') }}"></script>
 		{%- block EXTRA_SCRIPTS %}{% endblock -%}
     {%- block EXTRA_BODY %}{% endblock -%}
   </body>
