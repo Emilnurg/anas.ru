@@ -158,26 +158,31 @@
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<form action="#" class="form b-feedback__form">
+				<form action="{{ url('forms:training', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
+							{{- csrf_input -}}
 					<div class="form__heading">
 						<h4>Подать заявку на обучение</h4>
 						<p> Оставьте контакты, мы свяжемся с вами по телефону </p>
 					</div>
+
 					<div class="form__content">
+						<input type="hidden" name="course" value="{{ current_course.pk }}">
 						<div class="form__group">
-							<input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
-							<div class="form__placeholder"> Имя </div>
+							<input type="text" name="name" class="form__field required" id="feedback_name"/>
+							<label for="feedback_name" class="form__placeholder">Имя</label>
+							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
-							<input type="text" name="tel" class="form__field required" placeholder="" data-validate="tel">
-							<div class="form__placeholder"> Телефон </div>
+							<input type="text" name="telephone" class="form__field required" id="feedback_telephone"/>
+							<label for="feedback_telephone" class="form__placeholder">Телефон</label>
+							<div class="form__err"></div>
 						</div>
 					</div>
+
 					<div class="form__button">
 						<button type="submit" class="btn btn--black">Отправить</button>
-						<!-- <div class="form__err">
-					не правильно введен адрес
-				</div> --></div>
+					</div>
 				</form>
 			</div>
 		</div>

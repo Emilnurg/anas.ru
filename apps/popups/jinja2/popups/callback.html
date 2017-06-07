@@ -1,29 +1,38 @@
-<div id="modal" class="modal modal--ajax modal--form">
+<div id="modal" class="modal modal--ajax modal--form modal-callback">
   <div class="modal__inner">
-    <form action="#" class="form b-feedback__form">
+    <form action="{{ url('forms:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+					class="form b-feedback__form callback-form" method="POST" accept-charset="utf-8" novalidate>
+			{{- csrf_input -}}
       <div class="form__heading">
         <h4>Звонок консультанта</h4>
       </div>
-      <div class="form__content">
-        <div class="form__group">
-          <input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
-          <div class="form__placeholder">
-            Имя
-          </div>
-        </div>
-        <div class="form__group">
-          <input type="text" name="telemail" class="form__field required" placeholder="" data-validate="notEmpty">
-          <div class="form__placeholder">
-            E-mail или телефон
-          </div>
-        </div>
-      </div>
+
+			<div class="form__content">
+				<input type="hidden" name="place" value="popup"/>
+				<div class="form__group">
+					<input type="text" name="name" class="form__field required" id="popup-callback-name">
+					<label for="popup-callback-name" class="form__placeholder">Имя</label>
+					<div class="form__err"></div>
+				</div>
+				<div class="form__group">
+					<input type="text" name="telephone" class="form__field required" id="popup-callback-telephone">
+					<label for="popup-callback-telephone" class="form__placeholder">E-mail или телефон</label>
+					<div class="form__err"></div>
+				</div>
+			</div>
+
       <div class="form__button">
         <button type="submit" class="btn btn--black">Отправить</button>
-        <!-- <div class="form__err">
-          не правильно введен адрес
-        </div> -->
       </div>
     </form>
   </div>
+
+	<script type="application/javascript">
+	$(document).ready(function() {
+		window.F.manageForm('.modal-callback .form', function() {
+		  $('.modal-callback [data-fancybox-close]').click();
+		  openThanksCallback();
+		});
+	});
+	</script>
 </div>

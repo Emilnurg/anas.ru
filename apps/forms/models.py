@@ -3,7 +3,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from forms.enums import FormRequestReadStatusEnum
+from forms.enums import FormRequestReadStatusEnum, CallbackFormPlaceEnum, FeedbackFormPlaceEnum
 from snippets.models import LastModMixin, BasicModel
 
 
@@ -35,6 +35,10 @@ class BaseNamePhoneRequest(BaseFormRequest):
 
 class CallbackFormRequest(BaseNamePhoneRequest):
     """Запросы заказа звонка"""
+    place = models.CharField(
+        _('Расположение формы'), blank=True, null=True, max_length=50,
+        choices=CallbackFormPlaceEnum.get_choices()
+    )
 
     class Meta:
         verbose_name = _('Заказ звонка')
@@ -44,51 +48,52 @@ class CallbackFormRequest(BaseNamePhoneRequest):
 class FeedbackFormRequest(BaseNamePhoneRequest):
     """Запросы обратной связи"""
     comment = models.TextField(_('Вопрос'), max_length=32768)
+    place = models.CharField(
+        _('Расположение формы'), blank=True, null=True, max_length=50,
+        choices=FeedbackFormPlaceEnum.get_choices()
+    )
 
     class Meta:
         verbose_name = _('Запрос обратной связи')
         verbose_name_plural = _('Обратная связь')
 
 
-class PartnershipFormRequest(BaseNamePhoneRequest):
-    """Запросы сотрудничества"""
-    comment = models.TextField(_('Комментарий'), max_length=32768, blank=True, null=True)
-
-    class Meta:
-        verbose_name = _('Запрос сотрудничества')
-        verbose_name_plural = _('Сотрудничество')
-
-
 class ProductProposalRequest(BaseNamePhoneRequest):
     """Запрос КП по продукту"""
     product = models.ForeignKey(
-        'catalog.Product', verbose_name=_('Продукт'), related_name=_('question_proposals')
+        'catalog.Product', verbose_name=_('Продукт'), related_name='question_proposals'
     )
     email = models.EmailField(_('E-mail'))
-    comment = models.TextField(_('Комментарий'), max_length=32768, blank=True, null=True)
 
     class Meta:
         verbose_name = _('Запрос КП по продукту')
         verbose_name_plural = _('Запросы КП по продуктам')
 
+    def __str__(self):
+        return '%s: %s <%s>' % (self.product.title, self.name, self.email)
 
-class ProductQuestionRequest(BaseNamePhoneRequest):
+
+class ProductQuestionRequest(BaseFormRequest):
     """Вопрос по продукту"""
     product = models.ForeignKey(
-        'catalog.Product', verbose_name=_('Продукт'), related_name=_('question_requests')
+        'catalog.Product', verbose_name=_('Продукт'), related_name='question_requests'
     )
+    name = models.CharField(_('Имя'), max_length=255)
     email = models.EmailField(_('E-mail'))
-    comment = models.TextField(_('Комментарий'), max_length=32768, blank=True, null=True)
+    comment = models.TextField(_('Комментарий'), max_length=32768)
 
     class Meta:
         verbose_name = _('Вопрос по продукту')
         verbose_name_plural = _('Вопросы по продуктам')
 
+    def __str__(self):
+        return '%s: %s <%s>' % (self.product.title, self.name, self.email)
+
 
 class PurchaseFormRequest(BaseNamePhoneRequest):
     """Запросы закупки"""
     product = models.ForeignKey(
-        'catalog.Product', verbose_name=_('Продукт'), related_name=_('purchase_requests'),
+        'catalog.Product', verbose_name=_('Продукт'), related_name='purchase_requests',
         blank=True, null=True
     )
     comment = models.TextField(_('Комментарий'), max_length=32768, blank=True, null=True)

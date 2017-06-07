@@ -86,7 +86,9 @@
 {%- if about_page.questions_title -%}
 <div class="b-form">
 	<div class="container">
-		<form action="#" class="form b-feedback__form">
+		<form action="{{ url('forms:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+					class="form b-feedback__form callback-form" method="POST" accept-charset="utf-8" novalidate>
+			{{- csrf_input -}}
 			<div class="form__heading">
 				{%- if about_page.questions_title -%}
 				<h4>{{ about_page.questions_title }}</h4>
@@ -98,20 +100,22 @@
 			</div>
 
 			<div class="form__content">
+				<input type="hidden" name="place" value="about"/>
 				<div class="form__group">
-					<input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
-					<div class="form__placeholder"> Имя </div>
+					<input type="text" name="name" class="form__field required" id="callback-name">
+					<label for="callback-name" class="form__placeholder">Имя</label>
+					<div class="form__err"></div>
 				</div>
 				<div class="form__group">
-					<input type="text" name="tel" class="form__field required" placeholder="" data-validate="tel">
-					<div class="form__placeholder"> Телефон </div>
+					<input type="text" name="telephone" class="form__field required" id="callback-telephone">
+					<label for="callback-telephone" class="form__placeholder">Телефон</label>
+					<div class="form__err"></div>
 				</div>
 			</div>
+
 			<div class="form__button">
 				<button type="submit" class="btn btn--black">Отправить</button>
-				<!-- <div class="form__err">
-		не правильно введен адрес
-	</div> --></div>
+			</div>
 		</form>
 	</div>
 </div>

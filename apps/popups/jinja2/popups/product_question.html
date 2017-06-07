@@ -1,6 +1,8 @@
-<div id="modal" class="modal modal--ajax modal--form">
+<div id="modal" class="modal modal--ajax modal--form modal-product-question">
   <div class="modal__inner">
-    <form action="#" class="form b-feedback__form">
+    <form action="{{ url('forms:product_question', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+					class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
+			{{- csrf_input -}}
       <div class="form__heading">
         <h4>Есть вопросы по сотрудничеству?</h4>
         <p>
@@ -8,32 +10,38 @@
           <span>{{ current_product.title }}</span>
         </p>
       </div>
+
       <div class="form__content">
+				<input type="hidden" name="product" value="{{ current_product.pk }}"/>
         <div class="form__group">
-          <input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
-          <div class="form__placeholder">
-            Имя
-          </div>
+          <input type="text" name="name" class="form__field required" id="popup-pq-name"/>
+          <label for="popup-pq-name" class="form__placeholder">Имя</label>
+					<div class="form__err"></div>
         </div>
         <div class="form__group">
-          <input type="text" name="email" class="form__field required" placeholder="" data-validate="email">
-          <div class="form__placeholder">
-            E-mail
-          </div>
+          <input type="text" name="email" class="form__field required" id="popup-pq-email"/>
+          <label for="popup-pq-email" class="form__placeholder">E-mail</label>
+					<div class="form__err"></div>
         </div>
         <div class="form__group">
-          <input type="text" name="question" class="form__field required" placeholder="" data-validate="notEmpty">
-          <div class="form__placeholder">
-            Ваш вопрос
-          </div>
+          <input type="text" name="comment" class="form__field required" id="popup-pq-comment"/>
+          <label for="popup-pq-comment" class="form__placeholder">Ваш вопрос</label>
+					<div class="form__err"></div>
         </div>
       </div>
+
       <div class="form__button">
         <button type="submit" class="btn btn--black">Отправить</button>
-        <!-- <div class="form__err">
-          не правильно введен адрес
-        </div> -->
       </div>
     </form>
   </div>
+
+	<script type="application/javascript">
+	$(document).ready(function() {
+		window.F.manageForm('.modal-product-question .form', function() {
+		  $('.modal-product-question [data-fancybox-close]').click();
+		  openThanksRequest();
+		});
+	});
+	</script>
 </div>

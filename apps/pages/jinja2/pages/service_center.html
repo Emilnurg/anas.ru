@@ -78,38 +78,45 @@
 		<div style="background-image:url({{ service_page.questions_image_right.url }})"></div>
 		{%- endif -%}
 	</div>
+
 	{%- if service_page.questions_title -%}
 	<div class="container">
-		<form action="#" class="form b-feedback__form">
+		<form action="{{ url('forms:service', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+					class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
+			{{- csrf_input -}}
 			<div class="form__heading">
 				<h4>{{ service_page.questions_title }}</h4>
 				{%- if service_page.questions_subtitle -%}
 				<div class="content-block">{{ service_page.questions_subtitle }}</div>
 				{%- endif -%}
 			</div>
+
 			<div class="form__content">
 				<div class="form__group">
-					<input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
-					<div class="form__placeholder"> Имя </div>
+					<input type="text" name="name" class="form__field required" id="service_name">
+					<label for="service_name" class="form__placeholder">Имя</label>
+					<div class="form__err"></div>
 				</div>
 				<div class="form__group">
-					<input type="text" name="tel" class="form__field required" placeholder="" data-validate="tel">
-					<div class="form__placeholder"> Телефон </div>
+					<input type="text" name="telephone" class="form__field required" id="service_telephone">
+					<label for="service_telephone" class="form__placeholder">Телефон</label>
+					<div class="form__err"></div>
 				</div>
 				<div class="form__group">
-					<input type="text" name="tel" class="form__field required" placeholder="" data-validate="email">
-					<div class="form__placeholder"> E-mail </div>
+					<input type="text" name="email" class="form__field required" id="service_email">
+					<label for="service_email" class="form__placeholder">E-mail</label>
+					<div class="form__err"></div>
 				</div>
 				<div class="form__group">
-					<input type="text" name="problem" class="form__field required" placeholder="" data-validate="notEmpty">
-					<div class="form__placeholder"> Опишите проблему </div>
+					<input type="text" name="comment" class="form__field required" id="service_comment">
+					<label for="service_comment" class="form__placeholder">Опишите проблему</label>
+					<div class="form__err"></div>
 				</div>
 			</div>
+
 			<div class="form__button">
 				<button type="submit" class="btn btn--black">Отправить</button>
-				<!-- <div class="form__err">
-		не правильно введен адрес
-	</div> --></div>
+			</div>
 		</form>
 	</div>
 	{%- endif -%}

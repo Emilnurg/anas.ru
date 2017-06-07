@@ -7,7 +7,7 @@ from uploadifive import views
 urlpatterns = (
     url(
         r'^nonce/$',
-        views.NonceView, name='upload_get_nonce'
+        views.NonceView.as_view(), name='upload_get_nonce'
     ),
     url(
         r'^(?P<upload_type>[a-z]{1,30})/$',

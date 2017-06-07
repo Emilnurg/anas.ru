@@ -332,7 +332,7 @@
 .form__group {
   @include placeholder-color(#000, transparent);
   display: block;
-  margin-bottom: 48px;
+  margin-bottom: 34px;
   position: relative;
 
   &:before {
@@ -436,6 +436,7 @@
   line-height: 1.2;
   color: #d2205c;
   @include f-reg;
+  min-height: 14px;
 }
 
 .thank-you {
@@ -481,7 +482,7 @@
   }
 
   .form__group {
-    margin-bottom: 25px;
+    margin-bottom: 11px;
   }
 
   .form__button {

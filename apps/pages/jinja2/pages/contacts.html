@@ -25,7 +25,10 @@
 				{%- endif -%}
 				{#- <a href="javascript:" class="btn">{{ var('REGIONAL_DEALERS_BUTTON', request) }}</a> -#}
 			</div>
-			<form action="#" class="form">
+
+			<form action="{{ url('forms:feedback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+							class="form contacts__form" method="POST" accept-charset="utf-8" novalidate>
+					{{- csrf_input -}}
 				{%- if contacts_page.questions_title -%}
 				<div class="form__heading">
 					<h4>{{ contacts_page.questions_title }}</h4>
@@ -34,28 +37,28 @@
 					{%- endif -%}
 				</div>
 				{%- endif -%}
+
 				<div class="form__content">
 					<div class="form__group">
-						<input type="text" name="name" class="form__field required" placeholder=""
-									 data-validate="notEmpty">
-						<div class="form__placeholder"> Имя</div>
+						<input type="text" name="name" class="form__field required" id="contacts-form-name">
+						<label for="contacts-form-name" class="form__placeholder">Имя</label>
+						<div class="form__err"></div>
 					</div>
 					<div class="form__group">
-						<input type="text" name="tel" class="form__field required" placeholder=""
-									 data-validate="tel">
-						<div class="form__placeholder"> Телефон</div>
+						<input type="text" name="telephone" class="form__field required" id="contacts-form-telephone">
+						<label for="contacts-form-telephone" class="form__placeholder">Телефон</label>
+						<div class="form__err"></div>
 					</div>
 					<div class="form__group">
-						<input type="text" name="question" class="form__field required" placeholder=""
-									 data-validate="notEmpty">
-						<div class="form__placeholder"> Ваш вопрос</div>
+						<input type="text" name="comment" class="form__field required" id="contacts-form-comment">
+						<label for="contacts-form-comment" class="form__placeholder">Ваш вопрос</label>
+						<div class="form__err"></div>
 					</div>
 				</div>
+
 				<div class="form__button">
 					<button type="submit" class="btn btn--black">Отправить</button>
-					<!-- <div class="form__err">
-				не правильно введен адрес
-			</div> --></div>
+				</div>
 			</form>
 		</div>
 	</div>

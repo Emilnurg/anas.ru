@@ -1,6 +1,8 @@
-<div id="modal" class="modal modal--ajax modal--form">
+<div id="modal" class="modal modal--ajax modal--form modal-commercial-porposal">
   <div class="modal__inner">
-    <form action="#" class="form b-feedback__form">
+    <form action="{{ url('forms:product_proposal', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+					class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
+			{{- csrf_input -}}
       <div class="form__heading">
         <h4>Получить коммерческое предложение</h4>
         <p>
@@ -8,32 +10,38 @@
           <span>{{ current_product.title }}</span>
         </p>
       </div>
+
       <div class="form__content">
+				<input type="hidden" name="product" value="{{ current_product.pk }}"/>
         <div class="form__group">
-          <input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
-          <div class="form__placeholder">
-            Имя
-          </div>
+          <input type="text" name="name" class="form__field required" id="popup-cp-name">
+          <label for="popup-cp-name" class="form__placeholder">Имя</label>
+					<div class="form__err"></div>
         </div>
         <div class="form__group">
-          <input type="text" name="tel" class="form__field required" placeholder="" data-validate="tel">
-          <div class="form__placeholder">
-            Телефон
-          </div>
+          <input type="text" name="telephone" class="form__field required" id="popup-cp-telephone">
+          <label for="popup-cp-telephone" class="form__placeholder">Телефон</label>
+					<div class="form__err"></div>
         </div>
         <div class="form__group">
-          <input type="text" name="email" class="form__field required" placeholder="" data-validate="email">
-          <div class="form__placeholder">
-            E-mail
-          </div>
+          <input type="text" name="email" class="form__field required" id="popup-cp-email">
+          <label for="popup-cp-email" class="form__placeholder">E-mail</label>
+					<div class="form__err"></div>
         </div>
       </div>
-      <div class="form__button">
+
+			<div class="form__button">
         <button type="submit" class="btn btn--black">Отправить</button>
-        <!-- <div class="form__err">
-          не правильно введен адрес
-        </div> -->
       </div>
     </form>
   </div>
+
+	<script type="application/javascript">
+	$(document).ready(function() {
+		window.F.manageForm('.modal-commercial-porposal .form', function() {
+		  $('.modal-commercial-porposal [data-fancybox-close]').click();
+		  openThanksRequest();
+		});
+	});
+	</script>
 </div>

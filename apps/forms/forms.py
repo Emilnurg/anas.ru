@@ -30,14 +30,6 @@ class FeedbackRequestForm(BaseRequestForm):
         exclude = ('read_status',)
 
 
-class PartnershipRequestForm(BaseRequestForm):
-    """Форма сотрудничества"""
-    class Meta:
-        model = models.PartnershipFormRequest
-        fields = '__all__'
-        exclude = ('read_status',)
-
-
 class ProductProposalRequestForm(BaseRequestForm):
     """Форма КП по продукту"""
     product = forms.ModelChoiceField(
@@ -65,7 +57,7 @@ class ProductQuestionRequestForm(BaseRequestForm):
 class PurchaseRequestForm(BaseRequestForm):
     """Форма закупки"""
     product = forms.ModelChoiceField(
-        label=_('Продукт'), queryset=Product.objects.published(), required=False
+        label=_('Продукт'), queryset=Product.objects.published(), required=True
     )
 
     class Meta:

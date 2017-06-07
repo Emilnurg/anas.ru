@@ -232,7 +232,7 @@
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="b-feedback__contacts">
-					<h4> По вопросам звоните по телефону или пишите на почту </h4>
+					<h4> По вопросам звоните по телефону или пишите на почту</h4>
 					<div>
 						<a href="tel:+74956265455" class="b-feedback__tel">+7 (495) 626-54-55</a>
 					</div>
@@ -241,31 +241,38 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="col-lg-6">
-				<form action="#" class="form b-feedback__form">
+				<form action="{{ url('forms:purchase', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
+					{{- csrf_input -}}
 					<div class="form__heading">
 						<h4>Хотите обсудить сотрудничество?</h4>
-						<p> Оставьте контакты, мы свяжемся с вами по телефону </p>
+						<p> Оставьте контакты, мы свяжемся с вами по телефону</p>
 					</div>
+
 					<div class="form__content">
+						<input type="hidden" name="product" value="{{ current_product.pk }}"/>
 						<div class="form__group">
-							<input type="text" name="name" class="form__field required" placeholder="" data-validate="notEmpty">
-							<div class="form__placeholder"> Имя </div>
+							<input type="text" name="name" class="form__field required" id="feedback-name">
+							<label for="feedback-name" class="form__placeholder">Имя</label>
+							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
-							<input type="text" name="tel" class="form__field required" placeholder="" data-validate="tel">
-							<div class="form__placeholder"> Телефон </div>
+							<input type="text" name="telephone" class="form__field required" id="feedback-telephone">
+							<label for="feedback-telephone" class="form__placeholder">Телефон</label>
+							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
-							<input type="text" name="comment" class="form__field required" placeholder="" data-validate="notEmpty">
-							<div class="form__placeholder"> Комментарии </div>
+							<input type="text" name="comment" class="form__field required" id="feedback-comment">
+							<label for="feedback-comment" class="form__placeholder">Комментарии</label>
+							<div class="form__err"></div>
 						</div>
 					</div>
+
 					<div class="form__button">
 						<button type="submit" class="btn btn--black">Отправить</button>
-						<!-- <div class="form__err">
-					не правильно введен адрес
-				</div> --></div>
+					</div>
 				</form>
 			</div>
 		</div>

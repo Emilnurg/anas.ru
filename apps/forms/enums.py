@@ -15,3 +15,25 @@ class FormRequestReadStatusEnum(BaseEnumerate):
         (UNREAD, _('Новый')),
         (READ, _('Прочитан'))
     ))
+
+
+class CallbackFormPlaceEnum(BaseEnumerate):
+    """Расположение формы заказа звонка"""
+    ABOUT = 'about'
+    POPUP = 'popup'
+
+    values = OrderedDict((
+        (ABOUT, _('О компании')),
+        (POPUP, _('Попап'))
+    ))
+
+
+class FeedbackFormPlaceEnum(BaseEnumerate):
+    """Расположение формы заказа звонка"""
+    HOMEPAGE = 'hpme'
+    CONTACTS = 'contacts'
+
+    values = OrderedDict((
+        (HOMEPAGE, _('Главная')),
+        (CONTACTS, _('Контакты'))
+    ))
