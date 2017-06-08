@@ -20,17 +20,17 @@
 							<div>
 								<ul>
 									<li>
-										<a href="#">Москва</a>
+										<a href="javascript:">Москва</a>
 									</li>
 									<li>
-										<a href="#">Санкт-Петербург</a>
+										<a href="javascript:">Санкт-Петербург</a>
 									</li>
 								</ul>
 							</div>
 							<div>
 								<ul>
 									<li>
-										<a href="#">Нижний Новгород</a>
+										<a href="javascript:">Нижний Новгород</a>
 									</li>
 								</ul>
 							</div>
@@ -44,20 +44,20 @@
 							<div>
 								<ul>
 									<li>
-										<a href="#">Гигиенические рукавицы</a>
+										<a href="javascript:">Гигиенические рукавицы</a>
 									</li>
 									<li>
-										<a href="#">Суперабсорбенты</a>
+										<a href="javascript:">Суперабсорбенты</a>
 									</li>
 								</ul>
 							</div>
 							<div>
 								<ul>
 									<li>
-										<a href="#">Хирургия</a>
+										<a href="javascript:">Хирургия</a>
 									</li>
 									<li>
-										<a href="#">Стоматология</a>
+										<a href="javascript:">Стоматология</a>
 									</li>
 								</ul>
 							</div>
@@ -66,8 +66,8 @@
 				</div>
 			</div>
 			<div class="partners-filter__types">
-				<a href="#" class="btn btn--map">Карта</a>
-				<a href="#" class="btn btn--list is-active">Список</a>
+				<a href="javascript:" class="btn btn--map">Карта</a>
+				<a href="javascript:" class="btn btn--list is-active">Список</a>
 			</div>
 		</div>
 		<script>
@@ -77,67 +77,63 @@
 				{
 					zoom: 3,
 					scrollwheel: false,
-					center:
-					{
+					center: {
 						lat: 62.5763605,
 						lng: 93.33995625
 					}
 				});
 				var infoWin = new google.maps.InfoWindow();
-				var markers = locations.map(function(location, i)
-				{
-					var marker = new google.maps.Marker(
-					{
+				var markers = locations.map(function(location, i) {
+					var marker = new google.maps.Marker({
 						position: location
 					});
-					google.maps.event.addListener(marker, 'click', function(evt)
-					{
+					google.maps.event.addListener(marker, 'click', function() {
 						infoWin.setContent(location.info);
 						infoWin.open(map, marker);
-					})
+					});
 					return marker;
 				});
 				// Add a marker clusterer to manage the markers.
 				var clusterStyles = [
 				{
 					textColor: 'white',
-					url: 'images/m1.png',
+					url: '{{ STATIC_URL }}images/marker.svg',
 					textSize: 18,
-					height: 58,
+					height: 51,
 					width: 36,
-					iconAnchor: [17, 58],
+					iconAnchor: [17, 51]
 				},
 				{
 					textColor: 'white',
-					url: 'images/m2.png',
+					url: '{{ STATIC_URL }}images/marker.svg',
 					textSize: 18,
-					height: 58,
+					height: 51,
 					width: 36,
-					iconAnchor: [17, 58],
+					iconAnchor: [17, 51]
 				},
 				{
 					textColor: 'white',
-					url: 'images/m3.png',
+					url: '{{ STATIC_URL }}images/marker.svg',
 					textSize: 18,
-					height: 58,
+					height: 51,
 					width: 36,
-					iconAnchor: [17, 58],
+					iconAnchor: [17, 51]
 				},
 				{
 					textColor: 'white',
-					url: 'images/m4.png',
+					url: '{{ STATIC_URL }}images/marker.svg',
 					textSize: 18,
-					height: 58,
+					height: 51,
 					width: 36,
-					iconAnchor: [17, 58],
+					iconAnchor: [17, 51]
 				},
 				{
 					textColor: 'white',
-					url: 'images/m5.png',
+					url: '{{ STATIC_URL }}images/marker.svg',
 					textSize: 18,
-					height: 58,
+					height: 51,
 					width: 36,
-					iconAnchor: [17, 58],
+					iconAnchor: [17, 58]
 				}];
 				var mcOptions = {
 					gridSize: 36,
@@ -173,10 +169,13 @@
 				info: '<div class="map-info"><div class="map-info__city">Нижний Новгород</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
 			}]
 		</script>
-		<script src="vendors/scripts/partials/markerclusterer.js">
+
+		<script src="{{ STATIC_URL }}js/partials/markerclusterer.js">
 		</script>
-		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGgAHCr6yyc5mrD9QyXJxFZd8LJtTZ2lM&callback=initMap">
+		<script async defer
+						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGgAHCr6yyc5mrD9QyXJxFZd8LJtTZ2lM&callback=initMap">
 		</script>
+
 		<div class="partners-map">
 			<div class="map">
 				<div id="map"></div>
@@ -186,62 +185,62 @@
 			<table class="table partners-table is-active">
 				<thead>
 					<tr>
-						<th> Город </th>
-						<th> Компания </th>
-						<th> Адрес </th>
-						<th> Телефон </th>
-						<th> Сайт </th>
+						<th>Город</th>
+						<th>Компания</th>
+						<th>Адрес</th>
+						<th>Телефон</th>
+						<th>Сайт</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td> Москва </td>
-						<td> Компания “Актен” </td>
-						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
-						<td> (495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47 </td>
-						<td> cter.com </td>
+						<td>Москва</td>
+						<td>Компания “Актен”</td>
+						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
+						<td>(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</td>
+						<td>cter.com</td>
 					</tr>
 					<tr>
-						<td> Нижний Новгород </td>
-						<td> Астра фиртин фьючерс индастри </td>
-						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
-						<td> (495) 681-90-46, 681-95-47 </td>
-						<td> artifutersundestris.com </td>
+						<td>Нижний Новгород</td>
+						<td>Астра фиртин фьючерс индастри</td>
+						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
+						<td>(495) 681-90-46, 681-95-47</td>
+						<td>artifutersundestris.com</td>
 					</tr>
 					<tr>
-						<td> Москва </td>
-						<td> Компания “Актен” </td>
-						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
-						<td> (495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47 </td>
-						<td> cter.com </td>
+						<td>Москва</td>
+						<td>Компания “Актен”</td>
+						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
+						<td>(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</td>
+						<td>cter.com</td>
 					</tr>
 					<tr>
-						<td> Нижний Новгород </td>
-						<td> Астра фиртин фьючерс индастри </td>
-						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
-						<td> (495) 681-90-46, 681-95-47 </td>
-						<td> artifutersundestris.com </td>
+						<td>Нижний Новгород</td>
+						<td>Астра фиртин фьючерс индастри</td>
+						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
+						<td>(495) 681-90-46, 681-95-47</td>
+						<td>artifutersundestris.com</td>
 					</tr>
 					<tr>
-						<td> Санкт-Петербург </td>
-						<td> Астра фиртин фьючерс индастри </td>
-						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
-						<td> (495) 681-90-46, 681-95-47 </td>
-						<td> artifutersundestris.com </td>
+						<td>Санкт-Петербург</td>
+						<td>Астра фиртин фьючерс индастри</td>
+						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
+						<td>(495) 681-90-46, 681-95-47</td>
+						<td>artifutersundestris.com</td>
 					</tr>
 					<tr>
-						<td> Нижний Новгород </td>
-						<td> Астра фиртин фьючерс индастри </td>
-						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
-						<td> (495) 681-90-46, 681-95-47 </td>
-						<td> artifutersundestris.com </td>
+						<td>Нижний Новгород</td>
+						<td>Астра фиртин фьючерс индастри</td>
+						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
+						<td>(495) 681-90-46, 681-95-47</td>
+						<td>artifutersundestris.com</td>
 					</tr>
 					<tr>
-						<td> Нижний Новгород </td>
-						<td> Астра фиртин </td>
-						<td> 129090, 2-й Троицкий </td>
-						<td> (495) 681-90-46, 681-95-47 </td>
-						<td> artifutersundestris.com </td>
+						<td>Нижний Новгород</td>
+						<td>Астра фиртин</td>
+						<td>129090, 2-й Троицкий</td>
+						<td>(495) 681-90-46, 681-95-47</td>
+						<td>artifutersundestris.com</td>
 					</tr>
 				</tbody>
 			</table>
@@ -274,7 +273,7 @@
 						<a href="tel:+74956265455" class="b-feedback__tel">+7 (495) 626-54-55</a>
 					</div>
 					<div>
-						<a href="#" class="b-feedback__email">info@anas.com</a>
+						<a href="javascript:" class="b-feedback__email">info@anas.com</a>
 					</div>
 				</div>
 			</div>

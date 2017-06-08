@@ -138,7 +138,7 @@ function MarkerClusterer(map, opt_markers, opt_options) {
    */
   this.zoomOnClick_ = true;
 
-  if (options['zoomOnClick'] != undefined) {
+  if (options['zoomOnClick'] !== undefined) {
     this.zoomOnClick_ = options['zoomOnClick'];
   }
 
@@ -148,7 +148,7 @@ function MarkerClusterer(map, opt_markers, opt_options) {
    */
   this.averageCenter_ = false;
 
-  if (options['averageCenter'] != undefined) {
+  if (options['averageCenter'] !== undefined) {
     this.averageCenter_ = options['averageCenter'];
   }
 
@@ -167,7 +167,7 @@ function MarkerClusterer(map, opt_markers, opt_options) {
   google.maps.event.addListener(this.map_, 'zoom_changed', function() {
     var zoom = that.map_.getZoom();
 
-    if (that.prevZoom_ != zoom) {
+    if (that.prevZoom_ !== zoom) {
       that.prevZoom_ = zoom;
       that.resetViewport();
     }

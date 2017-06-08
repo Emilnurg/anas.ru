@@ -18,6 +18,16 @@ class CityAdmin(BaseModelAdmin, SuperUserDeletableAdminMixin, TranslationAdmin):
     search_fields = ['=id'] + get_model_translation_fields(models.City)
 
 
+@admin.register(models.ProfessionalArea)
+class ProfessionalAreaAdmin(BaseModelAdmin, SuperUserDeletableAdminMixin, TranslationAdmin):
+    """Направления деятельности"""
+    fields = models.ProfessionalArea().collect_fields()
+    list_display = ('id', 'title', 'status', 'ordering', 'updated')
+    list_display_links = ('id', 'title')
+    ordering = ('ordering', 'title')
+    search_fields = ['=id'] + get_model_translation_fields(models.ProfessionalArea)
+
+
 @admin.register(models.SocialNetwork)
 class SocialNetworkAdmin(BaseModelAdmin, SuperUserDeletableAdminMixin, TranslationAdmin):
     """Соц. сети"""
