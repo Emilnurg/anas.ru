@@ -9,8 +9,9 @@ from snippets.modeltranslation import get_model_translation_fields
 
 
 @admin.register(models.Partner)
-class CityAdmin(BaseModelAdmin, TranslationAdmin):
-    """Города"""
+class PartnerAdmin(BaseModelAdmin, TranslationAdmin):
+    """Дилеры"""
+    group_fieldsets = True
     fields = models.Partner().collect_fields()
     list_display = ('id', 'title', 'city', 'professional_area' 'status', 'ordering', 'updated')
     list_display_links = ('id', 'title')
