@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
                 ('questions_subtitle_fr', models.TextField(blank=True, null=True, verbose_name='Подзаголовок блока "Есть вопросы?"')),
             ],
             options={
-                'verbose_name': 'Страница "Партнеры"',
+                'verbose_name': 'Страница "Дилеры"',
             },
         ),
     ]

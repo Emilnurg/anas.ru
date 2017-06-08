@@ -5262,6 +5262,7 @@
   .dropdown {
     margin-right: 53px;
     max-width: 250px;
+    white-space: nowrap;
 
     &:last-child {
       margin-right: 0;
@@ -5350,6 +5351,7 @@
     width: 23px;
     height: 23px;
     background: url(../images/ico_tel_l.svg) no-repeat 0 0;
+    background-size: 23px 23px;
     margin-top: -12px;
   }
 }
@@ -5361,6 +5363,7 @@
     width: 25px;
     height: 20px;
     background: url(../images/ico_email_l.svg) no-repeat 0 0;
+    background-size: 25px 20px;
     margin-top: -10px;
   }
 }

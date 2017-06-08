@@ -135,10 +135,10 @@ class PartnersPage(BasicModel, SingletonModel):
     )
 
     def __str__(self):
-        return str(_('Страница "Партнеры"'))
+        return str(_('Страница "Дилеры"'))
 
     class Meta:
-        verbose_name = _('Страница "Партнеры"')
+        verbose_name = _('Страница "Дилеры"')
 
 
 class ServiceCenterPage(BasicModel, SingletonModel):

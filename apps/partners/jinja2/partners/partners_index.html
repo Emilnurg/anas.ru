@@ -9,31 +9,28 @@
 	<div class="container">
 		<div class="main-title">
 			<h3>{{ partners_page.title }}</h3>
-			<p> По вопросам приобретения и обслуживания нашей продукции обращайтесь к официальному представителю в своем регионе </p>
+			{%- if partners_page.subtitle -%}
+			<div class="content--block">{{ partners_page.subtitle }}</div>
+			{%- endif -%}
 		</div>
+		{%- if partners -%}
 		<div class="partners-filter">
 			<div class="partners-filter__dropdowns">
 				<div class="dropdown">
-					<button class="dropdown__button" data-toggle="dropdown"> Выберите город </button>
+					<button class="dropdown__button" data-toggle="dropdown">Выберите город</button>
 					<div class="dropdown-menu">
 						<div>
+							{%- for col in cities|slice(2) -%}
 							<div>
 								<ul>
+									{%- for city in col -%}
 									<li>
-										<a href="javascript:">Москва</a>
+										<a href="javascript:">{{ city.title }}</a>
 									</li>
-									<li>
-										<a href="javascript:">Санкт-Петербург</a>
-									</li>
+									{%- endfor -%}
 								</ul>
 							</div>
-							<div>
-								<ul>
-									<li>
-										<a href="javascript:">Нижний Новгород</a>
-									</li>
-								</ul>
-							</div>
+							{%- endfor -%}
 						</div>
 					</div>
 				</div>
@@ -41,26 +38,17 @@
 					<button class="dropdown__button" type="button" data-toggle="dropdown"> Выберите направление </button>
 					<div class="dropdown-menu">
 						<div>
+							{%- for col in professional_areas|slice(2) -%}
 							<div>
 								<ul>
+									{%- for area in col -%}
 									<li>
-										<a href="javascript:">Гигиенические рукавицы</a>
+										<a href="javascript:">{{ area.title }}</a>
 									</li>
-									<li>
-										<a href="javascript:">Суперабсорбенты</a>
-									</li>
+									{%- endfor -%}
 								</ul>
 							</div>
-							<div>
-								<ul>
-									<li>
-										<a href="javascript:">Хирургия</a>
-									</li>
-									<li>
-										<a href="javascript:">Стоматология</a>
-									</li>
-								</ul>
-							</div>
+							{%- endfor -%}
 						</div>
 					</div>
 				</div>
@@ -70,7 +58,7 @@
 				<a href="javascript:" class="btn btn--list is-active">Список</a>
 			</div>
 		</div>
-		<script>
+		<script type="application/javascript">
 			function initMap()
 			{
 				var map = new google.maps.Map(document.getElementById('map'),
@@ -143,35 +131,36 @@
 				var markerCluster = new MarkerClusterer(map, markers, mcOptions);
 			}
 			var locations = [
-			{
-				lat: 55.755826,
-				lng: 37.6173,
-				info: '<div class="map-info"><div class="map-info__city">Москва</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
-			},
-			{
-				lat: 55.775666,
-				lng: 37.624298,
-				info: '<div class="map-info"><div class="map-info__city">Москва</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
-			},
-			{
-				lat: 59.9342802,
-				lng: 30.3350986,
-				info: '<div class="map-info"><div class="map-info__city">Санкт-Петербург</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
-			},
-			{
-				lat: 59.9342802,
-				lng: 30.3350986,
-				info: '<div class="map-info"><div class="map-info__city">Санкт-Петербург</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
-			},
-			{
-				lat: 56.2965039,
-				lng: 43.9360589,
-				info: '<div class="map-info"><div class="map-info__city">Нижний Новгород</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
-			}]
+			{%- for partner in partners %}
+			{%- if partner.map_x and partner.map_y -%}
+			{ {#-  -#}
+				lat: {{ partner.map_y }}, {#-  -#}
+				lng: {{ partner.map_x }}, {#-  -#}
+				info: '<div class="map-info">' {%- if partner.city_id -%} +
+					'<div class="map-info__city">' +
+						'{{ partner.city.title }}' +
+					'</div>' {%- endif -%} +
+					'<div class="map-info__company">' +
+						'{{ partner.title }}' +
+					'</div>' {%- if partner.address -%} +
+					'<address class="map-info__address">' +
+						'129090, 2-й Троицкий пер., д. 6а, стр. 13' +
+					'</address>' {%- endif -%}{%- if partner.phone -%} +
+					'<div class="map-info__phones">' +
+						'{{ partner.phone }}' +
+					'</div>' {%- endif -%} {%- if partner.website -%} +
+					'<div class="map-info__site">' +
+						'{{ partner.website }}' +
+					'</div>' {%- endif -%} +
+				'</div>'
+			}
+			{%- endif -%}
+			{%- if not loop.last %},{% endif -%}
+			{%- endfor -%}
+			]
 		</script>
 
-		<script src="{{ STATIC_URL }}js/partials/markerclusterer.js">
-		</script>
+		<script src="{{ STATIC_URL }}js/partials/markerclusterer.js"></script>
 		<script async defer
 						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGgAHCr6yyc5mrD9QyXJxFZd8LJtTZ2lM&callback=initMap">
 		</script>
@@ -193,103 +182,90 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>Москва</td>
-						<td>Компания “Актен”</td>
-						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
-						<td>(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</td>
-						<td>cter.com</td>
+					{%- for partner in partners -%}
+					<tr data-city="{{ partner.city_id if partner.city_id else '' }}"
+							data-profs="|{% for area in partner.professional_areas_cache %}{{ area.pk }}|{% endfor %}|">
+						<td>{{ partner.city.title if partner.city_id else '&nbsp;' }}</td>
+						<td>{{ partner.title }}</td>
+						<td>{{ partner.address or '&nbsp;' }}</td>
+						<td>{{ partner.phone or '&nbsp;' }}</td>
+						<td>{{ partner.website or '&nbsp;' }}</td>
 					</tr>
-					<tr>
-						<td>Нижний Новгород</td>
-						<td>Астра фиртин фьючерс индастри</td>
-						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
-						<td>(495) 681-90-46, 681-95-47</td>
-						<td>artifutersundestris.com</td>
-					</tr>
-					<tr>
-						<td>Москва</td>
-						<td>Компания “Актен”</td>
-						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
-						<td>(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</td>
-						<td>cter.com</td>
-					</tr>
-					<tr>
-						<td>Нижний Новгород</td>
-						<td>Астра фиртин фьючерс индастри</td>
-						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
-						<td>(495) 681-90-46, 681-95-47</td>
-						<td>artifutersundestris.com</td>
-					</tr>
-					<tr>
-						<td>Санкт-Петербург</td>
-						<td>Астра фиртин фьючерс индастри</td>
-						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
-						<td>(495) 681-90-46, 681-95-47</td>
-						<td>artifutersundestris.com</td>
-					</tr>
-					<tr>
-						<td>Нижний Новгород</td>
-						<td>Астра фиртин фьючерс индастри</td>
-						<td>129090, 2-й Троицкий пер., д. 6а, стр. 13</td>
-						<td>(495) 681-90-46, 681-95-47</td>
-						<td>artifutersundestris.com</td>
-					</tr>
-					<tr>
-						<td>Нижний Новгород</td>
-						<td>Астра фиртин</td>
-						<td>129090, 2-й Троицкий</td>
-						<td>(495) 681-90-46, 681-95-47</td>
-						<td>artifutersundestris.com</td>
-					</tr>
+					{%- endfor -%}
 				</tbody>
 			</table>
 		</div>
+		{%- endif -%}
 	</div>
 </div>
+
+{%- if partners_page.howto_title -%}
 <div class="b-become-dealer">
 	<div class="b-become-dealer__parallax">
 		<div></div>
 	</div>
+
 	<div class="container">
 		<div class="section-title">
-			<h4>Как стать дилером?</h4>
-			<p> Предприятия часто публикуют отдельные страницы типа «Ищем дилеров в регионах России» </p>
+			<h4>{{ partners_page.howto_title }}</h4>
+			{%- if partners_page.howto_subtitle -%}
+			<p>{{ partners_page.howto_subtitle }}</p>
+			{%- endif -%}
 		</div>
 		<div class="b-become-dealer__text">
-			<p> На нашем сайте мы объединили и систематизировали предложения дилерства различных предприятий от небольших компаний до всемирно известных брендов. Это поможет потенциальным представителям найти проект, который полностью их устроит. Компании,
-				которые заинтересованы в расширении рынка сбыта могут найти партнеров, разместив, свое предложение настраницах нашего сайта. </p>
-			<a href="#form" class="btn">Стать дилером</a>
+			{%- if partners_page.howto_body -%}
+			<div class="content-block">{{ partners_page.howto_body }}</div>
+			{%- endif -%}
+			{%- if partners_page.howto_button_caption -%}
+			<a href="#form" class="btn">{{ partners_page.howto_button_caption }}</a>
+			{%- endif -%}
 		</div>
 	</div>
 </div>
+{%- endif -%}
+
 <div class="b-feedback b-feedback2">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="b-feedback__contacts">
-					<h4> По вопросам звоните по телефону или пишите на почту </h4>
+					{%- if partners_page.questions_title_left -%}
+					<h4>{{ partners_page.questions_title_left }}</h4>
+					{%- endif -%}
+
+					{%- if var('TELEPHONE_PUBLIC', request) -%}
 					<div>
 						<a href="tel:+74956265455" class="b-feedback__tel">+7 (495) 626-54-55</a>
 					</div>
+					{%- endif -%}
+
+					{%- if var('EMAIL_PUBLIC', request) -%}
 					<div>
-						<a href="javascript:" class="b-feedback__email">info@anas.com</a>
+						<a href="mailto:{{ var('EMAIL_PUBLIC', request) }}" class="b-feedback__email">
+							{{- var('EMAIL_PUBLIC', request) -}}
+						</a>
 					</div>
+					{%- endif -%}
 				</div>
 			</div>
+
 			<div class="col-lg-6">
+				<a name="form"></a>
 				<form action="{{ url('forms:feedback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 							class="form contacts__form" method="POST" accept-charset="utf-8" novalidate>
 					{{- csrf_input -}}
-					<a name="form"></a>
 					<div class="form__heading">
-						<h4>Хотите обсудить сотрудничество?</h4>
-						<p>Оставьте контакты, мы свяжемся с вами по телефону</p>
+						{%- if partners_page.questions_title -%}
+						<h4>{{ partners_page.questions_title }}</h4>
+						{%- endif -%}
+						{%- if partners_page.questions_subtitle -%}
+						<p>{{ partners_page.questions_subtitle }}</p>
+						{%- endif -%}
 						<div class="messages"></div>
 					</div>
 
 					<div class="form__content">
-						<input type="hidden" name="place" value="partners"/>
+					<input type="hidden" name="place" value="partners"/>
 						<div class="form__group">
 							<input type="text" name="name" class="form__field required" id="partners-form-name">
 							<label for="partners-form-name" class="form__placeholder">Имя</label>
