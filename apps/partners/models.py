@@ -16,9 +16,9 @@ class Partner(BaseModel):
     city = models.ForeignKey(
         City, related_name='partners', verbose_name=_('Город'), blank=True, null=True
     )
-    professional_area = models.ForeignKey(
-        ProfessionalArea, related_name='partners', verbose_name=_('Направление деятельности'),
-        blank=True, null=True
+    professional_areas = models.ManyToManyField(
+        ProfessionalArea, related_name='partners', verbose_name=_('Направления деятельности'),
+        blank=True
     )
 
     map_y = models.FloatField(_('Координата Y (широта)'), blank=True, null=True)

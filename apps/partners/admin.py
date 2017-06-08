@@ -13,8 +13,9 @@ class PartnerAdmin(BaseModelAdmin, TranslationAdmin):
     """Дилеры"""
     group_fieldsets = True
     fields = models.Partner().collect_fields()
-    list_display = ('id', 'title', 'city', 'professional_area' 'status', 'ordering', 'updated')
+    filter_horizontal = ('professional_areas',)
+    list_display = ('id', 'title', 'city', 'status', 'ordering', 'updated')
     list_display_links = ('id', 'title')
-    list_filter = BaseModelAdmin.list_filter + ('city', 'professional_area')
+    list_filter = BaseModelAdmin.list_filter + ('city', 'professional_areas')
     ordering = ('ordering', 'title')
     search_fields = ['=id'] + get_model_translation_fields(models.Partner)
