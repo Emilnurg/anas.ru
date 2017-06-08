@@ -27,6 +27,12 @@ class ContactsPageAdmin(SingletonModelAdmin, TranslationAdmin):
     group_fieldsets = True
 
 
+@admin.register(models.PartnersPage)
+class PartnersPageAdmin(SingletonModelAdmin, TranslationAdmin):
+    """Страница "Партнеры" """
+    group_fieldsets = True
+
+
 class ServiceRequestOrderInline(TranslationStackedInline):
     """Порядок обращения"""
     extra = 0

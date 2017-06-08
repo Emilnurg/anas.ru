@@ -21,6 +21,7 @@ urlpatterns = (
     url(r'^', include('training.urls', namespace='training')),
     url(r'^', include('forms.urls', namespace='forms')),
     url(r'^', include('knowledge.urls', namespace='knowledge')),
+    url(r'^', include('partners.urls', namespace='partners')),
     url(r'^', include('popups.urls', namespace='popups')),
     url(r'^', include('press.urls', namespace='press')),
     url(r'^', include('projects.urls', namespace='projects')),

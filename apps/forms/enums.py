@@ -32,8 +32,10 @@ class FeedbackFormPlaceEnum(BaseEnumerate):
     """Расположение формы заказа звонка"""
     HOMEPAGE = 'hpme'
     CONTACTS = 'contacts'
+    PARTNERS = 'partners'
 
     values = OrderedDict((
         (HOMEPAGE, _('Главная')),
-        (CONTACTS, _('Контакты'))
+        (CONTACTS, _('Контакты')),
+        (PARTNERS, _('Партнеры'))
     ))

@@ -23,7 +23,8 @@
 					<address>{{ contacts_page.address }}</address>
 				</div>
 				{%- endif -%}
-				{#- <a href="javascript:" class="btn">{{ var('REGIONAL_DEALERS_BUTTON', request) }}</a> -#}
+				<a href="{{ url('partners:partners_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+					 class="btn">{{ var('REGIONAL_DEALERS_BUTTON', request) }}</a>
 			</div>
 
 			<form action="{{ url('forms:feedback', kwargs={'lang': request.LANGUAGE_CODE}) }}"

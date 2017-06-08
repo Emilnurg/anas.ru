@@ -1,9 +1,319 @@
 {%- extends 'layouts/main.html' -%}
 
-{%- block PAGE_TITLE %}{% endblock -%}
+{%- block PAGE_TITLE %}{{ partners_page.title|e }}{% endblock -%}
 
 {%- block BODY_CLASSES %}body-partners{% endblock -%}
 
 {%- block PAGE_CONTENT -%}
+<div class="b-partners">
+	<div class="container">
+		<div class="main-title">
+			<h3>{{ partners_page.title }}</h3>
+			<p> По вопросам приобретения и обслуживания нашей продукции обращайтесь к официальному представителю в своем регионе </p>
+		</div>
+		<div class="partners-filter">
+			<div class="partners-filter__dropdowns">
+				<div class="dropdown">
+					<button class="dropdown__button" data-toggle="dropdown"> Выберите город </button>
+					<div class="dropdown-menu">
+						<div>
+							<div>
+								<ul>
+									<li>
+										<a href="#">Москва</a>
+									</li>
+									<li>
+										<a href="#">Санкт-Петербург</a>
+									</li>
+								</ul>
+							</div>
+							<div>
+								<ul>
+									<li>
+										<a href="#">Нижний Новгород</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="dropdown">
+					<button class="dropdown__button" type="button" data-toggle="dropdown"> Выберите направление </button>
+					<div class="dropdown-menu">
+						<div>
+							<div>
+								<ul>
+									<li>
+										<a href="#">Гигиенические рукавицы</a>
+									</li>
+									<li>
+										<a href="#">Суперабсорбенты</a>
+									</li>
+								</ul>
+							</div>
+							<div>
+								<ul>
+									<li>
+										<a href="#">Хирургия</a>
+									</li>
+									<li>
+										<a href="#">Стоматология</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="partners-filter__types">
+				<a href="#" class="btn btn--map">Карта</a>
+				<a href="#" class="btn btn--list is-active">Список</a>
+			</div>
+		</div>
+		<script>
+			function initMap()
+			{
+				var map = new google.maps.Map(document.getElementById('map'),
+				{
+					zoom: 3,
+					scrollwheel: false,
+					center:
+					{
+						lat: 62.5763605,
+						lng: 93.33995625
+					}
+				});
+				var infoWin = new google.maps.InfoWindow();
+				var markers = locations.map(function(location, i)
+				{
+					var marker = new google.maps.Marker(
+					{
+						position: location
+					});
+					google.maps.event.addListener(marker, 'click', function(evt)
+					{
+						infoWin.setContent(location.info);
+						infoWin.open(map, marker);
+					})
+					return marker;
+				});
+				// Add a marker clusterer to manage the markers.
+				var clusterStyles = [
+				{
+					textColor: 'white',
+					url: 'images/m1.png',
+					textSize: 18,
+					height: 58,
+					width: 36,
+					iconAnchor: [17, 58],
+				},
+				{
+					textColor: 'white',
+					url: 'images/m2.png',
+					textSize: 18,
+					height: 58,
+					width: 36,
+					iconAnchor: [17, 58],
+				},
+				{
+					textColor: 'white',
+					url: 'images/m3.png',
+					textSize: 18,
+					height: 58,
+					width: 36,
+					iconAnchor: [17, 58],
+				},
+				{
+					textColor: 'white',
+					url: 'images/m4.png',
+					textSize: 18,
+					height: 58,
+					width: 36,
+					iconAnchor: [17, 58],
+				},
+				{
+					textColor: 'white',
+					url: 'images/m5.png',
+					textSize: 18,
+					height: 58,
+					width: 36,
+					iconAnchor: [17, 58],
+				}];
+				var mcOptions = {
+					gridSize: 36,
+					styles: clusterStyles,
+					maxZoom: 15
+				};
+				var markerCluster = new MarkerClusterer(map, markers, mcOptions);
+			}
+			var locations = [
+			{
+				lat: 55.755826,
+				lng: 37.6173,
+				info: '<div class="map-info"><div class="map-info__city">Москва</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
+			},
+			{
+				lat: 55.775666,
+				lng: 37.624298,
+				info: '<div class="map-info"><div class="map-info__city">Москва</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
+			},
+			{
+				lat: 59.9342802,
+				lng: 30.3350986,
+				info: '<div class="map-info"><div class="map-info__city">Санкт-Петербург</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
+			},
+			{
+				lat: 59.9342802,
+				lng: 30.3350986,
+				info: '<div class="map-info"><div class="map-info__city">Санкт-Петербург</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
+			},
+			{
+				lat: 56.2965039,
+				lng: 43.9360589,
+				info: '<div class="map-info"><div class="map-info__city">Нижний Новгород</div><div class="map-info__company">Компания “Актен”</div><address class="map-info__address">129090, 2-й Троицкий пер., д. 6а, стр. 13</address><div class="map-info__phones">(495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47</div><div class="map-info__site"><a href="http://www.acter.com/" target="_blank">acter.com</a></div></div>'
+			}]
+		</script>
+		<script src="vendors/scripts/partials/markerclusterer.js">
+		</script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGgAHCr6yyc5mrD9QyXJxFZd8LJtTZ2lM&callback=initMap">
+		</script>
+		<div class="partners-map">
+			<div class="map">
+				<div id="map"></div>
+			</div>
+		</div>
+		<div class="partners-table-wrap table-wrap is-active">
+			<table class="table partners-table is-active">
+				<thead>
+					<tr>
+						<th> Город </th>
+						<th> Компания </th>
+						<th> Адрес </th>
+						<th> Телефон </th>
+						<th> Сайт </th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td> Москва </td>
+						<td> Компания “Актен” </td>
+						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
+						<td> (495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47 </td>
+						<td> cter.com </td>
+					</tr>
+					<tr>
+						<td> Нижний Новгород </td>
+						<td> Астра фиртин фьючерс индастри </td>
+						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
+						<td> (495) 681-90-46, 681-95-47 </td>
+						<td> artifutersundestris.com </td>
+					</tr>
+					<tr>
+						<td> Москва </td>
+						<td> Компания “Актен” </td>
+						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
+						<td> (495) 681-90-46, 681-95-47, 681-95-47, 681-99-41, 681-95-61, 688-83-47 </td>
+						<td> cter.com </td>
+					</tr>
+					<tr>
+						<td> Нижний Новгород </td>
+						<td> Астра фиртин фьючерс индастри </td>
+						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
+						<td> (495) 681-90-46, 681-95-47 </td>
+						<td> artifutersundestris.com </td>
+					</tr>
+					<tr>
+						<td> Санкт-Петербург </td>
+						<td> Астра фиртин фьючерс индастри </td>
+						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
+						<td> (495) 681-90-46, 681-95-47 </td>
+						<td> artifutersundestris.com </td>
+					</tr>
+					<tr>
+						<td> Нижний Новгород </td>
+						<td> Астра фиртин фьючерс индастри </td>
+						<td> 129090, 2-й Троицкий пер., д. 6а, стр. 13 </td>
+						<td> (495) 681-90-46, 681-95-47 </td>
+						<td> artifutersundestris.com </td>
+					</tr>
+					<tr>
+						<td> Нижний Новгород </td>
+						<td> Астра фиртин </td>
+						<td> 129090, 2-й Троицкий </td>
+						<td> (495) 681-90-46, 681-95-47 </td>
+						<td> artifutersundestris.com </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="b-become-dealer">
+	<div class="b-become-dealer__parallax">
+		<div></div>
+	</div>
+	<div class="container">
+		<div class="section-title">
+			<h4>Как стать дилером?</h4>
+			<p> Предприятия часто публикуют отдельные страницы типа «Ищем дилеров в регионах России» </p>
+		</div>
+		<div class="b-become-dealer__text">
+			<p> На нашем сайте мы объединили и систематизировали предложения дилерства различных предприятий от небольших компаний до всемирно известных брендов. Это поможет потенциальным представителям найти проект, который полностью их устроит. Компании,
+				которые заинтересованы в расширении рынка сбыта могут найти партнеров, разместив, свое предложение настраницах нашего сайта. </p>
+			<a href="#form" class="btn">Стать дилером</a>
+		</div>
+	</div>
+</div>
+<div class="b-feedback b-feedback2">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="b-feedback__contacts">
+					<h4> По вопросам звоните по телефону или пишите на почту </h4>
+					<div>
+						<a href="tel:+74956265455" class="b-feedback__tel">+7 (495) 626-54-55</a>
+					</div>
+					<div>
+						<a href="#" class="b-feedback__email">info@anas.com</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<form action="{{ url('forms:feedback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+							class="form contacts__form" method="POST" accept-charset="utf-8" novalidate>
+					{{- csrf_input -}}
+					<a name="form"></a>
+					<div class="form__heading">
+						<h4>Хотите обсудить сотрудничество?</h4>
+						<p>Оставьте контакты, мы свяжемся с вами по телефону</p>
+						<div class="messages"></div>
+					</div>
 
+					<div class="form__content">
+						<input type="hidden" name="place" value="partners"/>
+						<div class="form__group">
+							<input type="text" name="name" class="form__field required" id="partners-form-name">
+							<label for="partners-form-name" class="form__placeholder">Имя</label>
+							<div class="form__err"></div>
+						</div>
+						<div class="form__group">
+							<input type="text" name="telephone" class="form__field required" id="partners-form-telephone">
+							<label for="partners-form-telephone" class="form__placeholder">Телефон</label>
+							<div class="form__err"></div>
+						</div>
+						<div class="form__group">
+							<input type="text" name="comment" class="form__field required" id="partners-form-comment">
+							<label for="partners-form-comment" class="form__placeholder">Комментарии</label>
+							<div class="form__err"></div>
+						</div>
+					</div>
+
+					<div class="form__button">
+						<button type="submit" class="btn btn--black">Отправить</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 {%- endblock -%}

@@ -74,20 +74,22 @@ class ContactsPage(BasicModel, SingletonModel):
     """Страница "Контакты" """
     title = models.CharField(_('Заголовок страницы'), max_length=255)
     address = models.TextField(_('Адрес в контактах'), max_length=4096, blank=True, null=True)
-    questions_title = models.CharField(
-        _('Заголовок блока "Есть вопросы?"'), max_length=255, blank=True, null=True
-    )
-    questions_subtitle = models.CharField(
-        _('Подзаголовок блока "Есть вопросы?"'), max_length=255, blank=True, null=True
-    )
+
     map_y = models.FloatField(_('Координата Y (широта)'), blank=True, default=.0)
     map_x = models.FloatField(_('Координата X (долгота)'), blank=True, default=.0)
     map_zoom = models.PositiveSmallIntegerField(
         _('Масштаб карты'), choices=[(x, str(x)) for x in range(1, 21)], default=16
     )
 
+    questions_title = models.CharField(
+        _('Заголовок блока "Есть вопросы?"'), max_length=255, blank=True, null=True
+    )
+    questions_subtitle = models.CharField(
+        _('Подзаголовок блока "Есть вопросы?"'), max_length=255, blank=True, null=True
+    )
+
     translation_fields = (
-        'title', 'address', 'questions_title', 'questions_subtitle', 'map_x', 'map_y', 'map_zoom'
+        'title', 'address', 'map_x', 'map_y', 'map_zoom', 'questions_title', 'questions_subtitle'
     )
 
     def __str__(self):
@@ -95,6 +97,48 @@ class ContactsPage(BasicModel, SingletonModel):
 
     class Meta:
         verbose_name = _('Страница "Контакты"')
+
+
+class PartnersPage(BasicModel, SingletonModel):
+    """Страница "Партнеры" """
+    title = models.CharField(_('Заголовок страницы'), max_length=255)
+    subtitle = RichTextUploadingField(
+        _('Подзаголовок страницы'), max_length=4096, blank=True, null=True
+    )
+
+    howto_title = models.CharField(
+        _('Заголовок блока "Как стать дилером?"'), max_length=255, blank=True, null=True
+    )
+    howto_subtitle = models.CharField(
+        _('Подзаголовок блока "Как стать дилером?"'), max_length=255, blank=True, null=True
+    )
+    howto_body = RichTextUploadingField(
+        _('Контент блока "Как стать дилером?"'), blank=True, null=False
+    )
+    howto_button_caption = models.CharField(
+        _('Текст кнопки блока "Как стать дилером?"'), max_length=50, blank=True, null=True
+    )
+
+    questions_title_left = models.CharField(
+        _('Заголовок блока "Есть вопросы? (слева)"'), max_length=255, blank=True, null=True
+    )
+    questions_title = models.CharField(
+        _('Заголовок блока "Есть вопросы?"'), max_length=255, blank=True, null=True
+    )
+    questions_subtitle = models.TextField(
+        _('Подзаголовок блока "Есть вопросы?"'), blank=True, null=True
+    )
+
+    translation_fields = (
+        'title', 'subtitle', 'howto_title', 'howto_subtitle', 'howto_body', 'howto_button_caption',
+        'questions_title_left', 'questions_title', 'questions_subtitle'
+    )
+
+    def __str__(self):
+        return str(_('Страница "Партнеры"'))
+
+    class Meta:
+        verbose_name = _('Страница "Партнеры"')
 
 
 class ServiceCenterPage(BasicModel, SingletonModel):

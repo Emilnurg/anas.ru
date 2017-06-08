@@ -45,9 +45,9 @@
 							manufacturer={{ manufacturer.slug|e -}}
 							{%- endif -%}">
 						<label class="{%- if current_manufacturer and current_manufacturer.id == manufacturer.id %}active{% endif %}">
-{#							<input type="radio" name="catalog-brand"#}
+{#-							<input type="radio" name="catalog-brand"#}
 {#									{%- if current_manufacturer and current_manufacturer.id == manufacturer.id %} checked#}
-{#									{%- endif %}>#}
+{#									{%- endif %}>-#}
 							<span>
 								<img src="{{ manufacturer.image.url }}" alt="{{ manufacturer.title }}">
 							</span>
