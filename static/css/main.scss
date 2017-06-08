@@ -303,6 +303,18 @@
   background-color: white;
   box-shadow: 0 6px 46px rgba(1, 39, 54, 0.05);
   padding: 84px 70px 90px;
+
+  .messages {
+    margin: 0 0 20px;
+
+    &.success {
+      display: none;
+    }
+
+    &.failure {
+      color: #d2205c;
+    }
+  }
 }
 
 .form__heading, .thank-you {

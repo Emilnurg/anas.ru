@@ -35,10 +35,12 @@
 					{%- if contacts_page.questions_subtitle -%}
 					<p>{{ contacts_page.questions_subtitle }}</p>
 					{%- endif -%}
+					<div class="messages"></div>
 				</div>
 				{%- endif -%}
 
 				<div class="form__content">
+					<input type="hidden" name="place" value="contacts"/>
 					<div class="form__group">
 						<input type="text" name="name" class="form__field required" id="contacts-form-name">
 						<label for="contacts-form-name" class="form__placeholder">Имя</label>

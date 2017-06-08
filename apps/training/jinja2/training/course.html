@@ -39,7 +39,7 @@
 					{%- if current_course.date_start %}
 					<p>Начало курса с {{ current_course.date_start|date('d E') }}</p>
 					{%- endif -%}
-					<a href="javascript:" class="btn btn--black">Записаться</a>
+					<a href="#form" class="btn btn--black">Записаться</a>
 				</div>
 			</div>
 		</div>
@@ -158,12 +158,14 @@
 				</div>
 			</div>
 			<div class="col-lg-6">
+				<a name="form"></a>
 				<form action="{{ url('forms:training', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
 							{{- csrf_input -}}
 					<div class="form__heading">
 						<h4>Подать заявку на обучение</h4>
-						<p> Оставьте контакты, мы свяжемся с вами по телефону </p>
+						<p>Оставьте контакты, мы свяжемся с вами по телефону</p>
+						<div class="messages"></div>
 					</div>
 
 					<div class="form__content">

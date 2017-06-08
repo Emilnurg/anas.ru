@@ -38,8 +38,11 @@
 							{{- csrf_input -}}
 					<div class="form__heading">
 						<h4>Или заполните контактную форму</h4>
+						<div class="messages"></div>
 					</div>
+
 					<div class="form__content">
+						<input type="hidden" name="category" value="{{ current_category.pk }}"/>
 						<div class="form__group">
 							<input type="text" name="name" class="form__field required" id="support-from-name">
 							<label for="support-from-name" class="form__placeholder">Имя</label>

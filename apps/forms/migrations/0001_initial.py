@@ -143,7 +143,7 @@ class Migration(migrations.Migration):
                 ('product', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='purchase_requests', to='catalog.Product', verbose_name='Продукт')),
             ],
             options={
-                'verbose_name': 'Запрос закупки',
+                'verbose_name': 'Запрос по закупке',
                 'verbose_name_plural': 'Закупка',
             },
         ),
@@ -174,7 +174,7 @@ class Migration(migrations.Migration):
                 ('language', models.CharField(choices=[('ru', 'Русский'), ('en', 'English'), ('fr', 'Français')], default='ru', max_length=6, verbose_name='Язык')),
                 ('read_status', models.SmallIntegerField(choices=[(-1, 'Новый'), (1, 'Прочитан')], default=-1, verbose_name='Статус прочтения')),
                 ('name', models.CharField(max_length=255, verbose_name='Имя')),
-                ('email', models.EmailField(max_length=254, verbose_name='E-mail')),
+                ('email', models.EmailField(max_length=254, verbose_name='E-mail, куда придет ответ')),
                 ('product_code', models.CharField(max_length=255, verbose_name='Полное название товара, серия')),
                 ('comment', models.TextField(blank=True, max_length=32768, null=True, verbose_name='Сообщение')),
             ],

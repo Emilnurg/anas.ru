@@ -10,6 +10,7 @@ from django.template.defaultfilters import floatformat as float_format
 from django.utils import formats
 from django.utils.dateformat import format as date_format
 from django.utils.timezone import template_localtime
+from django.utils.translation import ugettext_lazy as _
 
 from easy_thumbnails.conf import settings as thumbnailer_settings
 from easy_thumbnails.exceptions import InvalidImageFormatError
@@ -318,6 +319,11 @@ def thumbnail(source, size, **opts):
         else:
             return ''
     return escape(curr_thumbnail.url)
+
+
+@jinjaglobal
+def ugettext(value):
+    return _(value)
 
 
 @jinjaglobal

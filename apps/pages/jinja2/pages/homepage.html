@@ -129,13 +129,14 @@
 				<form action="{{ url('forms:feedback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
 					{{- csrf_input -}}
-					<div class="messages"></div>
 					<div class="form__heading">
 						<h4>Есть вопросы по сотрудничеству?</h4>
 						<p> Оставьте контакты, мы свяжемся с вами по телефону </p>
+						<div class="messages"></div>
 					</div>
 
 					<div class="form__content">
+						<input type="hidden" name="place" value="home"/>
 						<div class="form__group">
 							<input type="text" name="name" class="form__field required" id="feedback-name">
 							<label for="feedback-name" class="form__placeholder">Имя</label>

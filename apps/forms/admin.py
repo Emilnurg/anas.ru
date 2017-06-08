@@ -131,6 +131,7 @@ class SupportFormRequestAdmin(CommentAdminMixin, BaseFormRequestAdmin):
         'id', 'name', 'email', 'product_code', 'comment_short', 'language', 'updated'
     )
     list_display_links = ('id', 'name')
+    list_filter = BaseFormRequestAdmin.list_filter + ('category',)
     search_fields = BaseFormRequestAdmin.search_fields + (
         'name', 'email', 'product_code', 'comment'
     )

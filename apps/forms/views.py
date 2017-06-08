@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
+from smtplib import SMTPException
 
 from django.utils.translation import ugettext_lazy as _
 
 from forms import forms
 from snippets.http.response import success_response, form_validation_error_response
+from snippets.utils.email import send_trigger_email
 from snippets.views import BaseView
 
 
@@ -19,7 +21,14 @@ class BaseFormRequestView(BaseView):
         form = self.form_class(data)
 
         if form.is_valid():
-            form.save()
+            obj = form.save()
+
+            event = 'новая отправка формы "%s"' % obj._meta.verbose_name
+            try:
+                send_trigger_email(event, obj=obj, fields=obj.email_fields)
+            except (SMTPException, ConnectionError):
+                pass
+
             return success_response(self.succes_message)
 
         else:

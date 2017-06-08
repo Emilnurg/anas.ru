@@ -4,6 +4,7 @@ from collections import OrderedDict
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.core.mail import EmailMultiAlternatives
+from django.db import models
 from django.template.loader import render_to_string
 
 from snippets.db_config import db_vars
@@ -85,8 +86,11 @@ def send_trigger_email(event, obj=None, fields=None, emails=None, from_email=Non
             fields = OrderedDict()
             for field in field_names:
                 for f in meta.fields:
+                    value = getattr(obj, field)
                     if f.name == field:
-                        fields[f.verbose_name] = getattr(obj, field)
+                        if isinstance(f, models.ForeignKey):
+                            value = 'ID=%s: %s' % (value.id, value)
+                        fields[f.verbose_name] = value
                         break
 
         admin_url = '/admin/%s/%s/%s/change/' % (app, model_name, obj.pk)
@@ -100,7 +104,7 @@ def send_trigger_email(event, obj=None, fields=None, emails=None, from_email=Non
     }
 
     message_txt = render_to_string(
-        'emails/admin/new_object_trigger.jinja2',
+        'emails/admin/new_object_trigger.html',
         params,
         using='jinja2'
     )
