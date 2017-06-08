@@ -31,21 +31,3 @@ class ProfessionalArea(BaseModel):
 
     def __str__(self):
         return self.title
-
-
-class SocialNetwork(BaseModel):
-    """Соц. сети"""
-    title = models.CharField(_('Заголовок'), max_length=255, db_index=True, unique=True)
-    url = models.CharField(_('URL'), max_length=255)
-    class_name = models.CharField(
-        _('CSS-класс для ссылки (a тэг)'), blank=True, null=True, max_length=50
-    )
-
-    translation_fields = ('title', 'url')
-
-    class Meta:
-        verbose_name = _('Социальная сеть')
-        verbose_name_plural = _('Социальные сети')
-
-    def __str__(self):
-        return self.title

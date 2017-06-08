@@ -13,8 +13,3 @@ class CityTranslationOptions(BaseTranslationOptions):
 @register(models.ProfessionalArea)
 class ProfessionalAreaTranslationOptions(BaseTranslationOptions):
     fields = models.ProfessionalArea.translation_fields
-
-
-@register(models.SocialNetwork)
-class SocialNetworkTranslationOptions(BaseTranslationOptions):
-    fields = models.SocialNetwork.translation_fields

@@ -26,12 +26,3 @@ class ProfessionalAreaAdmin(BaseModelAdmin, SuperUserDeletableAdminMixin, Transl
     list_display_links = ('id', 'title')
     ordering = ('ordering', 'title')
     search_fields = ['=id'] + get_model_translation_fields(models.ProfessionalArea)
-
-
-@admin.register(models.SocialNetwork)
-class SocialNetworkAdmin(BaseModelAdmin, SuperUserDeletableAdminMixin, TranslationAdmin):
-    """Соц. сети"""
-    fields = models.SocialNetwork().collect_fields()
-    list_display = ('id', 'title', 'url', 'status', 'ordering', 'updated')
-    list_display_links = ('id', 'title')
-    search_fields = ['=id', 'class_name'] + get_model_translation_fields(models.SocialNetwork)
