@@ -12,7 +12,7 @@ from snippets.modeltranslation import get_model_translation_fields
 class PartnerAdmin(BaseModelAdmin, TranslationAdmin):
     """Дилеры"""
     group_fieldsets = True
-    fields = models.Partner().collect_fields()
+    fields = models.Partner().collect_fields() + ['professional_areas']
     filter_horizontal = ('professional_areas',)
     list_display = ('id', 'title', 'city', 'status', 'ordering', 'updated')
     list_display_links = ('id', 'title')
