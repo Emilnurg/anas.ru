@@ -23,11 +23,11 @@
 				<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}" class="b-contacts__tel">
 					{{- var('TELEPHONE_PUBLIC', request) -}}
 				</a>
-				<div class="b-contacts__email"> E-mail:
+				<div class="b-contacts__email">{{ var('EMAIL_LABEL', request) }}:
 					<a href="mailto:{{ var('EMAIL_PUBLIC', request) }}">{{ var('EMAIL_PUBLIC', request) }}</a>
 				</div>
 				{%- if contacts_page.address -%}
-				<div class="b-contacts__address"> Адрес:
+				<div class="b-contacts__address">{{ var('ADDRESS_LABEL', request) }}:
 					<address>{{ contacts_page.address }}</address>
 				</div>
 				{%- endif -%}
@@ -52,23 +52,23 @@
 					<input type="hidden" name="place" value="contacts"/>
 					<div class="form__group">
 						<input type="text" name="name" class="form__field required" id="contacts-form-name">
-						<label for="contacts-form-name" class="form__placeholder">Имя</label>
+						<label for="contacts-form-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 						<div class="form__err"></div>
 					</div>
 					<div class="form__group">
 						<input type="text" name="telephone" class="form__field required" id="contacts-form-telephone">
-						<label for="contacts-form-telephone" class="form__placeholder">Телефон</label>
+						<label for="contacts-form-telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
 						<div class="form__err"></div>
 					</div>
 					<div class="form__group">
 						<input type="text" name="comment" class="form__field required" id="contacts-form-comment">
-						<label for="contacts-form-comment" class="form__placeholder">Ваш вопрос</label>
+						<label for="contacts-form-comment" class="form__placeholder">{{ var('FORM_YOUR_QUESTION_LABEL', request) }}</label>
 						<div class="form__err"></div>
 					</div>
 				</div>
 
 				<div class="form__button">
-					<button type="submit" class="btn btn--black">Отправить</button>
+					<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 				</div>
 			</form>
 		</div>

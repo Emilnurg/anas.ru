@@ -16,7 +16,7 @@
 	{%- if categories -%}
 	<div class="articles-categories">
 		<div class="sld{% if not current_category %} is-active{% endif %}">
-			<a href="{{ list_url }}">Все статьи</a>
+			<a href="{{ list_url }}">{{ var('ALL_ARTICLES_LINKS', request) }}</a>
 		</div>
 
 		{%- for category in categories -%}

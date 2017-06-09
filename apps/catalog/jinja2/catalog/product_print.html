@@ -13,7 +13,7 @@
 				<div class="product__descr">
 					{%- if current_product.manufacturer_id -%}
 					<dl>
-						<dt>Производитель</dt>
+						<dt>{{ var('PRODUCT_FEATURE_MANUFACTURER_TITLE', request) }}</dt>
 						<dd>{{ current_product.manufacturer.title }}</dd>
 					</dl>
 					{%- endif -%}
@@ -62,7 +62,7 @@
 			<div class="product-tabs__pane tab-pane fade in active" id="product-description">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Описание</h2>
+						<h2>{{ var('PRODUCT_DESCRIPTION_TAB', request) }}</h2>
 						<div class="content-block">{{ current_product.body -}}</div>
 					</div>
 				</div>
@@ -72,7 +72,7 @@
 			<div class="product-tabs__pane tab-pane fade in active" id="product-features">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Технические характеристики</h2>
+						<h2>{{ var('PRODUCT_TECH_FEATURES_TAB', request) }}</h2>
 						{%- if current_product.features_body -%}
 						<div class="content-block">{{ current_product.features_body }}</div>
 						{%- endif -%}
@@ -103,7 +103,7 @@
 			<div class="product-tabs__pane tab-pane fade in active" id="product-training">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Бесплатное обучение</h2>
+						<h2>{{ var('PRODUCT_TRAINING_TAB', request) }}</h2>
 						<div class="content-block">{{ current_product.training_body }}</div>
 					</div>
 				</div>
@@ -114,7 +114,7 @@
 			<div class="product-tabs__pane tab-pane fade in active" id="product-testing">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Бесплатное тестирование</h2>
+						<h2>{{ var('PRODUCT_TESTING_TAB', request) }}</h2>
 						<div class="content-block">{{ current_product.testing_body }}</div>
 					</div>
 				</div>
@@ -125,7 +125,7 @@
 			<div class="product-tabs__pane tab-pane fade in active" id="product-docs">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Документация</h2>
+						<h2>{{ var('PRODUCT_DOCS_TAB', request) }}</h2>
 						{%- if current_product.docs_body -%}
 						<div class="content-block">{{ current_product.docs_body }}</div>
 						{%- endif -%}

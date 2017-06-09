@@ -139,23 +139,23 @@
 						<input type="hidden" name="place" value="home"/>
 						<div class="form__group">
 							<input type="text" name="name" class="form__field required" id="feedback-name">
-							<label for="feedback-name" class="form__placeholder">Имя</label>
+							<label for="feedback-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
 							<input type="text" name="telephone" class="form__field required" id="feedback-telephone">
-							<label for="feedback-telephone" class="form__placeholder">Телефон</label>
+							<label for="feedback-telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
 							<input type="text" name="comment" class="form__field required" id="feedback-comment">
-							<label for="feedback-comment" class="form__placeholder">Ваш вопрос</label>
+							<label for="feedback-comment" class="form__placeholder">{{ var('FORM_YOUR_QUESTION_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 					</div>
 
 					<div class="form__button">
-						<button type="submit" class="btn btn--black">Отправить</button>
+						<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 					</div>
 				</form>
 			</div>

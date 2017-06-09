@@ -12,7 +12,9 @@
 			<a href="{{ main_category.get_absolute_url(lang) }}" class="page-back__link">{{ main_category.title }}</a>
 			{%- endif -%}
 			<a href="{{ url('catalog:product_print', kwargs={'lang': lang, 'slug': current_product.slug}) }}"
-				 class="print-link" target="_blank">Распечатать информацию</a>
+				 class="print-link" target="_blank" rel="nofollow">
+				{{- var('PRODUCT_PRINT_LINK_CAPTION', request) -}}
+			</a>
 		</div>
 		<div class="row">
 			<div class="col-lg-6 col-md-7">
@@ -20,7 +22,7 @@
 				<div class="product__descr">
 					{%- if current_product.manufacturer_id -%}
 					<dl>
-						<dt>Производитель</dt>
+						<dt>{{ var('PRODUCT_FEATURE_MANUFACTURER_TITLE', request) }}</dt>
 						<dd>{{ current_product.manufacturer.title }}</dd>
 					</dl>
 					{%- endif -%}
@@ -44,12 +46,12 @@
 						 data-fancybox
 						 data-type="ajax"
 						 data-src="{{ url('popups:commercial_proposal', kwargs={'lang': request.LANGUAGE_CODE, 'slug': current_product.slug|e}) }}"
-						 class="btn">Запрос КП</a>
+						 class="btn">{{ var('PRODUCT_COMMERCIAL_PROPOSAL_BUTTON_CAPTION', request) }}</a>
 					<a href="javascript:"
 						 data-fancybox
 						 data-type="ajax"
 						 data-src="{{ url('popups:product_question', kwargs={'lang': request.LANGUAGE_CODE, 'slug': current_product.slug|e}) }}"
-						 class="btn btn--link">Задать вопрос</a>
+						 class="btn btn--link">{{ var('PRODUCT_QUESTION_BUTTON_CAPTION', request) }}</a>
 				</div>
 			</div>
 
@@ -108,30 +110,30 @@
 	<div class="container">
 		<div class="product-tabs__links">
 			<div class="sld active">
-				<a href="#product-description" class="product-tabs__tab">Описание</a>
+				<a href="#product-description" class="product-tabs__tab">{{ var('PRODUCT_DESCRIPTION_TAB', request) }}</a>
 			</div>
 
 			{%- if features -%}
 			<div class="sld">
-				<a href="#product-features" class="product-tabs__tab">Технические характеристики</a>
+				<a href="#product-features" class="product-tabs__tab">{{ var('PRODUCT_TECH_FEATURES_TAB', request) }}</a>
 			</div>
 			{%- endif -%}
 
 			{%- if current_product.training_body -%}
 			<div class="sld">
-				<a href="#product-training" class="product-tabs__tab">Бесплатное обучение</a>
+				<a href="#product-training" class="product-tabs__tab">{{ var('PRODUCT_TRAINING_TAB', request) }}</a>
 			</div>
 			{%- endif -%}
 
 			{%- if current_product.testing_body -%}
 			<div class="sld">
-				<a href="#product-testing" class="product-tabs__tab">Бесплатное тестирование</a>
+				<a href="#product-testing" class="product-tabs__tab">{{ var('PRODUCT_TESTING_TAB', request) }}</a>
 			</div>
 			{%- endif -%}
 
 			{%- if current_product.docs_body or docs -%}
 			<div class="sld">
-				<a href="#product-docs" class="product-tabs__tab">Документация</a>
+				<a href="#product-docs" class="product-tabs__tab">{{ var('PRODUCT_DOCS_TAB', request) }}</a>
 			</div>
 			{%- endif -%}
 		</div>
@@ -232,12 +234,14 @@
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="b-feedback__contacts">
-					<h4> По вопросам звоните по телефону или пишите на почту</h4>
+					<h4>{{ var('PRODUCT_QUESTIONS_FORM_TITLE', request) }}</h4>
 					<div>
-						<a href="tel:+74956265455" class="b-feedback__tel">+7 (495) 626-54-55</a>
+						<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}" class="b-feedback__tel">
+							{{- var('TELEPHONE_PUBLIC', request) -}}
+						</a>
 					</div>
 					<div>
-						<a href="javascript:" class="b-feedback__email">info@anas.com</a>
+						<a href="mailto:{{ var('EMAIL_PUBLIC', request)|e }}" class="b-feedback__email">{{ var('EMAIL_PUBLIC', request) }}</a>
 					</div>
 				</div>
 			</div>
@@ -247,8 +251,8 @@
 							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
 					{{- csrf_input -}}
 					<div class="form__heading">
-						<h4>Хотите обсудить сотрудничество?</h4>
-						<p> Оставьте контакты, мы свяжемся с вами по телефону</p>
+						<h4>{{ var('PRODUCT_FEEDBACK_FORM_TITLE', request) }}</h4>
+						<p>{{ var('PRODUCT_FEEDBACK_FORM_SUBTITLE', request) }}</p>
 						<div class="messages"></div>
 					</div>
 
@@ -256,23 +260,23 @@
 						<input type="hidden" name="product" value="{{ current_product.pk }}"/>
 						<div class="form__group">
 							<input type="text" name="name" class="form__field required" id="feedback-name">
-							<label for="feedback-name" class="form__placeholder">Имя</label>
+							<label for="feedback-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
 							<input type="text" name="telephone" class="form__field required" id="feedback-telephone">
-							<label for="feedback-telephone" class="form__placeholder">Телефон</label>
+							<label for="feedback-telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
 							<input type="text" name="comment" class="form__field required" id="feedback-comment">
-							<label for="feedback-comment" class="form__placeholder">Комментарии</label>
+							<label for="feedback-comment" class="form__placeholder">{{ var('FORM_COMMENTS_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 					</div>
 
 					<div class="form__button">
-						<button type="submit" class="btn btn--black">Отправить</button>
+						<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 					</div>
 				</form>
 			</div>

@@ -4,8 +4,8 @@
 			<div class="col-lg-8 col-lg-offset-2">
 				<div class="b-comments__heading">
 					<h4>
-						Комментарии и отзывы
-						<span class="disqus-comment-count"
+						{{- var('COMMENTS_TITLE', request) -}}
+						&nbsp;<span class="disqus-comment-count"
 							data-disqus-identifier="{{ current_article._meta.db_table }}_{{ current_article.pk }}"></span>
 					</h4>
 				</div>
@@ -23,7 +23,7 @@
 					(d.head || d.body).appendChild(s);
 				})();
 				</script>
-				<noscript>Пожалуйста включите JavaScript чтобы увидеть комментарии.</noscript>
+				<noscript>{{ var('JAVASCRIPT REQUIRED', request) }}</noscript>
 			</div>
 		</div>
 	</div>
