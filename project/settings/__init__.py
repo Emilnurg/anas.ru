@@ -353,6 +353,8 @@ UPLOADIFIVE_VIDEO_MIMETYPES = (
     'video/x-matroska'
 )
 
+DISCUS_ACCOUNT = 'anasmedical'
+
 
 try:
     from project.settings.settings_local import *  # NOQA

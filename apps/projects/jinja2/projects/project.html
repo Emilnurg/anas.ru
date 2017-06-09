@@ -16,6 +16,10 @@
 	<meta property="og:description" content="{{ current_article.excerpt|e }}">
 {%- endblock -%}
 
+{%- block EXTRA_BODY -%}
+<script id="dsq-count-scr" src="//{{ discus_account() }}.disqus.com/count.js" async></script>
+{%- endblock -%}
+
 {%- block PAGE_CONTENT -%}
 <div class="b-project">
 	<div class="b-project__bg">

@@ -3,18 +3,22 @@
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
 				<div class="b-comments__heading">
-					<h4>Комментарии и отзывы</h4>
+					<h4>
+						Комментарии и отзывы
+						(<span class="disqus-comment-count"
+							data-disqus-identifier="{{ current_article._meta.db_table }}_{{ current_article.pk }}"></span>)
+					</h4>
 				</div>
 				<div id="disqus_thread"></div>
 				<script type="application/javascript">
 				var disqus_config = function () {
 				  this.language = '{{ request.LANGUAGE_CODE }}';
 					this.page.url = '{{ site_url() }}{{ request.get_full_path() }}';
-					this.page.identifier = '{{ current_article.pk }}';
+					this.page.identifier = '{{ current_article._meta.db_table }}_{{ current_article.pk }}';
 				};
 				(function() {
 					var d = document, s = d.createElement('script');
-					s.src = '//anas.disqus.com/embed.js';
+					s.src = '//wizzzet.disqus.com/embed.js';
 					s.setAttribute('data-timestamp', + new Date());
 					(d.head || d.body).appendChild(s);
 				})();
