@@ -4,6 +4,14 @@
 
 {%- block BODY_CLASSES %}body-contacts{% endblock -%}
 
+{%- block EXTRA_SCRIPTS -%}
+{%- if contacts_page.map_x and contacts_page.map_y -%}
+<script async defer
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGgAHCr6yyc5mrD9QyXJxFZd8LJtTZ2lM&callback=initContactsMap">
+</script>
+{%- endif -%}
+{%- endblock -%}
+
 {%- block PAGE_CONTENT -%}
 <div class="b-contacts">
 	<div class="b-contacts__left">
@@ -67,14 +75,12 @@
 	</div>
 
 	{%- if contacts_page.map_x and contacts_page.map_y -%}
-	<script async defer
-					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGgAHCr6yyc5mrD9QyXJxFZd8LJtTZ2lM&callback=initMap">
-	</script>
 	<div class="contacts-map">
 		<div id="map"
 				 data-coord-lon="{{ contacts_page.map_x }}"
 				 data-coord-lat="{{ contacts_page.map_y }}"
-		     data-coord-alt="{{ contacts_page.map_zoom }}"></div>
+		     data-coord-alt="{{ contacts_page.map_zoom }}">
+		</div>
 	</div>
 	{%- endif -%}
 </div>

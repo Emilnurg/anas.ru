@@ -4,6 +4,13 @@
 
 {%- block BODY_CLASSES %}body-partners{% endblock -%}
 
+{%- block EXTRA_SCRIPTS -%}
+<script src="{{ STATIC_URL }}js/partials/markerclusterer.js"></script>
+<script async defer
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGgAHCr6yyc5mrD9QyXJxFZd8LJtTZ2lM&callback=initPartnerMap">
+</script>
+{%- endblock -%}
+
 {%- block PAGE_CONTENT -%}
 <div class="b-partners">
 	<div class="container">
@@ -17,15 +24,23 @@
 		<div class="partners-filter">
 			<div class="partners-filter__dropdowns">
 				<div class="dropdown">
-					<button class="dropdown__button" data-toggle="dropdown">Выберите город</button>
+					<input type="hidden" name="city" id="partners_city" value=""/>
+					<button class="dropdown__button" data-toggle="dropdown">
+						Выберите город
+					</button>
 					<div class="dropdown-menu">
 						<div>
 							{%- for col in cities|slice(2) -%}
 							<div>
 								<ul>
+									{%- if loop.first -%}
+									<li>
+										<a data-rel="" href="javascript:">Все города</a>
+									</li>
+									{%- endif -%}
 									{%- for city in col -%}
 									<li>
-										<a href="javascript:">{{ city.title }}</a>
+										<a data-rel="{{ city.pk }}" href="javascript:">{{ city.title }}</a>
 									</li>
 									{%- endfor -%}
 								</ul>
@@ -35,15 +50,23 @@
 					</div>
 				</div>
 				<div class="dropdown">
-					<button class="dropdown__button" type="button" data-toggle="dropdown"> Выберите направление </button>
+					<input type="hidden" name="prof" id="partners_prof" value=""/>
+					<button class="dropdown__button" type="button" data-toggle="dropdown">
+						Выберите направление
+					</button>
 					<div class="dropdown-menu">
 						<div>
 							{%- for col in professional_areas|slice(2) -%}
 							<div>
 								<ul>
+									{%- if loop.first -%}
+									<li>
+										<a data-rel="" href="javascript:">Все направления</a>
+									</li>
+									{%- endif -%}
 									{%- for area in col -%}
 									<li>
-										<a href="javascript:">{{ area.title }}</a>
+										<a data-rel="{{ area.pk }}" href="javascript:">{{ area.title }}</a>
 									</li>
 									{%- endfor -%}
 								</ul>
@@ -58,112 +81,6 @@
 				<a href="javascript:" class="btn btn--list is-active">Список</a>
 			</div>
 		</div>
-		<script type="application/javascript">
-			function initMap()
-			{
-				var map = new google.maps.Map(document.getElementById('map'),
-				{
-					zoom: 3,
-					scrollwheel: false,
-					center: {
-						lat: 62.5763605,
-						lng: 93.33995625
-					}
-				});
-				var infoWin = new google.maps.InfoWindow();
-				var markers = locations.map(function(location, i) {
-					var marker = new google.maps.Marker({
-						position: location
-					});
-					google.maps.event.addListener(marker, 'click', function() {
-						infoWin.setContent(location.info);
-						infoWin.open(map, marker);
-					});
-					return marker;
-				});
-				// Add a marker clusterer to manage the markers.
-				var clusterStyles = [
-				{
-					textColor: 'white',
-					url: '{{ STATIC_URL }}images/marker.svg',
-					textSize: 18,
-					height: 51,
-					width: 36,
-					iconAnchor: [17, 51]
-				},
-				{
-					textColor: 'white',
-					url: '{{ STATIC_URL }}images/marker.svg',
-					textSize: 18,
-					height: 51,
-					width: 36,
-					iconAnchor: [17, 51]
-				},
-				{
-					textColor: 'white',
-					url: '{{ STATIC_URL }}images/marker.svg',
-					textSize: 18,
-					height: 51,
-					width: 36,
-					iconAnchor: [17, 51]
-				},
-				{
-					textColor: 'white',
-					url: '{{ STATIC_URL }}images/marker.svg',
-					textSize: 18,
-					height: 51,
-					width: 36,
-					iconAnchor: [17, 51]
-				},
-				{
-					textColor: 'white',
-					url: '{{ STATIC_URL }}images/marker.svg',
-					textSize: 18,
-					height: 51,
-					width: 36,
-					iconAnchor: [17, 58]
-				}];
-				var mcOptions = {
-					gridSize: 36,
-					styles: clusterStyles,
-					maxZoom: 15
-				};
-				var markerCluster = new MarkerClusterer(map, markers, mcOptions);
-			}
-			var locations = [
-			{%- for partner in partners %}
-			{%- if partner.map_x and partner.map_y -%}
-			{ {#-  -#}
-				lat: {{ partner.map_y }}, {#-  -#}
-				lng: {{ partner.map_x }}, {#-  -#}
-				info: '<div class="map-info">' {%- if partner.city_id -%} +
-					'<div class="map-info__city">' +
-						'{{ partner.city.title }}' +
-					'</div>' {%- endif -%} +
-					'<div class="map-info__company">' +
-						'{{ partner.title }}' +
-					'</div>' {%- if partner.address -%} +
-					'<address class="map-info__address">' +
-						'129090, 2-й Троицкий пер., д. 6а, стр. 13' +
-					'</address>' {%- endif -%}{%- if partner.phone -%} +
-					'<div class="map-info__phones">' +
-						'{{ partner.phone }}' +
-					'</div>' {%- endif -%} {%- if partner.website -%} +
-					'<div class="map-info__site">' +
-						'{{ partner.website }}' +
-					'</div>' {%- endif -%} +
-				'</div>'
-			}
-			{%- endif -%}
-			{%- if not loop.last %},{% endif -%}
-			{%- endfor -%}
-			]
-		</script>
-
-		<script src="{{ STATIC_URL }}js/partials/markerclusterer.js"></script>
-		<script async defer
-						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGgAHCr6yyc5mrD9QyXJxFZd8LJtTZ2lM&callback=initMap">
-		</script>
 
 		<div class="partners-map">
 			<div class="map">
@@ -184,12 +101,14 @@
 				<tbody>
 					{%- for partner in partners -%}
 					<tr data-city="{{ partner.city_id if partner.city_id else '' }}"
-							data-profs="|{% for area in partner.professional_areas_cache %}{{ area.pk }}|{% endfor %}|">
-						<td>{{ partner.city.title if partner.city_id else '&nbsp;' }}</td>
-						<td>{{ partner.title }}</td>
-						<td>{{ partner.address or '&nbsp;' }}</td>
-						<td>{{ partner.phone or '&nbsp;' }}</td>
-						<td>{{ partner.website or '&nbsp;' }}</td>
+							data-profs="|{% for area in partner.professional_areas_cache %}{{ area.pk }}|{% endfor %}|"
+							{%- if partner.map_y %} data-lat="{{ partner.map_y }}"{% endif -%}
+							{%- if partner.map_x %} data-lon="{{ partner.map_x }}"{% endif %}>
+						<td class="cty">{{ partner.city.title if partner.city_id else '&nbsp;' }}</td>
+						<td class="ttl">{{ partner.title }}</td>
+						<td class="adr">{{ partner.address or '&nbsp;' }}</td>
+						<td class="phn">{{ partner.phone or '&nbsp;' }}</td>
+						<td class="sit">{{ partner.website or '&nbsp;' }}</td>
 					</tr>
 					{%- endfor -%}
 				</tbody>

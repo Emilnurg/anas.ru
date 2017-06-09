@@ -1,5 +1,12 @@
 /*jshint esversion: 6*/
-
+if (!String.prototype.trim) {
+  (function() {
+    // Вырезаем BOM и неразрывный пробел
+    String.prototype.trim = function() {
+      return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+    };
+  })();
+}
 
 /**
  * maskedinput
@@ -681,7 +688,7 @@ function initScripts() {
   parallax();
 }
 
-function initMap() {
+function initContactsMap() {
   var mapEl = document.getElementById('map'),
       $map = $(mapEl);
 
@@ -706,6 +713,116 @@ function initMap() {
       icon: '/static/images/map_pin_logo.svg'
     });
   }
+}
+
+function loadPartnersMap() {
+  window.markerCluster.clearMarkers();
+  var bounds = new google.maps.LatLngBounds();
+
+  var city = $('#partners_city').val(),
+    prof = $('#partners_prof').val(),
+    allPartners, partners;
+    allPartners = partners = $('.partners-table tbody tr');
+
+  if (city) {
+    partners = partners.filter('[data-city="' + city + '"]');
+  }
+
+  if (prof) {
+    partners = partners.filter('[data-profs*="|' + prof + '|"]');
+  }
+
+  allPartners.addClass('hide');
+  partners.removeClass('hide');
+
+  partners = partners.filter('[data-lat]').filter('[data-lon]');
+
+  var infoWin = new google.maps.InfoWindow();
+  partners.each(function() {
+    var partner = $(this),
+      info = '<div class="map-info">',
+      city = partner.find('.cty').text().trim(),
+      address = partner.find('.adr').text().trim(),
+      phones = partner.find('.phn').text().trim(),
+      site = partner.find('.sit').text().trim();
+
+    if (city) {
+      info += '<div class="map-info__city">' + city + '</div>'
+    }
+
+    info += '<div class="map-info__company">' + partner.find('.ttl').text() + '</div>';
+
+    if (address) {
+      info += '<div class="map-info__address">' + address + '</div>'
+    }
+
+    if (phones) {
+      info += '<div class="map-info__phones">' + phones + '</div>'
+    }
+
+    if (site) {
+      info += '<div class="map-info__site">' + site + '</div>'
+    }
+
+    info += '</div>';
+    var location = {
+      lat: parseFloat(partner.data('lat')),
+      lng: parseFloat(partner.data('lon')),
+      info: info
+    };
+    var marker = new google.maps.Marker({
+      position: location
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+      infoWin.setContent(location.info);
+      infoWin.open(window.partnersMap, marker);
+    });
+    window.markerCluster.addMarker(marker);
+    bounds.extend(marker.getPosition());
+  });
+
+  if (window.markerCluster.getMarkers().length > 0) {
+    window.partnersMap.fitBounds(bounds);
+    if (window.partnersMap.getZoom() > 16) {
+      window.partnersMap.setZoom(16);
+    }
+  } else {
+    window.partnersMap.setZoom(3);
+    window.partnersMap.setCenter({
+      lat: 62.5763605,
+      lng: 93.33995625
+    });
+  }
+
+}
+
+function initPartnerMap() {
+  $(document).ready(function() {
+    window.partnersMap = new google.maps.Map(document.getElementById('map'), {
+      zoom: 3,
+      scrollwheel: false,
+      center: {
+        lat: 62.5763605,
+        lng: 93.33995625
+      }
+    });
+
+    // Add a marker clusterer to manage the markers.
+    window.markerCluster = new MarkerClusterer(window.partnersMap, [], {
+      gridSize: 36,
+      styles: [{
+        textColor: 'white',
+        url: '/static/images/marker.svg',
+        textSize: 18,
+        height: 51,
+        width: 36,
+        iconAnchor: [17, 51]
+      }],
+      maxZoom: 15
+    });
+
+    loadPartnersMap();
+  });
 }
 
 window.Share = {
@@ -931,7 +1048,7 @@ function openThanksRequest() {
 $(document).ready(function() {
   var body = $('body');
   window.F = new Form();
-  var feedbackForm = $('.b-feedback__form');
+  var feedbackForm = $('.b-feedback__form,.contacts__form');
   if (feedbackForm.size() > 0) {
     window.F.manageForm(
       feedbackForm,
@@ -964,12 +1081,23 @@ $(document).ready(function() {
 
        return false;
      });
+
   } else if (body.hasClass('body-contacts')) {
     var contactsForm = $('.contacts__form');
     if (contactsForm.size() > 0) {
       window.F.manageForm(contactsForm, openThanksRequest);
     }
 
+  } else if (body.hasClass('body-partners')) {
+    var dropdowns = $('main .dropdown');
+    $('input', dropdowns).change(loadPartnersMap);
+
+    $('.dropdown-menu a', dropdowns).click(function() {
+      var parent = $(this).parents('.dropdown');
+      parent.find('input[type=hidden]').val($(this).data('rel'));
+      parent.find('.dropdown__button').text($(this).text());
+      loadPartnersMap();
+    });
   }
 });
 
