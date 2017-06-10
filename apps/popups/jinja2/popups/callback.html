@@ -4,7 +4,7 @@
 					class="form b-feedback__form callback-form" method="POST" accept-charset="utf-8" novalidate>
 			{{- csrf_input -}}
       <div class="form__heading">
-        <h4>Звонок консультанта</h4>
+        <h4>{{ var('POPUP_CONSULTANT_CALL', request) }}</h4>
 				<div class="messages"></div>
       </div>
 
@@ -12,18 +12,18 @@
 				<input type="hidden" name="place" value="popup"/>
 				<div class="form__group">
 					<input type="text" name="name" class="form__field required" id="popup-callback-name">
-					<label for="popup-callback-name" class="form__placeholder">Имя</label>
+					<label for="popup-callback-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 					<div class="form__err"></div>
 				</div>
 				<div class="form__group">
 					<input type="text" name="telephone" class="form__field required" id="popup-callback-telephone">
-					<label for="popup-callback-telephone" class="form__placeholder">E-mail или телефон</label>
+					<label for="popup-callback-telephone" class="form__placeholder">{{ var('FORM_NAME_OR_EMAIL_LABEL', request) }}</label>
 					<div class="form__err"></div>
 				</div>
 			</div>
 
       <div class="form__button">
-        <button type="submit" class="btn btn--black">Отправить</button>
+        <button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
       </div>
     </form>
   </div>

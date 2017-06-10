@@ -4189,7 +4189,10 @@
   &:focus {
     color: #1f191a;
   }
+}
 
+a.page-nav__prev,
+a.page-nav__next {
   &:hover {
     background: #d2205c;
     color: #fff;

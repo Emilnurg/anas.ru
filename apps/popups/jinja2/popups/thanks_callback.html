@@ -2,9 +2,9 @@
   <div class="modal__inner">
     <div class="thank-you">
       <div class="thank-you__check"></div>
-      <h4>Спасибо за обращение!</h4>
+      <h4>{{ var('POPUP_CALLBACK_TITLE', request) }}</h4>
       <p>
-        Мы Вам перезвони в рабочее время. Мы работаем с 10:00-21:00
+        {{- var('POPUP_CALLBACK_BODY', request) -}}
       </p>
     </div>
   </div>

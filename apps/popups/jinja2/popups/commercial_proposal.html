@@ -4,9 +4,9 @@
 					class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
 			{{- csrf_input -}}
       <div class="form__heading">
-        <h4>Получить коммерческое предложение</h4>
+        <h4>{{ var('POPUP_GET_COMMERCIAL_PROPOSAL', request) }}</h4>
         <p>
-          Мы свяжемся с вами и подготовим предложение
+          {{- var('POPUP_GET_COMMERCIAL_PROPOSAL_SUBTITLE', request) -}}
           <span>{{ current_product.title }}</span>
         </p>
 				<div class="messages"></div>
@@ -16,23 +16,23 @@
 				<input type="hidden" name="product" value="{{ current_product.pk }}"/>
         <div class="form__group">
           <input type="text" name="name" class="form__field required" id="popup-cp-name">
-          <label for="popup-cp-name" class="form__placeholder">Имя</label>
+          <label for="popup-cp-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 					<div class="form__err"></div>
         </div>
         <div class="form__group">
           <input type="text" name="telephone" class="form__field required" id="popup-cp-telephone">
-          <label for="popup-cp-telephone" class="form__placeholder">Телефон</label>
+          <label for="popup-cp-telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
 					<div class="form__err"></div>
         </div>
         <div class="form__group">
           <input type="text" name="email" class="form__field required" id="popup-cp-email">
-          <label for="popup-cp-email" class="form__placeholder">E-mail</label>
+          <label for="popup-cp-email" class="form__placeholder">{{ var('FORM_EMAIL_LABEL', request) }}</label>
 					<div class="form__err"></div>
         </div>
       </div>
 
 			<div class="form__button">
-        <button type="submit" class="btn btn--black">Отправить</button>
+        <button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
       </div>
     </form>
   </div>

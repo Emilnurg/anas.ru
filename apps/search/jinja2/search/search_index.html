@@ -23,7 +23,7 @@
 		{%- if products['objects'] -%}
 		<div class="b-search__section">
 			<a name="products"></a>
-			<h2>Продукция</h2>
+			<h2>{{ var('SEARCH_PRODUCTS_TITLE', request) }}</h2>
 			<div class="catalog__row row">
 				{%- for product in products['objects'] -%}
 				<div class="col-xs-12 col-sm-6 catalog__col">
@@ -38,7 +38,7 @@
 		{%- if training['objects'] -%}
 		<div class="b-search__section">
 			<a name="training"></a>
-			<h2>Обучение</h2>
+			<h2>{{ var('SEARCH_TRAINING_TITLE', request) }}</h2>
 			<div class="row row--equal">
 				{%- for article in training['objects'] -%}
 				<div class="col-lg-6 col-xs-12">
@@ -53,7 +53,7 @@
 		{%- if articles['objects'] -%}
 		<div class="b-search__section">
 			<a name="knowledge"></a>
-			<h2>База знаний</h2>
+			<h2>{{ var('SEARCH_KNOWLEDGE_BASE_TITLE', request) }}</h2>
 			<div class="row row--equal">
 				{%- for article in articles['objects'] -%}
 				<div class="col-lg-6 col-xs-12">

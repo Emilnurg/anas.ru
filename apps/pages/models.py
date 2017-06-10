@@ -99,6 +99,49 @@ class ContactsPage(BasicModel, SingletonModel):
         verbose_name = _('Страница "Контакты"')
 
 
+class HomePage(BasicModel, SingletonModel):
+    """Главная страница"""
+    title = models.CharField(_('Заголовок страницы'), max_length=255)
+    projects_title = models.CharField(
+        _('Заголовок блока проектов'), max_length=100, blank=True, null=True
+    )
+    projects_subtitle = models.TextField(
+        _('Подзаголовок блока проектов'), blank=True, null=True
+    )
+    projects_button = models.CharField(
+        _('Текст кнопки блока проектов'), max_length=30, blank=True, null=True
+    )
+
+    questions_title = models.CharField(
+        _('Заголовок блока "Есть вопросы?"'), max_length=255, blank=True, null=True
+    )
+    questions_subtitle = models.TextField(
+        _('Подзаголовок блока "Есть вопросы?"'), blank=True, null=True
+    )
+
+    how_we_work_title = models.CharField(
+        _('Заголовок блока "Как мы работаем с клиентами"'), max_length=100, blank=True, null=True
+    )
+    how_we_work_subtitle = models.TextField(
+        _('Подзаголовок блока "Как мы работаем с клиентами"'), blank=True, null=True
+    )
+    how_we_work_image = models.ImageField(
+        _('Фото в блоке  блока "Как мы работаем с клиентами"'), max_length=255, upload_to='about',
+        blank=True, null=True
+    )
+
+    translation_fields = (
+        'title', 'projects_title', 'projects_subtitle', 'projects_button', 'questions_title',
+        'questions_subtitle', 'how_we_work_title', 'how_we_work_subtitle'
+    )
+
+    class Meta:
+        verbose_name = _('Главная страница')
+
+    def __str__(self):
+        return str(_('Главная страница'))
+
+
 class PartnersPage(BasicModel, SingletonModel):
     """Страница "Партнеры" """
     title = models.CharField(_('Заголовок страницы'), max_length=255)

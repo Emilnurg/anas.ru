@@ -8,7 +8,7 @@ from core.models import HomeAdvantage, HomeSlide, HomeCatalog, HomeCatalogProduc
     HomeCatalogManufacturer
 from core.utils import get_flat_page
 from pages.models import ContactsPage, AboutPage, AboutAdvantage, ServiceCenterPage, \
-    ServiceRequestOrder
+    ServiceRequestOrder, HomePage
 from snippets.views import BaseTemplateView
 
 
@@ -25,6 +25,7 @@ class HomeView(BaseTemplateView):
 
     def get_context_data(self, **kwargs):
         kwargs = super(HomeView, self).get_context_data(**kwargs)
+        home_page = HomePage.get_solo()
         home_slides = HomeSlide.objects.published().order_by('ordering')[:20]
         home_advantages = HomeAdvantage.objects.published().order_by('ordering')[:5]
 
@@ -45,6 +46,7 @@ class HomeView(BaseTemplateView):
             home_catalogs=home_catalogs,
             home_catalog_manufacturers=home_catalog_manufacturers,
             home_catalog_products=home_catalog_products,
+            home_page=home_page,
             home_slides=home_slides
         )
         return kwargs

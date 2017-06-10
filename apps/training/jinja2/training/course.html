@@ -24,22 +24,35 @@
 				<div class="b-course__header">
 					<ul class="b-course__info">
 						{%- if current_course.participants_count -%}
-						<li>Количество участников: {{ current_course.participants_count }}</li>
+						<li>
+							{{- var('COURSE_PARTICIPANTS_COUNT_LABEL', request) }}:&nbsp;
+							{{- current_course.participants_count -}}
+						</li>
 						{%- endif -%}
 
 						{%- if current_course.price -%}
-						<li>Цена: {{ current_course.price|intcomma }} руб</li>
+						<li>
+							{{- var('COURSE_PRICE_LABEL', request) }}:&nbsp;
+							{{- current_course.price|intcomma }}&nbsp;
+							{{- var('RUR', request) -}}
+						</li>
 						{%- endif -%}
 
 						{%- if current_course.city_id -%}
-						<li>Место проведения: {{ current_course.city.title }}</li>
+						<li>
+							{{- var('COURSE_LOCATION_LABEL', request) }}:&nbsp;
+							{{- current_course.city.title -}}
+						</li>
 						{%- endif -%}
 					</ul>
 
-					{%- if current_course.date_start %}
-					<p>Начало курса с {{ current_course.date_start|date('d E') }}</p>
+					{%- if current_course.date_start -%}
+					<p>
+						{{- var('COURSE_STARTS_SINCE', request) -}}
+						&nbsp;{{ current_course.date_start|date('d E') -}}
+					</p>
 					{%- endif -%}
-					<a href="#form" class="btn btn--black">Записаться</a>
+					<a href="#form" class="btn btn--black">{{ var('COURSE_ENROLL_BUTTON', request) }}</a>
 				</div>
 			</div>
 		</div>
@@ -53,19 +66,19 @@
 
 					{%- if current_course.body_about or teachers -%}
 					<div class="sld active">
-						<a href="#course-about" data-toggle="tab">О курсе</a>
+						<a href="#course-about" data-toggle="tab">{{ var('COURSE_ABOUT_TAB', request) }}</a>
 					</div>
 					{%- endif -%}
 
 					{%- if current_course.body_detail -%}
 					<div class="sld">
-						<a href="#course-detail" data-toggle="tab">Подробная информация</a>
+						<a href="#course-detail" data-toggle="tab">{{ var('COURSE_DETAILS_TAB', request) }}</a>
 					</div>
 					{%- endif -%}
 
 					{%- if current_course.body_schedule or schedule -%}
 					<div class="sld">
-						<a href="#course-schedule" data-toggle="tab">Расписание</a>
+						<a href="#course-schedule" data-toggle="tab">{{ var('COURSE_SCHEDULE_TAB', request) }}</a>
 					</div>
 					{%- endif -%}
 				</div>
@@ -73,16 +86,12 @@
 				<div class="tab-content">
 					{%- if current_course.body_about or teachers -%}
 					<div class="tab-pane fade active in" id="course-about">
-						<div class="about-course">
-							<dl>
-								<dt>Обучаем на практике</dt>
-								<dd>Отработаны практические навыки по удалению зубов и одномоментной имплантации</dd>
-							</dl>
-							<dl>
-								<dt>Предоставляем все необходимое</dt>
-								<dd>Курсантам предоставляются все необходимые материалы и оборудование</dd>
-							</dl>
+						{%- if current_course.body_about -%}
+						<div class="about-course content-block">
+							{{- current_course.body_about -}}
 						</div>
+						{%- endif -%}
+
 						{%- if teachers -%}
 						<div class="lecturer">
 							<div class="lecturer__left">
@@ -99,13 +108,15 @@
 									{%- endif -%}
 
 									<div class="lecturer__descr">{{ teacher.teacher.title }}</div>
-									{#- <a href="javascript:" class="lecturer__link">О преподавателе</a> -#}
+									{#- <a href="javascript:" class="lecturer__link">{{ var('COURSE_ABOUT_TEACHER_BUTTON', request) }}</a> -#}
 								</div>
 								{%- endfor -%}
 							</div>
 							<div class="lecturer__right">
 								<div class="lecturer__image">
-									<img src="{{ STATIC_URL }}images/raster/lecturer_img.png" class="img-responsive" alt=""> </div>
+									<img src="{{ STATIC_URL }}images/raster/lecturer_img.png"
+											 class="img-responsive" alt=""/>
+								</div>
 							</div>
 						</div>
 						{%- endif -%}
@@ -153,8 +164,8 @@
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="b-feedback__text">
-					<h4>Обучение в ANAS</h4>
-					<p>Наша компания занимается комплексным обучением стоматологов уже более 10 лет. Пройдя курсы специалист становится не только профессионалом но и мастером. </p>
+					<h4>{{ var('COURSE_TRAINING_TITLE', request) }}</h4>
+					<p>{{ var('COURSE_TRAINING_SUBTITLE', request) }}</p>
 				</div>
 			</div>
 			<div class="col-lg-6">
@@ -163,8 +174,8 @@
 							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
 							{{- csrf_input -}}
 					<div class="form__heading">
-						<h4>Подать заявку на обучение</h4>
-						<p>Оставьте контакты, мы свяжемся с вами по телефону</p>
+						<h4>{{ var('COURSE_ENROLL_FORM_TITLE', request) }}</h4>
+						<p>{{ var('COURSE_ENROLL_FORM_SUBTITLE', request) }}</p>
 						<div class="messages"></div>
 					</div>
 
@@ -172,42 +183,58 @@
 						<input type="hidden" name="course" value="{{ current_course.pk }}">
 						<div class="form__group">
 							<input type="text" name="name" class="form__field required" id="feedback_name"/>
-							<label for="feedback_name" class="form__placeholder">Имя</label>
+							<label for="feedback_name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
 							<input type="text" name="telephone" class="form__field required" id="feedback_telephone"/>
-							<label for="feedback_telephone" class="form__placeholder">Телефон</label>
+							<label for="feedback_telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 					</div>
 
 					<div class="form__button">
-						<button type="submit" class="btn btn--black">Отправить</button>
+						<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+
+{%- if siblings -%}
 <div class="page-nav">
-	<a href="javascript:" class="page-nav__prev">
+	{%- if siblings[0] -%}
+	<a href="{{ siblings[0].get_absolute_url(lang) }}" class="page-nav__prev">
 		<div class="page-nav__text page-nav__text--center">
-			<div class="page-nav__name"> Название курса </div>
+			<div class="page-nav__name">{{ siblings[0].title }}</div>
 			<div class="page-nav__arrow"></div>
 		</div>
+		{%- if siblings[0].image -%}
 		<div class="page-nav__image">
-			<span style="background-image: url(images/raster/page_nav_prev.jpg)"></span>
+			<span style="background-image: url({{ siblings[0]|cropped_thumbnail('thumb_siblings') }})"></span>
 		</div>
+		{%- endif -%}
 	</a>
-	<a href="javascript:" class="page-nav__next">
+	{%- else -%}
+	<span class="page-nav__prev"></span>
+	{%- endif -%}
+
+	{%- if siblings[1] -%}
+	<a href="{{ siblings[1].get_absolute_url(lang) }}" class="page-nav__next">
 		<div class="page-nav__text page-nav__text--center">
-			<div class="page-nav__name"> Название курса </div>
+			<div class="page-nav__name">{{ siblings[1].title }}</div>
 			<div class="page-nav__arrow"></div>
 		</div>
+		{%- if siblings[1].image -%}
 		<div class="page-nav__image">
-			<span style="background-image: url(images/raster/page_nav_next.jpg)"></span>
+			<span style="background-image: url({{ siblings[1]|cropped_thumbnail('thumb_siblings') }})"></span>
 		</div>
+		{%- endif -%}
 	</a>
+	{%- else -%}
+	<span class="page-nav__next"></span>
+	{%- endif -%}
 </div>
+{%- endif -%}
 {%- endblock -%}

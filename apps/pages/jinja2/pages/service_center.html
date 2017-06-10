@@ -95,28 +95,28 @@
 			<div class="form__content">
 				<div class="form__group">
 					<input type="text" name="name" class="form__field required" id="service_name">
-					<label for="service_name" class="form__placeholder">Имя</label>
+					<label for="service_name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 					<div class="form__err"></div>
 				</div>
 				<div class="form__group">
 					<input type="text" name="telephone" class="form__field required" id="service_telephone">
-					<label for="service_telephone" class="form__placeholder">Телефон</label>
+					<label for="service_telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
 					<div class="form__err"></div>
 				</div>
 				<div class="form__group">
 					<input type="text" name="email" class="form__field required" id="service_email">
-					<label for="service_email" class="form__placeholder">E-mail</label>
+					<label for="service_email" class="form__placeholder">{{ var('FORM_EMAIL_LABEL', request) }}</label>
 					<div class="form__err"></div>
 				</div>
 				<div class="form__group">
 					<input type="text" name="comment" class="form__field required" id="service_comment">
-					<label for="service_comment" class="form__placeholder">Опишите проблему</label>
+					<label for="service_comment" class="form__placeholder">{{ var('FORM_PROBLEM_LABEL', request) }}</label>
 					<div class="form__err"></div>
 				</div>
 			</div>
 
 			<div class="form__button">
-				<button type="submit" class="btn btn--black">Отправить</button>
+				<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 			</div>
 		</form>
 	</div>

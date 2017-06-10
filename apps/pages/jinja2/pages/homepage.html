@@ -1,6 +1,6 @@
 {%- extends 'layouts/main.html' -%}
 
-{%- block PAGE_TITLE %}{{ var('HOMEPAGE_TITLE', request) }}{% endblock -%}
+{%- block PAGE_TITLE %}{{ home_page.title }}{% endblock -%}
 
 {%- block BODY_CLASSES %}body-home{% endblock -%}
 
@@ -117,21 +117,32 @@
 <div class="b-feedback">
 	<div class="container">
 		<div class="row">
+			{%- if home_page.projects_title -%}
 			<div class="col-lg-6">
 				<div class="b-feedback__text">
-					<h4>Комплексные проекты</h4>
-					<p> Наша компания занимается комплексным оснащением стоматологических учреждений от этапа проектирования до поставки оборудования. </p>
-					<a href="{{ url('projects:projects_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-						 class="btn">Реализованные проекты</a>
+					<h4>{{ home_page.projects_title }}</h4>
+					{%- if home_page.projects_subtitle -%}
+					<p>{{ home_page.projects_subtitle }}</p>
+					{%- endif -%}
+					{%- if home_page.projects_button -%}
+					<a href="{{ url('projects:projects_index', kwargs={'lang': request.LANGUAGE_CODE}) }}" class="btn">
+						{{- home_page.projects_button -}}
+					</a>
+					{%- endif -%}
 				</div>
 			</div>
-			<div class="col-lg-6">
+			{%- endif -%}
+
+			{%- if home_page.questions_title -%}
+			<div class="col-lg-{% if home_page.projects_title %}6{% else %}12{% endif %}">
 				<form action="{{ url('forms:feedback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
 					{{- csrf_input -}}
 					<div class="form__heading">
-						<h4>Есть вопросы по сотрудничеству?</h4>
-						<p> Оставьте контакты, мы свяжемся с вами по телефону </p>
+						<h4>{{ home_page.questions_title }}</h4>
+						{%- if home_page.questions_subtitle -%}
+						<p>{{ home_page.questions_subtitle }}</p>
+						{%- endif -%}
 						<div class="messages"></div>
 					</div>
 
@@ -159,23 +170,33 @@
 					</div>
 				</form>
 			</div>
+			{%- endif -%}
 		</div>
 	</div>
 </div>
+
+{%- if home_page.how_we_work_title -%}
 <div class="b-how-working">
 	<div class="container">
 		<div class="row">
+			{%- if home_page.how_we_work_image -%}
 			<div class="col-md-5 hidden-sm hidden-xs">
 				<div class="b-how-working__image">
-					<img src="{{ STATIC_URL }}images/raster/how_we_working.jpg" class="img-responsive" alt=""> </div>
+					<img src="{{ home_page.how_we_work_image.url }}" class="img-responsive" alt=""/>
+				</div>
 			</div>
+			{%- endif -%}
+
 			<div class="col-md-7">
 				<div class="b-how-working__text">
-					<h4>Как мы работаем с клиентами</h4>
-					<p> Обучаем персонал на этапе ввода услуги в клинику. Оказываем полную техническую поддержку. Предоставляем оборудование во временное пользование. Консультируем по проведенному исследованию 24 часа в сутки 7 дней в неделю. </p>
+					<h4>{{ home_page.how_we_work_title }}</h4>
+					{%- if home_page.how_we_work_subtitle -%}
+					<p>{{ home_page.how_we_work_subtitle }}</p>
+					{%- endif -%}
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+{%- endif -%}
 {%- endblock -%}

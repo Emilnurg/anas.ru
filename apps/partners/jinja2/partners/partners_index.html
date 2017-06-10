@@ -26,7 +26,7 @@
 				<div class="dropdown">
 					<input type="hidden" name="city" id="partners_city" value=""/>
 					<button class="dropdown__button" data-toggle="dropdown">
-						Выберите город
+						{{- var('SELECT_CITY', request) -}}
 					</button>
 					<div class="dropdown-menu">
 						<div>
@@ -35,7 +35,7 @@
 								<ul>
 									{%- if loop.first -%}
 									<li>
-										<a data-rel="" href="javascript:">Все города</a>
+										<a data-rel="" href="javascript:">{{ var('ALL_CITIES', request) }}</a>
 									</li>
 									{%- endif -%}
 									{%- for city in col -%}
@@ -52,7 +52,7 @@
 				<div class="dropdown">
 					<input type="hidden" name="prof" id="partners_prof" value=""/>
 					<button class="dropdown__button" type="button" data-toggle="dropdown">
-						Выберите направление
+						{{- var('SELECT_PROFESSIONAL_AREA', request) -}}
 					</button>
 					<div class="dropdown-menu">
 						<div>
@@ -61,7 +61,7 @@
 								<ul>
 									{%- if loop.first -%}
 									<li>
-										<a data-rel="" href="javascript:">Все направления</a>
+										<a data-rel="" href="javascript:">{{ var('ALL_PROFESSIONAL_AREAS', request) }}</a>
 									</li>
 									{%- endif -%}
 									{%- for area in col -%}
@@ -77,8 +77,8 @@
 				</div>
 			</div>
 			<div class="partners-filter__types">
-				<a href="javascript:" class="btn btn--map">Карта</a>
-				<a href="javascript:" class="btn btn--list is-active">Список</a>
+				<a href="javascript:" class="btn btn--map">{{ var('PARTNERS_MAP_BUTTON', request) }}</a>
+				<a href="javascript:" class="btn btn--list is-active">{{ var('PARTNERS_LIST_BUTTON', request) }}</a>
 			</div>
 		</div>
 
@@ -91,11 +91,11 @@
 			<table class="table partners-table is-active">
 				<thead>
 					<tr>
-						<th>Город</th>
-						<th>Компания</th>
-						<th>Адрес</th>
-						<th>Телефон</th>
-						<th>Сайт</th>
+						<th>{{ var('PARTNERS_CITY_COL', request) }}</th>
+						<th>{{ var('PARTNERS_COMPANY_COL', request) }}</th>
+						<th>{{ var('PARTNERS_ADDRESS_COL', request) }}</th>
+						<th>{{ var('PARTNERS_PHONE_COL', request) }}</th>
+						<th>{{ var('PARTNERS_WEBSITE_COL', request) }}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -187,23 +187,23 @@
 					<input type="hidden" name="place" value="partners"/>
 						<div class="form__group">
 							<input type="text" name="name" class="form__field required" id="partners-form-name">
-							<label for="partners-form-name" class="form__placeholder">Имя</label>
+							<label for="partners-form-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
 							<input type="text" name="telephone" class="form__field required" id="partners-form-telephone">
-							<label for="partners-form-telephone" class="form__placeholder">Телефон</label>
+							<label for="partners-form-telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
 							<input type="text" name="comment" class="form__field required" id="partners-form-comment">
-							<label for="partners-form-comment" class="form__placeholder">Комментарии</label>
+							<label for="partners-form-comment" class="form__placeholder">{{ var('FORM_COMMENTS_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 					</div>
 
 					<div class="form__button">
-						<button type="submit" class="btn btn--black">Отправить</button>
+						<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 					</div>
 				</form>
 			</div>

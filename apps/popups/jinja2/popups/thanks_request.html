@@ -1,9 +1,9 @@
 <div id="modal" class="modal modal--ajax modal--thankyou">
   <div class="modal__inner">
     <div class="thank-you">
-      <h4>Спасибо за обращение!</h4>
+      <h4>{{ var('POPUP_REQUEST_TITLE', request) }}</h4>
       <p>
-        Ваш запрос уже у нас на почте. В скором времени мы с Вами свяжемся.
+        {{- var('POPUP_REQUEST_BODY', request) -}}
       </p>
     </div>
   </div>

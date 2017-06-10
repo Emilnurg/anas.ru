@@ -15,12 +15,13 @@
 		</div>
 	</div>
 </div>
+
 <div class="b-qa">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
 				<div class="support-sections support-sections--tabs">
-					<h4> Разделы </h4>
+					<h4>{{ var('SUPPORT_SECTIONS_TITLE', request) }}</h4>
 					<a name="questions"></a>
 					<ul>
 						{%- for section in sections -%}
@@ -37,7 +38,7 @@
 							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
 							{{- csrf_input -}}
 					<div class="form__heading">
-						<h4>Или заполните контактную форму</h4>
+						<h4>{{ var('SUPPORT_FORM_TITLE', request) }}</h4>
 						<div class="messages"></div>
 					</div>
 
@@ -45,27 +46,27 @@
 						<input type="hidden" name="category" value="{{ current_category.pk }}"/>
 						<div class="form__group">
 							<input type="text" name="name" class="form__field required" id="support-from-name">
-							<label for="support-from-name" class="form__placeholder">Имя</label>
+							<label for="support-from-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
 							<input type="text" name="email" class="form__field required" id="support-from-email">
-							<label for="support-from-email" class="form__placeholder">E-mail, куда придет ответ</label>
+							<label for="support-from-email" class="form__placeholder">{{ var('FORM_EMAIL_ANSWER_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
 							<input type="text" name="product_code" class="form__field required" id="support-from-product-code">
-							<label for="support-from-product-code" class="form__placeholder">Полное название товара, серия</label>
+							<label for="support-from-product-code" class="form__placeholder">{{ var('FORM_PRODUCT_SERIES_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 						<div class="form__group">
 							<input type="text" name="comment" class="form__field required" id="support-from-comment">
-							<label for="support-from-comment" class="form__placeholder">Сообщение</label>
+							<label for="support-from-comment" class="form__placeholder">{{ var('FORM_MESSAGE_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
 					</div>
 					<div class="form__button">
-						<button type="submit" class="btn btn--black">Отправить</button>
+						<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 					</div>
 				</form>
 
@@ -90,9 +91,12 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="no-answer__text">
-					<h4>Не нашли ответа?</h4>
-					<p> Воспользуйтесь формой и задайте вопрос нашим специалистам </p>
-					<a href="javascript:" class="btn btn--black">Задать вопрос</a>
+					<h4>{{ var('SUPPORT_CALLBACK_FORM_TITLE', request) }}</h4>
+					<p>{{ var('SUPPORT_CALLBACK_FORM_SUBTITLE', request) }}</p>
+					<a href="javascript:"
+						 data-fancybox data-type="ajax"
+						 data-src="{{ url('popups:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+						 class="btn btn--black">{{ var('SUPPORT_CALLBACK_BUTTON', request) }}</a>
 				</div>
 			</div>
 			<div class="col-md-6 hidden-xs hidden-sm">
