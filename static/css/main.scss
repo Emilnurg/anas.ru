@@ -352,7 +352,7 @@
     position: absolute;
     width: 10px;
     height: 8px;
-    background: url(../images/ico_check.png) no-repeat 0 0;
+    background: url(../images/ico_check.svg) no-repeat 0 0;
     top: 17px;
     right: -15px;
     transition: all 0.3s;
@@ -364,7 +364,7 @@
     position: absolute;
     width: 6px;
     height: 6px;
-    background: url(../images/ico_close.png) no-repeat 0 0;
+    background: url(../images/ico_close.svg) no-repeat 0 0;
     top: 17px;
     right: -15px;
     transition: all 0.3s;
@@ -459,7 +459,7 @@
 .thank-you__check {
   width: 120px;
   height: 120px;
-  background: url(../images/thank_you_check.png) no-repeat 0 0;
+  background: url(../images/thank_you_check.svg) no-repeat 0 0;
   background-size: contain;
   margin: 0 auto 40px;
 }
@@ -5458,7 +5458,7 @@ a.page-nav__next {
   &:before {
     width: 13px;
     height: 19px;
-    background: url(../images/map_info_address.png) no-repeat 0 0;
+    background: url(../images/map_info_address.svg) no-repeat 0 0;
   }
 }
 
@@ -5466,7 +5466,7 @@ a.page-nav__next {
   &:before {
     width: 15px;
     height: 15px;
-    background: url(../images/map_info_phone.png) no-repeat 0 0;
+    background: url(../images/map_info_phone.svg) no-repeat 0 0;
   }
 }
 
@@ -5475,7 +5475,7 @@ a.page-nav__next {
     width: 16px;
     height: 16px;
     top: 3px;
-    background: url(../images/map_info_globe.png) no-repeat 0 0;
+    background: url(../images/map_info_globe.svg) no-repeat 0 0;
   }
 
   a {
@@ -5870,7 +5870,7 @@ a.page-nav__next {
     position: absolute;
     width: 24px;
     height: 26px;
-    background: url(../images/ico_print.png) no-repeat 0 0;
+    background: url(../images/ico_print.svg) no-repeat 0 0;
     left: 32px;
     top: 50%;
     margin-top: -13px;
@@ -5878,7 +5878,7 @@ a.page-nav__next {
   }
 
   &:after {
-    background: url(../images/ico_print_white.png) no-repeat 0 0;
+    background: url(../images/ico_print_white.svg) no-repeat 0 0;
     opacity: 0;
   }
 
@@ -5902,27 +5902,16 @@ a.page-nav__next {
 }
 
 .info-tooltip {
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
   display: inline-block;
   vertical-align: middle;
   position: relative;
-  border: 1px solid #d1255f;
-  border-radius: 50%;
   cursor: pointer;
   text-align: center;
   line-height: 1;
   margin: -2px 3px 0;
-
-  &:before {
-    content: "i";
-    @include f-reg;
-    color: #d1255f;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 700;
-    display: block;
-  }
+  background: url(../images/ico_info.svg) 50% 50% no-repeat;
 
   span {
     background-color: white;
@@ -6403,11 +6392,11 @@ a.page-nav__next {
     height: 100%;
     left: 0;
     top: 0;
-    background: url(../images/doc.png) no-repeat 0 0;
+    background: url(../images/doc.svg) no-repeat 0 0;
     transition: all 0.3s;
   }
   &:after {
-    background: url(../images/doc_hover.png) no-repeat 0 0;
+    background: url(../images/doc_hover.svg) no-repeat 0 0;
     opacity: 0;
   }
 }
