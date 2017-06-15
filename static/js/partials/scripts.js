@@ -771,7 +771,11 @@ function loadPartnersMap() {
       info: info
     };
     var marker = new google.maps.Marker({
-      position: location
+      position: location,
+      icon: {
+        url: '/static/images/marker_small.svg',
+        size: new google.maps.Size(24, 34)
+      }
     });
     google.maps.event.addListener(marker, 'click', function() {
       infoWin.setContent(location.info);

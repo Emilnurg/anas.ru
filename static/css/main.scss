@@ -5149,7 +5149,7 @@ a.page-nav__next {
   backface-visibility: hidden;
   width: 610px;
   padding: 30px 60px 24px;
-  z-index: 100;
+  z-index: 1000;
   border: 0;
 
   >div {
@@ -5613,6 +5613,29 @@ a.page-nav__next {
 
       &:last-child {
         margin-right: auto;
+      }
+    }
+
+    .dropdown-menu {
+      left: 0;
+      width: 100%;
+      padding: 15px 20px 20px;
+
+      &>div {
+        display: block;
+
+        &>div {
+          width: 100%;
+          padding-right: 0;
+        }
+      }
+
+      ul {
+        display: block;
+
+        li {
+          margin: 0;
+        }
       }
     }
   }
