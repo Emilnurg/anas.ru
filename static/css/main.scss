@@ -1513,8 +1513,19 @@
     }
   }
 
-  .header__tel, .header__email {
+  .header__email {
     display: none;
+  }
+
+  .header__tel,
+  .header__tel:focus {
+    color: #000;
+    margin-right: 20px;
+    margin-left: 0;
+
+    &:before {
+        background: url(../images/ico_tel_l.svg) no-repeat 0 0;
+    }
   }
 
   .header__nav-item {
@@ -1576,6 +1587,14 @@
   }
 }
 
+@media (max-width: 992px) {
+  .header__tel {
+    text-indent: -999px;
+    overflow: hidden;
+    width: 0;
+  }
+}
+
 @media (max-width: 767px) {
   .header {
     padding: 9px 0;
@@ -1592,6 +1611,7 @@
 
   .header__tel {
     margin-left: 0;
+    margin-right: 0;
     font-size: 12px;
     letter-spacing: 0;
     @include f-reg;
