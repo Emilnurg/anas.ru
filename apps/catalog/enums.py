@@ -24,12 +24,10 @@ class ImagePositionEnum(BaseEnumerate):
 class CatalogBlockShapeEnum(BaseEnumerate):
     """Форма блоков товаров каталога"""
     NORMAL = 'normal'
-    MIDDLE = 'middle'
     HIGH = 'high'
 
     values = OrderedDict((
         (NORMAL, _('Нормальная')),
-        (MIDDLE, _('Средняя')),
         (HIGH, _('Высокая'))
     ))
 

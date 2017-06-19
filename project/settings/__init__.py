@@ -27,7 +27,7 @@ DATABASES = {
         'USER': 'anas',
         'PASSWORD': 'anas',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 

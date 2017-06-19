@@ -30,7 +30,7 @@ class Page(BaseModel):
         return self.title
 
     def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
-        return reverse('core:flatpage', kwargs={'lang': lang, 'slug': self.slug})
+        return reverse('pages:flatpage', kwargs={'lang': lang, 'slug': self.slug})
 
 
 class Gallery(ImageMixin, BaseModel):
