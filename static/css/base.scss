@@ -235,6 +235,11 @@ input::-webkit-clear-button {
   display: none;
 }
 
+.table-wrap {
+  overflow: auto;
+  margin-bottom: 50px;
+}
+
 .content-block {
   .table-wrap {
     overflow: auto;

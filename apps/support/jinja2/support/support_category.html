@@ -17,12 +17,12 @@
 </div>
 
 <div class="b-qa">
+	<a name="questions"></a>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
 				<div class="support-sections support-sections--tabs">
 					<h4>{{ var('SUPPORT_SECTIONS_TITLE', request) }}</h4>
-					<a name="questions"></a>
 					<ul>
 						{%- for section in sections -%}
 						<li>
@@ -32,6 +32,7 @@
 					</ul>
 				</div>
 			</div>
+
 			<div class="col-md-6">
 				<a name="form"></a>
 				<form action="{{ url('forms:support', kwargs={'lang': request.LANGUAGE_CODE}) }}"
@@ -89,6 +90,7 @@
 		</div>
 	</div>
 </div>
+
 <div class="no-answer">
 	<div class="container">
 		<div class="row">
@@ -100,6 +102,7 @@
 						 class="btn btn--black support-btn">{{ var('SUPPORT_CALLBACK_BUTTON', request) }}</a>
 				</div>
 			</div>
+
 			<div class="col-md-6 hidden-xs hidden-sm">
 				<div class="no-answer__image">
 					<img src="{{ STATIC_URL }}images/raster/no_answer.jpg" class="img-responsive" alt=""> </div>
