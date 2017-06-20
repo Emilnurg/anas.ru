@@ -1558,14 +1558,22 @@ textarea.form__field {
 
   .header__tel,
   .header__tel:focus {
-    color: #000;
     margin-right: 20px;
     margin-left: 0;
+  }
 
-    &:before {
-        background: url(../images/ico_tel_l.svg) no-repeat 0 0;
+  .header__top {
+    .header__tel,
+    .header__tel:focus {
+      color: #000;
+
+      &:before {
+          background: url(../images/ico_tel_l.svg) no-repeat 0 0;
+      }
     }
   }
+
+
 
   .header__nav-item {
     display: block;
@@ -1649,7 +1657,7 @@ textarea.form__field {
     font-size: 12px;
   }
 
-  .header__contacts {
+  .header__top .header__contacts {
     padding: 9px 0;
     position: absolute;
     top: 7px;
@@ -1670,8 +1678,6 @@ textarea.form__field {
     @include f-reg;
   }
 }
-
-
 
 /*************************************************
 *                     b-hero                     *
