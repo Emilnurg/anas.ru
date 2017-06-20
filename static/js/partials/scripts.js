@@ -148,13 +148,13 @@ function breakpointsHandler() {
     enter: function () {
       $('.footer__contacts').prependTo('.footer__middle-right');
 
-      $('.product-tabs__links').slick({
-        slidesToShow: 1,
-        arrows: false,
-        infinite: false,
-        swipeToSlide: true,
-        variableWidth: true
-      });
+      // $('.product-tabs__links').slick({
+      //   slidesToShow: 1,
+      //   arrows: false,
+      //   infinite: false,
+      //   swipeToSlide: true,
+      //   variableWidth: true
+      // });
 
       $('.catalog-filter__categories').slick({
         slidesToShow: 1,
@@ -172,13 +172,13 @@ function breakpointsHandler() {
         variableWidth: true
       });
 
-      $('.course-tabs').slick({
-        slidesToShow: 1,
-        arrows: false,
-        infinite: false,
-        swipeToSlide: true,
-        variableWidth: true
-      });
+      // $('.course-tabs').slick({
+      //   slidesToShow: 1,
+      //   arrows: false,
+      //   infinite: false,
+      //   swipeToSlide: true,
+      //   variableWidth: true
+      // });
 
       $('.articles-categories').slick({
         slidesToShow: 1,
@@ -191,10 +191,10 @@ function breakpointsHandler() {
     leave: function () {
       $('.footer__contacts').appendTo('.footer__right');
 
-      $('.product-tabs__links').slick('unslick');
+      // $('.product-tabs__links').slick('unslick');
       $('.catalog-filter__categories').slick('unslick');
       $('.select-brand').slick('unslick');
-      $('.course-tabs').slick('unslick');
+      // $('.course-tabs').slick('unslick');
       $('.articles-categories').slick('unslick');
     }
   });

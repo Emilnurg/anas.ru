@@ -6057,7 +6057,7 @@ a.page-nav__next {
 
 .product__descr {
   margin-bottom: 30px;
-  min-height: 281px;
+  min-height: 60px;
 
   dl {
     font-size: 0;
@@ -6714,8 +6714,8 @@ a.page-nav__next {
 
   .product-tabs__links {
     display: block;
-    margin-left: -56px;
-    margin-right: -56px;
+    margin-left: -16px;
+    margin-right: -16px;
     margin-bottom: 25px;
     @include cf;
 
@@ -6738,8 +6738,8 @@ a.page-nav__next {
     display: block;
     text-align: center;
     font-size: 16px;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0;
+    margin: 0 0 10px;
   }
 
 
@@ -7245,11 +7245,9 @@ a.page-nav__next {
   }
 }
 
-
-@media (max-width: 538px) {
+@media (max-width: 767px) {
   .course-tabs {
-    margin-left: -18px;
-    margin-right: -18px;
+    text-align: center;
   }
 }
 
