@@ -4257,7 +4257,7 @@ a.page-nav__next {
     left: 0;
     top: 0;
     background: no-repeat center;
-    background-size: cover;
+    background-size: contain;
     transition: all 0.3s;
     opacity: 0.5;
   }
@@ -6038,6 +6038,7 @@ a.page-nav__next {
   max-width: 500px;
   line-height: 1.2;
   margin-bottom: 49px;
+  font-size: 30px;
 }
 
 .product__buttons {
@@ -7653,7 +7654,7 @@ a.page-nav__next {
   position: relative;
   z-index: 1;
 
-  h2 {
+  h1 {
     font-size: 246px;
     line-height: 1;
     @include f-reg;

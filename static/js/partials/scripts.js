@@ -660,6 +660,43 @@ function courseTabs() {
   });
 }
 
+function initPhotoswipe(el) {
+  if ($('.pswp').size() === 0) {
+    return false;
+  }
+
+  var pswpElement = document.querySelectorAll('.pswp')[0],
+    rel = $(el).attr('rel'),
+    href = $(el).attr('href');
+  var items = [], index = 0, i = 0;
+  $('[rel="' + rel + '"]').each(function() {
+    var size = ($(this).data('size') || '0x0').split('x'),
+      src = $(this).attr('href');
+
+    if (!index && href === src) {
+      index = i;
+    }
+
+    items.push({
+      src: src,
+      w: size[0],
+      h: size[1],
+      title: ($(this).attr('title') || '')
+    });
+
+    i ++;
+  });
+  var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+    index: index,
+    bgOpacity: .9,
+    history: false,
+    captionEl: true,
+    shareEl: true
+  });
+  gallery.init();
+  return false;
+}
+
 /**
  * Initialization General Scripts for all pages
  */
@@ -1101,6 +1138,14 @@ $(document).ready(function() {
       parent.find('input[type=hidden]').val($(this).data('rel'));
       parent.find('.dropdown__button').text($(this).text());
       loadPartnersMap();
+    });
+  }
+
+  var psPhoto = $('a[rel^="photoswipe"]');
+  if (psPhoto.size() > 0) {
+    psPhoto.click(function (e) {
+      e.preventDefault();
+      return initPhotoswipe(this);
     });
   }
 });

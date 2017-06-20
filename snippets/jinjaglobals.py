@@ -289,10 +289,11 @@ def strip_whitescapes(val, re_obj=whitespace_re):
 
 
 @jinjafilter
-def thumbnail(source, size, **opts):
+def thumbnail_obj(source, size, **opts):
     """Make thumbnail from source image"""
     if not source:
-        return ''
+        return None
+
     raise_errors = thumbnailer_settings.THUMBNAIL_DEBUG
     accepted_opts = {}
     for key, value in opts.items():
@@ -300,25 +301,35 @@ def thumbnail(source, size, **opts):
             accepted_opts[key] = value
     opts = accepted_opts
     m = RE_SIZE.match(size)
+
     if m:
         opts['size'] = (int(m.group(1)), int(m.group(2)))
     else:
         if raise_errors:
             raise TemplateSyntaxError('%r is not a valid size.' % size, 1)
+
     if 'quality' in opts:
         try:
             opts['quality'] = int(opts['quality'])
         except (TypeError, ValueError):
             if raise_errors:
                 raise TemplateSyntaxError('%r is an invalid quality.' % opts['quality'], 1)
+
     try:
         curr_thumbnail = get_thumbnailer(source).get_thumbnail(opts)
     except Exception as e:
         if raise_errors:
             raise TemplateSyntaxError('Couldn\'t get the thumbnail %s: %s' % (source, e), 1)
         else:
-            return ''
-    return escape(curr_thumbnail.url)
+            return None
+
+    return curr_thumbnail
+
+
+@jinjafilter
+def thumbnail(source, size, **opts):
+    thumb = thumbnail_obj(source, size, **opts)
+    return escape(thumb.url) if thumb else ''
 
 
 @jinjaglobal

@@ -383,7 +383,7 @@
 			data-src="{{ url('popups:thanks_request', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 			class="hide thanks_request"></a>
 
-		<link rel="stylesheet" href="{{ static_with_mtime('css/style.css') }}">
+		<link rel="stylesheet" href="{{ static_with_mtime('css/style.css') }}" media="all">
     {%- block EXTRA_STYLES %}{% endblock -%}
 
     <script src="{{ static_with_mtime('js/critical.js') }}"></script>

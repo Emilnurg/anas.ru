@@ -4,6 +4,20 @@
 
 {%- block BODY_CLASSES %}body-product{% endblock -%}
 
+{%- block EXTRA_BODY -%}
+	{%- include 'widgets/photoswipe.html' -%}
+{%- endblock -%}
+
+{%- block EXTRA_STYLES -%}
+<link href="{{ static_with_mtime('css/photoswipe/photoswipe.css') }}" rel="stylesheet" type="text/css" media="screen">{#  -#}
+<link href="{{ static_with_mtime('css/photoswipe/default-skin/default-skin.css') }}" rel="stylesheet" type="text/css" media="screen">{#  -#}
+{%- endblock -%}
+
+{%- block EXTRA_SCRIPTS -%}
+<script src="{{ static_with_mtime('js/photoswipe/photoswipe.min.js') }}"></script>
+<script src="{{ static_with_mtime('js/photoswipe/photoswipe-ui-default.min.js') }}"></script>
+{%- endblock -%}
+
 {%- block PAGE_CONTENT -%}
 <div class="product">
 	<div class="container">
@@ -16,9 +30,10 @@
 				{{- var('PRODUCT_PRINT_LINK_CAPTION', request) -}}
 			</a>
 		</div>
+
 		<div class="row">
 			<div class="col-lg-6 col-md-7">
-				<h2 class="product__name">{{ current_product.title }}</h2>
+				<h1 class="product__name">{{ current_product.title }}</h1>
 				<div class="product__descr">
 					{%- if current_product.manufacturer_id -%}
 					<dl>
@@ -41,6 +56,7 @@
 					</dl>
 					{%- endfor -%}
 				</div>
+
 				<div class="product__buttons">
 					<a href="javascript:"
 						 data-fancybox
@@ -60,19 +76,30 @@
 				<div class="product-slider">
 					<div class="product-slider-large">
 						{%- for image in images -%}
+						{%- set thumb = image.image|thumbnail_obj('1200x600', remove_alpha=True) -%}
+						{%- if thumb -%}
 						<div class="sld">
-							<img src="{{ image|cropped_thumbnail('thumb_images') }}"
-									 class="img-responsive" alt="{{ image.alt or '' }}"/>
+							<a href="{{ thumb.url }}"
+								 data-size="{{ thumb.width }}x{{ thumb.height }}"
+								 title="{{ image.alt or '' }}"
+								 rel="photoswipe[{{ current_product.slug }}]">
+								<img src="{{ image|cropped_thumbnail('thumb_images') }}"
+										 class="img-responsive" alt="{{ image.alt or '' }}"/>
+							</a>
 						</div>
+						{%- endif -%}
 						{%- endfor -%}
 					</div>
 
 					<div class="product-slider-small">
 						{%- for image in images -%}
+						{%- set thumb = image.image|thumbnail_obj('1200x600', remove_alpha=True) -%}
+						{%- if thumb -%}
 						<div class="sld">
 							<img src="{{ image|cropped_thumbnail('thumb_images', width=120, height=68, background='#FFFFFF') }}"
 									 class="img-responsive" alt="{{ image.alt or '' }}"/>
 						</div>
+						{%- endif -%}
 						{%- endfor -%}
 					</div>
 				</div>

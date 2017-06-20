@@ -296,11 +296,12 @@ SEARCH = {
 }
 
 # cropper
-THUMBNAIL_QUALITY = 90
+THUMBNAIL_QUALITY = 85
 THUMBNAIL_PROGRESSIVE = 100
 THUMBNAIL_PRESERVE_EXTENSIONS = ('jpg',)
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
+    'snippets.utils.thumbnail_processors.remove_alpha_processor'
 ) + ThumbnailSettings.THUMBNAIL_PROCESSORS
 
 UPLOADIFIVE_IMAGE_MIMETYPES = (
