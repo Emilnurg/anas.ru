@@ -161,6 +161,14 @@ class Product(ImageMixin, BaseModel):
             'slug': self.slug
         })
 
+    @property
+    def image_size(self):
+        if self.block_shape == CatalogBlockShapeEnum.HIGH:
+            return '500x600'
+        if self.image_position == ImagePositionEnum.RIGHT:
+            return '300x254'
+        return '500x210'
+
 
 class Feature(BaseModel):
     """Характеристика"""

@@ -116,6 +116,7 @@ class ProductAdmin(ModelTranlsationFieldsetsMixin, ImageCroppingMixin, BaseModel
     )
     list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'updated')
     list_display_links = ('id', 'image_thumb', 'title')
+    list_filter = BaseModelAdmin.list_filter + ('categories', 'manufacturer')
     ordering = BaseModelAdmin.ordering + ('title',)
     raw_id_fields = ('product_set',)
     save_as = True
