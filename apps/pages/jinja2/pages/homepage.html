@@ -153,13 +153,15 @@
 							<label for="feedback-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
+
 						<div class="form__group">
 							<input type="text" name="telephone" class="form__field required" id="feedback-telephone">
 							<label for="feedback-telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
+
 						<div class="form__group">
-							<input type="text" name="comment" class="form__field required" id="feedback-comment">
+							<textarea name="comment" class="form__field required" id="feedback-comment"></textarea>
 							<label for="feedback-comment" class="form__placeholder">{{ var('FORM_YOUR_QUESTION_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>

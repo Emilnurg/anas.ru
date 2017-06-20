@@ -35,7 +35,7 @@ function placehodlers() {
 			})();
 		}
 
-		[].slice.call( document.querySelectorAll( 'input.form__field' ) ).forEach( function( inputEl ) {
+		[].slice.call( document.querySelectorAll( 'input.form__field,textarea.form__field' ) ).forEach( function( inputEl ) {
 			// in case the input is already filled..
 			if( inputEl.value.trim() !== '' ) {
 				inputEl.parentNode.classList.add('input--filled' );

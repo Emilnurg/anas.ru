@@ -49,18 +49,21 @@
 							<label for="support-from-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
+
 						<div class="form__group">
 							<input type="text" name="email" class="form__field required" id="support-from-email">
 							<label for="support-from-email" class="form__placeholder">{{ var('FORM_EMAIL_ANSWER_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
+
 						<div class="form__group">
 							<input type="text" name="product_code" class="form__field required" id="support-from-product-code">
 							<label for="support-from-product-code" class="form__placeholder">{{ var('FORM_PRODUCT_SERIES_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
+
 						<div class="form__group">
-							<input type="text" name="comment" class="form__field required" id="support-from-comment">
+							<textarea name="comment" class="form__field required" id="support-from-comment"></textarea>
 							<label for="support-from-comment" class="form__placeholder">{{ var('FORM_MESSAGE_LABEL', request) }}</label>
 							<div class="form__err"></div>
 						</div>
