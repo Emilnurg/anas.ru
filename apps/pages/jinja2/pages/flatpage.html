@@ -5,21 +5,17 @@
 {%- block BODY_CLASSES %}body-flatpage{% endblock -%}
 
 {%- block PAGE_CONTENT -%}
-<div class="b-about">
-	<div class="b-about__bg">
-		<div class="container">
-			<div class="main-title">
-				<h1>{{ current_page.title }}</h1>
-			</div>
-		</div>
-	</div>
-
-	{%- if current_page.body -%}
+<div class="enter">
 	<div class="container">
-		<div class="b-about__text content-block">
+		<div class="main-title">
+			<h1>{{ current_page.title }}</h1>
+		</div>
+
+		{%- if current_page.body -%}
+		<div class="flatpage__text content-block">
 			<div>{{ current_page.body|preprocess_content }}</div>
 		</div>
+		{%- endif -%}
 	</div>
-	{%- endif -%}
 </div>
 {%- endblock -%}

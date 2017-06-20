@@ -436,6 +436,10 @@
       transform: scale(0.6) translateY(-22px) translateX(4px);
     }
   }
+
+  &::-ms-clear {
+    display: none;
+  }
 }
 
 textarea.form__field {
@@ -7715,6 +7719,10 @@ a.page-nav__next {
 }
 
 
+.flatpage__text {
+  max-width: 900px;
+  margin: 0 auto;
+}
 
 /*************************************************
 *                  page search                   *
