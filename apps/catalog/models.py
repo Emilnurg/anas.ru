@@ -166,7 +166,7 @@ class Product(ImageMixin, BaseModel):
         if self.block_shape == CatalogBlockShapeEnum.HIGH:
             return '500x600'
         if self.image_position == ImagePositionEnum.RIGHT:
-            return '300x254'
+            return '300x274'
         return '500x210'
 
 
