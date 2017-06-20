@@ -76,7 +76,7 @@
 				<div class="product-slider">
 					<div class="product-slider-large">
 						{%- for image in images -%}
-						{%- set thumb = image.image|thumbnail_obj('1200x600', remove_alpha=True) -%}
+						{%- set thumb = image.image|thumbnail_obj('1200x900', remove_alpha=True) -%}
 						{%- if thumb -%}
 						<div class="sld">
 							<a href="{{ thumb.url }}"
