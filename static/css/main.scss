@@ -1426,12 +1426,12 @@ textarea.form__field {
   }
 
   .header__logo--sm {
-    display: inline-block;
+    display: block;
     position: absolute;
-    top: 50%;
+    top: 12px;
     left: 50%;
-    transform: translate(-50%, -50%);
     width: auto;
+    margin: 0 0 0 -69px;
   }
 
   .header__contacts {
@@ -1630,6 +1630,7 @@ textarea.form__field {
     text-indent: -999px;
     overflow: hidden;
     width: 0;
+    margin-right: 0;
   }
 }
 
