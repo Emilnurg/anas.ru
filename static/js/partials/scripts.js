@@ -810,7 +810,7 @@ function loadPartnersMap() {
     var marker = new google.maps.Marker({
       position: location,
       icon: {
-        url: '/static/images/marker_small.svg',
+        url: '/static/images/marker_small.png',
         size: new google.maps.Size(24, 34)
       }
     });

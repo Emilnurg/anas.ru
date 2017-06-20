@@ -5470,7 +5470,6 @@ a.page-nav__next {
   }
 }
 
-
 .partners-map {
   height: 0;
   overflow: hidden;
@@ -5731,6 +5730,23 @@ a.page-nav__next {
   }
 }
 
+@media (max-width: 650px) {
+  .map {
+    padding-bottom: 65%;
+  }
+}
+
+@media (max-width: 480px) {
+  .map {
+    padding-bottom: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .map {
+    padding-bottom: 150%;
+  }
+}
 
 
 /*************************************************
