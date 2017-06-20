@@ -17,19 +17,19 @@
 
         <div class="form__group">
           <input type="text" name="name" class="form__field required" id="popup-pq-name"/>
-          <label for="popup-pq-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
+          <label for="popup-pq-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}<span class="req">*</span></label>
 					<div class="form__err"></div>
         </div>
 
         <div class="form__group">
           <input type="text" name="email" class="form__field required" id="popup-pq-email"/>
-          <label for="popup-pq-email" class="form__placeholder">{{ var('FORM_EMAIL_LABEL', request) }}</label>
+          <label for="popup-pq-email" class="form__placeholder">{{ var('FORM_EMAIL_LABEL', request) }}<span class="req">*</span></label>
 					<div class="form__err"></div>
         </div>
 
         <div class="form__group">
 					<textarea name="comment" class="form__field required" id="popup-pq-comment"></textarea>
-          <label for="popup-pq-comment" class="form__placeholder">{{ var('FORM_YOUR_QUESTION_LABEL', request) }}</label>
+          <label for="popup-pq-comment" class="form__placeholder">{{ var('FORM_YOUR_QUESTION_LABEL', request) }}<span class="req">*</span></label>
 					<div class="form__err"></div>
         </div>
       </div>

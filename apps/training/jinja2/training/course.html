@@ -183,13 +183,13 @@
 						<input type="hidden" name="course" value="{{ current_course.pk }}">
 						<div class="form__group">
 							<input type="text" name="name" class="form__field required" id="feedback_name"/>
-							<label for="feedback_name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
+							<label for="feedback_name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}<span class="req">*</span></label>
 							<div class="form__err"></div>
 						</div>
 
 						<div class="form__group">
 							<input type="text" name="telephone" class="form__field required" id="feedback_telephone"/>
-							<label for="feedback_telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
+							<label for="feedback_telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}<span class="req">*</span></label>
 							<div class="form__err"></div>
 						</div>
 					</div>

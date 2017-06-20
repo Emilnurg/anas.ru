@@ -11,8 +11,8 @@ if (!String.prototype.trim) {
 /**
  * maskedinput
  */
-function maskedInput() {
-  $('[name=tel]').inputmask({
+function maskedInput(container) {
+  $('[name=telephone]', container).inputmask({
     mask: '+7 (999) 999-99-99',
     showMaskOnHover: false,
     showMaskOnFocus: true
@@ -701,7 +701,7 @@ function initPhotoswipe(el) {
  * Initialization General Scripts for all pages
  */
 function initScripts() {
-  maskedInput();
+  maskedInput($('body'));
   fancybox();
   scrollToHref();
   breakpointsHandler();

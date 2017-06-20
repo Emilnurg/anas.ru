@@ -12,13 +12,13 @@
 				<input type="hidden" name="place" value="popup"/>
 				<div class="form__group">
 					<input type="text" name="name" class="form__field required" id="popup-callback-name">
-					<label for="popup-callback-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
+					<label for="popup-callback-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}<span class="req">*</span></label>
 					<div class="form__err"></div>
 				</div>
 
 				<div class="form__group">
 					<input type="text" name="telephone" class="form__field required" id="popup-callback-telephone">
-					<label for="popup-callback-telephone" class="form__placeholder">{{ var('FORM_NAME_OR_EMAIL_LABEL', request) }}</label>
+					<label for="popup-callback-telephone" class="form__placeholder">{{ var('FORM_NAME_OR_EMAIL_LABEL', request) }}<span class="req">*</span></label>
 					<div class="form__err"></div>
 				</div>
 			</div>

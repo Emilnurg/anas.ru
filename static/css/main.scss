@@ -347,6 +347,10 @@
   margin-bottom: 34px;
   position: relative;
 
+  .req {
+    color: #d2205c;
+  }
+
   &:before {
     content: "";
     position: absolute;

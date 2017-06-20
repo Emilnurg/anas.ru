@@ -187,19 +187,19 @@
 					<input type="hidden" name="place" value="partners"/>
 						<div class="form__group">
 							<input type="text" name="name" class="form__field required" id="partners-form-name">
-							<label for="partners-form-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
+							<label for="partners-form-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}<span class="req">*</span></label>
 							<div class="form__err"></div>
 						</div>
 
 						<div class="form__group">
 							<input type="text" name="telephone" class="form__field required" id="partners-form-telephone">
-							<label for="partners-form-telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
+							<label for="partners-form-telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}<span class="req">*</span></label>
 							<div class="form__err"></div>
 						</div>
 
 						<div class="form__group">
 							<textarea name="comment" class="form__field required" id="partners-form-comment"></textarea>
-							<label for="partners-form-comment" class="form__placeholder">{{ var('FORM_COMMENTS_LABEL', request) }}</label>
+							<label for="partners-form-comment" class="form__placeholder">{{ var('FORM_COMMENTS_LABEL', request) }}<span class="req">*</span></label>
 							<div class="form__err"></div>
 						</div>
 					</div>
