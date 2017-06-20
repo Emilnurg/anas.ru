@@ -436,10 +436,17 @@
       transform: scale(0.6) translateY(-22px) translateX(4px);
     }
   }
+}
 
-  &::-ms-clear {
+input,
+textarea {
+  &::-ms-clear,
+  ::-ms-clear {
     display: none;
   }
+}
+::-ms-clear {
+  display: none;
 }
 
 textarea.form__field {
