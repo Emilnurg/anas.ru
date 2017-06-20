@@ -15,7 +15,7 @@
 <div class="b-partners">
 	<div class="container">
 		<div class="main-title">
-			<h3>{{ partners_page.title }}</h3>
+			<h1>{{ partners_page.title }}</h1>
 			{%- if partners_page.subtitle -%}
 			<div class="content--block">{{ partners_page.subtitle }}</div>
 			{%- endif -%}
@@ -133,7 +133,7 @@
 		</div>
 		<div class="b-become-dealer__text">
 			{%- if partners_page.howto_body -%}
-			<div class="content-block">{{ partners_page.howto_body }}</div>
+			<div class="content-block">{{ partners_page.howto_body|preprocess_content }}</div>
 			{%- endif -%}
 			{%- if partners_page.howto_button_caption -%}
 			<a href="#form" class="btn">{{ partners_page.howto_button_caption }}</a>

@@ -236,8 +236,12 @@ input::-webkit-clear-button {
 }
 
 .content-block {
+  .table-wrap {
+    overflow: auto;
+    margin-bottom: 50px;
+  }
+
   table {
-    margin: 0 0 50px;
     min-width: 500px;
 
     thead {
@@ -271,11 +275,6 @@ input::-webkit-clear-button {
       }
     }
   }
-
-  .table-wrap {
-    overflow: auto;
-    margin-bottom: 50px;
-  }
 }
 
 @media (max-width: 767px) {
@@ -289,8 +288,6 @@ input::-webkit-clear-button {
 
   .content-block {
     table {
-      margin-bottom: 50px;
-
       thead {
         tr {
           th {

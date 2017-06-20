@@ -2112,10 +2112,6 @@
   padding-right: 40%;
 }
 
-.catalog-item--middle {
-  min-height: 500px;
-}
-
 .catalog-item--high {
   min-height: 760px;
 }
@@ -2259,8 +2255,7 @@
     height: auto;
   }
 
-  .catalog-item--high,
-  .catalog-item--middle {
+  .catalog-item--high {
     .catalog-item__image {
       height: auto;
     }
@@ -2878,7 +2873,7 @@
   }
 
   .main-title {
-    padding-top: 105px;
+    padding-top: 75px;
     margin-bottom: 27px;
   }
 }
@@ -2899,14 +2894,14 @@
   max-width: 800px;
   margin: 0 auto 48px;
 
-  h3 {
+  h1 {
     font-size: 48px;
     @include f-reg;
     letter-spacing: -0.3px;
     margin: 0 0 14px;
   }
 
-  h5 {
+  h2 {
     font-size: 20px;
     @include f-reg;
   }
@@ -3009,7 +3004,7 @@
     padding-top: 30px;
     margin-bottom: 40px;
 
-    h3 {
+    h1 {
       font-size: 30px;
     }
 
@@ -3508,7 +3503,7 @@
   .main-title {
     max-width: 100%;
 
-    h3 {
+    h1 {
       letter-spacing: -1px;
       line-height: 1.20833333;
       margin-bottom: 22px
@@ -5754,8 +5749,9 @@ a.page-nav__next {
 
   p {
     display: inline-block;
-    padding-top: 9px;
-    margin: 0 20px 10px 0;
+    margin: 0 10px 0 0;
+    white-space: nowrap;
+    line-height: 80px;
   }
 }
 
@@ -5801,11 +5797,12 @@ a.page-nav__next {
       display: block;
       border: 2px solid rgba(#e2e2e2, 0);
       border-radius: 25px;
-      height: 50px;
+      height: 80px;
       font-size: 0;
       @include responsiveImg;
-      padding: 10px 35px;
+      padding: 10px 20px;
       transition: all 0.3s;
+      max-width: 200px;
 
       &:hover {
         img {
@@ -6150,14 +6147,20 @@ a.page-nav__next {
   padding: 0;
   margin: 0 0 35px;
   font-size: 0;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
 
   .sld {
     display: inline-block;
     vertical-align: top;
     padding: 0;
+    margin: 0 3px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     &:before {
       display: none;

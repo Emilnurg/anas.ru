@@ -16,7 +16,7 @@
 		{%- endif -%}
 
 		<div class="main-title">
-			<h3>{{ current_category.title }}</h3>
+			<h1>{{ current_category.title }}</h1>
 		</div>
 
 		{%- if children_categories or brands -%}
@@ -88,7 +88,7 @@
 					<h2 class="promo">{{ parent_category.seo_block_title }}</h2>
 					{%- if parent_category.seo_block_body -%}
 					<div class="content-block">
-						{{- parent_category.seo_block_body -}}
+						{{- parent_category.seo_block_body|preprocess_content -}}
 					</div>
 					{%- endif -%}
 				</div>

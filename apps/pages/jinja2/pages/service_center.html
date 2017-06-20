@@ -14,10 +14,10 @@
 		{%- endif -%}
 		<div class="container">
 			<div class="main-title">
-				<h3>{{ service_page.title }}</h3>
+				<h1>{{ service_page.title }}</h1>
 				{%- if service_page.subtitle -%}
 				<div class="content-block">
-					{{- service_page.subtitle -}}
+					{{- service_page.subtitle|preprocess_content -}}
 				</div>
 				{%- endif -%}
 			</div>
@@ -28,7 +28,7 @@
 			<div class="b-service__text">
 				{%- if service_page.body -%}
 				<div class="content-block">
-					{{- service_page.body -}}
+					{{- service_page.body|preprocess_content -}}
 				</div>
 				{%- endif -%}
 			</div>
@@ -59,7 +59,7 @@
 					<h4>{{ step.title }}</h4>
 					{%- if step.subtitle -%}
 					<div class="content-block">
-						{{- step.subtitle -}}
+						{{- step.subtitle|preprocess_content -}}
 					</div>
 					{%- endif -%}
 				</div>
@@ -87,7 +87,7 @@
 			<div class="form__heading">
 				<h4>{{ service_page.questions_title }}</h4>
 				{%- if service_page.questions_subtitle -%}
-				<div class="content-block">{{ service_page.questions_subtitle }}</div>
+				<div class="content-block">{{ service_page.questions_subtitle|preprocess_content }}</div>
 				{%- endif -%}
 				<div class="messages"></div>
 			</div>
@@ -98,11 +98,13 @@
 					<label for="service_name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}</label>
 					<div class="form__err"></div>
 				</div>
+
 				<div class="form__group">
 					<input type="text" name="telephone" class="form__field required" id="service_telephone">
 					<label for="service_telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}</label>
 					<div class="form__err"></div>
 				</div>
+
 				<div class="form__group">
 					<input type="text" name="email" class="form__field required" id="service_email">
 					<label for="service_email" class="form__placeholder">{{ var('FORM_EMAIL_LABEL', request) }}</label>

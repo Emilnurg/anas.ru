@@ -63,7 +63,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h2>{{ var('PRODUCT_DESCRIPTION_TAB', request) }}</h2>
-						<div class="content-block">{{ current_product.body -}}</div>
+						<div class="content-block">{{ current_product.body|preprocess_content -}}</div>
 					</div>
 				</div>
 			</div>
@@ -74,7 +74,7 @@
 					<div class="col-md-12">
 						<h2>{{ var('PRODUCT_TECH_FEATURES_TAB', request) }}</h2>
 						{%- if current_product.features_body -%}
-						<div class="content-block">{{ current_product.features_body }}</div>
+						<div class="content-block">{{ current_product.features_body|preprocess_content }}</div>
 						{%- endif -%}
 
 						<table class="table product-table">
@@ -104,7 +104,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h2>{{ var('PRODUCT_TRAINING_TAB', request) }}</h2>
-						<div class="content-block">{{ current_product.training_body }}</div>
+						<div class="content-block">{{ current_product.training_body|preprocess_content }}</div>
 					</div>
 				</div>
 			</div>
@@ -115,7 +115,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h2>{{ var('PRODUCT_TESTING_TAB', request) }}</h2>
-						<div class="content-block">{{ current_product.testing_body }}</div>
+						<div class="content-block">{{ current_product.testing_body|preprocess_content }}</div>
 					</div>
 				</div>
 			</div>
@@ -127,7 +127,7 @@
 					<div class="col-md-12">
 						<h2>{{ var('PRODUCT_DOCS_TAB', request) }}</h2>
 						{%- if current_product.docs_body -%}
-						<div class="content-block">{{ current_product.docs_body }}</div>
+						<div class="content-block">{{ current_product.docs_body|preprocess_content }}</div>
 						{%- endif -%}
 					</div>
 				</div>

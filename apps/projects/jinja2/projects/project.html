@@ -34,9 +34,9 @@
 				<a href="{{ list_url }}" class="page-back__link">{{ list_name }}</a>
 			</div>
 			<div class="main-title">
-				<h3>{{ current_article.title|e }}</h3>
+				<h1>{{ current_article.title|e }}</h1>
 				<div class="content-block">
-					{{- current_article.excerpt -}}
+					{{- current_article.excerpt|preprocess_content -}}
 				</div>
 				<div class="main-title__date">{{ current_article.publish_date|date('d.m.Y') }}</div>
 			</div>
@@ -46,7 +46,7 @@
 	<div class="container">
 		<div class="b-project__text">
 			<div class="content-block">
-				{{- current_article.body -}}
+				{{- current_article.body|preprocess_content -}}
 			</div>
 		</div>
 	</div>
@@ -65,7 +65,7 @@
 
 			{%- if section.body -%}
 			<div class="content-block">
-				{{- section.body -}}
+				{{- section.body|preprocess_content -}}
 			</div>
 			{%- endif -%}
 		</div>

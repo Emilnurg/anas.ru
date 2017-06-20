@@ -10,7 +10,7 @@
 	<div class="container">
 		<div data-start="transform: translateY(0px)">
 			<div class="main-title">
-				<h3>{{ var('SEARCH_RESULTS', request) }}</h3>
+				<h1>{{ var('SEARCH_RESULTS', request) }}</h1>
 			</div>
 			<form action="{{ url('search:search', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 						class="search-form search-form2" method="get" novalidate data-novalidate="">

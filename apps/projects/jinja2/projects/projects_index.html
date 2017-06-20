@@ -8,9 +8,9 @@
 {%- block PAGE_CONTENT -%}
 <div class="container" data-start="transform: translateY(0px)" data-center-top="transform: translateY(-100px)">
 	<div class="main-title">
-		<h3>{{ var('COMPLETED_PROJECTS_TITLE', request) }}</h3>
+		<h1>{{ var('COMPLETED_PROJECTS_TITLE', request) }}</h1>
 		{%- if var('COMPLETED_PROJECTS_SUBTITLE', request) -%}
-		<h5>{{ var('COMPLETED_PROJECTS_SUBTITLE', request) }}</h5>
+		<h2>{{ var('COMPLETED_PROJECTS_SUBTITLE', request) }}</h2>
 		{%- endif -%}
 	</div>
 </div>

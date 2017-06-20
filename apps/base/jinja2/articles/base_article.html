@@ -27,10 +27,10 @@
 			<a href="{{ list_url }}" class="page-back__link">{{ list_name }}</a>
 		</div>
 		<div class="main-title">
-			<h3>{{ current_article.title }}</h3>
+			<h1>{{ current_article.title }}</h1>
 			{%- if current_article.excerpt -%}
 			<div class="content-block">
-				{{- current_article.excerpt -}}
+				{{- current_article.excerpt|preprocess_content -}}
 			</div>
 			{%- endif -%}
 			<div class="main-title__date">{{ current_article.publish_date|date('d E Y') }}</div>
@@ -58,7 +58,7 @@
 					{%- if slide.body -%}
 					<div class="slide__text">
 						<div class="content-block">
-							{{- slide.body -}}
+							{{- slide.body|preprocess_content -}}
 						</div>
 					</div>
 					{%- endif -%}

@@ -8,7 +8,7 @@
 <div class="b-support">
 	<div class="container">
 		<div class="main-title">
-			<h3>{{ var('TECH_SUPPORT_TITLE', request) }}. {{ current_category.title|e }}</h3>
+			<h1>{{ var('TECH_SUPPORT_TITLE', request) }}. {{ current_category.title|e }}</h1>
 			<p>
 				{{- var('SUPPORT_CONTENT', request) -}}
 			</p>
@@ -76,7 +76,7 @@
 					<div class="qa__item" data-sections="|{% for section in question.sections.all() %}{{ section.pk }}|{% endfor %}|">
 						<a href="javascript:" class="qa__question">{{ question.title }}</a>
 						<div class="qa__answer content-block">
-							{{- question.body -}}
+							{{- question.body|preprocess_content -}}
 						</div>
 					</div>
 					{%- endfor -%}

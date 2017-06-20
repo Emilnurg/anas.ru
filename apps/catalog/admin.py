@@ -7,7 +7,7 @@ from modeltranslation.admin import TranslationAdmin, TranslationTabularInline, \
     TranslationStackedInline
 from mptt.admin import MPTTModelAdmin
 
-from catalog import models
+from catalog import models, forms
 from snippets.admin import BaseModelAdmin
 from snippets.admin.admin import ModelTranlsationFieldsetsMixin
 from snippets.modeltranslation import get_model_translation_fields
@@ -108,6 +108,7 @@ class ProductAdmin(ModelTranlsationFieldsetsMixin, ImageCroppingMixin, BaseModel
                    TranslationAdmin):
     """Продукты"""
     filter_horizontal = ('categories',)
+    form = forms.ProductModelForm
     group_fieldsets = True
     inlines = (
         ProductImageMainInline, ProductFeatureMainInline, ProductFeatureInline,

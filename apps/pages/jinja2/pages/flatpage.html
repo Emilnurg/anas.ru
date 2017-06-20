@@ -9,7 +9,7 @@
 	<div class="b-about__bg">
 		<div class="container">
 			<div class="main-title">
-				<h3>{{ current_page.title }}</h3>
+				<h1>{{ current_page.title }}</h1>
 			</div>
 		</div>
 	</div>
@@ -17,7 +17,7 @@
 	{%- if current_page.body -%}
 	<div class="container">
 		<div class="b-about__text content-block">
-			<div>{{ current_page.body }}</div>
+			<div>{{ current_page.body|preprocess_content }}</div>
 		</div>
 	</div>
 	{%- endif -%}

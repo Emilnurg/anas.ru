@@ -17,8 +17,9 @@
 	<div class="b-contacts__left">
 		<div class="b-contacts__body">
 			<div class="main-title">
-				<h3>{{ contacts_page.title }}</h3>
+				<h1>{{ contacts_page.title }}</h1>
 			</div>
+
 			<div class="b-contacts__contacts">
 				<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}" class="b-contacts__tel">
 					{{- var('TELEPHONE_PUBLIC', request) -}}

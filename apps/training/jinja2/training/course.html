@@ -17,7 +17,7 @@
 			</a>
 		</div>
 		<div class="main-title">
-			<h3>{{ current_course.title }}</h3>
+			<h1>{{ current_course.title }}</h1>
 		</div>
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -88,7 +88,7 @@
 					<div class="tab-pane fade active in" id="course-about">
 						{%- if current_course.body_about -%}
 						<div class="about-course content-block">
-							{{- current_course.body_about -}}
+							{{- current_course.body_about|preprocess_content -}}
 						</div>
 						{%- endif -%}
 
@@ -125,7 +125,7 @@
 
 					{%- if current_course.body_detail -%}
 					<div class="tab-pane fade" id="course-detail">
-						<div class="content-block">{{ current_course.body_detail }}</div>
+						<div class="content-block">{{ current_course.body_detail|preprocess_content }}</div>
 						<div class="lecturer__img">
 							<img src="{{ STATIC_URL }}images/raster/lecturer_info_img.png" class="img-responsive" alt=""/>
 						</div>
