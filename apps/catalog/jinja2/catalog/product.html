@@ -83,7 +83,7 @@
 								 data-size="{{ thumb.width }}x{{ thumb.height }}"
 								 title="{{ image.alt or '' }}"
 								 rel="photoswipe[{{ current_product.slug }}]">
-								<img src="{{ image|cropped_thumbnail('thumb_images') }}"
+								<img src="{{ image|cropped_thumbnail('thumb_images', remove_alpha=True) }}"
 										 class="img-responsive" alt="{{ image.alt or '' }}"/>
 							</a>
 						</div>
@@ -96,7 +96,7 @@
 						{%- set thumb = image.image|thumbnail_obj('1200x600', remove_alpha=True) -%}
 						{%- if thumb -%}
 						<div class="sld">
-							<img src="{{ image|cropped_thumbnail('thumb_images', width=120, height=68, background='#FFFFFF') }}"
+							<img src="{{ image|cropped_thumbnail('thumb_images', width=120, height=68, background='#FFFFFF', remove_alpha=True) }}"
 									 class="img-responsive" alt="{{ image.alt or '' }}"/>
 						</div>
 						{%- endif -%}

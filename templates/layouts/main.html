@@ -117,7 +117,7 @@
                 <ul class="header__nav-list">
 									{%- for category_1 in catalog_tree -%}
 									{%- set cat1_url = category_1['obj'].get_absolute_url(request.LANGUAGE_CODE) -%}
-                  <li class="header__nav-item header__nav-item--dropdown
+                  <li class="header__nav-item header__nav-item--dropdown catalog-dropdown
 										{%- if hasattr(request, 'active_url') and cat1_url == request.active_url %} active{% endif %}">
                     <a href="{{ cat1_url }}"
 											 class="header__nav-link">
@@ -164,7 +164,7 @@
 									{%- set training_url = url('training:training_index', kwargs={'lang': request.LANGUAGE_CODE}) -%}
 									{%- set training_categories = get_training_categories() -%}
 									{%- if training_categories -%}
-                  <li class="header__nav-item header__nav-item--dropdown
+                  <li class="header__nav-item header__nav-item--dropdown training-dropdown
 										{%- if hasattr(request, 'active_url') and training_url == request.active_url %} active{% endif %}">
                     <a href="{{ training_url }}"
 											 class="header__nav-link">
@@ -190,7 +190,7 @@
 									{%- set support_url = url('support:support_index', kwargs={'lang': request.LANGUAGE_CODE}) -%}
 									{%- set support_categories = get_support_categories() -%}
 									{%- if support_categories -%}
-                  <li class="header__nav-item header__nav-item--dropdown
+                  <li class="header__nav-item header__nav-item--dropdown support-dropdown
 										{%- if hasattr(request, 'active_url') and support_url == request.active_url %} active{% endif %}">
                     <a href="{{ support_url }}"
 											 class="header__nav-link">

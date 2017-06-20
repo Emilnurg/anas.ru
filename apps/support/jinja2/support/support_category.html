@@ -96,10 +96,8 @@
 				<div class="no-answer__text">
 					<h4>{{ var('SUPPORT_CALLBACK_FORM_TITLE', request) }}</h4>
 					<p>{{ var('SUPPORT_CALLBACK_FORM_SUBTITLE', request) }}</p>
-					<a href="javascript:"
-						 data-fancybox data-type="ajax"
-						 data-src="{{ url('popups:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-						 class="btn btn--black">{{ var('SUPPORT_CALLBACK_BUTTON', request) }}</a>
+					<a href="#form"
+						 class="btn btn--black support-btn">{{ var('SUPPORT_CALLBACK_BUTTON', request) }}</a>
 				</div>
 			</div>
 			<div class="col-md-6 hidden-xs hidden-sm">

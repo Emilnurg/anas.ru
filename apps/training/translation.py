@@ -14,6 +14,12 @@ class CourseTranslationOptions(BaseArticleTranslationOptions):
     required_languages = {settings.DEFAULT_LANGUAGE: ('title',), 'default': ()}
 
 
+@register(models.CourseAboutBlock)
+class CourseAboutBlockTranslationOptions(BaseArticleTranslationOptions):
+    fields = models.CourseAboutBlock.translation_fields
+    required_languages = {settings.DEFAULT_LANGUAGE: ('title',), 'default': ()}
+
+
 @register(models.CourseSchedule)
 class CourseScheduleTranslationOptions(BaseTranslationOptions):
     fields = models.CourseSchedule.translation_fields

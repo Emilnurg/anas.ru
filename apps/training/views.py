@@ -3,6 +3,7 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
+from snippets.models.enumerates import StatusEnum
 from snippets.models.siblings import get_siblings
 from snippets.views import BaseTemplateView, BaseView
 from training import models
@@ -67,14 +68,18 @@ class CourseView(BaseTemplateView):
         else:
             list_url = reverse('training:training_index', kwargs={'lang': kwargs.get('lang')})
 
-        teachers = models.CourseTeacher.objects.published().filter(course=current_course)\
+        teachers = models.CourseTeacher.objects.published()\
+            .filter(course=current_course, teacher__status=StatusEnum.PUBLIC)\
             .order_by('ordering')
+
+        about_blocks = current_course.about_blocks.published().order_by('ordering')
 
         kwargs['view'].request.active_url = reverse(
             'training:training_index', kwargs={'lang': kwargs.get('lang')}
         )
 
         kwargs.update(
+            about_blocks=about_blocks,
             category=category,
             current_course=current_course,
             list_url=list_url,

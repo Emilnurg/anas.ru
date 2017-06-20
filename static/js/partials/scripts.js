@@ -1123,6 +1123,12 @@ $(document).ready(function() {
        return false;
      });
 
+    $('.support-btn').click(function() {
+      questionForm.show();
+      questionsBlock.hide();
+      $('a', sections).removeClass('active');
+    });
+
   } else if (body.hasClass('body-contacts')) {
     var contactsForm = $('.contacts__form');
     if (contactsForm.size() > 0) {

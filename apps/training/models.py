@@ -78,6 +78,7 @@ class Course(BaseArticle):
     body_schedule = RichTextUploadingField(
         _('Расписание'), blank=True, null=True, help_text=_('Текст над таблицей')
     )
+    is_enroll_button = models.BooleanField(_('Выводить кнопку "Записаться"'), default=True)
 
     teachers = models.ManyToManyField(
         Teacher, verbose_name=_('Преподаватели'), through='CourseTeacher', blank=True
@@ -102,13 +103,25 @@ class Course(BaseArticle):
         })
 
 
+class CourseAboutBlock(BaseModel):
+    """Блоки описания о курсе"""
+    course = models.ForeignKey(Course, verbose_name=_('Курс'), related_name='about_blocks')
+    title = models.CharField(_('Заголовок слева'), max_length=255)
+    description = models.TextField(_('Описание справа'), blank=True, null=True)
+
+    translation_fields = ('title', 'description')
+
+    class Meta:
+        verbose_name = _('Блок описания о курсе')
+        verbose_name_plural = _('Блоки описания о курсе')
+
+
 class CourseTeacher(BaseModel):
     """Преподаватели курсов"""
     course = models.ForeignKey(Course, verbose_name=_('Курс'))
     teacher = models.ForeignKey(Teacher, verbose_name=_('Преподаватель'))
-    teacher_role = models.CharField(
-        _('Роль преподавателя'), max_length=100, blank=True, null=True,
-        help_text=_('Например, "лектор"')
+    teacher_role = models.TextField(
+        _('Роль преподавателя'), blank=True, null=True, help_text=_('Например, "лектор"')
     )
 
     translation_fields = ('teacher_role',)

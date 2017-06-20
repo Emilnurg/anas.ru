@@ -3,8 +3,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 from image_cropping import ImageCroppingMixin
-from modeltranslation.admin import TranslationAdmin, TranslationTabularInline, \
-    TranslationStackedInline
+from modeltranslation.admin import TranslationAdmin, TranslationStackedInline
 
 from base.admin import BaseArticleAdmin
 from snippets.admin import BaseModelAdmin
@@ -13,11 +12,21 @@ from snippets.modeltranslation import get_model_translation_fields
 from training import models
 
 
-class CourseTeacherInline(TranslationTabularInline):
+class CourseAboutBlockInline(TranslationStackedInline):
+    """Блоки описания о курсе"""
+    extra = 0
+    fields = models.CourseAboutBlock().collect_fields()
+    model = models.CourseAboutBlock
+    ordering = ('ordering',)
+    suit_classes = 'suit-tab suit-tab-about'
+
+
+class CourseTeacherInline(TranslationStackedInline):
     """Преподаватели курса"""
     extra = 0
     fields = models.CourseTeacher().collect_fields()
     model = models.CourseTeacher
+    ordering = ('ordering',)
     suit_classes = 'suit-tab suit-tab-teachers'
 
 
@@ -26,6 +35,7 @@ class CourseScheduleInline(TranslationStackedInline):
     extra = 0
     fields = models.CourseSchedule().collect_fields()
     model = models.CourseSchedule
+    ordering = ('ordering',)
     suit_classes = 'suit-tab suit-tab-schedule'
 
 
@@ -35,7 +45,7 @@ class CourseAdmin(ImageCroppingMixin, ModelTranlsationFieldsetsMixin, BaseArticl
     date_hierarchy = 'date_start'
     group_fieldsets = True
     filter_horizontal = ('categories',)
-    inlines = (CourseTeacherInline, CourseScheduleInline)
+    inlines = (CourseAboutBlockInline, CourseTeacherInline, CourseScheduleInline)
     list_display = (
         'id', 'image_thumb', 'title', 'date_start', 'date_finish', 'ordering', 'status', 'updated'
     )

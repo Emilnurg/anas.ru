@@ -832,6 +832,18 @@ textarea.form__field {
   }
 }
 
+.support-dropdown,
+.training-dropdown {
+  .header__nav-dropdown {
+    min-width: 300px;
+
+    &>div>div {
+      width: auto;
+      min-width: 200px;
+    }
+  }
+}
+
 .header__nav-link {
   @include f-reg;
   color: #000;
@@ -2916,7 +2928,7 @@ textarea.form__field {
   text-align: center;
   padding-top: 40px;
   max-width: 800px;
-  margin: 0 auto 48px;
+  margin: 0 auto 40px;
 
   h1 {
     font-size: 48px;
@@ -3703,7 +3715,7 @@ textarea.form__field {
   padding-bottom: 59px;
 
   .section-title {
-    padding-top: 72px;
+    padding-top: 0;
     margin-bottom: 39px;
 
     h4 {
@@ -6805,6 +6817,7 @@ a.page-nav__next {
       width: 100%;
       top: 0;
       left: 0;
+      background-size: auto 45px !important;
     }
 
     &:nth-child(1) {

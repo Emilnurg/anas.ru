@@ -19,9 +19,12 @@
 		<div class="main-title">
 			<h1>{{ current_course.title }}</h1>
 		</div>
+
+		{%- if current_course.participants_count or current_course.price or current_course.city_id or current_course.date_start or current_course.is_enroll_button -%}
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 				<div class="b-course__header">
+					{%- if current_course.participants_count or current_course.price or current_course.city_id -%}
 					<ul class="b-course__info">
 						{%- if current_course.participants_count -%}
 						<li>
@@ -45,6 +48,7 @@
 						</li>
 						{%- endif -%}
 					</ul>
+					{%- endif -%}
 
 					{%- if current_course.date_start -%}
 					<p>
@@ -52,10 +56,14 @@
 						&nbsp;{{ current_course.date_start|date('d E') -}}
 					</p>
 					{%- endif -%}
+
+					{%- if current_course.is_enroll_button -%}
 					<a href="#form" class="btn btn--black">{{ var('COURSE_ENROLL_BUTTON', request) }}</a>
+					{%- endif -%}
 				</div>
 			</div>
 		</div>
+		{%- endif -%}
 	</div>
 </div>
 <div class="b-course-tabs">
@@ -86,9 +94,20 @@
 				<div class="tab-content">
 					{%- if current_course.body_about or teachers -%}
 					<div class="tab-pane fade active in" id="course-about">
-						{%- if current_course.body_about -%}
-						<div class="about-course content-block">
-							{{- current_course.body_about|preprocess_content -}}
+						{%- if current_course.body_about or about_blocks -%}
+						<div class="about-course">
+							{%- for about_block in about_blocks -%}
+							<dl>
+								<dt>{{ about_block.title }}</dt>
+								<dd>{{ about_block.description or '' }}</dd>
+							</dl>
+							{%- endfor -%}
+
+							{%- if current_course.body_about -%}
+							<div class="content-block">
+								{{- current_course.body_about|preprocess_content -}}
+							</div>
+							{%- endif -%}
 						</div>
 						{%- endif -%}
 
@@ -159,6 +178,8 @@
 		</div>
 	</div>
 </div>
+
+{%- if current_course.is_enroll_button -%}
 <div class="b-feedback b-feedback--education">
 	<div class="container">
 		<div class="row">
@@ -202,6 +223,7 @@
 		</div>
 	</div>
 </div>
+{%- endif -%}
 
 {%- if siblings -%}
 <div class="page-nav">
