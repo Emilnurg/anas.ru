@@ -5919,7 +5919,9 @@ a.page-nav__next {
     outline: none;
     display: inline-block;
     border-bottom: 0 none;
+  }
 
+  li {
     .dropdown-menu & {
       text-align: center;
     }
