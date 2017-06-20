@@ -191,6 +191,20 @@
   }
 }
 
+.mobile-show {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .mobile-show {
+    display: block !important;
+  }
+
+  .mobile-hide {
+    display: none !important;
+  }
+}
+
 //icons
 .medicon {
 
@@ -5199,6 +5213,7 @@ a.page-nav__next {
 .dropdown-menu {
   background-color: white;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  white-space: normal;
   position: absolute;
   left: -30px;
   top: 100%;
@@ -5337,7 +5352,8 @@ a.page-nav__next {
   justify-content: space-between;
 }
 
-.partners-filter__dropdowns {
+.partners-filter__dropdowns,
+.category-dropdowns {
   padding-top: 10px;
 
   .dropdown {
@@ -5572,14 +5588,18 @@ a.page-nav__next {
     margin-bottom: 10px;
   }
 
-  .partners-filter__dropdowns {
+  .partners-filter__dropdowns,
+  .category-dropdowns {
     padding-top: 0;
-    width: 30%;
 
     .dropdown {
       margin-right: 0;
       margin-bottom: 20px;
     }
+  }
+
+  .partners-filter__dropdowns {
+    width: 30%;
   }
 
   .partners-filter__types {
@@ -5658,7 +5678,8 @@ a.page-nav__next {
     margin-bottom: 40px;
   }
 
-  .partners-filter__dropdowns {
+  .partners-filter__dropdowns,
+  .category-dropdowns  {
     width: 100%;
     text-align: center;
 
@@ -5744,7 +5765,7 @@ a.page-nav__next {
 
 @media (max-width: 360px) {
   .map {
-    padding-bottom: 150%;
+    padding-bottom: 120%;
   }
 }
 
@@ -5898,6 +5919,10 @@ a.page-nav__next {
     outline: none;
     display: inline-block;
     border-bottom: 0 none;
+
+    .dropdown-menu & {
+      text-align: center;
+    }
   }
 }
 

@@ -156,21 +156,21 @@ function breakpointsHandler() {
       //   variableWidth: true
       // });
 
-      $('.catalog-filter__categories').slick({
-        slidesToShow: 1,
-        arrows: false,
-        infinite: false,
-        swipeToSlide: true,
-        variableWidth: true
-      });
-
-      $('.select-brand').slick({
-        slidesToShow: 1,
-        arrows: false,
-        infinite: false,
-        swipeToSlide: true,
-        variableWidth: true
-      });
+      // $('.catalog-filter__categories').slick({
+      //   slidesToShow: 1,
+      //   arrows: false,
+      //   infinite: false,
+      //   swipeToSlide: true,
+      //   variableWidth: true
+      // });
+      //
+      // $('.select-brand').slick({
+      //   slidesToShow: 1,
+      //   arrows: false,
+      //   infinite: false,
+      //   swipeToSlide: true,
+      //   variableWidth: true
+      // });
 
       // $('.course-tabs').slick({
       //   slidesToShow: 1,
@@ -179,23 +179,23 @@ function breakpointsHandler() {
       //   swipeToSlide: true,
       //   variableWidth: true
       // });
-
-      $('.articles-categories').slick({
-        slidesToShow: 1,
-        arrows: false,
-        infinite: false,
-        swipeToSlide: true,
-        variableWidth: true
-      });
+      //
+      // $('.articles-categories').slick({
+      //   slidesToShow: 1,
+      //   arrows: false,
+      //   infinite: false,
+      //   swipeToSlide: true,
+      //   variableWidth: true
+      // });
     },
     leave: function () {
       $('.footer__contacts').appendTo('.footer__right');
 
       // $('.product-tabs__links').slick('unslick');
-      $('.catalog-filter__categories').slick('unslick');
-      $('.select-brand').slick('unslick');
+      // $('.catalog-filter__categories').slick('unslick');
+      // $('.select-brand').slick('unslick');
       // $('.course-tabs').slick('unslick');
-      $('.articles-categories').slick('unslick');
+      // $('.articles-categories').slick('unslick');
     }
   });
 }

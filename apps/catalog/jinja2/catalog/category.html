@@ -22,7 +22,7 @@
 		{%- if children_categories or brands -%}
 		<div class="catalog-filter">
 			{%- if children_categories -%}
-			<div class="catalog-filter__categories">
+			<div class="catalog-filter__categories mobile-hide">
 				{%- for category in children_categories -%}
 				<a class="sld" href="{{ category.get_absolute_url(lang) }}">
 					<label>
@@ -32,10 +32,33 @@
 				</a>
 				{%- endfor -%}
 			</div>
+
+			<div class="category-dropdowns mobile-show">
+				<div class="dropdown">
+					<button class="dropdown__button" data-toggle="dropdown">
+						{{- var('SELECT_SUBCATEGORY', request) -}}
+					</button>
+					<div class="dropdown-menu">
+						<div>
+							{%- for col in children_categories|slice(2) -%}
+							<div>
+								<ul>
+									{%- for category in col -%}
+									<li>
+										<a href="{{ category.get_absolute_url(lang) }}" rel="nofollow">{{ category.title }}</a>
+									</li>
+									{%- endfor -%}
+								</ul>
+							</div>
+							{%- endfor -%}
+						</div>
+					</div>
+				</div>
+			</div>
 			{%- endif -%}
 
 			{%- if manufacturers -%}
-			<div class="catalog-filter__brands">
+			<div class="catalog-filter__brands mobile-hide">
 				<p>{{ var('SELECT_BRAND', request) }}</p>
 				<div class="select-brand">
 					{%- for manufacturer in manufacturers -%}
@@ -54,6 +77,39 @@
 						</label>
 					</a>
 					{%- endfor -%}
+				</div>
+			</div>
+
+			<div class="category-dropdowns mobile-show">
+				<div class="dropdown">
+					<button class="dropdown__button" data-toggle="dropdown">
+						{{- var('SELECT_BRAND', request) -}}
+					</button>
+					<div class="dropdown-menu">
+						<div>
+							{%- for col in manufacturers|slice(2) -%}
+							<div>
+								<ul class="select-brand">
+									{%- for manufacturer in col -%}
+									<li>
+										<a class="sld" href="{{ base_url }}?
+											{%- if current_manufacturer and current_manufacturer.id == manufacturer.id -%}
+											{%- else -%}
+											manufacturer={{ manufacturer.slug|e -}}
+											{%- endif -%}">
+											<label class="{%- if current_manufacturer and current_manufacturer.id == manufacturer.id %}active{% endif %}">
+												<span>
+													<img src="{{ manufacturer.image.url }}" alt="{{ manufacturer.title }}">
+												</span>
+											</label>
+										</a>
+									</li>
+									{%- endfor -%}
+								</ul>
+							</div>
+							{%- endfor -%}
+						</div>
+					</div>
 				</div>
 			</div>
 			{%- endif -%}
