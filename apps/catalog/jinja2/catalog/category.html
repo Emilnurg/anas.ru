@@ -14,10 +14,10 @@
 {%- block PAGE_CONTENT -%}
 <div class="b-catalog">
 	<div class="container">
-		{%- if parent_category -%}
+		{%- if back_link and back_title -%}
 		<div class="page-back">
-			<a href="{{ parent_category.get_absolute_url(lang) }}"
-				 class="page-back__link">{{ parent_category.title }}</a>
+			<a href="{{ back_link }}"
+				 class="page-back__link">{{ back_title }}</a>
 		</div>
 		{%- endif -%}
 

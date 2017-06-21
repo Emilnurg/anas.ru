@@ -5,6 +5,7 @@ from django.urls import reverse
 from pure_pagination import Paginator
 
 from catalog import models, PRODUCTS_PER_PAGE
+from snippets.jinjaglobals import var
 from snippets.models.enumerates import StatusEnum
 from snippets.models.siblings import get_siblings
 from snippets.views import BaseTemplateView
@@ -17,6 +18,7 @@ class ProductCategoryView(BaseTemplateView):
     def get_context_data(self, **kwargs):
         kwargs = super(ProductCategoryView, self).get_context_data(**kwargs)
         slug = kwargs.get('slug')
+        request = kwargs['view'].request
 
         current_category = None
         categories_base_qs = models.ProductCategory.objects.published()
@@ -47,10 +49,10 @@ class ProductCategoryView(BaseTemplateView):
 
         current_manufacturer = None
         get_params = ''
-        if kwargs['view'].request.GET.get('manufacturer'):
+        if request.GET.get('manufacturer'):
             current_manufacturer = get_object_or_404(
                 models.Manufacturer,
-                slug__exact=kwargs['view'].request.GET['manufacturer'],
+                slug__exact=request.GET['manufacturer'],
                 status=StatusEnum.PUBLIC
             )
             get_params = '?manufacturer=%s' % current_manufacturer.slug
@@ -68,20 +70,29 @@ class ProductCategoryView(BaseTemplateView):
         except (EmptyPage, InvalidPage):
             products_list = []
 
+        back_link = back_title = None
+        if parent_category is None and current_category is not None:
+            back_link = reverse('catalog:catalog_index', kwargs={'lang': kwargs.get('lang')})
+            back_title = var('CATALOG_TITLE', request)
+        elif parent_category is not None:
+            back_link = parent_category.get_absolute_url(kwargs.get('lang'))
+            back_title = parent_category.title
+
         if current_category is None:
-            kwargs['view'].request.active_url = reverse(
+            request.active_url = reverse(
                 'catalog:catalog_index', kwargs={'lang': kwargs.get('lang')}
             )
         elif current_category.is_root_node():
-            kwargs['view'].request.active_url = current_category.get_absolute_url()
+            request.active_url = current_category.get_absolute_url()
         else:
-            kwargs['view'].request.active_url = current_category.get_root().get_absolute_url()
+            request.active_url = current_category.get_root().get_absolute_url()
 
         kwargs.update(
+            back_link=back_link,
+            back_title=back_title,
             base_url=current_category.get_absolute_url(lang=kwargs.get('lang'))
-            if current_category else reverse(
-                'catalog:catalog_index', kwargs={'lang': kwargs.get('lang')}
-            ),
+            if current_category
+            else reverse('catalog:catalog_index', kwargs={'lang': kwargs.get('lang')}),
             manufacturers=manufacturers,
             children_categories=children_categories,
             current_category=current_category,
