@@ -1,7 +1,13 @@
 {%- extends 'layouts/main.html' -%}
 {%- from 'widgets/pagination.html' import pagination -%}
 
-{%- block PAGE_TITLE %}{{ current_category.title|e }}{% endblock -%}
+{%- block PAGE_TITLE -%}
+	{%- if current_category -%}
+		{{- current_category.title|e -}}
+	{%- else -%}
+		{{- var('CATALOG_TITLE', request)|e -}}
+	{%- endif -%}
+{%- endblock -%}
 
 {%- block BODY_CLASSES %}body-category{% endblock -%}
 
@@ -16,7 +22,13 @@
 		{%- endif -%}
 
 		<div class="main-title">
-			<h1>{{ current_category.title }}</h1>
+			<h1>
+				{%- if current_category -%}
+					{{- current_category.title|e -}}
+				{%- else -%}
+					{{- var('CATALOG_TITLE', request)|e -}}
+				{%- endif -%}
+			</h1>
 		</div>
 
 		{%- if children_categories or brands -%}

@@ -6,6 +6,14 @@ from catalog import views
 
 urlpatterns = (
     url(
+        r'^(?P<lang>\w{2})/catalog/$',
+        views.ProductCategoryView.as_view(), name='catalog_index'
+    ),
+    url(
+        r'^(?P<lang>\w{2})/catalog/page/(?P<page>\d{1,5})/$',
+        views.ProductCategoryView.as_view(), name='catalog_index_with_page'
+    ),
+    url(
         r'^(?P<lang>\w{2})/catalog/(?P<slug>[-\w]{1,150})/$',
         views.ProductCategoryView.as_view(), name='category'
     ),

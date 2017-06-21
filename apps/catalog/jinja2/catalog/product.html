@@ -91,6 +91,7 @@
 						{%- endfor -%}
 					</div>
 
+					{%- if images|length > 1 -%}
 					<div class="product-slider-small">
 						{%- for image in images -%}
 						{%- set thumb = image.image|thumbnail_obj('1200x600', remove_alpha=True) -%}
@@ -102,6 +103,7 @@
 						{%- endif -%}
 						{%- endfor -%}
 					</div>
+					{%- endif -%}
 				</div>
 			</div>
 			{%- endif -%}

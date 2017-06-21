@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.core.paginator import InvalidPage, EmptyPage
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from pure_pagination import Paginator
 
 from catalog import models, PRODUCTS_PER_PAGE
@@ -15,21 +16,29 @@ class ProductCategoryView(BaseTemplateView):
 
     def get_context_data(self, **kwargs):
         kwargs = super(ProductCategoryView, self).get_context_data(**kwargs)
-        current_category = get_object_or_404(
-            models.ProductCategory.objects.published(), slug__exact=kwargs.get('slug')
-        )
+        slug = kwargs.get('slug')
+
+        current_category = None
+        categories_base_qs = models.ProductCategory.objects.published()
+        if slug:
+            current_category = get_object_or_404(categories_base_qs, slug__exact=slug)
 
         parent_category = None
-        if current_category.parent_id and current_category.parent.status == StatusEnum.PUBLIC:
+        if current_category and current_category.parent_id \
+                and current_category.parent.status == StatusEnum.PUBLIC:
             parent_category = current_category.parent
 
-        if current_category.is_leaf_node():
+        if current_category is None:
+            children_categories = categories_base_qs.filter(level=0).order_by('ordering')
+        elif current_category.is_leaf_node():
             children_categories = None
         else:
             children_categories = current_category.children.published().order_by('ordering')
-        products_qs = models.Product.objects.published()\
-            .filter(categories__in=current_category.get_descendants(include_self=True)) \
-            .order_by('ordering')
+
+        products_qs = models.Product.objects.published().order_by('ordering')
+        if current_category is not None:
+            products_qs = products_qs\
+                .filter(categories__in=current_category.get_descendants(include_self=True))
 
         manufacturers = models.Manufacturer.objects.published()\
             .filter(products__in=products_qs.values_list('id'))\
@@ -59,13 +68,20 @@ class ProductCategoryView(BaseTemplateView):
         except (EmptyPage, InvalidPage):
             products_list = []
 
-        if current_category.is_root_node():
+        if current_category is None:
+            kwargs['view'].request.active_url = reverse(
+                'catalog:catalog_index', kwargs={'lang': kwargs.get('lang')}
+            )
+        elif current_category.is_root_node():
             kwargs['view'].request.active_url = current_category.get_absolute_url()
         else:
             kwargs['view'].request.active_url = current_category.get_root().get_absolute_url()
 
         kwargs.update(
-            base_url=current_category.get_absolute_url(lang=kwargs.get('lang')),
+            base_url=current_category.get_absolute_url(lang=kwargs.get('lang'))
+            if current_category else reverse(
+                'catalog:catalog_index', kwargs={'lang': kwargs.get('lang')}
+            ),
             manufacturers=manufacturers,
             children_categories=children_categories,
             current_category=current_category,
