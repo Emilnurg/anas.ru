@@ -12,8 +12,11 @@ def e400(request, **kwargs):
     request.LANGUAGE_CODE = get_language(request)
     return HttpResponseBadRequest(
         render_to_string(
-            'errors/400.html',
-            {'request_path': request.path, 'message': message},
+            'errors/400.html', {
+                'request_path': request.path,
+                'message': message,
+                'is_error_page': True
+            },
             request=request,
             using='jinja2'
         )
@@ -26,8 +29,11 @@ def e403(request, **kwargs):
     request.LANGUAGE_CODE = get_language(request)
     return HttpResponseForbidden(
         render_to_string(
-            'errors/403.html',
-            {'request_path': request.path, 'message': message},
+            'errors/403.html', {
+                'request_path': request.path,
+                'message': message,
+                'is_error_page': True
+            },
             request=request,
             using='jinja2'
         )
@@ -40,8 +46,11 @@ def e404(request, **kwargs):
     request.LANGUAGE_CODE = get_language(request)
     return HttpResponseNotFound(
         render_to_string(
-            'errors/404.html',
-            {'request_path': request.path, 'message': message},
+            'errors/404.html', {
+                'request_path': request.path,
+                'message': message,
+                'is_error_page': True
+            },
             request=request,
             using='jinja2'
         )
@@ -54,8 +63,11 @@ def e500(request, **kwargs):
     request.LANGUAGE_CODE = get_language(request)
     return HttpResponseServerError(
         render_to_string(
-            'errors/500.html',
-            {'request_path': request.path, 'message': message},
+            'errors/500.html', {
+                'request_path': request.path,
+                'message': message,
+                'is_error_page': True
+            },
             request=request,
             using='jinja2'
         )
