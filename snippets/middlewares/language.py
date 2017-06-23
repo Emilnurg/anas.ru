@@ -21,7 +21,7 @@ class LanguageMiddleware(object):
             or settings.DEFAULT_LANGUAGE
         ).lower()
 
-        available_langs = settings.LANGUAGE_CODES
+        available_langs = settings.LANGUAGE_CODES_PUBLIC
         if lang not in available_langs:
             raise Http404(_('Язык "%s" не зарегистрирован в системе') % lang)
 

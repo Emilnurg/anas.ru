@@ -60,6 +60,10 @@ class PressView(BaseTemplateView):
         siblings = get_siblings(base_qs.order_by('ordering'), current_news.pk)
         list_url = reverse('press:press_index', kwargs={'lang': kwargs.get('lang')})
 
+        kwargs['view'].request.active_url = reverse(
+            'press:press_index', kwargs={'lang': kwargs['lang']}
+        )
+
         kwargs.update(
             current_article=current_news,
             list_name=var('NEWS_TITLE', kwargs['view'].request),

@@ -13,6 +13,7 @@ def gettext_noop(s):
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_ROOT = os.path.dirname(PROJECT_DIR)
 
+ENV = 'production'
 DEBUG = False
 
 ADMINS = (
@@ -39,6 +40,7 @@ LANGUAGES = (
     ('fr', gettext_noop('Français'))
 )
 LANGUAGE_CODES = tuple([x[0] for x in LANGUAGES])
+LANGUAGE_CODES_PUBLIC = ('ru', 'en')
 DEFAULT_LANGUAGE = MODELTRANSLATION_DEFAULT_LANGUAGE = LANGUAGES[0][0]
 
 MODELTRANSLATION_CUSTOM_FIELDS = ('RichTextUploadingField',)

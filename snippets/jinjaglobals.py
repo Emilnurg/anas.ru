@@ -223,7 +223,7 @@ def get_language_href(request, lang):
 
 @jinjaglobal
 def get_languages():
-    return settings.LANGUAGES
+    return [x for x in settings.LANGUAGES if x[0] in settings.LANGUAGE_CODES_PUBLIC]
 
 
 @jinjafilter
