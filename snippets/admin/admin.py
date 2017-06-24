@@ -54,6 +54,7 @@ class ModelTranlsationFieldsetsMixin(object):
                 fieldsets.remove(fieldset)
 
         for field in ('status', 'ordering'):
-            move_list_element_to_end(fieldsets[0][1]['fields'], field)
+            if field in fieldsets[0][1]['fields']:
+                move_list_element_to_end(fieldsets[0][1]['fields'], field)
 
         return fieldsets

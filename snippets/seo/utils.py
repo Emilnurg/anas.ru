@@ -15,7 +15,7 @@ def collect_sitemap_urls():
             names = dir(mod)
             if 'get_page_urls' in names:
                 global_func = mod.get_page_urls
-                for lang in settings.LANGUAGE_CODES:
+                for lang in settings.LANGUAGE_CODES_PUBLIC:
                     result = global_func(lang)
                     if result and isinstance(result, collections.Iterable):
                         urls.extend(tuple(result))
