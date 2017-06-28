@@ -39,7 +39,7 @@
 
 	{%- for section in sections -%}
 	{%- if section.gallery_id -%}
-	{%- set slides = section.gallery.photos.published() -%}
+	{%- set slides = section.gallery.photos.published().order_by('ordering') -%}
 	{%- if slides -%}
 	<div class="b-slider">
 		<div class="container">

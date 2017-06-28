@@ -9,20 +9,30 @@ from easy_thumbnails.files import get_thumbnailer
 
 class ImageMixin(models.Model):
     image_field = 'image'
+    image_size = (70, 40)
 
     def image_thumb(self):
-        try:
-            return '<img src="%s" alt="" />' % get_thumbnailer(
-                getattr(self, self.image_field)
-            ).get_thumbnail({
-                'size': (0, 40),
-                'detail': True,
-            }).url if getattr(self, self.image_field) else \
-                '<img src="%simages/blank.gif" alt="" ' \
-                'style="width:50px;height:40px;" />' % settings.STATIC_URL
-        except (OSError, EasyThumbnailsError):
-            return ''
+        image = getattr(self, self.image_field)
+        if image and isinstance(image, FieldFile):
+            return '<img src="%s" alt="" style="max-width:%spx;max-height:%spx;">' % (
+                image.url, self.image_size[0], self.image_size[1]
+            )
+        else:
+            try:
+                return '<img src="%s" alt="" />' % get_thumbnailer(
+                    getattr(self, self.image_field)
+                ).get_thumbnail({
+                    'size': self.image_size,
+                    'detail': True,
+                }).url if image else \
+                    '<img src="%simages/blank.gif" alt="" ' \
+                    'style="max-width:%spx;max-height:%spx;" />' % (
+                        settings.STATIC_URL, self.image_size[0], self.image_size[1]
+                    )
+            except (OSError, EasyThumbnailsError):
+                return ''
 
+    image_thumb.admin_order_field = image_field
     image_thumb.allow_tags = True
     image_thumb.short_description = _('Изображение')
 
