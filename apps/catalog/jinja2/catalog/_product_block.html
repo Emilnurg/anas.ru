@@ -8,7 +8,7 @@
 	{%- endif -%}
 	{%- if product.image -%}
 	<div class="catalog-item__image text-{{ product.image_position }}">{# -#}
-		<img src="{{ product.image|thumbnail(product.image_size, remove_alpha=True) }}" alt=""/>{# -#}
+		<img src="{{ product.image|thumbnail(product.get_image_size(), remove_alpha=True) }}" alt=""/>{# -#}
 	</div>
 	{%- endif -%}
 </a>

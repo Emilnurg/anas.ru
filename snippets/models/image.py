@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.db import models
-from django.db.models.fields.files import FieldFile
+from django.db.models.fields.files import ImageFieldFile
 from django.utils.translation import ugettext_lazy as _
 
 from easy_thumbnails.exceptions import EasyThumbnailsError
@@ -14,7 +14,7 @@ class ImageMixin(models.Model):
 
     def image_thumb(self):
         image = getattr(self, self.image_field)
-        if image and isinstance(image, FieldFile):
+        if image and not isinstance(image, ImageFieldFile):
             return '<img src="%s" alt="" style="max-width:%spx;max-height:%spx;">' % (
                 image.url, self.image_size[0], self.image_size[1]
             )
