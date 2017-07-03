@@ -10,7 +10,7 @@ urlpatterns = (
         views.PressIndexView.as_view(), name='press_index'
     ),
     url(
-        r'^(?P<lang>\w{2})/press/(?P<page>[0-9]{1,4})/$',
+        r'^(?P<lang>\w{2})/press/page/(?P<page>[0-9]{1,4})/$',
         views.PressIndexView.as_view(), name='press_index_with_page'
     ),
     url(

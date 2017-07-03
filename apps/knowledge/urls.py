@@ -10,7 +10,7 @@ urlpatterns = (
         views.KnowledgeIndexView.as_view(), name='knowledge_index'
     ),
     url(
-        r'^(?P<lang>\w{2})/knowledge/(?P<page>[0-9]{1,4})/$',
+        r'^(?P<lang>\w{2})/knowledge/page/(?P<page>[0-9]{1,4})/$',
         views.KnowledgeIndexView.as_view(), name='knowledge_index_with_page'
     ),
     url(
@@ -18,7 +18,7 @@ urlpatterns = (
         views.KnowledgeIndexView.as_view(), name='knowledge_category'
     ),
     url(
-        r'^(?P<lang>\w{2})/knowledge/(?P<slug>[-\w]{1,150})/(?P<page>[0-9]{1,4})/$',
+        r'^(?P<lang>\w{2})/knowledge/(?P<slug>[-\w]{1,150})/page/(?P<page>[0-9]{1,4})/$',
         views.KnowledgeIndexView.as_view(), name='knowledge_category_with_page'
     ),
     url(
