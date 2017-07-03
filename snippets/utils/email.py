@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from snippets.db_config import db_vars
 
 
-def get_admin_emails(force_system=False):
+def get_admin_emails(force_system=False, language=settings.DEFAULT_LANGUAGE):
     """
     Получение списка email администраторов
     force_system - получение списка администраторов из файловых настроек Django
@@ -18,7 +18,7 @@ def get_admin_emails(force_system=False):
     if force_system:
         return [x[1] for x in settings.ADMINS]
 
-    admins = db_vars.get('ADMINS', '')
+    admins = db_vars.get('ADMINS', language, '')
     return admins.split(',') if admins else [x[1] for x in settings.ADMINS]
 
 
@@ -49,14 +49,14 @@ def send_email(template, emails, subject, params=None,  extra_headers=None, from
 
 
 def send_trigger_email(event, obj=None, fields=None, emails=None, from_email=None,
-                       extra_data=None, extra_headers=None):
+                       extra_data=None, extra_headers=None, language=settings.DEFAULT_LANGUAGE):
     """
     Отправка триггерного сообщения при новом событии:
     @:param obj - объект события
     @
     """
     if emails is None:
-        emails = get_admin_emails()
+        emails = get_admin_emails(language=language)
 
     if from_email is None:
         from_email = get_default_from_email()

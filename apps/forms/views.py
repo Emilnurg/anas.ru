@@ -25,7 +25,9 @@ class BaseFormRequestView(BaseView):
 
             event = 'новая отправка формы "%s"' % obj._meta.verbose_name
             try:
-                send_trigger_email(event, obj=obj, fields=obj.email_fields)
+                send_trigger_email(
+                    event, obj=obj, fields=obj.email_fields, language=request.LANGUAGE_CODE
+                )
             except (SMTPException, ConnectionError):
                 pass
 
