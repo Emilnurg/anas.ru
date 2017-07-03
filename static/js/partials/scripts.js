@@ -1036,7 +1036,7 @@ function Form() {
 			e.preventDefault();
 			var form = $(this);
 			$(T.button, form).data('inactive', true).addClass('inactive');
-			$(T.message, form).fadeOut(150);
+			$(T.message, form).fadeOut(160);
 			T.clearFormErrors(form);
 			var data = T.populateDataAjaxForm(form);
 
