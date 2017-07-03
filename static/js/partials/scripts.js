@@ -1025,8 +1025,8 @@ function Form() {
 		formCont = $(formCont);
 		$(T.button, formCont).click(function(e) {
 			e.preventDefault();
-			var inactive = $(this).data('inactive');
-			if(typeof(inactive) === 'undefined' || !inactive){
+			var inactive = $(this).hasClass('inactive');
+			if(typeof(inactive) === 'undefined' || !inactive) {
 				$(this).parents('form').submit();
 			}
 			return false;
