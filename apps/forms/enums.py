@@ -30,7 +30,7 @@ class CallbackFormPlaceEnum(BaseEnumerate):
 
 class FeedbackFormPlaceEnum(BaseEnumerate):
     """Расположение формы заказа звонка"""
-    HOMEPAGE = 'hpme'
+    HOMEPAGE = 'home'
     CONTACTS = 'contacts'
     PARTNERS = 'partners'
 

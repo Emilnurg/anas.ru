@@ -1129,12 +1129,6 @@ $(document).ready(function() {
       $('a', sections).removeClass('active');
     });
 
-  } else if (body.hasClass('body-contacts')) {
-    var contactsForm = $('.contacts__form');
-    if (contactsForm.size() > 0) {
-      window.F.manageForm(contactsForm, openThanksRequest);
-    }
-
   } else if (body.hasClass('body-partners')) {
     var dropdowns = $('main .dropdown');
     $('input', dropdowns).change(loadPartnersMap);
