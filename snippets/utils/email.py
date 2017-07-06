@@ -94,9 +94,9 @@ def send_trigger_email(event, obj=None, fields=None, emails=None, from_email=Non
                             orig_value = value
                             value = 'ID=%s: %s' % (value.id, escape(str(value)))
 
-                            if hasattr(value, 'get_absolute_url'):
-                                value = '<a href="%s">%s</a>' % (
-                                    orig_value.get_absolute_url(), value
+                            if hasattr(orig_value, 'get_absolute_url'):
+                                value = '<a href="%s%s">%s</a>' % (
+                                    settings.SITE_URL, orig_value.get_absolute_url(), value
                                 )
                         else:
                             value = escape(value)
