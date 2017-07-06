@@ -7,6 +7,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.db import models
 from django.template.loader import render_to_string
 
+from markupsafe import escape
+
 from snippets.db_config import db_vars
 
 
@@ -89,7 +91,15 @@ def send_trigger_email(event, obj=None, fields=None, emails=None, from_email=Non
                     value = getattr(obj, field)
                     if f.name == field:
                         if isinstance(f, models.ForeignKey):
-                            value = 'ID=%s: %s' % (value.id, value)
+                            orig_value = value
+                            value = 'ID=%s: %s' % (value.id, escape(str(value)))
+
+                            if hasattr(value, 'get_absolute_url'):
+                                value = '<a href="%s">%s</a>' % (
+                                    orig_value.get_absolute_url(), value
+                                )
+                        else:
+                            value = escape(value)
                         fields[f.verbose_name] = value
                         break
 
