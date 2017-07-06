@@ -14,7 +14,7 @@ urlpatterns = (
         views.TrainingCategoryView.as_view(), name='training_category'
     ),
     url(
-        r'^(?P<lang>\w{2})/training/page/(?P<page>[0-9]{1,4})/$',
+        r'^(?P<lang>\w{2})/training/(?P<slug>[-\w]{1,150})/page/(?P<page>[0-9]{1,4})/$',
         views.TrainingCategoryView.as_view(), name='training_category_with_page'
     ),
     url(
