@@ -240,6 +240,10 @@ input::-webkit-clear-button {
   margin-bottom: 50px;
 }
 
+.table tbody tr:hover td {
+    background: #f6f6f6;
+}
+
 .content-block {
   .table-wrap {
     overflow: auto;
