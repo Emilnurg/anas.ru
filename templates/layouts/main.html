@@ -341,7 +341,7 @@
 						{%- endif -%}
             <div class="footer__middle-right">
               <ul class="socials footer__socials">
-								{{- menu(request, 'FOOTER_SOCIALS') -}}
+								{{- menu(request, 'FOOTER_SOCIALS', target_blank=True) -}}
               </ul>
               <div class="footer__contacts">
 								{%- if var('TELEPHONE_PUBLIC', request) -%}
@@ -351,7 +351,7 @@
 								</a>
 								{%- endif -%}
 								{%- if var('EMAIL_PUBLIC', request) -%}
-                <a href="{{ var('EMAIL_PUBLIC', request)|e }}" class="email-link footer__email">
+                <a href="mailto:{{ var('EMAIL_PUBLIC', request)|e }}" class="email-link footer__email">
 									{{- var('EMAIL_PUBLIC', request) -}}
 								</a>
 								{%- endif -%}

@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+from django.core.paginator import EmptyPage, InvalidPage
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
+from pure_pagination import Paginator
+
+from base import ARTICLES_PER_PAGE
 from snippets.models.enumerates import StatusEnum
 from snippets.models.siblings import get_siblings
 from snippets.views import BaseTemplateView, BaseView
@@ -37,13 +41,29 @@ class TrainingCategoryView(BaseTemplateView):
             .select_related('city') \
             .order_by('ordering')
 
+        # paginator
+        paginator_page = None
+        page = self.get_page()
+        paginator = Paginator(courses_list, ARTICLES_PER_PAGE, allow_empty_first_page=False)
+
+        try:
+            paginator_page = paginator.page(page)
+            courses_list = paginator_page.object_list
+        except (EmptyPage, InvalidPage):
+            courses_list = []
+
         kwargs['view'].request.active_url = reverse(
             'training:training_index', kwargs={'lang': kwargs.get('lang')}
         )
 
         kwargs.update(
+            base_url=reverse(
+                'training:training_category',
+                kwargs={'lang': kwargs.get('lang'), 'slug': current_category.slug}
+            ),
             courses_list=courses_list,
-            current_category=current_category
+            current_category=current_category,
+            paginator_page=paginator_page
         )
         return kwargs
 
