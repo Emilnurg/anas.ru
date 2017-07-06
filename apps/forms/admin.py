@@ -76,6 +76,7 @@ CallbackFormRequestAdmin.comment_short.short_description = _('Вопрос')
 class FeedbackFormRequestAdmin(CommentAdminMixin, BaseNamePhoneRequestAdmin):
     """Админ.часть запросов обратной связи"""
     list_display = BaseNamePhoneRequestAdmin.list_display + ('comment_short',)
+    list_filter = BaseNamePhoneRequestAdmin.list_filter + ('place',)
     search_fields = BaseNamePhoneRequestAdmin.search_fields + ('comment',)
 
 
