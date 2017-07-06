@@ -69,7 +69,7 @@
 			</div>
 			{%- endif -%}
 
-			{%- if manufacturers -%}
+			{%- if manufacturers and manufacturers|length > 1 -%}
 			<div class="catalog-filter__brands mobile-hide">
 				<p>{{ var('SELECT_BRAND', request) }}</p>
 				<div class="select-brand">
