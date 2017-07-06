@@ -141,22 +141,22 @@
 	</div>
 </div>
 
-{%- if parent_category.seo_block_title or parent_category.seo_block_body -%}
+{%- if current_category.seo_block_title or current_category.seo_block_body -%}
 <div class="b-seo-text">
 	<div class="container">
 		<div class="row">
-			{%- if parent_category.seo_block_image -%}
+			{%- if current_category.seo_block_image -%}
 			<div class="col-md-5 hidden-sm hidden-xs">
-				<img src="{{ parent_category.seo_block_image.url }}" class="img-responsive" alt="">
+				<img src="{{ current_category.seo_block_image.url }}" class="img-responsive" alt="">
 			</div>
 			{%- endif -%}
 
-			<div class="{%- if parent_category.seo_block_image -%}col-md-7{% endif %} col-sm-12">
+			<div class="{%- if current_category.seo_block_image -%}col-md-7{% endif %} col-sm-12">
 				<div class="b-seo-text__text">
-					<h2 class="promo">{{ parent_category.seo_block_title }}</h2>
-					{%- if parent_category.seo_block_body -%}
+					<h2 class="promo">{{ current_category.seo_block_title }}</h2>
+					{%- if current_category.seo_block_body -%}
 					<div class="content-block">
-						{{- parent_category.seo_block_body|preprocess_content -}}
+						{{- current_category.seo_block_body|preprocess_content -}}
 					</div>
 					{%- endif -%}
 				</div>
