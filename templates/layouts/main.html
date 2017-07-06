@@ -384,6 +384,11 @@
 			class="hide thanks_request"></a>
 
 		<link rel="stylesheet" href="{{ static_with_mtime('css/style.css') }}" media="all">
+
+		<!--[if lt IE 9]>
+		<style>.header__bottom .header__logo img {height: 76px;}</style>
+		<![endif]-->
+
     {%- block EXTRA_STYLES %}{% endblock -%}
 
     <script src="{{ static_with_mtime('js/critical.js') }}"></script>
