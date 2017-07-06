@@ -6,3 +6,7 @@
 {%- block EXTRA_STYLES -%}
 <link rel="stylesheet" href="{{ static_with_mtime('css/print.css') }}">
 {%- endblock -%}
+
+{%- block EXTRA_SCRIPTS -%}
+<script>window.print();</script>
+{%- endblock -%}
