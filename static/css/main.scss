@@ -2023,26 +2023,6 @@ textarea.form__field {
   min-height: 360px;
   border: 0;
 
-  &:before, &:after {
-    content: "";
-    position: absolute;
-    width: 70px;
-    height: 40px;
-    left: 54px;
-    bottom: 51px;
-    z-index: 1;
-    transition: all 0.3s;
-    opacity: 0;
-  }
-
-  &:before {
-    background: url(../images/catalog_arrow.svg) no-repeat 0 0;
-  }
-
-  &:after {
-    background: url(../images/catalog_arrow_hover.svg) no-repeat 0 0;
-  }
-
   h3 {
     color: #1f191a;
     font-size: 30px;
@@ -2064,15 +2044,6 @@ textarea.form__field {
 
   &:hover {
     box-shadow: 0 6px 46px rgba(1, 39, 54, 0.2);
-  }
-
-  &:active {
-    &:before {
-      opacity: 0;
-    }
-    &:after {
-      opacity: 1;
-    }
   }
 }
 
@@ -6830,10 +6801,13 @@ a.page-nav__next {
   .product-additional__image {
     width: 100%;
     display: block;
-    height: auto;
     float: none;
-    max-height: 126px;
+    height: 126px;
     overflow: hidden;
+
+    img {
+      max-height: 100%;
+    }
   }
 }
 
