@@ -135,6 +135,7 @@
 </div>
 {%- endif -%}
 
+{%- if current_product.body or features or current_product.training_body or current_product.testing_body or current_product.docs_body or docs -%}
 <div class="product-tabs">
 	<div class="container">
 		<div class="product-tabs__links">
@@ -261,6 +262,7 @@
 		</div>
 	</div>
 </div>
+{%- endif -%}
 
 <div class="b-feedback b-feedback2">
 	<div class="container">
