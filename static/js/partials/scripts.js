@@ -1158,10 +1158,23 @@ $(window).on('load', function(){
 
   var body = $('body');
 
+  var cont, tabs;
   if (body.hasClass('body-product')) {
-    $('.product-tabs__links .sld').first().find('a').click();
+    cont = $('.product-tabs__links');
+    tabs = $('.sld', cont);
+    if (tabs.length > 1) {
+      tabs.first().find('a').click();
+    } else {
+      cont.hide();
+    }
 
   } else if (body.hasClass('body-training-course')) {
-    $('.course-tabs .sld').first().find('a').click();
+    cont = $('.course-tabs');
+    tabs = $('.sld', cont);
+    if (tabs.length > 1) {
+      tabs.first().find('a').click();
+    } else {
+      cont.hide();
+    }
   }
 });
