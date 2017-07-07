@@ -132,6 +132,7 @@
 								</div>
 								{%- endfor -%}
 							</div>
+
 							{%- if current_course.bg -%}
 							<div class="lecturer__right">
 								<div class="lecturer__image">
@@ -139,6 +140,7 @@
 								</div>
 							</div>
 							{%- endif -%}
+
 						</div>
 						{%- endif -%}
 					</div>
@@ -147,9 +149,13 @@
 					{%- if current_course.body_detail -%}
 					<div class="tab-pane fade" id="course-detail">
 						<div class="content-block">{{ current_course.body_detail|preprocess_content }}</div>
+
+						{%- if current_course.detail_bg -%}
 						<div class="lecturer__img">
-							<img src="{{ STATIC_URL }}images/raster/lecturer_info_img.png" class="img-responsive" alt=""/>
+							<img src="{{ current_course.detail_bg.url }}" class="img-responsive" alt=""/>
 						</div>
+						{%- endif -%}
+
 					</div>
 					{%- endif -%}
 

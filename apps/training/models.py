@@ -82,6 +82,10 @@ class Course(BaseArticle):
     bg = models.ImageField(
         _('Фон описания о курсе'), blank=True, null=True, max_length=255, upload_to='courses'
     )
+    detail_bg = models.ImageField(
+        _('Фон подробного описания о курсе'), blank=True, null=True, max_length=255,
+        upload_to='courses'
+    )
 
     teachers = models.ManyToManyField(
         Teacher, verbose_name=_('Преподаватели'), through='CourseTeacher', blank=True
