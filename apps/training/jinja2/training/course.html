@@ -67,6 +67,7 @@
 	</div>
 </div>
 
+{%- if current_course.body_about or teachers or current_course.body_detail or current_course.body_schedule or schedule -%}
 <div class="b-course-tabs">
 	<div class="container">
 		<div class="row">
@@ -178,6 +179,7 @@
 		</div>
 	</div>
 </div>
+{%- endif -%}
 
 {%- if current_course.is_enroll_button -%}
 <div class="b-feedback b-feedback--education">
