@@ -71,10 +71,10 @@
 				</div>
 			</div>
 
-			{%- if images -%}
 			<div class="col-lg-6 col-md-5">
 				<div class="product-slider">
 					<div class="product-slider-large">
+						{%- if images -%}
 						{%- for image in images -%}
 						{%- set thumb = image.image|thumbnail_obj('1600x1200', remove_alpha=True) -%}
 						{%- if thumb -%}
@@ -89,6 +89,11 @@
 						</div>
 						{%- endif -%}
 						{%- endfor -%}
+						{%- else -%}
+						<div class="sld">
+							<img src="{{ STATIC_URL }}images/no_image.png" class="img-responsive" alt=""/>
+						</div>
+						{%- endif -%}
 					</div>
 
 					{%- if images|length > 1 -%}
@@ -106,7 +111,6 @@
 					{%- endif -%}
 				</div>
 			</div>
-			{%- endif -%}
 		</div>
 	</div>
 </div>

@@ -132,12 +132,13 @@
 								</div>
 								{%- endfor -%}
 							</div>
+							{%- if current_coursee.bg -%}
 							<div class="lecturer__right">
 								<div class="lecturer__image">
-									<img src="{{ STATIC_URL }}images/raster/lecturer_img.png"
-											 class="img-responsive" alt=""/>
+									<img src="{{ current_course.bg.url }}" class="img-responsive" alt=""/>
 								</div>
 							</div>
+							{%- endif -%}
 						</div>
 						{%- endif -%}
 					</div>
