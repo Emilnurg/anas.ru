@@ -4637,6 +4637,10 @@ a.page-nav__next {
   .page-nav__next {
     padding-left: 20px;
 
+    .page-nav__name {
+      padding-right: 40px;
+    }
+
     .page-nav__text {
       padding-right: 20px;
     }
