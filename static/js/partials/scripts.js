@@ -1155,4 +1155,13 @@ $(document).ready(function() {
  */
 $(window).on('load', function(){
   initScripts();
+
+  var body = $('body');
+
+  if (body.hasClass('body-product')) {
+    $('.product-tabs__links .sld').first().find('a').click();
+
+  } else if (body.hasClass('body-training-course')) {
+    $('.course-tabs .sld').first().find('a').click();
+  }
 });

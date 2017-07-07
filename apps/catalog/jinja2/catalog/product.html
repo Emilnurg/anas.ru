@@ -138,9 +138,11 @@
 <div class="product-tabs">
 	<div class="container">
 		<div class="product-tabs__links">
-			<div class="sld active">
+			{%- if current_product.body -%}
+			<div class="sld">
 				<a href="#product-description" class="product-tabs__tab">{{ var('PRODUCT_DESCRIPTION_TAB', request) }}</a>
 			</div>
+			{%- endif -%}
 
 			{%- if features -%}
 			<div class="sld">
@@ -168,13 +170,15 @@
 		</div>
 
 		<div class="product-tabs__content tab-content">
-			<div class="product-tabs__pane tab-pane fade in active" id="product-description">
+			{%- if current_product.body -%}
+			<div class="product-tabs__pane tab-pane fade" id="product-description">
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 						<div class="content-block">{{ current_product.body|preprocess_content -}}</div>
 					</div>
 				</div>
 			</div>
+			{%- endif -%}
 
 			{%- if features -%}
 			<div class="product-tabs__pane tab-pane fade" id="product-features">
