@@ -124,6 +124,7 @@ class Product(ImageMixin, BaseModel):
     docs_body = RichTextUploadingField(
         _('Контент вкладки "Документация"'), blank=True, null=False
     )
+    is_show_in_list = models.BooleanField(_('Показывать в списке'), default=True)
 
     manufacturer = models.ForeignKey(
         Manufacturer, related_name='products', verbose_name=_('Производитель'),
@@ -133,9 +134,8 @@ class Product(ImageMixin, BaseModel):
         ProductCategory, verbose_name=_('Категории'), related_name='products',
         blank=True
     )
-    product_set = models.ForeignKey(
-        'self', verbose_name=_('Входит в комплект'), related_name='set_components',
-        blank=True, null=True
+    related_products = models.ManyToManyField(
+        'self', verbose_name=_('Связанные товары'), symmetrical=True
     )
 
     thumb_siblings = ImageRatioField(

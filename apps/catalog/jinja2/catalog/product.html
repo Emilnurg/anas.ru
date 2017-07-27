@@ -115,11 +115,11 @@
 	</div>
 </div>
 
-{%- if set_components -%}
+{%- if related_products -%}
 <div class="b-products-additional">
 	<div class="container">
 		<div class="products-additional-slider">
-			{%- for product in set_components -%}
+			{%- for product in related_products -%}
 			<div class="sld">
 				<a href="{{ product.get_absolute_url(lang) }}" class="product-additional">
 					<div class="product-additional__text">

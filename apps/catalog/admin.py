@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.contrib.admin import TabularInline
 from django.utils.translation import ugettext_lazy as _
 from image_cropping import ImageCroppingMixin
 
@@ -103,6 +104,17 @@ class ProductImageMainInline(ImageCroppingMixin, TranslationTabularInline):
     suit_classes = 'suit-tab suit-tab-images'
 
 
+class ProductRelatedInline(TabularInline):
+    """Связанные продукты"""
+    extra = 0
+    raw_id_fields = ('to_product',)
+    fk_name = 'from_product'
+    model = models.Product.related_products.through
+    suit_classes = 'suit-tab suit-tab-related'
+    verbose_name = _('Связанный продукт')
+    verbose_name_plural = _('Связанные продукты')
+
+
 @admin.register(models.Product)
 class ProductAdmin(ModelTranlsationFieldsetsMixin, ImageCroppingMixin, BaseModelAdmin,
                    TranslationAdmin):
@@ -112,13 +124,12 @@ class ProductAdmin(ModelTranlsationFieldsetsMixin, ImageCroppingMixin, BaseModel
     group_fieldsets = True
     inlines = (
         ProductImageMainInline, ProductFeatureMainInline, ProductFeatureInline,
-        ProductDocumentInline
+        ProductDocumentInline, ProductRelatedInline
     )
     list_display = ('id', 'image_thumb', 'title', 'ordering', 'status', 'updated')
     list_display_links = ('id', 'image_thumb', 'title')
     list_filter = BaseModelAdmin.list_filter + ('categories', 'manufacturer')
     ordering = BaseModelAdmin.ordering + ('title',)
-    raw_id_fields = ('product_set',)
     save_as = True
     search_fields = ['=id', 'slug', 'image'] + get_model_translation_fields(models.Product)
     suit_form_tabs = (
@@ -128,7 +139,8 @@ class ProductAdmin(ModelTranlsationFieldsetsMixin, ImageCroppingMixin, BaseModel
         ('features', _('Характеристики')),
         ('training', _('Обучение')),
         ('testing', _('Тестирование')),
-        ('docs', _('Документация'))
+        ('docs', _('Документация')),
+        ('related', _('Связанные продукты'))
     )
     tabs_mapping = {
         '': 'general',

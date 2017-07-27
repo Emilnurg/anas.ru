@@ -37,7 +37,10 @@ class ProductCategoryView(BaseTemplateView):
         else:
             children_categories = current_category.children.published().order_by('ordering')
 
-        products_qs = models.Product.objects.published().order_by('ordering')
+        products_qs = models.Product.objects.published()\
+            .filter(is_show_in_list=True)\
+            .order_by('ordering')
+
         if current_category is not None:
             products_qs = products_qs\
                 .filter(categories__in=current_category.get_descendants(include_self=True))
@@ -139,13 +142,7 @@ class ProductView(BaseTemplateView):
                 current_product.pk
             )
 
-        if current_product.product_set_id:
-            # получаем другие элементы набора
-            set_components = current_product.product_set.set_components.published()\
-                .exclude(pk=current_product.pk).order_by('ordering')
-        else:
-            # или если текущий товар - набор, то выводим его элементы
-            set_components = current_product.set_components.published() or None
+        related_products = current_product.related_products.published().order_by('ordering')
 
         kwargs.update(
             current_product=current_product,
@@ -154,7 +151,7 @@ class ProductView(BaseTemplateView):
             features_main=features_main,
             images=images,
             main_category=main_category,
-            set_components=set_components,
+            related_products=related_products,
             siblings=siblings
         )
 
