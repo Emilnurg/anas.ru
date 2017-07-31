@@ -9,6 +9,7 @@ from core.models import HomeAdvantage, HomeSlide, HomeCatalog, HomeCatalogProduc
 from core.utils import get_flat_page
 from pages.models import ContactsPage, AboutPage, AboutAdvantage, ServiceCenterPage, \
     ServiceRequestOrder, HomePage
+from snippets.models.enumerates import StatusEnum
 from snippets.views import BaseTemplateView
 
 
@@ -38,6 +39,7 @@ class HomeView(BaseTemplateView):
 
         home_catalog_manufacturers = defaultdict(list)
         for manufacturer in HomeCatalogManufacturer.objects.published()\
+                .filter(manufacturer__status=StatusEnum.PUBLIC, catalog__status=StatusEnum.PUBLIC)\
                 .select_related('manufacturer').order_by('ordering').iterator():
             home_catalog_manufacturers[manufacturer.catalog_id].append(manufacturer.manufacturer)
 
