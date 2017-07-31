@@ -18,7 +18,7 @@ class Teacher(ImageMixin, BaseModel):
     image = ImageCropField(
         _('Аватар'), max_length=254, blank=True, null=True, upload_to='teachers'
     )
-    image_thumb = ImageRatioField('image', '180x180', free_crop=True, verbose_name=_('Эскиз'))
+    image_thumb = ImageRatioField('image', '200x200', free_crop=True, verbose_name=_('Эскиз'))
 
     courses = models.ManyToManyField(
         'Course', verbose_name=_('Курсы'), through='CourseTeacher', blank=True
