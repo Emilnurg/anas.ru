@@ -79,7 +79,7 @@
 		</div>
 		{%- endif -%}
 
-		{%- if not products['objects'] and not training['objects'] and not articles['objects'] -%}
+		{%- if not pages and not products['objects'] and not training['objects'] and not articles['objects'] -%}
 		<div class="flatpage__text content-block">
 			<div>
 				<p>{{ var('SEARCH_NOT_FOUND', request) }}</p>
