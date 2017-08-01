@@ -34,6 +34,7 @@ class HomeView(BaseTemplateView):
 
         home_catalog_products = defaultdict(list)
         for product in HomeCatalogProduct.objects.published()\
+                .filter(product__status=StatusEnum.PUBLIC, catalog__status=StatusEnum.PUBLIC)\
                 .select_related('product').order_by('ordering').iterator():
             home_catalog_products[product.catalog_id].append(product.product)
 

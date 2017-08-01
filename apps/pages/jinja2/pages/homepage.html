@@ -8,6 +8,12 @@
 {%- if home_slides or home_advantages -%}
 <div class="b-hero">
 	<div class="container">
+		{%- if home_page.page_title -%}
+		<div class="main-title">
+			<h1>{{ home_page.page_title }}</h1>
+		</div>
+		{%- endif -%}
+
 		{%- if home_slides -%}
 		<div class="main-slider owl-carousel owl-theme">
 			{%- for slide in home_slides -%}

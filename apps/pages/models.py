@@ -101,7 +101,10 @@ class ContactsPage(BasicModel, SingletonModel):
 
 class HomePage(BasicModel, SingletonModel):
     """Главная страница"""
-    title = models.CharField(_('Заголовок страницы'), max_length=255)
+    title = models.CharField(_('Заголовок страницы (SEO)'), max_length=255)
+    page_title = models.CharField(
+        _('Заголовок страницы сверху'), max_length=255, blank=True, null=True
+    )
     projects_title = models.CharField(
         _('Заголовок блока проектов'), max_length=100, blank=True, null=True
     )
@@ -126,13 +129,13 @@ class HomePage(BasicModel, SingletonModel):
         _('Подзаголовок блока "Как мы работаем с клиентами"'), blank=True, null=True
     )
     how_we_work_image = models.ImageField(
-        _('Фото в блоке  блока "Как мы работаем с клиентами"'), max_length=255, upload_to='about',
+        _('Фото в блоке "Как мы работаем с клиентами"'), max_length=255, upload_to='about',
         blank=True, null=True
     )
 
     translation_fields = (
-        'title', 'projects_title', 'projects_subtitle', 'projects_button', 'questions_title',
-        'questions_subtitle', 'how_we_work_title', 'how_we_work_subtitle'
+        'title', 'page_title', 'projects_title', 'projects_subtitle', 'projects_button',
+        'questions_title', 'questions_subtitle', 'how_we_work_title', 'how_we_work_subtitle'
     )
 
     class Meta:

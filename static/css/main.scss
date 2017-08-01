@@ -7972,6 +7972,16 @@ a.page-nav__next {
   }
 }
 
+@media (max-width: 580px) {
+  .modal--thankyou {
+    width: 100%;
+
+    .modal__inner {
+      width: 100%;
+    }
+  }
+}
+
 
 body {
   opacity: 1 !important;
