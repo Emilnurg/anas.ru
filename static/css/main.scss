@@ -7869,6 +7869,14 @@ a.page-nav__next {
 
 .b-search__section {
   position: relative;
+
+  ul li {
+    padding-left: 0;
+
+    &:before {
+      display: none;
+    }
+  }
 }
 
 
