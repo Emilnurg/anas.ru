@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from solo.models import SingletonModel
@@ -47,6 +49,9 @@ class AboutPage(BasicModel, SingletonModel):
 
     def __str__(self):
         return str(_('Страница "О компании"'))
+
+    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
+        return reverse('pages:about', kwargs={'lang': lang})
 
 
 class AboutAdvantage(BaseModel):
@@ -97,6 +102,9 @@ class ContactsPage(BasicModel, SingletonModel):
 
     class Meta:
         verbose_name = _('Страница "Контакты"')
+
+    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
+        return reverse('pages:contacts', kwargs={'lang': lang})
 
 
 class HomePage(BasicModel, SingletonModel):
@@ -186,6 +194,9 @@ class PartnersPage(BasicModel, SingletonModel):
     class Meta:
         verbose_name = _('Страница "Дилеры"')
 
+    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
+        return reverse('partners:partners_index', kwargs={'lang': lang})
+
 
 class ServiceCenterPage(BasicModel, SingletonModel):
     """Страница "Сервисный центр" """
@@ -227,6 +238,9 @@ class ServiceCenterPage(BasicModel, SingletonModel):
 
     class Meta:
         verbose_name = _('Страница "Сервисный центр"')
+
+    def get_absolute_url(self, lang=settings.DEFAULT_LANGUAGE):
+        return reverse('pages:service_center', kwargs={'lang': lang})
 
 
 class ServiceRequestOrder(BaseModel):

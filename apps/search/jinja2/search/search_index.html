@@ -20,6 +20,22 @@
 			</form>
 		</div>
 
+		{%- if pages -%}
+		<div class="b-search__section">
+			<a name="pages"></a>
+			<h2>{{ var('SEARCH_PAGES_TITLE', request) }}</h2>
+			<div class="catalog__row row">
+				<ul>
+				{%- for page in pages -%}
+				<li>
+					<a href="{{ page.get_absolute_url(request.LANGUAGE_CODE) }}">{{ page.title }}</a>
+				</li>
+				{%- endfor -%}
+				</ul>
+			</div>
+		</div>
+		{%- endif -%}
+
 		{%- if products['objects'] -%}
 		<div class="b-search__section">
 			<a name="products"></a>
