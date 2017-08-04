@@ -1162,11 +1162,12 @@ $(window).on('load', function(){
   if (body.hasClass('body-product')) {
     cont = $('.product-tabs__links');
     tabs = $('.sld', cont);
-    if (tabs.length > 1) {
-      tabs.first().find('a').click();
-    } else {
+
+    if (tabs.length === 1) {
       cont.hide();
     }
+
+    tabs.first().find('a').click();
 
   } else if (body.hasClass('body-training-course')) {
     cont = $('.course-tabs');
