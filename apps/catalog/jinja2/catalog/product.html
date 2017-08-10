@@ -149,7 +149,7 @@
 			</div>
 			{%- endif -%}
 
-			{%- if features -%}
+			{%- if features or current_product.features_body -%}
 			<div class="sld">
 				<a href="#product-features" class="product-tabs__tab">{{ var('PRODUCT_TECH_FEATURES_TAB', request) }}</a>
 			</div>
@@ -185,7 +185,7 @@
 			</div>
 			{%- endif -%}
 
-			{%- if features -%}
+			{%- if features or current_product.features_body -%}
 			<div class="product-tabs__pane tab-pane fade" id="product-features">
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -193,6 +193,7 @@
 						<div class="content-block">{{ current_product.features_body|preprocess_content }}</div>
 						{%- endif -%}
 
+						{%- if features -%}
 						<table class="table product-table">
 							<tbody>
 								{%- for feature in features -%}
@@ -210,6 +211,7 @@
 								{%- endfor -%}
 							</tbody>
 						</table>
+						{%- endif -%}
 					</div>
 				</div>
 			</div>
