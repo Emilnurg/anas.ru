@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import re
+
 from django.core.paginator import InvalidPage, EmptyPage
 from django.db.models import Q
 from django.urls import reverse
@@ -13,6 +15,7 @@ from search import PRODUCTS_PER_PAGE, COURSES_PER_PAGE, ARTICLES_PER_PAGE
 from search.indexes.articles import search_articles
 from search.indexes.courses import search_courses
 from search.indexes.products import search_products
+from search.utils import get_stop_words
 from snippets.views import BaseTemplateView
 from training.models import Course
 
@@ -25,7 +28,9 @@ class SearchIndexView(BaseTemplateView):
         kwargs = super(SearchIndexView, self).get_context_data(**kwargs)
         request = kwargs['view'].request
         page = self.get_page()
-        query = request.GET.get('q', '')
+        source_query = request.GET.get('q', '')
+        stop_words = get_stop_words()
+        query = ' '.join(filter(lambda x: x not in stop_words, re.split('\s+', source_query)))
         section = request.GET.get('s', 'products')
         get_params = {'q': query}
 
@@ -94,63 +99,64 @@ class SearchIndexView(BaseTemplateView):
             })
 
         pages = []
-        flatpages = Page.objects.published()\
-            .filter(Q(title__icontains=query) | Q(body__icontains=query))
+        if query:
+            flatpages = Page.objects.published()\
+                .filter(Q(title__icontains=query) | Q(body__icontains=query))
 
-        if flatpages:
-            pages.extend(flatpages)
+            if flatpages:
+                pages.extend(flatpages)
 
-        about_page = AboutPage.objects.filter(
-            Q(title__icontains=query)
-            | Q(subtitle__icontains=query)
-            | Q(quote__icontains=query)
-            | Q(quoted_person__icontains=query)
-            | Q(main_body__icontains=query)
-            | Q(guarantee_title__icontains=query)
-            | Q(guarantee_body__icontains=query)
-            | Q(questions_title__icontains=query)
-            | Q(questions_subtitle__icontains=query)
-        )
+            about_page = AboutPage.objects.filter(
+                Q(title__icontains=query)
+                | Q(subtitle__icontains=query)
+                | Q(quote__icontains=query)
+                | Q(quoted_person__icontains=query)
+                | Q(main_body__icontains=query)
+                | Q(guarantee_title__icontains=query)
+                | Q(guarantee_body__icontains=query)
+                | Q(questions_title__icontains=query)
+                | Q(questions_subtitle__icontains=query)
+            )
 
-        if about_page:
-            pages.extend(about_page)
+            if about_page:
+                pages.extend(about_page)
 
-        contacts_page = ContactsPage.objects.filter(
-            Q(title__icontains=query)
-            | Q(address__icontains=query)
-            | Q(questions_title__icontains=query)
-            | Q(questions_subtitle__icontains=query)
-        )
+            contacts_page = ContactsPage.objects.filter(
+                Q(title__icontains=query)
+                | Q(address__icontains=query)
+                | Q(questions_title__icontains=query)
+                | Q(questions_subtitle__icontains=query)
+            )
 
-        if contacts_page:
-            pages.extend(contacts_page)
+            if contacts_page:
+                pages.extend(contacts_page)
 
-        partners_page = PartnersPage.objects.filter(
-            Q(title__icontains=query)
-            | Q(subtitle__icontains=query)
-            | Q(howto_title__icontains=query)
-            | Q(howto_subtitle__icontains=query)
-            | Q(howto_body__icontains=query)
-            | Q(howto_button_caption__icontains=query)
-            | Q(questions_title_left__icontains=query)
-            | Q(questions_title__icontains=query)
-            | Q(questions_subtitle__icontains=query)
-        )
+            partners_page = PartnersPage.objects.filter(
+                Q(title__icontains=query)
+                | Q(subtitle__icontains=query)
+                | Q(howto_title__icontains=query)
+                | Q(howto_subtitle__icontains=query)
+                | Q(howto_body__icontains=query)
+                | Q(howto_button_caption__icontains=query)
+                | Q(questions_title_left__icontains=query)
+                | Q(questions_title__icontains=query)
+                | Q(questions_subtitle__icontains=query)
+            )
 
-        if partners_page:
-            pages.extend(partners_page)
+            if partners_page:
+                pages.extend(partners_page)
 
-        service_center_page = ServiceCenterPage.objects.filter(
-            Q(title__icontains=query)
-            | Q(subtitle__icontains=query)
-            | Q(body__icontains=query)
-            | Q(request_order_title__icontains=query)
-            | Q(questions_title__icontains=query)
-            | Q(questions_subtitle__icontains=query)
-        )
+            service_center_page = ServiceCenterPage.objects.filter(
+                Q(title__icontains=query)
+                | Q(subtitle__icontains=query)
+                | Q(body__icontains=query)
+                | Q(request_order_title__icontains=query)
+                | Q(questions_title__icontains=query)
+                | Q(questions_subtitle__icontains=query)
+            )
 
-        if service_center_page:
-            pages.extend(service_center_page)
+            if service_center_page:
+                pages.extend(service_center_page)
 
         get_params = '?' + '&'.join(['%s=%s' % (k, v) for k, v in get_params.items()])
         kwargs.update(
@@ -158,7 +164,7 @@ class SearchIndexView(BaseTemplateView):
             get_params=get_params,
             page=page,
             pages=pages,
-            q=query
+            q=source_query
         )
 
         return kwargs

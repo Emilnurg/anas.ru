@@ -82,7 +82,11 @@
 		{%- if not pages and not products['objects'] and not training['objects'] and not articles['objects'] -%}
 		<div class="flatpage__text content-block">
 			<div>
+				{%- if q -%}
 				<p>{{ var('SEARCH_NOT_FOUND', request) }}</p>
+				{%- else -%}
+				<p>{{ var('SEARCH_WELCOME', request) }}</p>
+				{%- endif -%}
 			</div>
 		</div>
 		{%- endif -%}

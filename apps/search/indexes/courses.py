@@ -16,13 +16,14 @@ from search.utils import get_standard_es_settings
 
 
 def config_index_courses():
-    requests.put(
+    r = requests.put(
         'http://{host}:{port}/courses'.format(**settings.SEARCH),
         ujson.dumps({'settings': get_standard_es_settings()})
     )
+    print(r.json())
 
     for language in settings.LANGUAGE_CODES:
-        requests.put(
+        r = requests.put(
             'http://{host}:{port}/courses/course_{language}/_mapping'.format(
                 language=language, **settings.SEARCH
             ),
@@ -63,8 +64,10 @@ def config_index_courses():
                 }
             })
         )
+        print(r.json())
 
-    requests.post('http://{host}:{port}/courses/_open'.format(**settings.SEARCH))
+    r = requests.post('http://{host}:{port}/courses/_open'.format(**settings.SEARCH))
+    print(r.json())
 
 
 def bind_course_body(target):

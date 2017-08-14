@@ -10,33 +10,34 @@ from snippets.utils.dicts import mergedicts
 ALL_INDEXES = ('articles', 'courses', 'products')
 
 
+def get_stop_words():
+    with open(os.path.join(settings.PROJECT_DIR, 'deploy', 'es_stopwords.txt'), 'r') as sw_file:
+        return sw_file.read().split()
+
+
 def get_standard_es_settings(**kwargs):
-    with open(
-        os.path.join(settings.PROJECT_DIR, 'deploy', 'es_stopwords.txt'),
-        'r'
-    ) as sw_file:
-        conf = {
-            'analysis': {
-                'analyzer': {
-                    'common_analyzer': {
-                        'type': 'custom',
-                        'tokenizer': 'standard',
-                        'filter': [
-                            'lowercase',
-                            'russian_morphology',
-                            'english_morphology',
-                            'my_stopwords'
-                        ]
-                    }
-                },
-                'filter': {
-                    'my_stopwords': {
-                        'type': 'stop',
-                        'stopwords': ','.join(sw_file.read().split())
-                    }
+    conf = {
+        'analysis': {
+            'analyzer': {
+                'common_analyzer': {
+                    'type': 'custom',
+                    'tokenizer': 'standard',
+                    'filter': [
+                        'lowercase',
+                        'russian_morphology',
+                        'english_morphology',
+                        'my_stopwords'
+                    ]
+                }
+            },
+            'filter': {
+                'my_stopwords': {
+                    'type': 'stop',
+                    'stopwords': get_stop_words()
                 }
             }
         }
+    }
     if kwargs:
         conf = mergedicts(conf, kwargs)
     return conf

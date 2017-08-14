@@ -17,13 +17,14 @@ from snippets.models.enumerates import StatusEnum
 
 
 def config_index_products():
-    requests.put(
+    r = requests.put(
         'http://{host}:{port}/products'.format(**settings.SEARCH),
         ujson.dumps({'settings': get_standard_es_settings()})
     )
+    print(r.json())
 
     for language in settings.LANGUAGE_CODES:
-        requests.put(
+        r = requests.put(
             'http://{host}:{port}/products/product_{language}/_mapping'.format(
                 language=language, **settings.SEARCH
             ),
@@ -85,7 +86,10 @@ def config_index_products():
             })
         )
 
-    requests.post('http://{host}:{port}/products/_open'.format(**settings.SEARCH))
+        print(r.json())
+
+    r = requests.post('http://{host}:{port}/products/_open'.format(**settings.SEARCH))
+    print(r.json())
 
 
 def bind_product_body(target):
