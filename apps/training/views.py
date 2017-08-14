@@ -39,7 +39,7 @@ class TrainingCategoryView(BaseTemplateView):
         courses_list = current_category.courses \
             .published() \
             .select_related('city') \
-            .order_by('ordering')
+            .order_by('ordering', '-date_start', '-date_finish')
 
         # paginator
         paginator_page = None

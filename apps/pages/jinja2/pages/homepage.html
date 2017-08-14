@@ -109,7 +109,14 @@
 		<div class="brands-carousel">
 			{%- for manufacturer in home_catalog_manufacturers[catalog.id] -%}
 			<div class="sld">
-				<a href="javascript:" class="brand-link">
+				<a href="
+					{%- if catalog.link and not catalog.link.startswith('javascript:') -%}
+						{{- catalog.link -}}
+					{%- else -%}
+						{{- url('catalog:catalog_index', kwargs={'lang': request.LANGUAGE_CODE}) -}}
+					{%- endif -%}
+					?manufacturer={{ manufacturer.slug }}
+				  " class="brand-link">
 					<img src="{{ manufacturer.image.url }}" alt="{{ manufacturer.title|e }}"/>
 				</a>
 			</div>

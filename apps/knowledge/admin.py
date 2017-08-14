@@ -34,6 +34,7 @@ class ArticleAdmin(ImageCroppingMixin, ModelTranlsationFieldsetsMixin, BaseArtic
     """Статьи базы знаний"""
     filter_horizontal = ('categories',)
     inlines = (ArticleSectionInline,)
+    list_filter = BaseArticleAdmin.list_filter + ('categories',)
 
     class Media:
         js = ('admin/js/translit.js',)
