@@ -67,7 +67,46 @@
   }
 }
 
-@mixin f-reg {
-  font-family: 'ProximaNovaRg', sans-serif;
-  font-weight: 400;
+@mixin f100 {
+  font-family: 'museo_sans_cyrl100', sans-serif;
+  font-weight: 100;
+}
+
+@mixin f100i {
+  font-family: 'museo_sans_cyrl100_italic', sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+@mixin f300 {
+  font-family: 'museo_sans_cyrl300', sans-serif;
+  font-weight: 300;
+}
+
+@mixin f300i {
+  font-family: 'museo_sans_cyrl300_italic', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+@mixin f500 {
+  font-family: 'museo_sans_cyrl500', sans-serif;
+  font-weight: 500;
+}
+
+@mixin f500i {
+  font-family: 'museo_sans_cyrl500_italic', sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+@mixin f700 {
+  font-family: 'museo_sans_cyrl700', sans-serif;
+  font-weight: 700;
+}
+
+@mixin f700i {
+  font-family: 'museo_sans_cyrl700_italic', sans-serif;
+  font-weight: 700;
+  font-style: italic;
 }

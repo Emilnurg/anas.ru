@@ -4,7 +4,6 @@
 .btn {
   font-size: 20px;
   color: #cf1d58;
-  @include f-reg;
   border-radius: 25px;
   line-height: 1;
   padding: 15px 46px;
@@ -337,7 +336,6 @@
   h4 {
     font-size: 48px;
     line-height: 1;
-    @include f-reg;
     margin-bottom: 24px;
   }
 
@@ -417,7 +415,6 @@
   position: absolute;
   top: 4px;
   font-size: 18px;
-  @include f-reg;
   color: #000;
   padding: 0 8px;
   transition: all 0.3s;
@@ -430,7 +427,6 @@
   border: 0;
   background: none;
   font-size: 18px;
-  @include f-reg;
   line-height: normal;
   padding: 0 8px;
   width: 100%;
@@ -485,7 +481,6 @@ textarea.form__field {
   font-size: 12px;
   line-height: 1.2;
   color: #d2205c;
-  @include f-reg;
   min-height: 14px;
 }
 
@@ -616,7 +611,6 @@ textarea.form__field {
       color: #fff;
       font-size: 14px;
       text-decoration: none;
-      @include f-reg;
       letter-spacing: 0.3px;
       border: 0;
 
@@ -721,7 +715,6 @@ textarea.form__field {
 
 .header__callback {
   font-size: 14px;
-  @include f-reg;
   color: #fff;
   border-radius: 20px;
   background: #d2205c;
@@ -865,7 +858,6 @@ textarea.form__field {
 }
 
 .header__nav-link {
-  @include f-reg;
   color: #000;
   text-transform: uppercase;
   text-decoration: none;
@@ -933,7 +925,6 @@ textarea.form__field {
   h4 {
     color: #d2205c;
     font-size: 16px;
-    @include f-reg;
     text-transform: uppercase;
     line-height: 22px;
 
@@ -991,7 +982,6 @@ textarea.form__field {
   color: #000;
   text-decoration: none;
   font-size: 14px;
-  @include f-reg;
   position: relative;
   display: inline-block;
   border: 0;
@@ -1331,7 +1321,6 @@ textarea.form__field {
   border-bottom: 1px solid #929aa0;
   height: 30px;
   font-size: 14px;
-  @include f-reg;
   padding-left: 20px;
   padding-right: 20px;
   margin-bottom: 3px;
@@ -1346,7 +1335,6 @@ textarea.form__field {
   height: 24px;
   background-color: #f9f9f9;
   border-radius: 12px;
-  @include f-reg;
 
   &:disabled {
     opacity: 1;
@@ -1472,7 +1460,6 @@ textarea.form__field {
 
       a {
         color: #000;
-        @include f-reg;
       }
     }
   }
@@ -1527,7 +1514,6 @@ textarea.form__field {
           a {
             background: none;
             color: #dd5784;
-            @include f-reg;
           }
         }
       }
@@ -1690,7 +1676,6 @@ textarea.form__field {
     margin-right: 0;
     font-size: 12px;
     letter-spacing: 0;
-    @include f-reg;
   }
 }
 
@@ -1821,7 +1806,6 @@ textarea.form__field {
   }
 
   h4 {
-    @include f-reg;
     font-size: 30px;
     line-height: 1.2;
     letter-spacing: -0.4px;
@@ -1989,7 +1973,6 @@ textarea.form__field {
 
   h4 {
     font-size: 48px;
-    @include f-reg;
     margin: 0 0 3px;
     letter-spacing: -0.7px;
   }
@@ -2031,7 +2014,6 @@ textarea.form__field {
     color: #1f191a;
     font-size: 30px;
     line-height: 1.2;
-    @include f-reg;
     margin: 0 0 12px;
   }
 
@@ -2096,7 +2078,6 @@ textarea.form__field {
   h4 {
     font-size: 30px;
     margin-bottom: 2px;
-    @include f-reg;
     letter-spacing: -0.1px;
   }
 
@@ -2343,7 +2324,6 @@ textarea.form__field {
   max-width: 550px;
 
   h4 {
-    @include f-reg;
     font-size: 48px;
     margin: 0 0 23px;
     letter-spacing: -0.4px;
@@ -2577,7 +2557,6 @@ textarea.form__field {
   position: relative;
   display: inline-block;
   font-size: 16px;
-  @include f-reg;
   padding-left: 28px;
   border: 0;
   text-align: left;
@@ -2880,10 +2859,6 @@ textarea.form__field {
 
   .footer__contacts {
     margin-bottom: 20px;
-
-    >a {
-      @include f-reg;
-    }
   }
 
   .footer__socials {
@@ -2941,14 +2916,12 @@ textarea.form__field {
 
   h1 {
     font-size: 48px;
-    @include f-reg;
     letter-spacing: -0.3px;
     margin: 0 0 14px;
   }
 
   h2 {
     font-size: 20px;
-    @include f-reg;
   }
 
   p {
@@ -2969,7 +2942,6 @@ textarea.form__field {
 .main-title__date {
   font-size: 16px;
   color: #d2205c;
-  @include f-reg;
   padding-top: 23px;
 }
 
@@ -3296,7 +3268,6 @@ textarea.form__field {
 .article-preview__date {
   font-size: 16px;
   color: #d2205c;
-  @include f-reg;
   line-height: 1;
   margin-bottom: 6px;
 }
@@ -3343,7 +3314,6 @@ textarea.form__field {
 .page-control {
   border: 0;
   color: #8d8d8d;
-  @include f-reg;
   font-size: 20px;
   display: inline-block;
   position: relative;
@@ -3573,7 +3543,6 @@ textarea.form__field {
 .page-back__link {
   border: 0;
   color: #8d8d8d;
-  @include f-reg;
   font-size: 20px;
   display: inline-block;
   position: relative;
@@ -3686,7 +3655,6 @@ textarea.form__field {
   z-index: 1;
   line-height: 78px;
   font-size: 18px;
-  @include f-reg;
   color: #fff;
   padding: 0 15px;
   min-width: 78px;
@@ -4016,7 +3984,6 @@ textarea.form__field {
   h4 {
     font-size: 48px;
     margin: 0;
-    @include f-reg;
     text-align: center;
     letter-spacing: -0.5px;
 
@@ -4063,7 +4030,6 @@ textarea.form__field {
   top: 0;
   color: #fff;
   text-transform: uppercase;
-  @include f-reg;
   text-align: center;
   line-height: 50px;
   overflow: hidden;
@@ -4086,7 +4052,6 @@ textarea.form__field {
   justify-content: space-between;
   font-size: 16px;
   align-items: flex-start;
-  @include f-reg;
   margin-bottom: 5px;
 }
 
@@ -4106,7 +4071,6 @@ textarea.form__field {
 .comment__reply-link {
   font-size: 14px;
   display: inline-block;
-  @include f-reg;
   position: relative;
   padding-left: 22px;
   border: 0;
@@ -4198,7 +4162,6 @@ textarea.form__field {
     top: 0;
     font-size: 8px;
     line-height: 9px;
-    @include f-reg;
     text-transform: uppercase;
     background: #d2205c url(../images/ico_photo_sm.svg) no-repeat 50% 14px;
     border-radius: 50%;
@@ -4318,7 +4281,6 @@ a.page-nav__next {
   width: 100%;
   font-size: 16px;
   line-height: 1;
-  @include f-reg;
   padding-top: 15px;
 }
 
@@ -5218,7 +5180,6 @@ a.page-nav__next {
   h4 {
     color: #d2205c;
     font-size: 16px;
-    @include f-reg;
     text-transform: uppercase;
   }
 
@@ -5495,7 +5456,6 @@ a.page-nav__next {
 .map-info__city {
   font-size: 14px;
   color: #d2205c;
-  @include f-reg;
   text-transform: uppercase;
   line-height: 1;
   margin-bottom: 0;
@@ -5503,7 +5463,6 @@ a.page-nav__next {
 
 .map-info__company {
   font-size: 18px;
-  @include f-reg;
   margin-bottom: 10px;
 }
 
@@ -5784,7 +5743,6 @@ a.page-nav__next {
     border-radius: 18px;
     overflow: hidden;
     cursor: pointer;
-    @include f-reg;
 
     input {
       display: none;
@@ -5979,7 +5937,6 @@ a.page-nav__next {
   color: #8d8d8d;
   border: 0;
   margin-top: -9px;
-  @include f-reg;
   border-radius: 27px;
   padding: 12px 33px 12px 78px;
   margin-right: -33px;
@@ -6071,7 +6028,6 @@ a.page-nav__next {
   }
 
   dt, dd {
-    @include f-reg;
     display: inline-block;
     vertical-align: top;
     width: 100%;
@@ -6287,7 +6243,6 @@ a.page-nav__next {
   display: inline-block;
   padding: 5px 18px 4px;
   border-top: 2px solid rgba(#c51e55, 0);
-  @include f-reg;
 
   &:hover {
     border-top: 2px solid rgba(#c51e55, 0);
@@ -6429,7 +6384,6 @@ a.page-nav__next {
 .product-additional__name {
   font-size: 30px;
   text-transform: uppercase;
-  @include f-reg;
   line-height: 1;
   margin-bottom: 10px;
   max-width: 300px;
@@ -6915,7 +6869,6 @@ a.page-nav__next {
       display: block;
       padding: 13px 30px;
       border: 0;
-      @include f-reg;
       border-radius: 24px;
     }
 
@@ -6942,7 +6895,6 @@ a.page-nav__next {
     float: left;
     font-size: 30px;
     line-height: 1;
-    @include f-reg;
     padding-right: 20px;
   }
 
@@ -7006,7 +6958,6 @@ a.page-nav__next {
 
 .lecturer__name {
   font-size: 14px;
-  @include f-reg;
   text-transform: uppercase;
   margin-bottom: 2px;
 }
@@ -7014,7 +6965,6 @@ a.page-nav__next {
 .lecturer__link {
   border: 0;
   font-size: 14px;
-  @include f-reg;
   display: inline-block;
 
   &:after {
@@ -7054,13 +7004,11 @@ a.page-nav__next {
 
   dt {
     width: 67%;
-    @include f-reg;
     float: left;
   }
 
   dd {
     width: 33%;
-    @include f-reg;
     float: left;
   }
 
@@ -7571,7 +7519,6 @@ a.page-nav__next {
   border: 0;
   padding-left: 40px;
   letter-spacing: -0.2px;
-  @include f-reg;
   margin-bottom: 31px;
 
   &:before {
@@ -7750,7 +7697,6 @@ a.page-nav__next {
   h1 {
     font-size: 246px;
     line-height: 1;
-    @include f-reg;
     margin-bottom: 9px;
   }
 
