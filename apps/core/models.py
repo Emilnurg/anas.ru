@@ -146,6 +146,10 @@ class HomeSlide(ImageMixin, BaseModel):
     image = models.ImageField(
         _('Изображение'), max_length=255, upload_to='homepage_slides', blank=True, null=True
     )
+    bg = models.ImageField(
+        _('Фон'), max_length=255, upload_to='homepage_slides', blank=True, null=True
+    )
+    image_on_left = models.BooleanField(_('Изображение слева'), default=False)
     title = models.CharField(_('Заголовок'), max_length=255, blank=True, null=True)
     subtitle = models.CharField(_('Подзаголовок'), max_length=255, blank=True, null=True)
     url = models.CharField(_('Ссылка кнопки'), max_length=255, blank=True, null=True)

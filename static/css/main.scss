@@ -1683,7 +1683,6 @@ textarea.form__field {
 *                     b-hero                     *
 *************************************************/
 .b-hero {
-  padding-top: 51px;
   position: relative;
   z-index: 1;
 }
@@ -1702,14 +1701,6 @@ textarea.form__field {
     &:focus {
       outline: none;
     }
-  }
-}
-
-.main-slider {
-  border-bottom: 1px solid #dedede;
-
-  .slick-prev, .slick-next {
-    margin-top: -44px;
   }
 }
 
@@ -1796,6 +1787,36 @@ textarea.form__field {
   }
 }
 
+.slick-dots {
+  line-height: 0;
+
+  li {
+    &:before {
+      background: #fff;
+      border: 1px solid #fff;
+      left: 6px;
+      top: 6px;
+    }
+
+    &.slick-active {
+      &:before {
+        background: transparent;
+      }
+    }
+
+    button {
+      overflow: hidden;
+      text-indent: -999px;
+      position: absolute;
+      padding: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+
 .offer {
   margin-bottom: 40px;
 
@@ -1813,24 +1834,81 @@ textarea.form__field {
   }
 }
 
+.main-slider {
+  height: 600px;
+  height: 30vw;
+  min-height: 200px;
+  overflow: hidden;
+
+  //.slick-prev, .slick-next {
+  //  margin-top: -44px;
+  //}
+
+  .slick-dots {
+    bottom: 20px;
+  }
+}
+
 .main-slider__slide {
+  background: transparent 50% 50% no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  height: 600px;
+  line-height: 600px;
+  height: 30vw;
+  line-height: 30vw;
+  min-height: 200px;
+  position: relative;
+
   .offer {
-    padding-top: 64px;
-    margin-left: -7px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 0;
+    color: #fff;
+
+    h4 {
+      margin-bottom: 0;
+    }
+
+    .btn {
+      float: left;
+      margin: 20px 0 0;
+      border-color: #fff;
+      color: #fff;
+      box-shadow: inset 0 0 0 2px #fff;
+
+      &:hover, &:active {
+        box-shadow: inset 0 0 0 2px #d2205c;
+        color: #d2205c;
+        background: transparent;
+      }
+    }
+  }
+
+  .container,
+  .row,
+  [class^="col-"] {
+    max-height: 100%;
   }
 }
 
 .main-slider__image {
   overflow: hidden;
   text-align: center;
-  font-size: 0;
-  padding-right: 80px;
-  margin-left: -22px;
+  height: 600px;
+  height: 30vw;
+  min-height: 200px;
+  width: 100%;
+  background: transparent 50% 100% no-repeat scroll content-box;
+  background-size: contain;
+  padding: 10px 10px 0;
 
   img {
     max-width: 100%;
+    max-height: 100%;
     height: auto;
     display: inline-block;
+    vertical-align: bottom;
   }
 }
 
@@ -1865,15 +1943,6 @@ textarea.form__field {
 }
 
 @media (max-width: 1264px) {
-  .main-slider__slide {
-    padding: 0 60px;
-
-    .offer {
-      padding-top: 60px;
-      max-width: 450px;
-    }
-  }
-
   .b-hero__advantages {
     padding-top: 40px;
     padding-bottom: 50px;
@@ -1904,6 +1973,24 @@ textarea.form__field {
     font-size: 0;
     height: 291px;
     @include responsiveImg;
+  }
+
+  .main-slider__slide {
+    .offer {
+      h2 {
+        font-size: 30px;
+        margin-bottom: 5px;
+      }
+
+      h4 {
+        font-size: 18px;
+        margin-bottom: 2px;
+      }
+
+      .btn {
+        margin: 10px 0 0;
+      }
+    }
   }
 }
 
@@ -1956,6 +2043,23 @@ textarea.form__field {
   }
 }
 
+@media (max-width: 600px) {
+  .main-slider__slide {
+    padding: 0;
+  }
+
+  .main-slider .slick-dots {
+    bottom: 10px;
+  }
+}
+
+@media (max-width: 550px) {
+  .main-slider,
+  .main-slider__slide,
+  .main-slider__image {
+    height: 200px;
+  }
+}
 
 /*************************************************
 *                     catalog                    *

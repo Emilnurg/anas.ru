@@ -5,111 +5,106 @@
 {%- block BODY_CLASSES %}body-home{% endblock -%}
 
 {%- block PAGE_CONTENT -%}
-{%- if home_slides or home_advantages -%}
-<div class="b-hero">
-	<div class="container">
-		{%- if home_page.page_title -%}
-		<div class="main-title">
-			<h1>{{ home_page.page_title }}</h1>
-		</div>
-		{%- endif -%}
-
-		{%- if home_slides -%}
-		<div class="main-slider owl-carousel owl-theme">
-			{%- for slide in home_slides -%}
-			<div class="sld">
-				<div class="main-slider__slide">
-					<div class="row">
-						<div class="col-md-12 col-lg-10 col-lg-offset-2">
-							<div class="row">
-								<div class="col-md-{% if slide.image %}5{% else %}12{% endif %}">
-									<div class="offer">
-										{%- if slide.title -%}
-										<h2>{{ slide.title }}</h2>
-										{%- endif -%}
-
-										{%- if slide.subtitle -%}
-										<h4>{{ slide.subtitle }}</h4>
-										{%- endif -%}
-
-										{%- if slide.url and slide.button_caption -%}
-										<a href="{{ slide.url }}" class="btn">{{ slide.button_caption }}</a>
-										{%- endif -%}
-									</div>
-								</div>
-								{%- if slide.image -%}
-								<div class="col-md-7">
-									<div class="main-slider__image">
-										<img src="{{ slide.image|thumbnail('600x600') }}"
-												 alt="{% if slide.title %}{{ slide.title|e }}{% endif %}">
-									</div>
-								</div>
-								{%- endif -%}
-							</div>
-						</div>
+	{%- if home_slides or home_advantages -%}
+		<div class="b-hero">
+			{%- if home_page.page_title -%}
+				<div class="main-title">
+					<div class="container">
+						<h1>{{ home_page.page_title }}</h1>
 					</div>
 				</div>
-			</div>
-			{%- endfor -%}
-		</div>
-		{%- endif -%}
-
-		{%- if home_advantages -%}
-		<div class="b-hero__advantages">
-			{%- for advantage in home_advantages -%}
-			<div class="b-hero__advantage medicon medicon-{{ advantage.icon|e }}">
-				<p>{{ advantage.title }}</p>
-			</div>
-			{%- endfor -%}
-		</div>
-		{%- endif -%}
-	</div>
-</div>
-{%- endif -%}
-
-{%- for catalog in home_catalogs -%}
-<div class="catalog">
-	<div class="container">
-		<div class="section-title">
-			<h4>{{ catalog.title }}</h4>
-			{%- if catalog.subtitle -%}
-			<p>{{ catalog.subtitle }}</p>
-			{%- endif -%}
-		</div>
-
-		{%- if home_catalog_products[catalog.id] -%}
-		<div class="catalog__row row">
-			{%- for product in home_catalog_products[catalog.id] -%}
-			<div class="col-xs-12 col-sm-6 catalog__col">
-				{%- include 'catalog/_product_block.html' -%}
-			</div>
-			{%- endfor -%}
-		</div>
-		{%- endif -%}
-
-		{%- if catalog.link and catalog.button_caption -%}
-		<div class="catalog__button">
-			<a href="{{ catalog.link }}" class="btn">{{ catalog.button_caption }}</a>
-		</div>
-		{%- endif -%}
-
-		{%- if catalog.banner_title or catalog.banner_subtitle -%}
-		<div class="catalog__discount">
-			{%- if catalog.banner_title -%}
-			<h4>{{ catalog.banner_title }}</h4>
 			{%- endif -%}
 
-			{%- if catalog.banner_subtitle -%}
-			<p>{{ catalog.banner_subtitle }}</p>
+			{%- if home_slides -%}
+				<div class="main-slider owl-carousel owl-theme">
+
+					{%- for slide in home_slides -%}
+						<div class="sld">
+							<div class="main-slider__slide"
+									{%- if slide.bg %} style="background-image:url({{ slide.bg.url }})"{% endif %}>
+								<div class="container">
+									<div class="row">
+
+										<div class="col-sm-6">
+											{%- if slide.image_on_left -%}
+												{%- include 'pages/widgets/slider_image.html' -%}
+											{%- else -%}
+												{%- include 'pages/widgets/slider_text.html' -%}
+											{%- endif -%}
+										</div>
+
+										<div class="col-sm-6">
+											{%- if slide.image_on_left -%}
+												{%- include 'pages/widgets/slider_text.html' -%}
+											{%- else -%}
+												{%- include 'pages/widgets/slider_image.html' -%}
+											{%- endif -%}
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					{%- endfor -%}
+
+				</div>
+			{%- endif -%}
+
+			{%- if home_advantages -%}
+				<div class="b-hero__advantages">
+					{%- for advantage in home_advantages -%}
+						<div class="b-hero__advantage medicon medicon-{{ advantage.icon|e }}">
+							<p>{{ advantage.title }}</p>
+						</div>
+					{%- endfor -%}
+				</div>
 			{%- endif -%}
 		</div>
-		{%- endif -%}
+	{%- endif -%}
 
-		{%- if home_catalog_manufacturers[catalog.id] -%}
-		<div class="brands-carousel">
-			{%- for manufacturer in home_catalog_manufacturers[catalog.id] -%}
-			<div class="sld">
-				<a href="
+	{%- for catalog in home_catalogs -%}
+		<div class="catalog">
+			<div class="container">
+				<div class="section-title">
+					<h4>{{ catalog.title }}</h4>
+					{%- if catalog.subtitle -%}
+						<p>{{ catalog.subtitle }}</p>
+					{%- endif -%}
+				</div>
+
+				{%- if home_catalog_products[catalog.id] -%}
+					<div class="catalog__row row">
+						{%- for product in home_catalog_products[catalog.id] -%}
+							<div class="col-xs-12 col-sm-6 catalog__col">
+								{%- include 'catalog/_product_block.html' -%}
+							</div>
+						{%- endfor -%}
+					</div>
+				{%- endif -%}
+
+				{%- if catalog.link and catalog.button_caption -%}
+					<div class="catalog__button">
+						<a href="{{ catalog.link }}" class="btn">{{ catalog.button_caption }}</a>
+					</div>
+				{%- endif -%}
+
+				{%- if catalog.banner_title or catalog.banner_subtitle -%}
+					<div class="catalog__discount">
+						{%- if catalog.banner_title -%}
+							<h4>{{ catalog.banner_title }}</h4>
+						{%- endif -%}
+
+						{%- if catalog.banner_subtitle -%}
+							<p>{{ catalog.banner_subtitle }}</p>
+						{%- endif -%}
+					</div>
+				{%- endif -%}
+
+				{%- if home_catalog_manufacturers[catalog.id] -%}
+					<div class="brands-carousel">
+						{%- for manufacturer in home_catalog_manufacturers[catalog.id] -%}
+							<div class="sld">
+								<a href="
 					{%- if catalog.link and not catalog.link.startswith('javascript:') -%}
 						{{- catalog.link -}}
 					{%- else -%}
@@ -117,101 +112,111 @@
 					{%- endif -%}
 					?manufacturer={{ manufacturer.slug }}
 				  " class="brand-link">
-					<img src="{{ manufacturer.image.url }}" alt="{{ manufacturer.title|e }}"/>
-				</a>
+									<img src="{{ manufacturer.image.url }}" alt="{{ manufacturer.title|e }}"/>
+								</a>
+							</div>
+						{%- endfor -%}
+					</div>
+				{%- endif -%}
 			</div>
-			{%- endfor -%}
 		</div>
-		{%- endif -%}
-	</div>
-</div>
-{%- endfor -%}
+	{%- endfor -%}
 
-<div class="b-feedback">
-	<div class="container">
-		<div class="row">
-			{%- if home_page.projects_title -%}
-			<div class="col-lg-6">
-				<div class="b-feedback__text">
-					<h4>{{ home_page.projects_title }}</h4>
-					{%- if home_page.projects_subtitle -%}
-					<p>{{ home_page.projects_subtitle }}</p>
-					{%- endif -%}
-					{%- if home_page.projects_button -%}
-					<a href="{{ url('projects:projects_index', kwargs={'lang': request.LANGUAGE_CODE}) }}" class="btn">
-						{{- home_page.projects_button -}}
-					</a>
-					{%- endif -%}
-				</div>
-			</div>
-			{%- endif -%}
-
-			{%- if home_page.questions_title -%}
-			<div class="col-lg-{% if home_page.projects_title %}6{% else %}12{% endif %}">
-				<form action="{{ url('forms:feedback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
-					{{- csrf_input -}}
-					<div class="form__heading">
-						<h4>{{ home_page.questions_title }}</h4>
-						{%- if home_page.questions_subtitle -%}
-						<p>{{ home_page.questions_subtitle }}</p>
-						{%- endif -%}
-						<div class="messages"></div>
-					</div>
-
-					<div class="form__content">
-						<input type="hidden" name="place" value="home"/>
-						<div class="form__group">
-							<input type="text" name="name" class="form__field required" id="feedback-name">
-							<label for="feedback-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}<span class="req">*</span></label>
-							<div class="form__err"></div>
-						</div>
-
-						<div class="form__group">
-							<input type="text" name="telephone" class="form__field required" id="feedback-telephone">
-							<label for="feedback-telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}<span class="req">*</span></label>
-							<div class="form__err"></div>
-						</div>
-
-						<div class="form__group">
-							<textarea name="comment" class="form__field required" id="feedback-comment"></textarea>
-							<label for="feedback-comment" class="form__placeholder">{{ var('FORM_YOUR_QUESTION_LABEL', request) }}<span class="req">*</span></label>
-							<div class="form__err"></div>
+	<div class="b-feedback">
+		<div class="container">
+			<div class="row">
+				{%- if home_page.projects_title -%}
+					<div class="col-lg-6">
+						<div class="b-feedback__text">
+							<h4>{{ home_page.projects_title }}</h4>
+							{%- if home_page.projects_subtitle -%}
+								<p>{{ home_page.projects_subtitle }}</p>
+							{%- endif -%}
+							{%- if home_page.projects_button -%}
+								<a href="{{ url('projects:projects_index', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+									 class="btn">
+									{{- home_page.projects_button -}}
+								</a>
+							{%- endif -%}
 						</div>
 					</div>
+				{%- endif -%}
 
-					<div class="form__button">
-						<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
+				{%- if home_page.questions_title -%}
+					<div class="col-lg-{% if home_page.projects_title %}6{% else %}12{% endif %}">
+						<form action="{{ url('forms:feedback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+									class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
+							{{- csrf_input -}}
+							<div class="form__heading">
+								<h4>{{ home_page.questions_title }}</h4>
+								{%- if home_page.questions_subtitle -%}
+									<p>{{ home_page.questions_subtitle }}</p>
+								{%- endif -%}
+								<div class="messages"></div>
+							</div>
+
+							<div class="form__content">
+								<input type="hidden" name="place" value="home"/>
+								<div class="form__group">
+									<input type="text" name="name" class="form__field required" id="feedback-name">
+									<label for="feedback-name"
+												 class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}<span
+											class="req">*</span></label>
+									<div class="form__err"></div>
+								</div>
+
+								<div class="form__group">
+									<input type="text" name="telephone" class="form__field required"
+												 id="feedback-telephone">
+									<label for="feedback-telephone"
+												 class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}<span
+											class="req">*</span></label>
+									<div class="form__err"></div>
+								</div>
+
+								<div class="form__group">
+									<textarea name="comment" class="form__field required"
+														id="feedback-comment"></textarea>
+									<label for="feedback-comment"
+												 class="form__placeholder">{{ var('FORM_YOUR_QUESTION_LABEL', request) }}<span
+											class="req">*</span></label>
+									<div class="form__err"></div>
+								</div>
+							</div>
+
+							<div class="form__button">
+								<button type="submit"
+												class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
+							</div>
+						</form>
 					</div>
-				</form>
-			</div>
-			{%- endif -%}
-		</div>
-	</div>
-</div>
-
-{%- if home_page.how_we_work_title -%}
-<div class="b-how-working">
-	<div class="container">
-		<div class="row">
-			{%- if home_page.how_we_work_image -%}
-			<div class="col-md-5 hidden-sm hidden-xs">
-				<div class="b-how-working__image">
-					<img src="{{ home_page.how_we_work_image.url }}" class="img-responsive" alt=""/>
-				</div>
-			</div>
-			{%- endif -%}
-
-			<div class="col-md-7">
-				<div class="b-how-working__text">
-					<h4>{{ home_page.how_we_work_title }}</h4>
-					{%- if home_page.how_we_work_subtitle -%}
-					<p>{{ home_page.how_we_work_subtitle }}</p>
-					{%- endif -%}
-				</div>
+				{%- endif -%}
 			</div>
 		</div>
 	</div>
-</div>
-{%- endif -%}
+
+	{%- if home_page.how_we_work_title -%}
+		<div class="b-how-working">
+			<div class="container">
+				<div class="row">
+					{%- if home_page.how_we_work_image -%}
+						<div class="col-md-5 hidden-sm hidden-xs">
+							<div class="b-how-working__image">
+								<img src="{{ home_page.how_we_work_image.url }}" class="img-responsive" alt=""/>
+							</div>
+						</div>
+					{%- endif -%}
+
+					<div class="col-md-7">
+						<div class="b-how-working__text">
+							<h4>{{ home_page.how_we_work_title }}</h4>
+							{%- if home_page.how_we_work_subtitle -%}
+								<p>{{ home_page.how_we_work_subtitle }}</p>
+							{%- endif -%}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{%- endif -%}
 {%- endblock -%}

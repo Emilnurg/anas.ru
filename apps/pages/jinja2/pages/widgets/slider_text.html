@@ -1,0 +1,15 @@
+<div class="main-slider__text">
+	<div class="offer">
+		{%- if slide.title -%}
+			<h2>{{ slide.title }}</h2>
+		{%- endif -%}
+
+		{%- if slide.subtitle -%}
+			<h4>{{ slide.subtitle }}</h4>
+		{%- endif -%}
+
+		{%- if slide.url and slide.button_caption -%}
+			<a href="{{ slide.url }}" class="btn">{{ slide.button_caption }}</a>
+		{%- endif -%}
+	</div>
+</div>
