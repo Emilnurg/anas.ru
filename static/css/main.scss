@@ -2068,8 +2068,16 @@ textarea.form__field {
 *                     catalog                    *
 *************************************************/
 .catalog {
-  &:nth-child(2n) {
-    background: #fafafa;
+  &-bg {
+    color: #fff;
+
+    &-blue {
+      background: #8ba7db;
+    }
+
+    &-pink {
+      background: #fda8b8;
+    }
   }
 }
 
@@ -2107,7 +2115,7 @@ textarea.form__field {
 .catalog-item {
   display: block;
   background-color: white;
-  box-shadow: 0 6px 46px rgba(1, 39, 54, 0.05);
+  box-shadow: 0 4px 53px rgba(1,39,54,0.2);
   margin-bottom: 40px;
   padding: 53px;
   position: relative;
@@ -2175,6 +2183,18 @@ textarea.form__field {
   padding-top: 20px;
   padding-bottom: 60px;
   position: relative;
+
+  .catalog-bg & .btn {
+    border-color: #fff;
+    color: #fff;
+    box-shadow: inset 0 0 0 2px #fff;
+
+    &:hover, &:active {
+      box-shadow: inset 0 0 0 2px #d2205c;
+      color: #d2205c;
+      background: transparent;
+    }
+  }
 }
 
 .catalog__discount {

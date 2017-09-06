@@ -54,7 +54,7 @@
 	{%- endif -%}
 
 	{%- for catalog in home_catalogs -%}
-		<div class="catalog">
+		<div class="catalog{% if catalog.bg %} catalog-bg catalog-bg-{{ catalog.bg }}{% endif %}">
 			<div class="container">
 				<div class="section-title">
 					<h4>{{ catalog.title }}</h4>
