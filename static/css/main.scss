@@ -2124,6 +2124,16 @@ textarea.form__field {
   }
 }
 
+.b-catalog {
+  .catalog-item {
+    box-shadow: 0 0 13px rgba(1,39,54,0.15);
+
+    &:hover {
+      box-shadow: 0 3px 27px rgba(1, 39, 54, 0.15)
+    }
+  }
+}
+
 .catalog-item__manufacturer {
   white-space: nowrap;
 }
