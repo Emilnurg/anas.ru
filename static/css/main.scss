@@ -567,8 +567,6 @@ textarea.form__field {
   }
 }
 
-
-
 /*************************************************
 *                     header                     *
 *************************************************/
@@ -577,16 +575,12 @@ textarea.form__field {
 }
 
 .header {
-  background: #fff;
+  background: #565e69;
   position: relative;
   z-index: 101;
   width: 100%;
   left: 0;
   top: 0;
-}
-
-.header__top {
-  background: #1f191a;
 }
 
 .header__menu {
@@ -745,15 +739,13 @@ textarea.form__field {
 }
 
 .header__bottom {
-  background: #fff;
   transition: all 0.3s;
+  color: #fff;
 
   >.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 13px;
-    padding-bottom: 19px;
 
     &:before, &:after {
       display: none;
@@ -786,10 +778,6 @@ textarea.form__field {
     max-width: 100%;
     max-height: 100%;
   }
-}
-
-.header__logo--big {
-  height: 76px;
 }
 
 .header__nav {
@@ -858,7 +846,7 @@ textarea.form__field {
 }
 
 .header__nav-link {
-  color: #000;
+  color: #fff;
   text-transform: uppercase;
   text-decoration: none;
   font-size: 14px;
@@ -877,20 +865,20 @@ textarea.form__field {
     width: 0;
     height: 0;
     border: 3px solid transparent;
-    border-top-color: #d3225d;
+    border-top-color: #fff;
     margin-left: 5px;
     transition: all 0.3s;
     transform-origin: 50% 13%;
   }
 
   &:focus {
-    color: #000;
+    color: #fff;
     text-decoration: none;
   }
 
   &:hover, &.active {
     border-bottom-color: #d2205c;
-    color: #000;
+    color: #fff;
     text-decoration: none;
   }
 }
@@ -979,7 +967,7 @@ textarea.form__field {
 }
 
 .search__toggle {
-  color: #000;
+  color: #fff;
   text-decoration: none;
   font-size: 14px;
   position: relative;
@@ -1008,7 +996,7 @@ textarea.form__field {
   }
 
   &:focus {
-    color: #000;
+    color: #d2215d;
     text-decoration: none;
   }
 
@@ -1030,7 +1018,7 @@ textarea.form__field {
       position: absolute;
       width: 10px;
       height: 11px;
-      background: url(../images/search.svg) no-repeat 0 0;
+      background: url(../images/search_white.svg) no-repeat 0 0;
       background-size: contain;
       left: 0;
       top: 50%;
@@ -1063,7 +1051,6 @@ textarea.form__field {
   font-size: 0;
   position: relative;
   user-select: none;
-  background: #fff;
 
   &.is-open {
     .lang__selected {
@@ -1083,7 +1070,7 @@ textarea.form__field {
 }
 
 .lang__selected {
-  border: 1px solid #d2205c;
+  border: 1px solid #fff;
   border-radius: 13px;
   font-size: 12px;
   text-transform: uppercase;
@@ -1092,7 +1079,7 @@ textarea.form__field {
   line-height: 1;
   display: inline-block;
   position: relative;
-  color: #d2205c;
+  color: #fff;
   cursor: pointer;
   transition: color 0.3s, border-color 0.3s;
 
@@ -1102,7 +1089,7 @@ textarea.form__field {
     width: 0;
     height: 0;
     border: 3px solid transparent;
-    border-top-color: #d3225d;
+    border-top-color: #fff;
     right: 10px;
     top: 50%;
     margin-top: -2px;
@@ -2589,9 +2576,6 @@ textarea.form__field {
     }
   }
 }
-
-
-
 
 
 /*************************************************
