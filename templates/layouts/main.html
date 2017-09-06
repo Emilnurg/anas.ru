@@ -45,39 +45,247 @@
   <body class="page skrollr-body {% block BODY_CLASSES %}{% endblock %}" id="top" style="opacity:0">
     <div class="page__layout">
 			{%- block HEADER -%}
-      <header class="header"
-							data-start="transform: translateY(0px)"
-							data-top-bottom="transform: translateY(-100px)">
-        <div class="header__top">
-          <div class="container">
-            <button class="menu-toggle">
-              <span></span><span></span><span></span>
-            </button>
-            <a href="{{ home_url }}"
-							 class="logo header__logo header__logo--sm">
-              <img src="{{ STATIC_URL }}images/logo_hor_wh.svg" alt=""/>
-						</a>
-            <nav class="header__menu">
-              <ul class="header__menu-list">
-                {{- menu(request, 'TOP_MAIN_MENU') -}}
-              </ul>
-            </nav>
-            <div class="header__contacts">
-							{%- if var('EMAIL_PUBLIC', request) -%}
-              <a href="mailto:{{ var('EMAIL_PUBLIC', request)|e }}"
-								 class="email-link header__email">
-								{{- var('EMAIL_PUBLIC', request) -}}
+			<div class="header-wrap">
+				<header class="header"
+								data-start="transform: translateY(0px)"
+								data-top-bottom="transform: translateY(-100px)">
+					<div class="header__top">
+						<div class="container">
+							<button class="menu-toggle">
+								<span></span><span></span><span></span>
+							</button>
+							<a href="{{ home_url }}"
+								 class="logo header__logo header__logo--sm">
+								<img src="{{ STATIC_URL }}images/logo_hor_wh.svg" alt=""/>
 							</a>
-							{%- endif -%}
+							<nav class="header__menu">
+								<ul class="header__menu-list">
+									{{- menu(request, 'TOP_MAIN_MENU') -}}
+								</ul>
+							</nav>
+							<div class="header__contacts">
+								{%- if var('EMAIL_PUBLIC', request) -%}
+								<a href="mailto:{{ var('EMAIL_PUBLIC', request)|e }}"
+									 class="email-link header__email">
+									{{- var('EMAIL_PUBLIC', request) -}}
+								</a>
+								{%- endif -%}
 
-              {%- if var('TELEPHONE_PUBLIC', request) -%}
+								{%- if var('TELEPHONE_PUBLIC', request) -%}
+								<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
+									 class="tel-link header__tel">
+									{{- var('TELEPHONE_PUBLIC', request) -}}
+								</a>
+								{%- endif -%}
+
+								{%- if var('CALLBACK_REQUEST_TEXT', request) -%}
+								<a href="javascript:"
+									 data-fancybox
+									 data-type="ajax"
+									 data-src="{{ url('popups:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+									 class="header__callback">
+									{{- var('CALLBACK_REQUEST_TEXT', request) -}}
+								</a>
+								{%- endif -%}
+							</div>
+						</div>
+					</div>
+					<div class="header__bottom">
+						<div class="header__search">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+										<form action="{{ url('search:search', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+													class="search-form" method="get" autocomplete="off" data-novalidate="">
+											<input type="text" name="q" class="search-form__field" value="{{ request.GET.get('q', '') }}"/>
+											<button type="submit" class="search-form__button" disabled>
+												{{- var('FIND_BUTTON', request) -}}
+											</button>
+											<a href="javascript:" class="search-form__clear"></a>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="container">
+							<div class="header__bottom-left">
+								<a href="{{ home_url }}" class="logo header__logo header__logo--big">
+									<img src="{{ STATIC_URL }}images/logo_hor_wh.svg" class="img-responsive" alt=""/>
+								</a>
+
+								{%- if catalog_tree -%}
+								<nav class="header__nav">
+									<ul class="header__nav-list">
+										{%- for category_1 in catalog_tree -%}
+										{%- set cat1_url = category_1['obj'].get_absolute_url(request.LANGUAGE_CODE) -%}
+										<li class="header__nav-item header__nav-item--dropdown catalog-dropdown
+											{%- if hasattr(request, 'active_url') and cat1_url == request.active_url %} active{% endif %}">
+											<a href="{{ cat1_url }}"
+												 class="header__nav-link">
+												{{- category_1['obj'].title -}}
+												{%- if category_1['children'] -%}
+												&nbsp;<span></span>
+												{%- endif -%}
+											</a>
+
+											{%- if category_1['children'] -%}
+											<div class="header__nav-dropdown">
+												{%- for row in category_1['children']|batch(2, '') -%}
+												<div>
+													{%- for category_2 in row -%}
+													{%- if category_2 -%}
+													<div>
+														<h4>
+															<a href="{{ category_2['obj'].get_absolute_url(request.LANGUAGE_CODE) }}">
+																{{- category_2['obj'].title -}}
+															</a>
+														</h4>
+
+														{%- if category_2['children'] -%}
+														<ul>
+															{%- for category_3 in category_2['children'] -%}
+															<li{% if current_category is defined() and current_category.id == category_3['obj'].id %} class="is-active"{% endif %}>
+																<a href="{{ category_3['obj'].get_absolute_url(request.LANGUAGE_CODE) }}">
+																	{{- category_3['obj'].title -}}
+																</a>
+															</li>
+															{%- endfor -%}
+														</ul>
+														{%- endif -%}
+													</div>
+													{%- endif -%}
+													{%- endfor -%}
+												</div>
+												{%- endfor -%}
+											</div>
+											{%- endif -%}
+										</li>
+										{%- endfor -%}
+
+										{%- set training_url = url('training:training_index', kwargs={'lang': request.LANGUAGE_CODE}) -%}
+										{%- set training_categories = get_training_categories() -%}
+										{%- if training_categories -%}
+										<li class="header__nav-item header__nav-item--dropdown training-dropdown
+											{%- if hasattr(request, 'active_url') and training_url == request.active_url %} active{% endif %}">
+											<a href="{{ training_url }}"
+												 class="header__nav-link">
+												{{- var('TRAINING_MENU_ITEM', request) -}}
+												&nbsp;<span></span>
+											</a>
+											<div class="header__nav-dropdown">
+												<div>
+													{%- for category in training_categories -%}
+													<div>
+														<h4>
+															<a href="{{ category.get_absolute_url(request.LANGUAGE_CODE) }}">
+																{{- category.title -}}
+															</a>
+														</h4>
+													</div>
+													{%- endfor -%}
+												</div>
+											</div>
+										</li>
+										{%- endif -%}
+
+										{%- set support_url = url('support:support_index', kwargs={'lang': request.LANGUAGE_CODE}) -%}
+										{%- set support_categories = get_support_categories() -%}
+										{%- if support_categories -%}
+										<li class="header__nav-item header__nav-item--dropdown support-dropdown
+											{%- if hasattr(request, 'active_url') and support_url == request.active_url %} active{% endif %}">
+											<a href="{{ support_url }}"
+												 class="header__nav-link">
+												{{- var('SUPPORT_MENU_ITEM', request) -}}
+												&nbsp;<span></span>
+											</a>
+											<div class="header__nav-dropdown">
+												<div>
+													{%- for category in support_categories -%}
+													<div>
+														<h4>
+															<a href="{{ category.get_absolute_url(request.LANGUAGE_CODE) }}">
+																{{- category.title -}}
+															</a>
+														</h4>
+													</div>
+													{%- endfor -%}
+												</div>
+											</div>
+										</li>
+										{%- endif -%}
+
+									</ul>
+								</nav>
+								{%- endif -%}
+							</div>
+
+							<div class="header__bottom-right">
+								<div class="search header__search-open">
+									<a href="javascript:"
+										 class="search__toggle">
+										<span>{{ var('SEARCH_BUTTON', request) }}</span>
+									</a>
+								</div>
+
+								<div class="lang header__lang">
+									<div class="lang__selected">{{ request.LANGUAGE_CODE|upper }}</div>
+									<ul class="lang__dropdown">
+										{%- for language in languages -%}
+										{%- if language[0] != request.LANGUAGE_CODE -%}
+											<li>
+												<a href="{{ site_url() }}{{ get_language_href(request, language[0]) }}">{{ language[0]|upper }}</a>
+											</li>
+											{%- endif -%}
+										{%- endfor -%}
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="header__mobile">
+						<div class="container">
+							<div class="search header__search-open">
+								<a href="{{ url('search:search', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+									 class="search__toggle">
+									<span>{{ var('SEARCH_BUTTON', request) }}</span>
+								</a>
+							</div>
+							<div class="header__scroll">
+								<nav class="header__menu">
+									<ul class="header__menu-list">
+										{{- menu(request, 'TOP_MAIN_MENU') -}}
+									</ul>
+								</nav>
+							</div>
+						</div>
+
+						<div class="header__contacts">
+							<div class="container">
+								<a href="javascript:"
+									 data-fancybox
+									 data-type="ajax"
+									 data-src="{{ url('popups:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+									 class="header__callback">
+									{{- var('CALLBACK_REQUEST_TEXT', request) -}}
+								</a>
+								<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
+									 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
+							</div>
+						</div>
+					</div>
+				</header>
+
+				<header class="header-fixed">
+					<div class="container">
+						<div class="header-fixed__left">
+							<a href="{{ home_url }}" class="logo">
+								<img src="{{ STATIC_URL }}images/logo_hor_wh.svg" class="img-responsive" alt=""/>
+							</a>
+						</div>
+						<div class="header-fixed__right">
 							<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
-								 class="tel-link header__tel">
-								{{- var('TELEPHONE_PUBLIC', request) -}}
-							</a>
-              {%- endif -%}
-
-							{%- if var('CALLBACK_REQUEST_TEXT', request) -%}
+								 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
 							<a href="javascript:"
 								 data-fancybox
 								 data-type="ajax"
@@ -85,216 +293,10 @@
 								 class="header__callback">
 								{{- var('CALLBACK_REQUEST_TEXT', request) -}}
 							</a>
-							{%- endif -%}
-            </div>
-          </div>
-        </div>
-        <div class="header__bottom">
-          <div class="header__search">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  <form action="{{ url('search:search', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-												class="search-form" method="get" autocomplete="off" data-novalidate="">
-                    <input type="text" name="q" class="search-form__field" value="{{ request.GET.get('q', '') }}"/>
-                    <button type="submit" class="search-form__button" disabled>
-											{{- var('FIND_BUTTON', request) -}}
-										</button>
-                    <a href="javascript:" class="search-form__clear"></a>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="container">
-            <div class="header__bottom-left">
-              <a href="{{ home_url }}" class="logo header__logo header__logo--big">
-                <img src="{{ STATIC_URL }}images/logo_hor_wh.svg" class="img-responsive" alt=""/>
-							</a>
-
-							{%- if catalog_tree -%}
-              <nav class="header__nav">
-                <ul class="header__nav-list">
-									{%- for category_1 in catalog_tree -%}
-									{%- set cat1_url = category_1['obj'].get_absolute_url(request.LANGUAGE_CODE) -%}
-                  <li class="header__nav-item header__nav-item--dropdown catalog-dropdown
-										{%- if hasattr(request, 'active_url') and cat1_url == request.active_url %} active{% endif %}">
-                    <a href="{{ cat1_url }}"
-											 class="header__nav-link">
-											{{- category_1['obj'].title -}}
-											{%- if category_1['children'] -%}
-                      &nbsp;<span></span>
-											{%- endif -%}
-                    </a>
-
-										{%- if category_1['children'] -%}
-                    <div class="header__nav-dropdown">
-											{%- for row in category_1['children']|batch(2, '') -%}
-                      <div>
-												{%- for category_2 in row -%}
-												{%- if category_2 -%}
-                        <div>
-                          <h4>
-                            <a href="{{ category_2['obj'].get_absolute_url(request.LANGUAGE_CODE) }}">
-															{{- category_2['obj'].title -}}
-														</a>
-                          </h4>
-
-													{%- if category_2['children'] -%}
-                          <ul>
-														{%- for category_3 in category_2['children'] -%}
-                            <li{% if current_category is defined() and current_category.id == category_3['obj'].id %} class="is-active"{% endif %}>
-                              <a href="{{ category_3['obj'].get_absolute_url(request.LANGUAGE_CODE) }}">
-																{{- category_3['obj'].title -}}
-															</a>
-                            </li>
-                            {%- endfor -%}
-                          </ul>
-													{%- endif -%}
-                        </div>
-												{%- endif -%}
-                        {%- endfor -%}
-                      </div>
-											{%- endfor -%}
-                    </div>
-										{%- endif -%}
-                  </li>
-                  {%- endfor -%}
-
-									{%- set training_url = url('training:training_index', kwargs={'lang': request.LANGUAGE_CODE}) -%}
-									{%- set training_categories = get_training_categories() -%}
-									{%- if training_categories -%}
-                  <li class="header__nav-item header__nav-item--dropdown training-dropdown
-										{%- if hasattr(request, 'active_url') and training_url == request.active_url %} active{% endif %}">
-                    <a href="{{ training_url }}"
-											 class="header__nav-link">
-											{{- var('TRAINING_MENU_ITEM', request) -}}
-                      &nbsp;<span></span>
-                    </a>
-										<div class="header__nav-dropdown">
-                      <div>
-												{%- for category in training_categories -%}
-                        <div>
-                          <h4>
-                            <a href="{{ category.get_absolute_url(request.LANGUAGE_CODE) }}">
-															{{- category.title -}}
-														</a>
-                          </h4>
-                        </div>
-                        {%- endfor -%}
-                      </div>
-                    </div>
-									</li>
-									{%- endif -%}
-
-									{%- set support_url = url('support:support_index', kwargs={'lang': request.LANGUAGE_CODE}) -%}
-									{%- set support_categories = get_support_categories() -%}
-									{%- if support_categories -%}
-                  <li class="header__nav-item header__nav-item--dropdown support-dropdown
-										{%- if hasattr(request, 'active_url') and support_url == request.active_url %} active{% endif %}">
-                    <a href="{{ support_url }}"
-											 class="header__nav-link">
-											{{- var('SUPPORT_MENU_ITEM', request) -}}
-                      &nbsp;<span></span>
-                    </a>
-										<div class="header__nav-dropdown">
-                      <div>
-												{%- for category in support_categories -%}
-                        <div>
-                          <h4>
-                            <a href="{{ category.get_absolute_url(request.LANGUAGE_CODE) }}">
-															{{- category.title -}}
-														</a>
-                          </h4>
-                        </div>
-                        {%- endfor -%}
-                      </div>
-                    </div>
-									</li>
-									{%- endif -%}
-
-                </ul>
-              </nav>
-							{%- endif -%}
-            </div>
-
-            <div class="header__bottom-right">
-              <div class="search header__search-open">
-                <a href="javascript:"
-									 class="search__toggle">
-                  <span>{{ var('SEARCH_BUTTON', request) }}</span>
-                </a>
-              </div>
-
-              <div class="lang header__lang">
-                <div class="lang__selected">{{ request.LANGUAGE_CODE|upper }}</div>
-                <ul class="lang__dropdown">
-									{%- for language in languages -%}
-									{%- if language[0] != request.LANGUAGE_CODE -%}
-										<li>
-											<a href="{{ site_url() }}{{ get_language_href(request, language[0]) }}">{{ language[0]|upper }}</a>
-										</li>
-										{%- endif -%}
-									{%- endfor -%}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="header__mobile">
-          <div class="container">
-            <div class="search header__search-open">
-              <a href="{{ url('search:search', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-								 class="search__toggle">
-                <span>{{ var('SEARCH_BUTTON', request) }}</span>
-              </a>
-            </div>
-            <div class="header__scroll">
-              <nav class="header__menu">
-                <ul class="header__menu-list">
-                  {{- menu(request, 'TOP_MAIN_MENU') -}}
-                </ul>
-              </nav>
-            </div>
-          </div>
-
-          <div class="header__contacts">
-            <div class="container">
-              <a href="javascript:"
-								 data-fancybox
-								 data-type="ajax"
-								 data-src="{{ url('popups:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-								 class="header__callback">
-								{{- var('CALLBACK_REQUEST_TEXT', request) -}}
-							</a>
-              <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
-								 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <header class="header-fixed">
-        <div class="container">
-          <div class="header-fixed__left">
-            <a href="{{ home_url }}" class="logo">
-              <img src="{{ STATIC_URL }}images/logo_hor_wh.svg" class="img-responsive" alt=""/>
-            </a>
-          </div>
-          <div class="header-fixed__right">
-            <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
-							 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
-            <a href="javascript:"
-							 data-fancybox
-							 data-type="ajax"
-							 data-src="{{ url('popups:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-							 class="header__callback">
-							{{- var('CALLBACK_REQUEST_TEXT', request) -}}
-						</a>
-          </div>
-        </div>
-      </header>
+						</div>
+					</div>
+				</header>
+			</div>
 			{%- endblock HEADER -%}
 
       <main class="main">

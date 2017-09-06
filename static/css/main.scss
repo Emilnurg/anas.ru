@@ -567,11 +567,13 @@ textarea.form__field {
   }
 }
 
-/*************************************************
-*                     header                     *
-*************************************************/
+
 .main {
   // padding-top: 150px;
+}
+
+.header-wrap {
+  background: #565e69;
 }
 
 .header {
@@ -597,6 +599,7 @@ textarea.form__field {
     display: inline-block;
     line-height: 1;
     margin-right: 32px;
+    margin-bottom: 6px;
 
     &:before {
       display: none;
@@ -607,12 +610,15 @@ textarea.form__field {
       font-size: 14px;
       text-decoration: none;
       letter-spacing: 0.3px;
-      border: 0;
+      padding: 0 0 3px;
+      border-bottom: 2px solid transparent;
 
 
       &:hover,
       &:active,
-      &.active {}
+      &.active {
+        border-bottom: 2px solid #fff;
+      }
     }
   }
 }
@@ -663,6 +669,7 @@ textarea.form__field {
 .header__tel {
   margin-left: 43px;
   border: 0;
+  white-space: nowrap;
 }
 
 .email-link {
@@ -699,9 +706,9 @@ textarea.form__field {
 
 .header__callback {
   font-size: 14px;
-  color: #fff;
+  color: #565e69;
   border-radius: 20px;
-  background: #d2205c;
+  background: #fff;
   line-height: 1;
   padding: 5px 16px;
   letter-spacing: 0.2px;
@@ -717,14 +724,14 @@ textarea.form__field {
   }
 
   &:hover {
-    color: #fff;
-    background: #b01247;
+    background: #CCC;
+    color: #565e69;;
     text-decoration: none;
   }
 
   &:active {
     background: white;
-    color: #d2205c;
+    color: #565e69;
   }
 }
 
@@ -749,7 +756,7 @@ textarea.form__field {
 
 .header__bottom-right {
   float: right;
-  margin-top: -3px;
+  line-height: 0;
 }
 
 .logo {
@@ -792,7 +799,7 @@ textarea.form__field {
 
 .header__nav-item {
   display: inline-block;
-  margin-right: 35px;
+  margin-right: 30px;
   position: relative;
 
   &:last-child {
@@ -802,19 +809,19 @@ textarea.form__field {
   &--dropdown {
     &.active {
       .header__nav-link {
-        border-bottom-color: #d2205c;
+        border-bottom-color: #fff;
         color: #000;
         text-decoration: none;
       }
     }
     .header__nav-link {
-      padding-right: 11px;
+      padding-right: 8px;
     }
   }
 
   &.is-open {
     .header__nav-link {
-      border-bottom-color: #d1205c;
+      border-bottom-color: #fff;
 
       >span {
         transform: rotate(-180deg);
@@ -856,7 +863,6 @@ textarea.form__field {
     height: 0;
     border: 3px solid transparent;
     border-top-color: #fff;
-    margin-left: 5px;
     transition: all 0.3s;
     transform-origin: 50% 13%;
   }
@@ -969,11 +975,11 @@ textarea.form__field {
     position: absolute;
     width: 10px;
     height: 10px;
-    border-left: 1px solid #373334;
-    border-top: 1px solid #373334;
+    border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
     left: -8px;
     transform: rotate(45deg);
-    top: 7px;
+    top: -2px;
     display: none;
   }
 
@@ -985,17 +991,10 @@ textarea.form__field {
     opacity: 0;
   }
 
-  &:focus {
-    color: #d2215d;
-    text-decoration: none;
-  }
-
-  &:hover {
-    color: #d2215d;
-  }
-
+  &:hover,
   &:active {
-    color: #b01247
+    color: #fff;
+    text-decoration: none;
   }
 
   span {
@@ -1041,12 +1040,12 @@ textarea.form__field {
   font-size: 0;
   position: relative;
   user-select: none;
+  line-height: 0;
 
   &.is-open {
     .lang__selected {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      border-bottom: 0;
 
       &:before {
         transform: rotate(-180deg);
@@ -1065,8 +1064,8 @@ textarea.form__field {
   font-size: 12px;
   text-transform: uppercase;
   min-width: 58px;
-  padding: 7px 12px 4px;
-  line-height: 1;
+  padding: 0 12px;
+  line-height: 24px;
   display: inline-block;
   position: relative;
   color: #fff;
@@ -1087,8 +1086,7 @@ textarea.form__field {
   }
 
   &:hover {
-    border-color: #b01247;
-    color: #b01247;
+    border-color: #fff;
   }
 }
 
@@ -1097,18 +1095,21 @@ textarea.form__field {
   top: 100%;
   width: 100%;
   left: 0;
-  border: 1px solid #d2205c;
-  border-top: 0;
+  border: 1px solid #fff;
+  border-top-width: 0;
   font-size: 12px;
   border-radius: 0 0 13px 13px;
+  line-height: 24px;
   margin: 0;
   display: none;
   overflow: hidden;
   background: #fff;
+  padding: 0;
 
   li {
     padding: 0;
-    margin: 2px 0;
+    margin: 0;
+    line-height: 22px;
 
     &:before {
       display: none;
@@ -1116,13 +1117,13 @@ textarea.form__field {
 
     a {
       font-size: 12px;
-      color: #d2205c;
+      color: #565e69;
       display: block;
       padding: 3px 12px;
       border: 0;
 
       &:hover {
-        background: #d2205c;
+        background: #565e69;
         color: #fff;
       }
     }
@@ -1278,7 +1279,6 @@ textarea.form__field {
     left: 0;
     top: 50%;
     margin-top: -5px;
-    opacity: .5;
   }
 
   &.is-filled {
@@ -1306,7 +1306,7 @@ textarea.form__field {
 
 .search-form__button {
   font-size: 14px;
-  color: #1f191a;
+  color: #565e69;
   border: 0;
   width: 72px;
   height: 24px;
@@ -1314,8 +1314,7 @@ textarea.form__field {
   border-radius: 12px;
 
   &:disabled {
-    opacity: 1;
-    background: rgba(#fff, 0.1);
+    opacity: .6;
   }
 }
 
@@ -1352,6 +1351,7 @@ textarea.form__field {
 
 .header-fixed {
   background: #565e69;
+  @include f300;
   position: fixed;
   top: 0;
   width: 100%;
@@ -1360,16 +1360,10 @@ textarea.form__field {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.04);
   padding: 15px 0;
 
-  .logo {
-    margin-top: 5px;
-  }
-
-
   .tel-link {
-    color: #000;
 
     &:before {
-      background: url(../images/ico_tel_l.svg) no-repeat 0 0;
+      background: url(../images/ico_tel_l_wh.svg) no-repeat 0 0;
       background-size: contain;
     }
   }
@@ -1377,10 +1371,21 @@ textarea.form__field {
 
 .header-fixed__left {
   float: left;
+  line-height: 34px;
 }
 
 .header-fixed__right {
   float: right;
+  line-height:0;
+
+  .header__tel,
+  .header__callback {
+    line-height: 24px;
+  }
+
+  .header__tel {
+
+  }
 }
 
 
