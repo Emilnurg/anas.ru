@@ -28,7 +28,7 @@ class HomeView(BaseTemplateView):
         kwargs = super(HomeView, self).get_context_data(**kwargs)
         home_page = HomePage.get_solo()
         home_slides = HomeSlide.objects.published().order_by('ordering')[:20]
-        home_advantages = HomeAdvantage.objects.published().order_by('ordering')[:5]
+        home_advantages = None  # HomeAdvantage.objects.published().order_by('ordering')[:5]
 
         home_catalogs = HomeCatalog.objects.published().order_by('ordering')
 

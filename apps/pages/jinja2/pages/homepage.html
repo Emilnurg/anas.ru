@@ -24,23 +24,14 @@
 									{%- if slide.bg %} style="background-image:url({{ slide.bg.url }})"{% endif %}>
 								<div class="container">
 									<div class="row">
+										{%- if slide.image_on_left -%}
+											{%- include 'pages/widgets/slider_image.html' -%}
+											{%- include 'pages/widgets/slider_text.html' -%}
 
-										<div class="col-sm-6">
-											{%- if slide.image_on_left -%}
-												{%- include 'pages/widgets/slider_image.html' -%}
-											{%- else -%}
-												{%- include 'pages/widgets/slider_text.html' -%}
-											{%- endif -%}
-										</div>
-
-										<div class="col-sm-6">
-											{%- if slide.image_on_left -%}
-												{%- include 'pages/widgets/slider_text.html' -%}
-											{%- else -%}
-												{%- include 'pages/widgets/slider_image.html' -%}
-											{%- endif -%}
-										</div>
-
+										{%- else -%}
+											{%- include 'pages/widgets/slider_text.html' -%}
+											{%- include 'pages/widgets/slider_image.html' -%}
+										{%- endif -%}
 									</div>
 								</div>
 							</div>

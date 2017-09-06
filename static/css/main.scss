@@ -1835,8 +1835,9 @@ textarea.form__field {
 }
 
 .main-slider {
-  height: 600px;
-  height: 30vw;
+  height: 620px;
+  height: 36vw;
+  max-height: 95vh;
   min-height: 200px;
   overflow: hidden;
 
@@ -1853,11 +1854,12 @@ textarea.form__field {
   background: transparent 50% 50% no-repeat;
   background-size: cover;
   overflow: hidden;
-  height: 600px;
-  line-height: 600px;
-  height: 30vw;
-  line-height: 30vw;
+  height: 620px;
+  line-height: 620px;
+  height: 36vw;
+  line-height: 36vw;
   min-height: 200px;
+  max-height: 95vh;
   position: relative;
 
   .offer {
@@ -1895,9 +1897,10 @@ textarea.form__field {
 .main-slider__image {
   overflow: hidden;
   text-align: center;
-  height: 600px;
-  height: 30vw;
+  height: 620px;
+  height: 36vw;
   min-height: 200px;
+  max-height: 95vh;
   width: 100%;
   background: transparent 50% 100% no-repeat scroll content-box;
   background-size: contain;
