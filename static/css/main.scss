@@ -581,6 +581,7 @@ textarea.form__field {
   width: 100%;
   left: 0;
   top: 0;
+  @include f300;
 }
 
 .header__menu {
@@ -609,20 +610,9 @@ textarea.form__field {
       border: 0;
 
 
-      &:focus {
-        color: #fff;
-        text-decoration: none;
-      }
-
       &:hover,
-      &.active {
-        color: #d2205c;
-        text-decoration: none;
-      }
-
-      &:active {
-        color: #b01247;
-      }
+      &:active,
+      &.active {}
     }
   }
 }
@@ -877,7 +867,7 @@ textarea.form__field {
   }
 
   &:hover, &.active {
-    border-bottom-color: #d2205c;
+    border-bottom-color: #fff;
     color: #fff;
     text-decoration: none;
   }
@@ -1229,7 +1219,7 @@ textarea.form__field {
     display: block;
     height: 2px;
     margin-bottom: 3px;
-    border-top: 1px solid #1f191a;
+    border-top: 1px solid #fff;
     border-bottom: 1px solid #7d7a7a;
     width: 100%;
     transition: all 0.3s;
@@ -1361,7 +1351,7 @@ textarea.form__field {
 }
 
 .header-fixed {
-  background: #fff;
+  background: #565e69;
   position: fixed;
   top: 0;
   width: 100%;
@@ -1421,19 +1411,15 @@ textarea.form__field {
   .header__logo--sm {
     display: block;
     position: absolute;
-    top: 12px;
+    top: 9px;
     left: 50%;
     width: auto;
-    margin: 0 0 0 -69px;
+    margin: 0 0 0 -52px;
     transition: none;
   }
 
   .header__contacts {
     padding: 13px 0;
-  }
-
-  .header__top {
-    background: #fff;
   }
 
   .header__menu {
@@ -1822,7 +1808,7 @@ textarea.form__field {
 }
 
 .main-slider {
-  height: 620px;
+  height: 619px;
   height: 36vw;
   max-height: 95vh;
   min-height: 200px;
@@ -1841,8 +1827,8 @@ textarea.form__field {
   background: transparent 50% 50% no-repeat;
   background-size: cover;
   overflow: hidden;
-  height: 620px;
-  line-height: 620px;
+  height: 619px;
+  line-height: 619px;
   height: 36vw;
   line-height: 36vw;
   min-height: 200px;
@@ -1884,7 +1870,7 @@ textarea.form__field {
 .main-slider__image {
   overflow: hidden;
   text-align: center;
-  height: 620px;
+  height: 619px;
   height: 36vw;
   min-height: 200px;
   max-height: 95vh;
@@ -2583,6 +2569,7 @@ textarea.form__field {
 *************************************************/
 .footer {
   background: #565e69;
+  @include f300;
 }
 
 .footer__top {
