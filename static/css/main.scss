@@ -3,7 +3,7 @@
 //buttons
 .btn {
   font-size: 20px;
-  color: #cf1d58;
+  color: #565e69;
   border-radius: 25px;
   line-height: 1;
   padding: 15px 46px;
@@ -11,7 +11,7 @@
   outline: none;
   background: none;
   display: inline-block;
-  box-shadow: inset 0 0 0 2px #d2205c;
+  box-shadow: inset 0 0 0 2px #565e69;
   z-index: 0;
   border: 0;
   backface-visibility: hidden;
@@ -19,7 +19,7 @@
 
   &:focus {
     outline: none;
-    color: #cf1d58;
+    color: #565e69;
     text-decoration: none;
   }
 
@@ -27,16 +27,10 @@
     outline: none;
   }
 
-  &:hover {
+  &:hover, &:active {
     color: #fff;
-    background: #d2205c;
+    background: #565e69;
     box-shadow: none;
-  }
-
-  &:active {
-    color: #fff;
-    box-shadow: none;
-    background: #d2205c;
   }
 
   &:active:focus {
@@ -44,7 +38,7 @@
   }
 
   &.waves-effect .waves-ripple {
-    background: #b01247;
+    background: #565e69;
     z-index: -1;
   }
 }
@@ -347,7 +341,7 @@
       font-size: 18px;
       display: block;
       line-height: 1;
-      color: #d2205c;
+      color: #565e69;
       margin-top: 0;
     }
   }
@@ -390,7 +384,7 @@
 
   &.has-success {
     .form__field {
-      border-color: #d2205c;
+      border-color: #565e69;
     }
 
     &:before {
@@ -415,7 +409,7 @@
   position: absolute;
   top: 4px;
   font-size: 18px;
-  color: #000;
+  color: #565e69;
   padding: 0 8px;
   transition: all 0.3s;
   transform-origin:  0 0;
@@ -423,14 +417,14 @@
 
 .form__field {
   display: block;
-  color: black;
+  color: #565e69;
   border: 0;
   background: none;
   font-size: 18px;
   line-height: normal;
   padding: 0 8px;
   width: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #565e69;
   height: 32px;
   outline: none;
   transition: all 0.3s;
@@ -439,8 +433,8 @@
   border-radius: 0;
 
   &:focus {
-    border-color: #d2205c;
-    box-shadow: 0 1px 0 0 #d2205c;
+    border-color: #565e69;
+    box-shadow: 0 1px 0 0 #565e69;
 
     &+.form__placeholder {
       transform: scale(0.6) translateY(-22px) translateX(4px);
@@ -881,8 +875,8 @@ textarea.form__field {
 }
 
 .header__nav-dropdown {
-  background-color: white;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+  background: #565e69;
   position: absolute;
   left: 50%;
   top: 100%;
@@ -908,17 +902,13 @@ textarea.form__field {
   }
 
   h4 {
-    color: #d2205c;
     font-size: 16px;
     text-transform: uppercase;
     line-height: 22px;
 
     a {
-      border-bottom: 2px solid rgba(#d2205c, 0);
-
-      &:hover {
-        border-color: #d2205c;
-      }
+      border-bottom: 2px solid #fff;
+      color: #fff;
     }
   }
 
@@ -929,7 +919,6 @@ textarea.form__field {
     li {
       padding: 0;
       font-size: 14px;
-      color: #1f191a;
       margin: 0 0 6px -28px;
 
       &:before {
@@ -938,6 +927,7 @@ textarea.form__field {
 
       &.is-active {
         a {
+          color: #565e69;
           background: #e2e2e2;
         }
       }
@@ -945,14 +935,15 @@ textarea.form__field {
 
     a {
       font-size: 14px;
-      color: #1f191a;
       padding: 8px 28px;
+      color: #fff;
       border-radius: 17px;
       display: inline-block;
       border: 0;
 
       &:hover {
         background: #e2e2e2;
+        color: #565e69;
       }
     }
   }
@@ -1864,8 +1855,8 @@ textarea.form__field {
       box-shadow: inset 0 0 0 2px #fff;
 
       &:hover, &:active {
-        box-shadow: inset 0 0 0 2px #d2205c;
-        color: #d2205c;
+        box-shadow: inset 0 0 0 2px #565e69;
+        color: #565e69;
         background: transparent;
       }
     }
@@ -1991,8 +1982,13 @@ textarea.form__field {
   }
 
   .main-slider__image {
-    min-height: 0;
-    height: auto;
+    //min-height: 0;
+    //height: auto;
+    display: none;
+  }
+
+  .main-slider__slide {
+    line-height: 165px;
   }
 
   .b-hero__advantage {
@@ -2164,22 +2160,34 @@ textarea.form__field {
   padding-bottom: 60px;
   position: relative;
 
+  .btn {
+    border-color: #565e69;
+    color: #565e69;
+    box-shadow: inset 0 0 0 2px #565e69;
+
+    &:hover, &:active {
+      box-shadow: inset 0 0 0 2px #565e69;
+      color: #565e69;
+      background: transparent;
+    }
+  }
+
   .catalog-bg & .btn {
     border-color: #fff;
     color: #fff;
     box-shadow: inset 0 0 0 2px #fff;
 
     &:hover, &:active {
-      box-shadow: inset 0 0 0 2px #d2205c;
-      color: #d2205c;
+      box-shadow: inset 0 0 0 2px #565e69;
+      color: #565e69;
       background: transparent;
     }
   }
 }
 
 .catalog__discount {
-  background: #d2205c;
   color: #fff;
+  border: 2px solid #fff;
   padding: 25px 90px;
 
   h4 {
@@ -2431,14 +2439,15 @@ textarea.form__field {
   max-width: 550px;
 
   h4 {
-    font-size: 48px;
-    margin: 0 0 23px;
+    font-size: 40px;
+    margin: 0 0 33px;
     letter-spacing: -0.4px;
   }
 
   p {
-    font-size: 30px;
+    font-size: 20px;
     line-height: 1.2;
+    margin: 0 0 125px;
   }
 }
 
@@ -2685,25 +2694,21 @@ textarea.form__field {
     opacity: 0;
   }
 
-  &:focus {
+  &:focus, &:hover {
     color: #fff;
-
-    &:hover {
-      color: #d2205c;
-    }
   }
 
-  &:hover {
-    color: #d2205c;
-
-    &:before {
-      opacity: 0;
-    }
-
-    &:after {
-      opacity: 1;
-    }
-  }
+  //&:hover {
+  //  color: #d2205c;
+  //
+  //  &:before {
+  //    opacity: 0;
+  //  }
+  //
+  //  &:after {
+  //    opacity: 1;
+  //  }
+  //}
 }
 
 .footer__tel {
@@ -2752,13 +2757,13 @@ textarea.form__field {
   }
 
   &:hover {
-    &:before {
-      opacity: 0;
-    }
-
-    &:after {
-      opacity: 1;
-    }
+    //&:before {
+    //  opacity: 0;
+    //}
+	//
+    //&:after {
+    //  opacity: 1;
+    //}
   }
 
   &--facebook {
@@ -2769,9 +2774,9 @@ textarea.form__field {
       background: url(../images/ico_facebook.svg) no-repeat 0 0;
     }
 
-    &:after {
-      background: url(../images/ico_facebook_hover.svg) no-repeat 0 0;
-    }
+    //&:after {
+    //  background: url(../images/ico_facebook_hover.svg) no-repeat 0 0;
+    //}
   }
 
   &--youtube {
@@ -2782,9 +2787,9 @@ textarea.form__field {
       background: url(../images/ico_youtube.svg) no-repeat 0 0;
     }
 
-    &:after {
-      background: url(../images/ico_youtube_hover.svg) no-repeat 0 0;
-    }
+    //&:after {
+    //  background: url(../images/ico_youtube_hover.svg) no-repeat 0 0;
+    //}
   }
 
   &--twitter {
@@ -2795,9 +2800,9 @@ textarea.form__field {
       background: url(../images/ico_twitter.svg) no-repeat 0 0;
     }
 
-    &:after {
-      background: url(../images/ico_twitter_hover.svg) no-repeat 0 0;
-    }
+    //&:after {
+    //  background: url(../images/ico_twitter_hover.svg) no-repeat 0 0;
+    //}
   }
 
   &--instagram {
@@ -2808,9 +2813,9 @@ textarea.form__field {
       background: url(../images/ico_instagram.svg) no-repeat 0 0;
     }
 
-    &:after {
-      background: url(../images/ico_instagram_hover.svg) no-repeat 0 0;
-    }
+    //&:after {
+    //  background: url(../images/ico_instagram_hover.svg) no-repeat 0 0;
+    //}
   }
 }
 
