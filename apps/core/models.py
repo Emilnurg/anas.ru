@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from ckeditor_uploader.fields import RichTextUploadingField
 
 from base.enums import IconEnum
+from core.enums import BlockBgEnum
 from snippets.models import BaseModel
 from snippets.models.image import ImageMixin
 
@@ -96,6 +97,9 @@ class HomeCatalog(BaseModel):
     banner_subtitle = models.CharField(
         _('Подзаголовок баннера'), max_length=255, blank=True, null=True
     )
+    bg = models.CharField(
+        _('Фон'), max_length=100, choices=BlockBgEnum.get_choices(), blank=True, null=True
+    )
 
     translation_fields = (
         'title', 'subtitle', 'link', 'button_caption',  'banner_title', 'banner_subtitle'
@@ -146,6 +150,10 @@ class HomeSlide(ImageMixin, BaseModel):
     image = models.ImageField(
         _('Изображение'), max_length=255, upload_to='homepage_slides', blank=True, null=True
     )
+    bg = models.ImageField(
+        _('Фон'), max_length=255, upload_to='homepage_slides', blank=True, null=True
+    )
+    image_on_left = models.BooleanField(_('Изображение слева'), default=False)
     title = models.CharField(_('Заголовок'), max_length=255, blank=True, null=True)
     subtitle = models.CharField(_('Подзаголовок'), max_length=255, blank=True, null=True)
     url = models.CharField(_('Ссылка кнопки'), max_length=255, blank=True, null=True)

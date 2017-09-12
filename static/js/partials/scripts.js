@@ -353,7 +353,12 @@ function heroSlider() {
     cssEase: 'linear',
     infinite: true,
     speed: 500,
-    adaptiveHeight: true
+    adaptiveHeight: true,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    pauseOnDotsHover: true,
+    dots: true,
+    arrows: false
   });
 }
 

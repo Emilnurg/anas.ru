@@ -37,3 +37,4 @@ class HomeCatalogTranslationOptions(BaseTranslationOptions):
 @register(models.HomeSlide)
 class HomeSlideTranslationOptions(BaseTranslationOptions):
     fields = models.HomeSlide.translation_fields
+    required_languages = {settings.DEFAULT_LANGUAGE: ('title',), 'default': ()}

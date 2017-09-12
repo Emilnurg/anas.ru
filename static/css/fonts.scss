@@ -1,8 +1,96 @@
 @font-face {
-  font-family: 'ProximaNovaRg';
-  src: url('../fonts/ProximaNova-Regular.woff2') format('woff2'),
-       url('../fonts/ProximaNova-Regular.woff') format('woff');
-  font-weight: normal;
+  font-family: 'museo_sans_cyrl100';
+  src: url('../fonts/museosanslight-webfont.eot');
+  src: url('../fonts/museosanslight-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/museosanslight-webfont.woff2') format('woff2'),
+  url('../fonts/museosanslight-webfont.woff') format('woff'),
+  url('../fonts/museosanslight-webfont.ttf') format('truetype'),
+  url('../fonts/museosanslight-webfont.svg#museo_sans_cyrl100') format('svg');
+  font-weight: 100;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'museo_sans_cyrl300';
+  src: url('../fonts/museosansregular-webfont.eot');
+  src: url('../fonts/museosansregular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/museosansregular-webfont.woff2') format('woff2'),
+  url('../fonts/museosansregular-webfont.woff') format('woff'),
+  url('../fonts/museosansregular-webfont.ttf') format('truetype'),
+  url('../fonts/museosansregular-webfont.svg#museo_sans_cyrl300') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'museo_sans_cyrl500';
+  src: url('../fonts/museosansmedium-webfont.eot');
+  src: url('../fonts/museosansmedium-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/museosansmedium-webfont.woff2') format('woff2'),
+  url('../fonts/museosansmedium-webfont.woff') format('woff'),
+  url('../fonts/museosansmedium-webfont.ttf') format('truetype'),
+  url('../fonts/museosansmedium-webfont.svg#museo_sans_cyrl500') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'museo_sans_cyrl700';
+  src: url('../fonts/museosansbold-webfont.eot');
+  src: url('../fonts/museosansbold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/museosansbold-webfont.woff2') format('woff2'),
+  url('../fonts/museosansbold-webfont.woff') format('woff'),
+  url('../fonts/museosansbold-webfont.ttf') format('truetype'),
+  url('../fonts/museosansbold-webfont.svg#museo_sans_cyrl700') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'museo_sans_cyrl100_italic';
+  src: url('../fonts/museosanslightitalic-webfont.eot');
+  src: url('../fonts/museosanslightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/museosanslightitalic-webfont.woff2') format('woff2'),
+  url('../fonts/museosanslightitalic-webfont.woff') format('woff'),
+  url('../fonts/museosanslightitalic-webfont.ttf') format('truetype'),
+  url('../fonts/museosanslightitalic-webfont.svg#museo_sans_cyrl100_italic') format('svg');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'museo_sans_cyrl300_italic';
+  src: url('../fonts/museosansitalic-webfont.eot');
+  src: url('../fonts/museosansitalic-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/museosansitalic-webfont.woff2') format('woff2'),
+  url('../fonts/museosansitalic-webfont.woff') format('woff'),
+  url('../fonts/museosansitalic-webfont.ttf') format('truetype'),
+  url('../fonts/museosansitalic-webfont.svg#museo_sans_cyrl300_italic') format('svg');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'museo_sans_cyrl500_italic';
+  src: url('../fonts/museosansmediumitalic-webfont.eot');
+  src: url('../fonts/museosansmediumitalic-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/museosansmediumitalic-webfont.woff2') format('woff2'),
+  url('../fonts/museosansmediumitalic-webfont.woff') format('woff'),
+  url('../fonts/museosansmediumitalic-webfont.ttf') format('truetype'),
+  url('../fonts/museosansmediumitalic-webfont.svg#museo_sans_cyrl500_italic') format('svg');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'museo_sans_cyrl700_italic';
+  src: url('../fonts/museosansbolditalic-webfont.eot');
+  src: url('../fonts/museosansbolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/museosansbolditalic-webfont.woff2') format('woff2'),
+  url('../fonts/museosansbolditalic-webfont.woff') format('woff'),
+  url('../fonts/museosansbolditalic-webfont.ttf') format('truetype'),
+  url('../fonts/museosansbolditalic-webfont.svg#museo_sans_cyrl700_italic') format('svg');
+  font-weight: 700;
+  font-style: italic;
 }
 
