@@ -49,20 +49,24 @@
 				<header class="header"
 								data-start="transform: translateY(0px)"
 								data-top-bottom="transform: translateY(-100px)">
+
 					<div class="header__top">
 						<div class="container">
 							<button class="menu-toggle">
 								<span></span><span></span><span></span>
 							</button>
+
 							<a href="{{ home_url }}"
 								 class="logo header__logo header__logo--sm">
-								<img src="{{ STATIC_URL }}images/logo_hor_wh.svg" alt=""/>
+								<img src="{{ STATIC_URL }}images/logo_sm_white.svg" alt=""/>
 							</a>
+
 							<nav class="header__menu">
 								<ul class="header__menu-list">
 									{{- menu(request, 'TOP_MAIN_MENU') -}}
 								</ul>
 							</nav>
+
 							<div class="header__contacts">
 								{%- if var('EMAIL_PUBLIC', request) -%}
 								<a href="mailto:{{ var('EMAIL_PUBLIC', request)|e }}"
@@ -90,32 +94,40 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="header__bottom">
 						<div class="header__search">
 							<div class="container">
 								<div class="row">
 									<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
 										<form action="{{ url('search:search', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 													class="search-form" method="get" autocomplete="off" data-novalidate="">
 											<input type="text" name="q" class="search-form__field" value="{{ request.GET.get('q', '') }}"/>
+
 											<button type="submit" class="search-form__button" disabled>
 												{{- var('FIND_BUTTON', request) -}}
 											</button>
+
 											<a href="javascript:" class="search-form__clear"></a>
 										</form>
+
 									</div>
 								</div>
 							</div>
 						</div>
+
 						<div class="container">
 							<div class="header__bottom-left">
+
 								<a href="{{ home_url }}" class="logo header__logo header__logo--big">
-									<img src="{{ STATIC_URL }}images/logo_hor_wh.svg" class="img-responsive" alt=""/>
+									<img src="{{ STATIC_URL }}images/logo_white.svg" class="img-responsive" alt=""/>
 								</a>
 
 								{%- if catalog_tree -%}
 								<nav class="header__nav">
 									<ul class="header__nav-list">
+
 										{%- for category_1 in catalog_tree -%}
 										{%- set cat1_url = category_1['obj'].get_absolute_url(request.LANGUAGE_CODE) -%}
 										<li class="header__nav-item header__nav-item--dropdown catalog-dropdown
@@ -130,8 +142,10 @@
 
 											{%- if category_1['children'] -%}
 											<div class="header__nav-dropdown">
+
 												{%- for row in category_1['children']|batch(2, '') -%}
 												<div>
+
 													{%- for category_2 in row -%}
 													{%- if category_2 -%}
 													<div>
@@ -164,6 +178,7 @@
 
 										{%- set training_url = url('training:training_index', kwargs={'lang': request.LANGUAGE_CODE}) -%}
 										{%- set training_categories = get_training_categories() -%}
+
 										{%- if training_categories -%}
 										<li class="header__nav-item header__nav-item--dropdown training-dropdown
 											{%- if hasattr(request, 'active_url') and training_url == request.active_url %} active{% endif %}">
@@ -172,6 +187,7 @@
 												{{- var('TRAINING_MENU_ITEM', request) -}}
 												&nbsp;<span></span>
 											</a>
+
 											<div class="header__nav-dropdown">
 												<div>
 													{%- for category in training_categories -%}
@@ -183,6 +199,7 @@
 														</h4>
 													</div>
 													{%- endfor -%}
+
 												</div>
 											</div>
 										</li>
@@ -190,6 +207,7 @@
 
 										{%- set support_url = url('support:support_index', kwargs={'lang': request.LANGUAGE_CODE}) -%}
 										{%- set support_categories = get_support_categories() -%}
+
 										{%- if support_categories -%}
 										<li class="header__nav-item header__nav-item--dropdown support-dropdown
 											{%- if hasattr(request, 'active_url') and support_url == request.active_url %} active{% endif %}">
@@ -198,6 +216,7 @@
 												{{- var('SUPPORT_MENU_ITEM', request) -}}
 												&nbsp;<span></span>
 											</a>
+
 											<div class="header__nav-dropdown">
 												<div>
 													{%- for category in support_categories -%}
@@ -209,6 +228,7 @@
 														</h4>
 													</div>
 													{%- endfor -%}
+
 												</div>
 											</div>
 										</li>
@@ -251,6 +271,7 @@
 									<span>{{ var('SEARCH_BUTTON', request) }}</span>
 								</a>
 							</div>
+
 							<div class="header__scroll">
 								<nav class="header__menu">
 									<ul class="header__menu-list">
@@ -269,6 +290,7 @@
 									 class="header__callback">
 									{{- var('CALLBACK_REQUEST_TEXT', request) -}}
 								</a>
+
 								<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
 									 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
 							</div>
@@ -280,12 +302,14 @@
 					<div class="container">
 						<div class="header-fixed__left">
 							<a href="{{ home_url }}" class="logo">
-								<img src="{{ STATIC_URL }}images/logo_hor_wh.svg" class="img-responsive" alt=""/>
+								<img src="{{ STATIC_URL }}images/logo_sm_white.svg" class="img-responsive" alt=""/>
 							</a>
 						</div>
+
 						<div class="header-fixed__right">
 							<a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
 								 class="tel-link header__tel">{{ var('TELEPHONE_PUBLIC', request) }}</a>
+
 							<a href="javascript:"
 								 data-fancybox
 								 data-type="ajax"
@@ -293,6 +317,7 @@
 								 class="header__callback">
 								{{- var('CALLBACK_REQUEST_TEXT', request) -}}
 							</a>
+
 						</div>
 					</div>
 				</header>
@@ -307,25 +332,31 @@
       <footer class="footer">
         <div class="footer__top">
           <div class="container">
+
             <div class="footer__left">
               <a href="{{ home_url }}" class="logo footer__logo">
-                <img src="{{ STATIC_URL }}images/logo_hor_wh.svg" class="img-responsive" alt=""/>
+                <img src="{{ STATIC_URL }}images/logo_white.svg" class="img-responsive" alt=""/>
 							</a>
             </div>
+
             <div class="footer__right">
               <div class="footer__menu">
                 <ul class="footer__nav">
                   {{- menu(request, 'FOOTER_MENU_COL1') -}}
                 </ul>
+
                 <ul class="footer__nav">
                   {{- menu(request, 'FOOTER_MENU_COL2') -}}
                 </ul>
+
                 <ul class="footer__nav">
                   {{- menu(request, 'FOOTER_MENU_COL3') -}}
                 </ul>
+
                 <ul class="footer__nav">
 									{{- menu(request, 'FOOTER_MENU_COL4') -}}
                 </ul>
+
               </div>
             </div>
           </div>
@@ -333,6 +364,7 @@
 
         <div class="footer__middle">
           <div class="container">
+
 						{%- if var('ADDRESS', request) -%}
             <address class="address footer__address">
               <a href="{{ url('pages:contacts', kwargs={'lang': request.LANGUAGE_CODE}) }}"
@@ -341,10 +373,12 @@
 							</a>
             </address>
 						{%- endif -%}
+
             <div class="footer__middle-right">
               <ul class="socials footer__socials">
 								{{- menu(request, 'FOOTER_SOCIALS', target_blank=True) -}}
               </ul>
+
               <div class="footer__contacts">
 								{%- if var('TELEPHONE_PUBLIC', request) -%}
                 <a href="tel:{{ var('TELEPHONE_PUBLIC', request)|phone_url }}"
@@ -352,15 +386,18 @@
 									{{- var('TELEPHONE_PUBLIC', request) -}}
 								</a>
 								{%- endif -%}
+
 								{%- if var('EMAIL_PUBLIC', request) -%}
                 <a href="mailto:{{ var('EMAIL_PUBLIC', request)|e }}" class="email-link footer__email">
 									{{- var('EMAIL_PUBLIC', request) -}}
 								</a>
 								{%- endif -%}
+
               </div>
             </div>
           </div>
         </div>
+
         <div class="footer__bottom">
           <div class="container">
             <small class="copyright">
@@ -396,6 +433,7 @@
     <script src="{{ static_with_mtime('js/critical.js') }}"></script>
 		<script src="{{ static_with_mtime('js/main.js') }}"></script>
 		<script src="{{ static_with_mtime('js/partials/scripts.min.js') }}"></script>
+
 		{%- block EXTRA_SCRIPTS %}{% endblock -%}
     {%- block EXTRA_BODY %}{% endblock -%}
   </body>

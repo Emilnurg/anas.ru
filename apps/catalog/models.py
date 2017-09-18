@@ -9,7 +9,7 @@ from image_cropping import ImageCropField, ImageRatioField
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
-from catalog.enums import ImagePositionEnum, CatalogBlockShapeEnum
+from catalog.enums import ImagePositionEnum, CatalogBlockShapeEnum, ImageVerticalPositionEnum
 from snippets.models import BaseModel, BaseManager
 from snippets.models.image import ImageMixin
 from snippets.utils.datetime import utcnow
@@ -107,6 +107,11 @@ class Product(ImageMixin, BaseModel):
     image_position = models.CharField(
         _('Расположение изображения'), choices=ImagePositionEnum.get_choices(),
         default=ImagePositionEnum.default, max_length=30
+    )
+    image_vertical_position = models.CharField(
+        _('Вертикальное позиционирование изображения'),
+        choices=ImageVerticalPositionEnum.get_choices(),
+        default=ImageVerticalPositionEnum.default, max_length=30
     )
     body = RichTextUploadingField(_('Основной контент'), blank=True, null=False)
     short_description = models.TextField(

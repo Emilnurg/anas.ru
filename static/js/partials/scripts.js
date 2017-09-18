@@ -358,7 +358,7 @@ function heroSlider() {
     autoplaySpeed: 6000,
     pauseOnDotsHover: true,
     dots: true,
-    arrows: false
+    arrows: true
   });
 }
 

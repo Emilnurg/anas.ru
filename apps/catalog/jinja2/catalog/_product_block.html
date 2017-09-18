@@ -1,4 +1,5 @@
-<a href="{{ product.get_absolute_url(request.LANGUAGE_CODE) }}" class="catalog-item catalog-item--{{ product.image_position }} catalog-item--{{ product.block_shape }}">
+<a href="{{ product.get_absolute_url(request.LANGUAGE_CODE) }}"
+	 class="catalog-item catalog-item--{{ product.image_position }} catalog-item--{{ product.block_shape }} catalog-item--vert-{{ product.image_vertical_position }}">
 	<h3>{{ product.title }}</h3>
 	{%- if product.manufacturer_id -%}
 	<p>

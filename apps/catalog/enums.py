@@ -32,3 +32,18 @@ class CatalogBlockShapeEnum(BaseEnumerate):
     ))
 
     default = NORMAL
+
+
+class ImageVerticalPositionEnum(BaseEnumerate):
+    """Форма блоков товаров каталога"""
+    MIDDLE = 'middle'
+    BOTTOM = 'bottom'
+    PADDING_BOTTOM = 'padding_bottom'
+
+    values = OrderedDict((
+        (MIDDLE, _('По центру')),
+        (BOTTOM, _('По нижнему краю')),
+        (PADDING_BOTTOM, _('По нижнему краю с отступом'))
+    ))
+
+    default = BOTTOM
