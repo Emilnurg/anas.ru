@@ -465,7 +465,10 @@ textarea.form__field {
 
 .form__button {
   padding-top: 32px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -ms-flex-pack: center;
   align-items: center;
 
   .btn {
@@ -737,8 +740,11 @@ textarea.form__field {
   color: #fff;
 
   >.container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     justify-content: space-between;
+    -ms-flex-pack: center;
     align-items: center;
 
     &:before, &:after {
@@ -891,6 +897,8 @@ textarea.form__field {
   display: none;
 
   >div {
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 
     >div {
@@ -1168,7 +1176,10 @@ textarea.form__field {
 
     .container {
       justify-content: space-between;
+      -ms-flex-pack: center;
       align-items: center;
+      display: -ms-flexbox;
+      display: -webkit-flex;
       display: flex;
 
       &:before, &:after {
@@ -1263,7 +1274,10 @@ textarea.form__field {
 }
 
 .search-form {
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -ms-flex-align: end;
   align-items: flex-end;
   position: relative;
 
@@ -2144,6 +2158,8 @@ textarea.form__field {
 }
 
 .catalog-item {
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -2193,9 +2209,13 @@ textarea.form__field {
   flex-basis: 100px;
   font-size: 0;
   padding: 0 20px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
+  -ms-flex-pack: center;
   align-items: center;
+  -ms-flex-align: end;
   justify-content: flex-end;
 
   .catalog-item--high.catalog-item--vert-padding_bottom & {
@@ -2203,6 +2223,7 @@ textarea.form__field {
   }
 
   .catalog-item--vert-middle & {
+    -ms-flex-align: center;
     justify-content: center;
   }
 
@@ -2229,6 +2250,7 @@ textarea.form__field {
   }
 
   &.text-left {
+    -ms-flex-align: start;
     align-items: flex-start;
     left: 0;
   }
@@ -2320,8 +2342,12 @@ textarea.form__field {
 
   .slick-track {
     min-width: 100%;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -ms-flex-align: center;
     justify-content: center;
+    -ms-flex-pack: center;
     align-items: center;
 
     &:before, &:after {
@@ -2728,6 +2754,8 @@ textarea.form__field {
 .footer__menu {
   font-size: 0;
   text-align: right;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
@@ -3175,10 +3203,13 @@ textarea.form__field {
 
 .quote {
   border: 0;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   max-width: 685px;
   margin: 0 auto;
   width: 100%;
+  -ms-flex-pack: center;
   align-items: center;
 }
 
@@ -3453,6 +3484,8 @@ textarea.form__field {
   min-height: 360px;
 }
 .article-preview {
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   width: 100%;
   max-width: 600px;
@@ -3834,6 +3867,8 @@ textarea.form__field {
   }
 
   .slick-track {
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 
     &:before, &:after {
@@ -4284,9 +4319,12 @@ textarea.form__field {
 }
 
 .comment__head {
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
   font-size: 16px;
+  -ms-flex-align: start;
   align-items: flex-start;
   margin-bottom: 5px;
 }
@@ -4433,6 +4471,8 @@ textarea.form__field {
 }
 
 .page-nav {
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
 }
 
@@ -4475,6 +4515,8 @@ a.page-nav__next {
 }
 
 .page-nav__text {
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -4484,6 +4526,7 @@ a.page-nav__next {
   height: 100%;
 
   &--center {
+    -ms-flex-align: center;
     justify-content: center;
   }
 }
@@ -4706,6 +4749,8 @@ a.page-nav__next {
   .page-nav__prev {
     width: 100%;
     min-height: 120px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 
     .page-nav__arrow {
@@ -4716,6 +4761,8 @@ a.page-nav__next {
   .page-nav__next {
     width: 100%;
     min-height: 120px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 
     .page-nav__arrow {
@@ -5397,6 +5444,8 @@ a.page-nav__next {
   border: 0;
 
   >div {
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 
     >div {
@@ -5520,6 +5569,8 @@ a.page-nav__next {
 
 .partners-filter {
   margin-bottom: 44px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
@@ -6011,6 +6062,8 @@ a.page-nav__next {
 }
 
 .catalog-filter__brands {
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
 
@@ -6150,8 +6203,11 @@ a.page-nav__next {
   padding-top: 41px;
 
   .page-back {
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     justify-content: space-between;
+    -ms-flex-align: start;
     align-items: flex-start;
     flex-wrap: wrap;
     margin-bottom: 0;
@@ -6325,6 +6381,8 @@ a.page-nav__next {
   }
 
   .slick-track {
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 
     &:before, &:after {
@@ -6334,7 +6392,10 @@ a.page-nav__next {
 
   .sld {
     text-align: center;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -ms-flex-align: center;
     justify-content: center;
     align-items: flex-end;
     height: auto;
@@ -6459,6 +6520,8 @@ a.page-nav__next {
 
   .slick-track {
     min-width: 100%;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     justify-content: space-between;
 
@@ -6557,6 +6620,8 @@ a.page-nav__next {
   }
 
   .slick-track {
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 
     &:before, &:after {
@@ -6570,7 +6635,10 @@ a.page-nav__next {
   border: 0;
   padding: 30px 20px 0 62px;
   color: #1f191a;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -ms-flex-align: end;
   align-items: flex-end;
   width: 100%;
   height: 100%;
@@ -6603,7 +6671,10 @@ a.page-nav__next {
   float: left;
   text-align: center;
   height: 100%;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -ms-flex-align: end;
   align-items: flex-end;
 
   img {
@@ -6630,6 +6701,8 @@ a.page-nav__next {
 }
 
 .doc-list {
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -7027,6 +7100,8 @@ a.page-nav__next {
 .b-course__info {
   padding: 0;
   list-style: none;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
   margin: 0 0 20px;
