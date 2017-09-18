@@ -52,6 +52,7 @@
   &:focus {
     color: #cf1d58;
   }
+
   &:focus:active {
     color: #cf1d58;
   }
@@ -607,13 +608,13 @@ textarea.form__field {
       text-decoration: none;
       letter-spacing: 0.3px;
       padding: 0 0 3px;
-      border-bottom: 2px solid transparent;
+      border-bottom: 1px solid transparent;
 
 
       &:hover,
       &:active,
       &.active {
-        border-bottom: 2px solid #fff;
+        border-bottom: 1px solid #fff;
       }
     }
   }
@@ -845,7 +846,7 @@ textarea.form__field {
   text-decoration: none;
   font-size: 14px;
   letter-spacing: 0.3px;
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid transparent;
   display: inline-block;
   padding: 6px 0;
   position: relative;
@@ -909,7 +910,7 @@ textarea.form__field {
     line-height: 22px;
 
     a {
-      border-bottom: 2px solid #fff;
+      border-bottom: 1px solid #fff;
       color: #fff;
     }
   }
@@ -1713,7 +1714,7 @@ textarea.form__field {
   }
 
   &:active {
-    background: #d2205c;
+    background: #282b2f;
 
     &:before, &:after {
       background: #fff;
@@ -2143,17 +2144,22 @@ textarea.form__field {
 }
 
 .catalog-item {
-  display: block;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   margin-bottom: 40px;
-  padding: 53px;
+  padding: 53px 0 0;
   position: relative;
   color: #1f191a;
   overflow: hidden;
   z-index: 0;
   min-height: 360px;
   border: 0;
+
+  h3, p {
+    padding: 0 53px;
+  }
 
   h3 {
     color: #1f191a;
@@ -2164,7 +2170,7 @@ textarea.form__field {
 
   p {
     color: #1f191a;
-    margin: 0 0 33px;
+    margin: 0;
   }
 
   &.waves-effect .waves-ripple {
@@ -2183,28 +2189,66 @@ textarea.form__field {
 }
 
 .catalog-item__image {
-  bottom: 0;
-  width: 100%;
-  left: 0;
-  margin-top: 0;
-  position: absolute;
-  @include responsiveImg;
+  flex-grow: 1;
+  flex-basis: 100px;
   font-size: 0;
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 
-  &:after {
-    vertical-align: bottom;
+  .catalog-item--high.catalog-item--vert-padding_bottom & {
+    padding-bottom: 50px;
+  }
+
+  .catalog-item--vert-middle & {
+    justify-content: center;
   }
 
   img {
     max-width: 100%;
+    max-height: 100%;
     height: auto;
     vertical-align: bottom;
   }
 
-  &.text-right {
+  &.text-right,
+  &.text-left {
     margin-top: -70px;
     padding: 0;
+    position: absolute;
+    flex-direction: row;
+    bottom: 0;
+    width: 40%;
+  }
+
+  &.text-right {
+    align-items: flex-end;
+    right: 0;
+  }
+
+  &.text-left {
+    align-items: flex-start;
+    left: 0;
+  }
+}
+
+.catalog-item--high {
+  .catalog-item__image {
+    &.text-right {
+      width: 80%;
+    }
+
+    &.text-left {
+      width: 80%;
+    }
+  }
+}
+
+.catalog-item--normal.catalog-item--center {
+  .catalog-item__image {
+    margin-top: 33px;
   }
 }
 
@@ -2244,7 +2288,7 @@ textarea.form__field {
 
 .catalog__discount {
   color: #fff;
-  border: 2px solid #fff;
+  border: 1px solid #fff;
   padding: 25px 90px;
 
   h4 {
@@ -2310,6 +2354,11 @@ textarea.form__field {
   padding-right: 40%;
 }
 
+.catalog-item--left {
+  padding-left: 40%;
+  text-align: right;
+}
+
 .catalog-item--high {
   min-height: 760px;
 }
@@ -2320,7 +2369,7 @@ textarea.form__field {
   }
 
   .catalog-item {
-    padding: 40px;
+    padding: 40px 0 0;
     min-height: 320px;
 
     &--high {
@@ -2329,6 +2378,10 @@ textarea.form__field {
       .catalog-item__image {
         height: 500px;
       }
+    }
+
+    h3, p {
+      padding: 0 40px;
     }
 
     h3 {
@@ -2341,7 +2394,7 @@ textarea.form__field {
   }
 
   .catalog-item__image {
-    height: 220px;
+    height: 175px;
   }
 }
 
@@ -2375,7 +2428,7 @@ textarea.form__field {
   }
 
   .catalog-item {
-    padding: 25px 30px 0;
+    padding: 25px 0 0;
     min-height: 206px;
     margin-bottom: 25px;
 
@@ -2394,6 +2447,11 @@ textarea.form__field {
       }
     }
 
+    h3, p {
+      padding: 0 30px;
+    }
+
+
     h3 {
       font-size: 20px;
       margin-bottom: 5px;
@@ -2405,7 +2463,8 @@ textarea.form__field {
   }
 
   .catalog-item__image {
-    height: 70px;
+    height: 113px;
+    margin-top: 20px !important;
 
     &.text-right {
       height: 140px
@@ -2433,9 +2492,14 @@ textarea.form__field {
   }
 
   .catalog-item {
-    padding: 20px 20px 0;
+    text-align: left;
+    padding: 20px 0 0 !important;
     min-height: 0;
     height: auto;
+
+    h3, p {
+      padding: 0 20px;
+    }
 
     h3 {
       font-size: 18px;
@@ -2461,11 +2525,10 @@ textarea.form__field {
 
   .catalog-item__image {
     height: auto;
-    position: relative;
+    position: relative !important;
     padding: 0;
-    width: auto;
-    margin-left: -20px;
-    margin-right: -20px;
+    flex: none;
+    width: 100% !important;
   }
 
   .catalog__discount {
@@ -2695,7 +2758,7 @@ textarea.form__field {
       text-decoration: none;
       letter-spacing: 0.3px;
       border: 0;
-      border-bottom: 2px solid transparent;
+      border-bottom: 1px solid transparent;
 
 
       &:focus {
@@ -2705,7 +2768,7 @@ textarea.form__field {
 
       &:hover, &.active, &:active {
         text-decoration: none;
-        border-bottom: 2px solid #fff;
+        border-bottom: 1px solid #fff;
       }
     }
   }
@@ -2751,7 +2814,7 @@ textarea.form__field {
   }
 
   //&:hover {
-  //  color: #d2205c;
+  //  color: #282b2f;
   //
   //  &:before {
   //    opacity: 0;
@@ -3107,7 +3170,6 @@ textarea.form__field {
 
 .main-title__date {
   font-size: 16px;
-  color: #d2205c;
   padding-top: 23px;
 }
 
@@ -3128,7 +3190,7 @@ textarea.form__field {
   overflow: hidden;
   position: relative;
   min-width: 113px;
-  border: 2px solid #d8e6e5;
+  border: 1px solid #d8e6e5;
   margin-right: 33px;
 
   span {
@@ -3433,7 +3495,6 @@ textarea.form__field {
 
 .article-preview__date {
   font-size: 16px;
-  color: #d2205c;
   line-height: 1;
   margin-bottom: 6px;
 }
@@ -3479,7 +3540,7 @@ textarea.form__field {
 
 .page-control {
   border: 0;
-  color: #8d8d8d;
+  color: #282b2f;
   font-size: 20px;
   display: inline-block;
   position: relative;
@@ -3572,14 +3633,24 @@ textarea.form__field {
       border-radius: 25px;
       display: block;
       background-color: transparent !important;
-      color: #8d8d8d;
+      color: #282b2f;
       line-height: 47px;
       padding: 0;
       margin-left: 0;
+    }
 
+    >a {
       &:hover, &:focus {
         background: none;
         color: #d2205c;
+        border-color: rgba(#d2205c, 0);
+      }
+    }
+
+    >span {
+      &:hover, &:focus {
+        background: none;
+        color: inherit;
         border-color: rgba(#d2205c, 0);
       }
     }
@@ -3707,7 +3778,7 @@ textarea.form__field {
 
 .page-back__link {
   border: 0;
-  color: #646b75;
+  color: #282b2f;
   font-size: 20px;
   display: inline-block;
   position: relative;
@@ -4296,7 +4367,7 @@ textarea.form__field {
   position: absolute;
   background: white no-repeat center;
   background-size: cover;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 50%;
   width: 100%;
   height: 100%;
@@ -4384,7 +4455,7 @@ textarea.form__field {
 a.page-nav__prev,
 a.page-nav__next {
   &:hover {
-    background: #d2205c;
+    background: rgba(0, 0, 0, .4);
     color: #fff;
 
     .page-nav__image{
@@ -4543,14 +4614,14 @@ a.page-nav__next {
       font-size: 14px;
 
       &:hover {
-        background: #d2205c;
+        background: #565e69;
         color: #fff;
       }
     }
 
     &.is-active {
       a {
-        background: #d2205c;
+        background: #565e69;
         color: #fff;
       }
     }
@@ -5240,10 +5311,6 @@ a.page-nav__next {
 }
 
 
-
-/*************************************************
-*                    partners                    *
-*************************************************/
 .b-partners {
   .main-title {
     max-width: 100%;
@@ -5259,8 +5326,8 @@ a.page-nav__next {
 
   &.open {
     .dropdown__button {
-      border-bottom-color: #d2205c;
-      box-shadow: 0 1px 0 0 #d2205c;
+      border-bottom-color: #282b2f;
+      box-shadow: 0 1px 0 0 #282b2f;
       color: #000;
 
       &:before {
@@ -5297,7 +5364,7 @@ a.page-nav__next {
     width: 0;
     height: 0;
     border: 3px solid transparent;
-    border-top-color: #d3225d;
+    border-top-color: #282b2f;
     margin-left: 5px;
     transition: all 0.3s;
     transform-origin: 50% 13%;
@@ -5309,8 +5376,8 @@ a.page-nav__next {
   }
 
   &:hover {
-    border-bottom-color: #d2205c;
-    box-shadow: 0 1px 0 0 #d2205c;
+    border-bottom-color: #282b2f;
+    box-shadow: 0 1px 0 0 #282b2f;
     color: #000;
     text-decoration: none;
   }
@@ -5343,7 +5410,7 @@ a.page-nav__next {
   }
 
   h4 {
-    color: #d2205c;
+    color: #282b2f;
     font-size: 16px;
     text-transform: uppercase;
   }
@@ -5967,7 +6034,7 @@ a.page-nav__next {
 
     &.active {
       span {
-        border: 2px solid rgba(#e2e2e2, 1);
+        border: 1px solid rgba(#e2e2e2, 1);
 
         img {
           filter: none;
@@ -5980,7 +6047,7 @@ a.page-nav__next {
       display: none;
 
       &:checked + span {
-        border: 2px solid rgba(#e2e2e2, 1);
+        border: 1px solid rgba(#e2e2e2, 1);
 
         img {
           filter: none;
@@ -5995,7 +6062,7 @@ a.page-nav__next {
 
     span {
       display: block;
-      border: 2px solid rgba(#e2e2e2, 0);
+      border: 1px solid rgba(#e2e2e2, 0);
       border-radius: 25px;
       height: 80px;
       font-size: 0;
@@ -6317,7 +6384,7 @@ a.page-nav__next {
     img {
       display: inline-block;
       transition: all 0.3s;
-      border-bottom: 2px solid rgba(#ebebeb, 0);
+      border-bottom: 1px solid rgba(#ebebeb, 0);
     }
 
     &.slick-current {
@@ -6407,10 +6474,10 @@ a.page-nav__next {
   color: #8d8d8d;
   display: inline-block;
   padding: 5px 18px 4px;
-  border-top: 2px solid rgba(#c51e55, 0);
+  border-top: 1px solid rgba(#c51e55, 0);
 
   &:hover {
-    border-top: 2px solid rgba(#c51e55, 0);
+    border-top: 1px solid rgba(#c51e55, 0);
     color: #c51e55;
   }
 }
@@ -7410,7 +7477,7 @@ a.page-nav__next {
         display: inline-block;
         border-radius: 25px;
         padding: 0 35px;
-        border: 2px solid rgba(#e2e2e2, 0);
+        border: 1px solid rgba(#e2e2e2, 0);
         letter-spacing: -0.3px;
 
         &:hover,
