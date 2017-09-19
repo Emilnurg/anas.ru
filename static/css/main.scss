@@ -2239,7 +2239,7 @@ textarea.form__field {
     margin-top: -70px;
     padding: 0;
     position: absolute;
-    flex-direction: row;
+    flex-direction: inherit;
     bottom: 0;
     width: 40%;
   }
