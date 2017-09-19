@@ -468,8 +468,8 @@ textarea.form__field {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  -ms-flex-pack: center;
   align-items: center;
+  -ms-flex-pack: center;
 
   .btn {
     margin-right: 25px;
@@ -744,8 +744,8 @@ textarea.form__field {
     display: -webkit-flex;
     display: flex;
     justify-content: space-between;
-    -ms-flex-pack: center;
     align-items: center;
+    -ms-flex-pack: center;
 
     &:before, &:after {
       display: none;
@@ -1176,8 +1176,8 @@ textarea.form__field {
 
     .container {
       justify-content: space-between;
-      -ms-flex-pack: center;
       align-items: center;
+      -ms-flex-pack: center;
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
@@ -2212,18 +2212,18 @@ textarea.form__field {
   display: -webkit-flex;
   display: flex;
   flex-direction: column;
-  -ms-flex-pack: center;
   align-items: center;
-  -ms-flex-align: end;
+  -ms-flex-pack: center;
   justify-content: flex-end;
+  -ms-flex-align: end;
 
   .catalog-item--high.catalog-item--vert-padding_bottom & {
     padding-bottom: 50px;
   }
 
   .catalog-item--vert-middle & {
-    -ms-flex-align: center;
     justify-content: center;
+    -ms-flex-align: center;
   }
 
   img {
@@ -2249,8 +2249,8 @@ textarea.form__field {
   }
 
   &.text-left {
-    -ms-flex-align: start;
     align-items: flex-start;
+    -ms-flex-align: start;
     left: 0;
   }
 }
@@ -2344,10 +2344,10 @@ textarea.form__field {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    -ms-flex-align: center;
     justify-content: center;
-    -ms-flex-pack: center;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-pack: center;
 
     &:before, &:after {
       display: none;
@@ -3208,8 +3208,8 @@ textarea.form__field {
   max-width: 685px;
   margin: 0 auto;
   width: 100%;
-  -ms-flex-pack: center;
   align-items: center;
+  -ms-flex-pack: center;
 }
 
 .quote__photo {
@@ -4323,8 +4323,8 @@ textarea.form__field {
   display: flex;
   justify-content: space-between;
   font-size: 16px;
-  -ms-flex-align: start;
   align-items: flex-start;
+  -ms-flex-align: start;
   margin-bottom: 5px;
 }
 
@@ -4525,8 +4525,8 @@ a.page-nav__next {
   height: 100%;
 
   &--center {
-    -ms-flex-align: center;
     justify-content: center;
+    -ms-flex-align: center;
   }
 }
 
@@ -6206,8 +6206,8 @@ a.page-nav__next {
     display: -webkit-flex;
     display: flex;
     justify-content: space-between;
-    -ms-flex-align: start;
     align-items: flex-start;
+    -ms-flex-align: start;
     flex-wrap: wrap;
     margin-bottom: 0;
   }
@@ -6394,9 +6394,9 @@ a.page-nav__next {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    -ms-flex-align: center;
     justify-content: center;
     align-items: flex-end;
+    -ms-flex-align: center;
     height: auto;
     max-height: 400px;
 
@@ -6637,8 +6637,8 @@ a.page-nav__next {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  -ms-flex-align: end;
   align-items: flex-end;
+  -ms-flex-align: end;
   width: 100%;
   height: 100%;
 
@@ -6673,8 +6673,8 @@ a.page-nav__next {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  -ms-flex-align: end;
   align-items: flex-end;
+  -ms-flex-align: end;
 
   img {
     max-width: 100%;
