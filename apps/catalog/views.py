@@ -86,9 +86,9 @@ class ProductCategoryView(BaseTemplateView):
                 'catalog:catalog_index', kwargs={'lang': kwargs.get('lang')}
             )
         elif current_category.is_root_node():
-            request.active_url = current_category.get_absolute_url()
+            request.active_url = current_category.get_absolute_url(kwargs.get('lang'))
         else:
-            request.active_url = current_category.get_root().get_absolute_url()
+            request.active_url = current_category.get_root().get_absolute_url(kwargs.get('lang'))
 
         kwargs.update(
             back_link=back_link,

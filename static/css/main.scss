@@ -572,11 +572,11 @@ textarea.form__field {
 }
 
 .header-wrap {
-  background: #565e69;
+  background: #fff;
 }
 
 .header {
-  background: #565e69;
+  background: #fff;
   position: relative;
   z-index: 101;
   width: 100%;
@@ -585,9 +585,12 @@ textarea.form__field {
   @include f300;
 }
 
+.header__top {
+  background: #565e69;
+}
+
 .header__menu {
   float: left;
-  margin-left: 125px;
 }
 
 .header__menu-list {
@@ -606,18 +609,33 @@ textarea.form__field {
     }
 
     a {
-      color: #fff;
       font-size: 14px;
       text-decoration: none;
       letter-spacing: 0.3px;
       padding: 0 0 3px;
       border-bottom: 1px solid transparent;
-
+      color: #fff;
 
       &:hover,
       &:active,
       &.active {
+        color: #fff;
         border-bottom: 1px solid #fff;
+      }
+    }
+  }
+}
+
+.header__mobile {
+  li {
+    a {
+      color: $base_color;
+
+      &:hover,
+      &:active,
+      &.active {
+        color: $active_color;
+        border-bottom: 1px solid $active_color;
       }
     }
   }
@@ -661,7 +679,7 @@ textarea.form__field {
     height: 15px;
     background: url(../images/ico_tel_white.svg) no-repeat 0 0;
     left: 0;
-    top: 50%;
+    top: 44%;
     margin-top: -7px;
   }
 }
@@ -670,6 +688,16 @@ textarea.form__field {
   margin-left: 34px;
   border: 0;
   white-space: nowrap;
+}
+
+.header-fixed {
+  .header__tel {
+    color: $base_color;
+
+    &:hover {
+      color: $active_color;
+    }
+  }
 }
 
 .email-link {
@@ -706,9 +734,9 @@ textarea.form__field {
 
 .header__callback {
   font-size: 14px;
-  color: #565e69;
+  color: #fff;
   border-radius: 20px;
-  background: #fff;
+  background: $active_color;
   line-height: 1;
   padding: 5px 16px;
   letter-spacing: 0.2px;
@@ -719,25 +747,24 @@ textarea.form__field {
   border: 0;
 
   &:focus {
+    background: $active_color_dark;
     text-decoration: none;
     color: #fff;
   }
 
   &:hover {
-    background: #CCC;
-    color: #565e69;;
+    background: $active_color_dark;
     text-decoration: none;
+    color: #fff;
   }
 
   &:active {
-    background: white;
-    color: #565e69;
+    color: #fff;
   }
 }
 
 .header__bottom {
   transition: all 0.3s;
-  color: #fff;
 
   >.container {
     display: -ms-flexbox;
@@ -770,8 +797,8 @@ textarea.form__field {
 .header__logo {
   vertical-align: middle;
   width: 105px;
-  margin: -25px 18px 18px 2px;
-  height: 54px;
+  margin: 10px 0 10px 2px;
+  height: 65px;
 
   img {
     transition: all 0.3s;
@@ -847,7 +874,7 @@ textarea.form__field {
 }
 
 .header__nav-link {
-  color: #fff;
+  color: $base_color;
   text-transform: uppercase;
   text-decoration: none;
   font-size: 14px;
@@ -866,26 +893,26 @@ textarea.form__field {
     width: 0;
     height: 0;
     border: 3px solid transparent;
-    border-top-color: #fff;
+    border-top-color: $active_color;
     transition: all 0.3s;
     transform-origin: 50% 13%;
   }
 
   &:focus {
-    color: #fff;
+    color: $active_color;
     text-decoration: none;
   }
 
   &:hover, &.active {
-    border-bottom-color: #fff;
-    color: #fff;
+    border-bottom-color: $active_color;
+    color: $active_color;
     text-decoration: none;
   }
 }
 
 .header__nav-dropdown {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
-  background: #565e69;
+  background: #fff;
   position: absolute;
   left: 50%;
   top: 100%;
@@ -918,8 +945,8 @@ textarea.form__field {
     line-height: 22px;
 
     a {
-      border-bottom: 1px solid #fff;
-      color: #fff;
+      border-bottom: 1px solid $base_color;
+      color: $base_color;
     }
   }
 
@@ -938,8 +965,8 @@ textarea.form__field {
 
       &.is-active {
         a {
-          color: #565e69;
-          background: #e2e2e2;
+          color: $active_color;
+          background: none;
         }
       }
     }
@@ -947,14 +974,14 @@ textarea.form__field {
     a {
       font-size: 14px;
       padding: 8px 28px;
-      color: #fff;
+      color: $base_color;
       border-radius: 17px;
       display: inline-block;
       border: 0;
 
       &:hover {
         background: #e2e2e2;
-        color: #565e69;
+        color: $active_color;
       }
     }
   }
@@ -966,7 +993,7 @@ textarea.form__field {
 }
 
 .search__toggle {
-  color: #fff;
+  color: $base_color;
   text-decoration: none;
   font-size: 14px;
   position: relative;
@@ -978,8 +1005,8 @@ textarea.form__field {
     position: absolute;
     width: 10px;
     height: 10px;
-    border-left: 1px solid #fff;
-    border-top: 1px solid #fff;
+    border-left: 1px solid $base_color;
+    border-top: 1px solid $base_color;
     left: -8px;
     transform: rotate(45deg);
     top: -2px;
@@ -996,7 +1023,7 @@ textarea.form__field {
 
   &:hover,
   &:active {
-    color: #fff;
+    color: $active_color;
     text-decoration: none;
   }
 
@@ -1010,7 +1037,7 @@ textarea.form__field {
       position: absolute;
       width: 10px;
       height: 11px;
-      background: url(../images/search_white.svg) no-repeat 0 0;
+      background: url(../images/search.svg) no-repeat 0 0;
       background-size: contain;
       left: 0;
       top: 50%;
@@ -1062,7 +1089,7 @@ textarea.form__field {
 }
 
 .lang__selected {
-  border: 1px solid #fff;
+  border: 1px solid $active_color;
   border-radius: 13px;
   font-size: 12px;
   text-transform: uppercase;
@@ -1071,7 +1098,7 @@ textarea.form__field {
   line-height: 24px;
   display: inline-block;
   position: relative;
-  color: #fff;
+  color: $active_color;
   cursor: pointer;
   transition: color 0.3s, border-color 0.3s;
 
@@ -1081,7 +1108,7 @@ textarea.form__field {
     width: 0;
     height: 0;
     border: 3px solid transparent;
-    border-top-color: #fff;
+    border-top-color: $active_color;
     right: 10px;
     top: 50%;
     margin-top: -2px;
@@ -1089,7 +1116,7 @@ textarea.form__field {
   }
 
   &:hover {
-    border-color: #fff;
+    border-color: $active_color_dark;
   }
 }
 
@@ -1098,7 +1125,7 @@ textarea.form__field {
   top: 100%;
   width: 100%;
   left: 0;
-  border: 1px solid #fff;
+  border: 1px solid $active_color;
   border-top-width: 0;
   font-size: 12px;
   border-radius: 0 0 13px 13px;
@@ -1122,12 +1149,12 @@ textarea.form__field {
       font-size: 12px;
       color: #565e69;
       display: block;
-      padding: 3px 12px;
+      padding: 2px 12px;
       border: 0;
 
       &:hover {
-        background: #565e69;
-        color: #fff;
+        background: #fff;
+        color: $active_color;
       }
     }
   }
@@ -1135,7 +1162,7 @@ textarea.form__field {
 
 .header__mobile {
   position: fixed;
-  background: #565e69;
+  background: #fff;
   width: 100%;
   height: 100%;
   left: 0;
@@ -1361,7 +1388,7 @@ textarea.form__field {
 }
 
 .header-fixed {
-  background: #565e69;
+  background: #fff;
   @include f300;
   position: fixed;
   top: 0;
@@ -1428,6 +1455,25 @@ textarea.form__field {
 
   .header__top {
     line-height: 0;
+    background: #fff;
+  }
+
+  .tel-link {
+    color: $base_color;
+
+    &:before {
+      background: url(../images/ico_tel_l.svg) no-repeat 0 0;
+    }
+  }
+
+  .header__mobile {
+    .tel-link {
+      color: #fff;
+
+      &:before {
+        background: url(../images/ico_tel_white.svg) no-repeat 0 0;
+      }
+    }
   }
 
   .header__logo--sm {
@@ -1502,6 +1548,28 @@ textarea.form__field {
         &.is-active {
           a {
             padding: 5px 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .header__mobile {
+    .header__nav-dropdown {
+      ul {
+        li {
+          a {
+            &:hover {
+              padding: 0;
+              background: none;
+              color: $active_color;
+            }
+          }
+
+          &.is-active {
+            a {
+              padding: 0;
+            }
           }
         }
       }
@@ -1728,7 +1796,7 @@ textarea.form__field {
   }
 
   &:active {
-    background: #282b2f;
+    background: $base_color;
 
     &:before, &:after {
       background: #fff;
@@ -2842,7 +2910,7 @@ textarea.form__field {
   }
 
   //&:hover {
-  //  color: #282b2f;
+  //  color: $base_color;
   //
   //  &:before {
   //    opacity: 0;
@@ -3573,7 +3641,7 @@ textarea.form__field {
 
 .page-control {
   border: 0;
-  color: #282b2f;
+  color: $base_color;
   font-size: 20px;
   display: inline-block;
   position: relative;
@@ -3666,7 +3734,7 @@ textarea.form__field {
       border-radius: 25px;
       display: block;
       background-color: transparent !important;
-      color: #282b2f;
+      color: $base_color;
       line-height: 47px;
       padding: 0;
       margin-left: 0;
@@ -3811,7 +3879,7 @@ textarea.form__field {
 
 .page-back__link {
   border: 0;
-  color: #282b2f;
+  color: $base_color;
   font-size: 20px;
   display: inline-block;
   position: relative;
@@ -5373,8 +5441,8 @@ a.page-nav__next {
 
   &.open {
     .dropdown__button {
-      border-bottom-color: #282b2f;
-      box-shadow: 0 1px 0 0 #282b2f;
+      border-bottom-color: $base_color;
+      box-shadow: 0 1px 0 0 $base_color;
       color: #000;
 
       &:before {
@@ -5411,7 +5479,7 @@ a.page-nav__next {
     width: 0;
     height: 0;
     border: 3px solid transparent;
-    border-top-color: #282b2f;
+    border-top-color: $base_color;
     margin-left: 5px;
     transition: all 0.3s;
     transform-origin: 50% 13%;
@@ -5423,8 +5491,8 @@ a.page-nav__next {
   }
 
   &:hover {
-    border-bottom-color: #282b2f;
-    box-shadow: 0 1px 0 0 #282b2f;
+    border-bottom-color: $base_color;
+    box-shadow: 0 1px 0 0 $base_color;
     color: #000;
     text-decoration: none;
   }
@@ -5459,7 +5527,7 @@ a.page-nav__next {
   }
 
   h4 {
-    color: #282b2f;
+    color: $base_color;
     font-size: 16px;
     text-transform: uppercase;
   }

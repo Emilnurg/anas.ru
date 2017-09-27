@@ -1,3 +1,7 @@
+$base_color: #282b2f;
+$active_color: #9e2250;
+$active_color_dark: darken($active_color, 5%);
+
 @mixin background-image-retina($file, $type) {
   background-image: url($file + '.' + $type);
 
