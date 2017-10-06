@@ -47,7 +47,7 @@ class ProductCategoryView(BaseTemplateView):
 
         manufacturers = models.Manufacturer.objects.published()\
             .filter(products__in=products_qs.values_list('id'))\
-            .order_by('ordering')\
+            .order_by('ordering', 'title')\
             .distinct()
 
         current_manufacturer = None
