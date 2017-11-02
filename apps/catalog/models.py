@@ -83,6 +83,10 @@ class ProductCategory(ImageMixin, BaseModel, MPTTModel):
             'catalog:category' if page is None else 'catalog:category_with_page', kwargs=kwargs
         )
 
+    def save(self, *args, **kwargs):
+        super(ProductCategory, self).save(*args, **kwargs)
+        self._tree_manager.rebuild()
+
 
 ProductCategory._meta.get_field('level').verbose_name = _('Уровень')
 
