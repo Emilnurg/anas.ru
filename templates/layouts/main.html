@@ -82,6 +82,7 @@
 								</a>
 								{%- endif -%}
 
+
 								{%- if var('CALLBACK_REQUEST_TEXT', request) -%}
 								<a href="javascript:"
 									 data-fancybox
@@ -408,6 +409,12 @@
         </div>
       </footer>
 			{%- endblock FOOTER -%}
+    </div>
+
+    <div class="cookie-bar">
+      <p>{{ var('COOKIE_BAR_TEXT', request) }}</p>
+      <a href="javascript:" class="btn btn--black cookie-close">Принять и закрыть</a>
+      <button class="cookie-bar__close cookie-close"></button>
     </div>
 
 		<a href="javascript:"

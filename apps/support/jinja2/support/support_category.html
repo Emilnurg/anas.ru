@@ -69,6 +69,13 @@
 							<div class="form__err"></div>
 						</div>
 					</div>
+
+          {%- if var('FORM_PRIVACE_TEXT', request) -%}
+            <div class="form__privacy">
+              <p>{{- var('FORM_PRIVACE_TEXT', request) -}}</p>
+            </div>
+          {% endif %}
+
 					<div class="form__button">
 						<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 					</div>

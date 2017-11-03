@@ -5,268 +5,288 @@
 {%- block BODY_CLASSES %}body-training-course{% endblock -%}
 
 {%- block PAGE_CONTENT -%}
-<div class="b-course">
-	<div class="container">
-		<div class="page-back">
-			<a href="{{ list_url }}" class="page-back__link">
-				{%- if category -%}
-				{{- category.title -}}
-				{%- else -%}
-				{{- var('TRAINING_TITLE', request) -}}
-				{%- endif -%}
-			</a>
-		</div>
-		<div class="main-title">
-			<h1>{{ current_course.title }}</h1>
-		</div>
+  <div class="b-course">
+    <div class="container">
+      <div class="page-back">
+        <a href="{{ list_url }}" class="page-back__link">
+          {%- if category -%}
+            {{- category.title -}}
+          {%- else -%}
+            {{- var('TRAINING_TITLE', request) -}}
+          {%- endif -%}
+        </a>
+      </div>
+      <div class="main-title">
+        <h1>{{ current_course.title }}</h1>
+      </div>
 
-		{%- if current_course.participants_count or current_course.price or current_course.city_id or current_course.date_start or current_course.is_enroll_button -%}
-		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				<div class="b-course__header">
-					{%- if current_course.participants_count or current_course.price or current_course.city_id -%}
-					<ul class="b-course__info">
-						{%- if current_course.participants_count -%}
-						<li>
-							{{- var('COURSE_PARTICIPANTS_COUNT_LABEL', request) }}:&nbsp;
-							{{- current_course.participants_count -}}
-						</li>
-						{%- endif -%}
+      {%- if current_course.participants_count or current_course.price or current_course.city_id or current_course.date_start or current_course.is_enroll_button -%}
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="b-course__header">
+              {%- if current_course.participants_count or current_course.price or current_course.city_id -%}
+                <ul class="b-course__info">
+                  {%- if current_course.participants_count -%}
+                    <li>
+                      {{- var('COURSE_PARTICIPANTS_COUNT_LABEL', request) }}:&nbsp;
+                      {{- current_course.participants_count -}}
+                    </li>
+                  {%- endif -%}
 
-						{%- if current_course.price -%}
-						<li>
-							{{- var('COURSE_PRICE_LABEL', request) }}:&nbsp;
-							{{- current_course.price|intcomma }}&nbsp;
-							{{- var('RUR', request) -}}
-						</li>
-						{%- endif -%}
+                  {%- if current_course.price -%}
+                    <li>
+                      {{- var('COURSE_PRICE_LABEL', request) }}:&nbsp;
+                      {{- current_course.price|intcomma }}&nbsp;
+                      {{- var('RUR', request) -}}
+                    </li>
+                  {%- endif -%}
 
-						{%- if current_course.city_id -%}
-						<li>
-							{{- var('COURSE_LOCATION_LABEL', request) }}:&nbsp;
-							{{- current_course.city.title -}}
-						</li>
-						{%- endif -%}
-					</ul>
-					{%- endif -%}
+                  {%- if current_course.city_id -%}
+                    <li>
+                      {{- var('COURSE_LOCATION_LABEL', request) }}:&nbsp;
+                      {{- current_course.city.title -}}
+                    </li>
+                  {%- endif -%}
+                </ul>
+              {%- endif -%}
 
-					{%- if current_course.date_start -%}
-					<p>
-						{{- var('COURSE_STARTS_SINCE', request) -}}
-						&nbsp;{{ current_course.date_start|date('d E') -}}
-					</p>
-					{%- endif -%}
+              {%- if current_course.date_start -%}
+                <p>
+                  {{- var('COURSE_STARTS_SINCE', request) -}}
+                  &nbsp;{{ current_course.date_start|date('d E') -}}
+                </p>
+              {%- endif -%}
 
-					{%- if current_course.is_enroll_button -%}
-					<a href="#form" class="btn btn--black">{{ var('COURSE_ENROLL_BUTTON', request) }}</a>
-					{%- endif -%}
-				</div>
-			</div>
-		</div>
-		{%- endif -%}
-	</div>
-</div>
+              {%- if current_course.is_enroll_button -%}
+                <a href="#form"
+                   class="btn btn--black">{{ var('COURSE_ENROLL_BUTTON', request) }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
 
-{%- if current_course.body_about or teachers or current_course.body_detail or current_course.body_schedule or schedule -%}
-<div class="b-course-tabs">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-				<div class="course-tabs">
-					{%- if current_course.body_about or teachers -%}
-					<div class="sld">
-						<a href="#course-about" data-toggle="tab">{{ var('COURSE_ABOUT_TAB', request) }}</a>
-					</div>
-					{%- endif -%}
+  {%- if current_course.body_about or teachers or current_course.body_detail or current_course.body_schedule or schedule -%}
+    <div class="b-course-tabs">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="course-tabs">
+              {%- if current_course.body_about or teachers -%}
+                <div class="sld">
+                  <a href="#course-about"
+                     data-toggle="tab">{{ var('COURSE_ABOUT_TAB', request) }}</a>
+                </div>
+              {%- endif -%}
 
-					{%- if current_course.body_detail -%}
-					<div class="sld">
-						<a href="#course-detail" data-toggle="tab">{{ var('COURSE_DETAILS_TAB', request) }}</a>
-					</div>
-					{%- endif -%}
+              {%- if current_course.body_detail -%}
+                <div class="sld">
+                  <a href="#course-detail"
+                     data-toggle="tab">{{ var('COURSE_DETAILS_TAB', request) }}</a>
+                </div>
+              {%- endif -%}
 
-					{%- if current_course.body_schedule or schedule -%}
-					<div class="sld">
-						<a href="#course-schedule" data-toggle="tab">{{ var('COURSE_SCHEDULE_TAB', request) }}</a>
-					</div>
-					{%- endif -%}
-				</div>
+              {%- if current_course.body_schedule or schedule -%}
+                <div class="sld">
+                  <a href="#course-schedule"
+                     data-toggle="tab">{{ var('COURSE_SCHEDULE_TAB', request) }}</a>
+                </div>
+              {%- endif -%}
+            </div>
 
-				<div class="tab-content">
-					{%- if current_course.body_about or teachers -%}
-					<div class="tab-pane fade" id="course-about">
-						{%- if current_course.body_about or about_blocks -%}
-						<div class="about-course">
-							{%- for about_block in about_blocks -%}
-							<dl>
-								<dt>{{ about_block.title }}</dt>
-								<dd>{{ about_block.description or '' }}</dd>
-							</dl>
-							{%- endfor -%}
+            <div class="tab-content">
+              {%- if current_course.body_about or teachers -%}
+                <div class="tab-pane fade" id="course-about">
+                  {%- if current_course.body_about or about_blocks -%}
+                    <div class="about-course">
+                      {%- for about_block in about_blocks -%}
+                        <dl>
+                          <dt>{{ about_block.title }}</dt>
+                          <dd>{{ about_block.description or '' }}</dd>
+                        </dl>
+                      {%- endfor -%}
 
-							{%- if current_course.body_about -%}
-							<div class="content-block">
-								{{- current_course.body_about|preprocess_content -}}
-							</div>
-							{%- endif -%}
-						</div>
-						{%- endif -%}
+                      {%- if current_course.body_about -%}
+                        <div class="content-block">
+                          {{- current_course.body_about|preprocess_content -}}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
 
-						{%- if teachers -%}
-						<div class="lecturer">
-							<div class="lecturer__left">
-								{%- for teacher in teachers -%}
-								<div class="lecturer__info">
-									{%- if teacher.teacher.image -%}
-									<div class="lecturer__photo">
-										<span style="background-image: url({{ teacher.teacher|cropped_thumbnail('image_thumb') }})"></span>
-									</div>
-									{%- endif -%}
+                  {%- if teachers -%}
+                    <div class="lecturer">
+                      <div class="lecturer__left">
+                        {%- for teacher in teachers -%}
+                          <div class="lecturer__info">
+                            {%- if teacher.teacher.image -%}
+                              <div class="lecturer__photo">
+                                <span
+                                    style="background-image: url({{ teacher.teacher|cropped_thumbnail('image_thumb') }})"></span>
+                              </div>
+                            {%- endif -%}
 
-									{%- if teacher.teacher_role -%}
-									<div class="lecturer__name">{{ teacher.teacher_role }}</div>
-									{%- endif -%}
+                            {%- if teacher.teacher_role -%}
+                              <div class="lecturer__name">{{ teacher.teacher_role }}</div>
+                            {%- endif -%}
 
-									<div class="lecturer__descr">{{ teacher.teacher.title }}</div>
-									{#- <a href="javascript:" class="lecturer__link">{{ var('COURSE_ABOUT_TEACHER_BUTTON', request) }}</a> -#}
-								</div>
-								{%- endfor -%}
-							</div>
+                            <div class="lecturer__descr">{{ teacher.teacher.title }}</div>
+                            {#- <a href="javascript:" class="lecturer__link">{{ var('COURSE_ABOUT_TEACHER_BUTTON', request) }}</a> -#}
+                          </div>
+                        {%- endfor -%}
+                      </div>
 
-							{%- if current_course.bg -%}
-							<div class="lecturer__right">
-								<div class="lecturer__image">
-									<img src="{{ current_course.bg.url }}" class="img-responsive" alt=""/>
-								</div>
-							</div>
-							{%- endif -%}
+                      {%- if current_course.bg -%}
+                        <div class="lecturer__right">
+                          <div class="lecturer__image">
+                            <img src="{{ current_course.bg.url }}" class="img-responsive" alt=""/>
+                          </div>
+                        </div>
+                      {%- endif -%}
 
-						</div>
-						{%- endif -%}
-					</div>
-					{%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
 
-					{%- if current_course.body_detail -%}
-					<div class="tab-pane fade" id="course-detail">
-						<div class="content-block">{{ current_course.body_detail|preprocess_content }}</div>
+              {%- if current_course.body_detail -%}
+                <div class="tab-pane fade" id="course-detail">
+                  <div
+                      class="content-block">{{ current_course.body_detail|preprocess_content }}</div>
 
-						{%- if current_course.detail_bg -%}
-						<div class="lecturer__img">
-							<img src="{{ current_course.detail_bg.url }}" class="img-responsive" alt=""/>
-						</div>
-						{%- endif -%}
+                  {%- if current_course.detail_bg -%}
+                    <div class="lecturer__img">
+                      <img src="{{ current_course.detail_bg.url }}" class="img-responsive" alt=""/>
+                    </div>
+                  {%- endif -%}
 
-					</div>
-					{%- endif -%}
+                </div>
+              {%- endif -%}
 
-					{%- if current_course.body_schedule or schedule -%}
-					<div class="tab-pane fade" id="course-schedule">
-						<div class="schedule">
-							{%- if current_course.body_schedule -%}
-							<div class="schedule__head">
-								{{- current_course.body_schedule -}}
-							</div>
-							{%- endif -%}
+              {%- if current_course.body_schedule or schedule -%}
+                <div class="tab-pane fade" id="course-schedule">
+                  <div class="schedule">
+                    {%- if current_course.body_schedule -%}
+                      <div class="schedule__head">
+                        {{- current_course.body_schedule -}}
+                      </div>
+                    {%- endif -%}
 
-							{%- if schedule -%}
-							<div class="schedule__body">
-								{%- for row in schedule -%}
-								<dl class="schedule__line">
-									<dt>{{ row.period }}</dt>
-									<dd>{{ row.title }}</dd>
-								</dl>
-								{%- endfor -%}
-							</div>
-							{%- endif -%}
-						</div>
-					</div>
-					{%- endif -%}
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-{%- endif -%}
+                    {%- if schedule -%}
+                      <div class="schedule__body">
+                        {%- for row in schedule -%}
+                          <dl class="schedule__line">
+                            <dt>{{ row.period }}</dt>
+                            <dd>{{ row.title }}</dd>
+                          </dl>
+                        {%- endfor -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
 
-{%- if current_course.is_enroll_button -%}
-<div class="b-feedback b-feedback--education">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6">
-				<div class="b-feedback__text">
-					<h4>{{ var('COURSE_TRAINING_TITLE', request) }}</h4>
-					<p>{{ var('COURSE_TRAINING_SUBTITLE', request) }}</p>
-				</div>
-			</div>
-			<div class="col-lg-6">
-				<a name="form"></a>
-				<form action="{{ url('forms:training', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
-							{{- csrf_input -}}
-					<div class="form__heading">
-						<h4>{{ var('COURSE_ENROLL_FORM_TITLE', request) }}</h4>
-						<p>{{ var('COURSE_ENROLL_FORM_SUBTITLE', request) }}</p>
-						<div class="messages"></div>
-					</div>
+  {%- if current_course.is_enroll_button -%}
+    <div class="b-feedback b-feedback--education">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="b-feedback__text">
+              <h4>{{ var('COURSE_TRAINING_TITLE', request) }}</h4>
+              <p>{{ var('COURSE_TRAINING_SUBTITLE', request) }}</p>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <a name="form"></a>
+            <form action="{{ url('forms:training', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+                  class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
+              {{- csrf_input -}}
+              <div class="form__heading">
+                <h4>{{ var('COURSE_ENROLL_FORM_TITLE', request) }}</h4>
+                <p>{{ var('COURSE_ENROLL_FORM_SUBTITLE', request) }}</p>
+                <div class="messages"></div>
+              </div>
 
-					<div class="form__content">
-						<input type="hidden" name="course" value="{{ current_course.pk }}">
-						<div class="form__group">
-							<input type="text" name="name" class="form__field required" id="feedback_name"/>
-							<label for="feedback_name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}<span class="req">*</span></label>
-							<div class="form__err"></div>
-						</div>
+              <div class="form__content">
+                <input type="hidden" name="course" value="{{ current_course.pk }}">
+                <div class="form__group">
+                  <input type="text" name="name" class="form__field required" id="feedback_name"/>
+                  <label for="feedback_name"
+                         class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}<span
+                      class="req">*</span></label>
+                  <div class="form__err"></div>
+                </div>
 
-						<div class="form__group">
-							<input type="text" name="telephone" class="form__field required" id="feedback_telephone"/>
-							<label for="feedback_telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}<span class="req">*</span></label>
-							<div class="form__err"></div>
-						</div>
-					</div>
+                <div class="form__group">
+                  <input type="text" name="telephone" class="form__field required"
+                         id="feedback_telephone"/>
+                  <label for="feedback_telephone"
+                         class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}<span
+                      class="req">*</span></label>
+                  <div class="form__err"></div>
+                </div>
+              </div>
 
-					<div class="form__button">
-						<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-{%- endif -%}
+              {%- if var('FORM_PRIVACE_TEXT', request) -%}
+                <div class="form__privacy">
+                  <p>{{- var('FORM_PRIVACE_TEXT', request) -}}</p>
+                </div>
+              {% endif %}
 
-{%- if siblings -%}
-<div class="page-nav">
-	{%- if siblings[0] -%}
-	<a href="{{ siblings[0].get_absolute_url(lang) }}" class="page-nav__prev">
-		<div class="page-nav__text page-nav__text--center">
-			<div class="page-nav__name">{{ siblings[0].title }}</div>
-			<div class="page-nav__arrow"></div>
-		</div>
-		{%- if siblings[0].image -%}
-		<div class="page-nav__image">
-			<span style="background-image: url({{ siblings[0]|cropped_thumbnail('thumb_siblings') }})"></span>
-		</div>
-		{%- endif -%}
-	</a>
-	{%- else -%}
-	<span class="page-nav__prev"></span>
-	{%- endif -%}
+              <div class="form__button">
+                <button type="submit"
+                        class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
 
-	{%- if siblings[1] -%}
-	<a href="{{ siblings[1].get_absolute_url(lang) }}" class="page-nav__next">
-		<div class="page-nav__text page-nav__text--center">
-			<div class="page-nav__name">{{ siblings[1].title }}</div>
-			<div class="page-nav__arrow"></div>
-		</div>
-		{%- if siblings[1].image -%}
-		<div class="page-nav__image">
-			<span style="background-image: url({{ siblings[1]|cropped_thumbnail('thumb_siblings') }})"></span>
-		</div>
-		{%- endif -%}
-	</a>
-	{%- else -%}
-	<span class="page-nav__next"></span>
-	{%- endif -%}
-</div>
-{%- endif -%}
+  {%- if siblings -%}
+    <div class="page-nav">
+      {%- if siblings[0] -%}
+        <a href="{{ siblings[0].get_absolute_url(lang) }}" class="page-nav__prev">
+          <div class="page-nav__text page-nav__text--center">
+            <div class="page-nav__name">{{ siblings[0].title }}</div>
+            <div class="page-nav__arrow"></div>
+          </div>
+          {%- if siblings[0].image -%}
+            <div class="page-nav__image">
+              <span
+                  style="background-image: url({{ siblings[0]|cropped_thumbnail('thumb_siblings') }})"></span>
+            </div>
+          {%- endif -%}
+        </a>
+      {%- else -%}
+        <span class="page-nav__prev"></span>
+      {%- endif -%}
+
+      {%- if siblings[1] -%}
+        <a href="{{ siblings[1].get_absolute_url(lang) }}" class="page-nav__next">
+          <div class="page-nav__text page-nav__text--center">
+            <div class="page-nav__name">{{ siblings[1].title }}</div>
+            <div class="page-nav__arrow"></div>
+          </div>
+          {%- if siblings[1].image -%}
+            <div class="page-nav__image">
+              <span
+                  style="background-image: url({{ siblings[1]|cropped_thumbnail('thumb_siblings') }})"></span>
+            </div>
+          {%- endif -%}
+        </a>
+      {%- else -%}
+        <span class="page-nav__next"></span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
 {%- endblock -%}

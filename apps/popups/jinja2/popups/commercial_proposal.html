@@ -1,52 +1,63 @@
 <div id="modal" class="modal modal--ajax modal--form modal-commercial-porposal">
   <div class="modal__inner">
     <form action="{{ url('forms:product_proposal', kwargs={'lang': request.LANGUAGE_CODE}) }}"
-					class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
-			{{- csrf_input -}}
+          class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
+      {{- csrf_input -}}
       <div class="form__heading">
         <h4>{{ var('POPUP_GET_COMMERCIAL_PROPOSAL', request) }}</h4>
         <p>
           {{- var('POPUP_GET_COMMERCIAL_PROPOSAL_SUBTITLE', request) -}}
           <span>{{ current_product.title }}</span>
         </p>
-				<div class="messages"></div>
+        <div class="messages"></div>
       </div>
 
       <div class="form__content">
-				<input type="hidden" name="product" value="{{ current_product.pk }}"/>
+        <input type="hidden" name="product" value="{{ current_product.pk }}"/>
 
         <div class="form__group">
           <input type="text" name="name" class="form__field required" id="popup-cp-name">
-          <label for="popup-cp-name" class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}<span class="req">*</span></label>
-					<div class="form__err"></div>
+          <label for="popup-cp-name"
+                 class="form__placeholder">{{ var('FORM_NAME_LABEL', request) }}<span
+              class="req">*</span></label>
+          <div class="form__err"></div>
         </div>
 
         <div class="form__group">
           <input type="text" name="telephone" class="form__field required" id="popup-cp-telephone">
-          <label for="popup-cp-telephone" class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}<span class="req">*</span></label>
-					<div class="form__err"></div>
+          <label for="popup-cp-telephone"
+                 class="form__placeholder">{{ var('FORM_PHONE_LABEL', request) }}<span class="req">*</span></label>
+          <div class="form__err"></div>
         </div>
 
         <div class="form__group">
           <input type="text" name="email" class="form__field required" id="popup-cp-email">
-          <label for="popup-cp-email" class="form__placeholder">{{ var('FORM_EMAIL_LABEL', request) }}<span class="req">*</span></label>
-					<div class="form__err"></div>
+          <label for="popup-cp-email"
+                 class="form__placeholder">{{ var('FORM_EMAIL_LABEL', request) }}<span class="req">*</span></label>
+          <div class="form__err"></div>
         </div>
       </div>
 
-			<div class="form__button">
-        <button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
+      {%- if var('FORM_PRIVACE_TEXT', request) -%}
+        <div class="form__privacy">
+          <p>{{- var('FORM_PRIVACE_TEXT', request) -}}</p>
+        </div>
+      {% endif %}
+
+      <div class="form__button">
+        <button type="submit"
+                class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
       </div>
     </form>
   </div>
 
-	<script type="application/javascript">
-	$(document).ready(function() {
-	  maskedInput($('.modal-commercial-porposal'));
-		window.F.manageForm('.modal-commercial-porposal .form', function() {
-		  $('.modal-commercial-porposal [data-fancybox-close]').click();
-		  openThanksRequest();
-		});
-	});
-	</script>
+  <script type="application/javascript">
+    $(document).ready(function () {
+      maskedInput($('.modal-commercial-porposal'));
+      window.F.manageForm('.modal-commercial-porposal .form', function () {
+        $('.modal-commercial-porposal [data-fancybox-close]').click();
+        openThanksRequest();
+      });
+    });
+  </script>
 </div>

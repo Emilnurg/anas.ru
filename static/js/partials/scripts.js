@@ -1153,6 +1153,18 @@ $(document).ready(function() {
       return initPhotoswipe(this);
     });
   }
+
+  // cookie bar
+  var cookieBarCookieKey = 'cbc',
+    cookieBar = $('.cookie-bar');
+  $('.cookie-close').click(function () {
+    cookieBar.hide();
+    setCookie(cookieBarCookieKey, '1');
+  });
+
+  if (! getCookie(cookieBarCookieKey)) {
+    cookieBar.show();
+  }
 });
 
 /**
