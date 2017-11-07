@@ -40,10 +40,13 @@
 		<![endif]-->
 
 	  {%- block EXTRA_META %}{% endblock -%}
+		{{- var('BEFORE_HEAD_CLOSE', request) -}}
   </head>
 
   <body class="page skrollr-body {% block BODY_CLASSES %}{% endblock %}" id="top" style="opacity:0">
-    <div class="page__layout">
+		{{- var('EXACT_BODY_START', request) -}}
+
+		<div class="page__layout">
 			{%- block HEADER -%}
 			<div class="header-wrap">
 				<header class="header"
@@ -443,5 +446,8 @@
 
 		{%- block EXTRA_SCRIPTS %}{% endblock -%}
     {%- block EXTRA_BODY %}{% endblock -%}
+
+
+		{{- var('BEFORE_BODY_CLOSE', request) -}}
   </body>
 </html>
