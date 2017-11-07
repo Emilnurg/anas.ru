@@ -1189,9 +1189,8 @@ $(window).on('load', function(){
   } else if (body.hasClass('body-training-course')) {
     cont = $('.course-tabs');
     tabs = $('.sld', cont);
-    if (tabs.length > 1) {
-      tabs.first().find('a').click();
-    } else {
+    tabs.first().find('a').click();
+    if (tabs.length <= 1) {
       cont.hide();
     }
   }
