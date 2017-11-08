@@ -5273,8 +5273,8 @@ a.page-nav__next {
   div:nth-child(1) {
     position: absolute;
     width: 179px;
-    height: 490px;
-    background: url(../images/raster/service_parallax1.png) no-repeat 0 0;
+    height: 360px;
+    background: url(../images/raster/service_parallax1.png) no-repeat 0 100%;
     top: 0;
     right: 0;
   }
@@ -5285,6 +5285,12 @@ a.page-nav__next {
     background: url(../images/raster/service_parallax2.png) no-repeat 0 0;
     bottom: 0;
     left: 0;
+  }
+}
+
+@media (max-width: 1500px) {
+  .b-service__parallax {
+    display: none;
   }
 }
 

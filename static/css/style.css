@@ -231,7 +231,7 @@ td, th {
 
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+  -webkit-tap-highlight-color: transparent; }
 
 body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -7504,8 +7504,8 @@ a.page-nav__next:hover {
   .b-service__parallax div:nth-child(1) {
     position: absolute;
     width: 179px;
-    height: 490px;
-    background: url(../images/raster/service_parallax1.png) no-repeat 0 0;
+    height: 360px;
+    background: url(../images/raster/service_parallax1.png) no-repeat 0 100%;
     top: 0;
     right: 0; }
   .b-service__parallax div:nth-child(2) {
@@ -7516,6 +7516,9 @@ a.page-nav__next:hover {
     bottom: 0;
     left: 0; }
 
+@media (max-width: 1500px) {
+  .b-service__parallax {
+    display: none; } }
 .b-service__text {
   background: #fff;
   max-width: 1000px;
