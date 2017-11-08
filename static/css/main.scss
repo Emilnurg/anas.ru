@@ -769,6 +769,7 @@ textarea.form__field {
     display: -webkit-flex;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     &:before, &:after {
       display: none;

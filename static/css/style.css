@@ -4398,7 +4398,8 @@ textarea.form__field {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-between;
+    align-items: center; }
     .header__bottom > .container:before, .header__bottom > .container:after {
       display: none; }
 
