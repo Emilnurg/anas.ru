@@ -4422,8 +4422,8 @@ textarea.form__field {
   height: 65px; }
   .header__logo img {
     transition: all 0.3s;
-    max-width: 100%;
-    max-height: 100%;
+    width: 81px;
+    height: 65px;
     display: inline-block;
     vertical-align: initial; }
 
