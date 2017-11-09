@@ -75,12 +75,14 @@ class ProductDocumentInline(TranslationStackedInline):
     extra = 0
     fields = models.ProductDocument().collect_fields()
     model = models.ProductDocument
+    readonly_fields = ('created', 'updated')
     suit_classes = 'suit-tab suit-tab-docs'
 
 
 class BaseProductFeatureInline(TranslationTabularInline):
     """Характеристики продукта"""
     extra = 0
+    readonly_fields = ('created', 'updated')
     suit_classes = 'suit-tab suit-tab-features'
 
 
@@ -100,11 +102,8 @@ class ProductImageMainInline(ImageCroppingMixin, TranslationTabularInline):
     """Изображения продукта"""
     extra = 0
     fields = models.ProductImage().collect_fields()
-    if 'created' in fields:
-        fields.remove('created')
-    if 'updated' in fields:
-        fields.remove('updated')
     model = models.ProductImage
+    readonly_fields = ('created', 'updated')
     suit_classes = 'suit-tab suit-tab-images'
 
 
