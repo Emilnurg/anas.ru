@@ -101,6 +101,7 @@ class ProductImageMainInline(ImageCroppingMixin, TranslationTabularInline):
     extra = 0
     fields = models.ProductImage().collect_fields()
     model = models.ProductImage
+    readonly_fields = ('created', 'updated')
     suit_classes = 'suit-tab suit-tab-images'
 
 
