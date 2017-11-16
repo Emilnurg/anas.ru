@@ -37,3 +37,4 @@ class BaseArticleSectionInline(TranslationStackedInline):
     extra = 0
     ordering = ('ordering',)
     suit_classes = 'suit-tab suit-tab-sections'
+    readonly_fields = ('created', 'updated')
