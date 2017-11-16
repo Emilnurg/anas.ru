@@ -12,6 +12,7 @@ class AboutAdvantageInline(TranslationStackedInline):
     extra = 0
     fields = models.AboutAdvantage().collect_fields()
     model = models.AboutAdvantage
+    readonly_fields = ('created', 'updated')
 
 
 @admin.register(models.AboutPage)
@@ -44,6 +45,7 @@ class ServiceRequestOrderInline(TranslationStackedInline):
     extra = 0
     fields = models.ServiceRequestOrder().collect_fields()
     model = models.ServiceRequestOrder
+    readonly_fields = ('created', 'updated')
 
 
 @admin.register(models.ServiceCenterPage)

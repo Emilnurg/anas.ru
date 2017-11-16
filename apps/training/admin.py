@@ -18,6 +18,7 @@ class CourseAboutBlockInline(TranslationStackedInline):
     fields = models.CourseAboutBlock().collect_fields()
     model = models.CourseAboutBlock
     ordering = ('ordering',)
+    readonly_fields = ('created', 'updated')
     suit_classes = 'suit-tab suit-tab-about'
 
 
@@ -27,6 +28,7 @@ class CourseTeacherInline(TranslationStackedInline):
     fields = models.CourseTeacher().collect_fields()
     model = models.CourseTeacher
     ordering = ('ordering',)
+    readonly_fields = ('created', 'updated')
     suit_classes = 'suit-tab suit-tab-teachers'
 
 
@@ -36,6 +38,7 @@ class CourseScheduleInline(TranslationStackedInline):
     fields = models.CourseSchedule().collect_fields()
     model = models.CourseSchedule
     ordering = ('ordering',)
+    readonly_fields = ('created', 'updated')
     suit_classes = 'suit-tab suit-tab-schedule'
 
 

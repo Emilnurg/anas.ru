@@ -19,6 +19,7 @@ class RobotDisallowInline(admin.TabularInline):
     fields = models.RobotDisallow().collect_fields()
     model = models.RobotDisallow
     ordering = ('ordering',)
+    readonly_fields = ('created', 'updated')
 
 
 class RobotAllowInline(admin.TabularInline):
@@ -27,6 +28,7 @@ class RobotAllowInline(admin.TabularInline):
     fields = models.RobotAllow().collect_fields()
     model = models.RobotAllow
     ordering = ('ordering',)
+    readonly_fields = ('created', 'updated')
 
 
 class RobotCleanparamInline(admin.TabularInline):
@@ -35,6 +37,7 @@ class RobotCleanparamInline(admin.TabularInline):
     fields = models.RobotCleanparam().collect_fields()
     model = models.RobotCleanparam
     ordering = ('ordering',)
+    readonly_fields = ('created', 'updated')
 
 
 class RobotSitemapInline(admin.TabularInline):
@@ -43,6 +46,7 @@ class RobotSitemapInline(admin.TabularInline):
     fields = models.RobotSitemap().collect_fields()
     model = models.RobotSitemap
     ordering = ('ordering',)
+    readonly_fields = ('created', 'updated')
 
 
 @admin.register(models.Robot)
