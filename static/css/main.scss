@@ -1480,7 +1480,7 @@ textarea.form__field {
     left: 50%;
     width: auto;
     height: auto;
-    margin: 0 0 0 -52px;
+    margin: 0 0 0 -74px;
     transition: none;
 
     img {
@@ -1678,6 +1678,7 @@ textarea.form__field {
     padding: 0;
     margin-top: 12px;
     line-height: 24px;
+    float: left;
   }
 
   .search__toggle {
@@ -1688,6 +1689,7 @@ textarea.form__field {
 
   .menu-toggle {
     display: inline-block;
+    float: left;
   }
 }
 

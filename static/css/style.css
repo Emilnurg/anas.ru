@@ -4908,7 +4908,7 @@ textarea.form__field {
     left: 50%;
     width: auto;
     height: auto;
-    margin: 0 0 0 -52px;
+    margin: 0 0 0 -74px;
     transition: none; }
     .header__logo--sm img {
       width: 147px;
@@ -5031,13 +5031,15 @@ textarea.form__field {
     margin-left: 32px;
     padding: 0;
     margin-top: 12px;
-    line-height: 24px; }
+    line-height: 24px;
+    float: left; }
 
   .search__toggle:before {
     top: 9px; }
 
   .menu-toggle {
-    display: inline-block; } }
+    display: inline-block;
+    float: left; } }
 @media (max-width: 992px) {
   .header__tel {
     text-indent: -999px;
