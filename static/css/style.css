@@ -9614,6 +9614,11 @@ a.page-nav__next:hover {
   z-index: 1;
   opacity: 1; }
 
+.cookie-bar .cookie-bar__close {
+  padding: 0;
+  width: 18px;
+  height: 18px; }
+
 .modal .close:after,
 .modal .close:before,
 .cookie-bar .cookie-bar__close:after,
@@ -9629,6 +9634,10 @@ a.page-nav__next:hover {
   -ms-transform-origin: 0 0;
   transform-origin: 0 0;
   transition: all 0.3s; }
+
+.cookie-bar .cookie-bar__close:after,
+.cookie-bar .cookie-bar__close:before {
+  width: 24px; }
 
 .modal .close:before,
 .cookie-bar .cookie-bar__close:before {
