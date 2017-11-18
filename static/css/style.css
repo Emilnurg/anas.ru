@@ -4910,6 +4910,9 @@ textarea.form__field {
     height: auto;
     margin: 0 0 0 -52px;
     transition: none; }
+    .header__logo--sm img {
+      width: 147px;
+      height: 20px; }
 
   .header__contacts {
     padding: 13px 0; }
