@@ -24,6 +24,7 @@ class MenuItemInline(TranslationStackedInline):
     fields = models.MenuItem().collect_fields()
     model = models.MenuItem
     raw_id_fields = ('parent_item',)
+    readonly_fields = ('created', 'updated')
 
 
 @admin.register(models.Menu)

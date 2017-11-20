@@ -26,6 +26,7 @@ class GalleryPhotoInline(TranslationTabularInline):
     extra = 0
     fields = models.GalleryPhoto().collect_fields()
     model = models.GalleryPhoto
+    readonly_fields = ('created', 'updated')
 
 
 @admin.register(models.Gallery)
@@ -60,6 +61,7 @@ class HomeCatalogProductInline(admin.TabularInline):
     model = models.HomeCatalogProduct
     ordering = ('ordering',)
     raw_id_fields = ('product',)
+    readonly_fields = ('created', 'updated')
 
 
 class HomeCatalogManufacturerInline(admin.TabularInline):
@@ -68,6 +70,7 @@ class HomeCatalogManufacturerInline(admin.TabularInline):
     fields = models.HomeCatalogManufacturer().collect_fields()
     model = models.HomeCatalogManufacturer
     ordering = ('ordering',)
+    readonly_fields = ('created', 'updated')
 
 
 @admin.register(models.HomeCatalog)
