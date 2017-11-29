@@ -243,7 +243,8 @@ function waves() {
  */
 function masonry() {
   $('.catalog__row').masonry({
-    itemSelector: '.catalog__col'
+    itemSelector: '.catalog__col',
+    transitionDuration: 0
   });
 }
 
