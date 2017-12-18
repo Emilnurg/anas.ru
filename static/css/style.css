@@ -231,7 +231,7 @@ td, th {
 
 html {
   font-size: 10px;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -4014,7 +4014,8 @@ input::-webkit-clear-button {
 .medicon:before {
   content: "";
   background: transparent 50% 50% no-repeat scroll;
-  background-size: contain; }
+  background-size: contain;
+  -webkit-background-size: contain; }
 .medicon-antibiotic:before {
   background-image: url(../images/icons/svg/antibiotic.svg); }
 .medicon-bacteria:before {
@@ -4206,6 +4207,7 @@ textarea.form__field {
   height: 120px;
   background: url(../images/thank_you_check.svg) no-repeat 0 0;
   background-size: contain;
+  -webkit-background-size: contain;
   margin: 0 auto 40px; }
 
 @media (max-width: 1264px) {
@@ -4588,6 +4590,7 @@ textarea.form__field {
       height: 11px;
       background: url(../images/search.svg) no-repeat 0 0;
       background-size: contain;
+      -webkit-background-size: contain;
       left: 0;
       top: 50%;
       margin-top: -7px; }
@@ -4856,7 +4859,8 @@ textarea.form__field {
   padding: 15px 0; }
   .header-fixed .tel-link:before {
     background: url(../images/ico_tel_l_wh.svg) no-repeat 0 0;
-    background-size: contain; }
+    background-size: contain;
+    -webkit-background-size: contain; }
 
 .header-fixed__left {
   display: inline-block;
@@ -5209,6 +5213,7 @@ textarea.form__field {
 .main-slider__slide {
   background: transparent 50% 50% no-repeat;
   background-size: cover;
+  -webkit-background-size: cover;
   overflow: hidden;
   height: 619px;
   line-height: 619px;
@@ -5249,6 +5254,7 @@ textarea.form__field {
   width: 100%;
   background: transparent 50% 100% no-repeat scroll content-box;
   background-size: contain;
+  -webkit-background-size: contain;
   padding: 10px 10px 0; }
   .main-slider__image img {
     max-width: 100%;
@@ -6692,6 +6698,7 @@ textarea.form__field {
     margin-top: -54px;
     margin-left: -54px;
     background: url(../images/ico_play.svg) no-repeat center;
+    -webkit-background-size: contain;
     background-size: contain; }
   .video-preview__link:hover {
     background: #b62059; }
