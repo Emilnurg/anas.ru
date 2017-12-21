@@ -1160,7 +1160,7 @@ $(document).ready(function() {
     cookieBar = $('.cookie-bar');
   $('.cookie-close').click(function () {
     cookieBar.hide();
-    setCookie(cookieBarCookieKey, '1', {expires: 365 * 24 * 3600});
+    setCookie(cookieBarCookieKey, '1', {expires: 365 * 24 * 3600, path: '/'});
   });
 
   if (! getCookie(cookieBarCookieKey)) {
