@@ -1,0 +1,7 @@
+{%- macro grecaptcha(form_id, callbackFn) -%}
+<div id="recaptcha_{{ form_id }}" class="g-recaptcha"
+          data-sitekey="{{ google_recaptcha_public_key() }}"
+          data-callback="{{ callbackFn }}"
+          data-size="invisible">
+</div>
+{%- endmacro -%}
