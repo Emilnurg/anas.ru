@@ -443,6 +443,8 @@
     <script src="{{ static_with_mtime('js/critical.js') }}"></script>
 		<script src="{{ static_with_mtime('js/main.js') }}"></script>
 		<script src="{{ static_with_mtime('js/partials/scripts.js') }}"></script>
+		<script src="//www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render=explicit"
+        async defer></script>
 
 		{%- block EXTRA_SCRIPTS %}{% endblock -%}
     {%- block EXTRA_BODY %}{% endblock -%}

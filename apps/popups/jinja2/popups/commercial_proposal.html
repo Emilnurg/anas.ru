@@ -1,6 +1,6 @@
 <div id="modal" class="modal modal--ajax modal--form modal-commercial-porposal">
   <div class="modal__inner">
-    <form action="{{ url('forms:product_proposal', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+    <form id="product_proposal_form" action="{{ url('forms:product_proposal', kwargs={'lang': request.LANGUAGE_CODE}) }}"
           class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
       {{- csrf_input -}}
       <div class="form__heading">
@@ -45,6 +45,9 @@
       {% endif %}
 
       <div class="form__button">
+				{%- import 'forms/widgets/grecaptcha.html' as recaptcha -%}
+				{{- recaptcha.grecaptcha('product_proposal_form', 'onPopupProductProposalFormSubmit') -}}
+
         <button type="submit"
                 class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
       </div>
@@ -53,8 +56,13 @@
 
   <script type="application/javascript">
     $(document).ready(function () {
-      maskedInput($('.modal-commercial-porposal'));
-      window.F.manageForm('.modal-commercial-porposal .form', function () {
+      var f = $('.modal-commercial-porposal .form');
+
+      maskedInput(f);
+
+      f.data('recaptcha', grecaptcha.render('recaptcha_product_proposal_form'));
+
+      window.F.manageForm(f, function () {
         $('.modal-commercial-porposal [data-fancybox-close]').click();
         openThanksRequest();
       });

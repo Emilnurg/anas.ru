@@ -35,7 +35,7 @@
 
 			<div class="col-md-6">
 				<a name="form"></a>
-				<form action="{{ url('forms:support', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+				<form id="support_form" action="{{ url('forms:support', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 							class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
 							{{- csrf_input -}}
 					<div class="form__heading">
@@ -77,6 +77,9 @@
           {% endif %}
 
 					<div class="form__button">
+						{%- import 'forms/widgets/grecaptcha.html' as recaptcha -%}
+						{{- recaptcha.grecaptcha('support_form', 'onSupportFormSubmit') -}}
+
 						<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 					</div>
 				</form>

@@ -2,10 +2,12 @@
 from copy import deepcopy
 from smtplib import SMTPException
 
+import requests
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from forms import forms
-from snippets.http.response import success_response, form_validation_error_response
+from snippets.http.response import success_response, form_validation_error_response, error_response
 from snippets.utils.email import send_trigger_email
 from snippets.views import BaseView
 
@@ -21,6 +23,24 @@ class BaseFormRequestView(BaseView):
         form = self.form_class(data)
 
         if form.is_valid():
+            if request.POST.get('only_validate'):
+                return success_response()
+
+            captcha = request.POST.get('g-recaptcha-response', '')
+            if not captcha:
+                return error_response(
+                    _('Не была проведена проверка на робота. Повторите попытку.')
+                )
+
+            r = requests.post('https://www.google.com/recaptcha/api/siteverify', data={
+                'secret': settings.RECAPTCHA_SECRET,
+                'response': captcha,
+                'remoteip': request.META.get('REMOTE_ADDR', '')
+            })
+            res = r.json()
+            if not res.get('success', False):
+                return error_response(_('Вы не прошли проверку на робота'))
+
             obj = form.save()
 
             event = 'новая отправка формы "%s"' % obj._meta.verbose_name

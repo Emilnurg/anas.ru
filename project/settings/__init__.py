@@ -358,6 +358,9 @@ UPLOADIFIVE_VIDEO_MIMETYPES = (
 
 DISCUS_ACCOUNT = 'anasmedical'
 
+RECAPTCHA_SECRET = 'XXX-XXX'
+RECAPTCHA_PUBLIC_KEY = 'XXX'
+
 
 try:
     from project.settings.settings_local import *  # NOQA

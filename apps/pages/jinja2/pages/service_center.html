@@ -81,7 +81,7 @@
 
 	{%- if service_page.questions_title -%}
 	<div class="container">
-		<form action="{{ url('forms:service', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+		<form id="service_form" action="{{ url('forms:service', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 					class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
 			{{- csrf_input -}}
 			<div class="form__heading">
@@ -125,6 +125,9 @@
       {% endif %}
 
 			<div class="form__button">
+				{%- import 'forms/widgets/grecaptcha.html' as recaptcha -%}
+				{{- recaptcha.grecaptcha('service_form', 'onServiceFeedbackFormSubmit') -}}
+
 				<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 			</div>
 		</form>

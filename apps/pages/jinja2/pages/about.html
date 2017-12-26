@@ -85,7 +85,7 @@
 {%- if about_page.questions_title -%}
 <div class="b-form">
 	<div class="container">
-		<form action="{{ url('forms:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+		<form id="about_feedback" action="{{ url('forms:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 					class="form b-feedback__form callback-form" method="POST" accept-charset="utf-8" novalidate>
 			{{- csrf_input -}}
 			<div class="form__heading">
@@ -121,6 +121,9 @@
       {% endif %}
 
 			<div class="form__button">
+				{%- import 'forms/widgets/grecaptcha.html' as recaptcha -%}
+				{{- recaptcha.grecaptcha('about_feedback', 'onAboutFeedbackFormSubmit') -}}
+
 				<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 			</div>
 		</form>

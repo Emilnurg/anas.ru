@@ -1025,10 +1025,69 @@ function Form() {
 		$('.form__group', form).removeClass('input--filled has-error has-success');
 	};
 
+	this.validate = function (formCont, callback) {
+	  var form = $(formCont);
+	  var data = T.populateDataAjaxForm(form);
+	  if ('g-recaptcha-response' in data) {
+	    delete data['g-recaptcha-response'];
+    }
+
+	  var onSuccess = function(data) {
+      $(T.button, form).data('inactive', false).removeClass('inactive');
+
+	    if (data['status'] === 'ok') {
+        callback(data);
+      } else {
+        if (data['detail'] && typeof(data['detail']['errors']) !== 'undefined') {
+          T.setFormErrors(form, data['detail']['errors']);
+        } else {
+          alert(data['detail']);
+        }
+      }
+    };
+
+	  data['only_validate'] = 1;
+
+    $.ajax({
+      url: form.attr('action'),
+      data: data,
+      dataType: 'json',
+      type: 'POST',
+      timeout: 60000,  // 1 min
+      success: onSuccess,
+      error: function(jqXHR, textStatus) {
+        if (jqXHR.status > 400) {
+          console.log(textStatus + ' ' + jqXHR.status + ': ' + jqXHR.statusText);
+
+          if(jqXHR.statusText) {
+            T.setFormErrors(form, {'Server error': [jqXHR.statusText]});
+          }
+          $(T.button, form).data('inactive', false).removeClass('inactive');
+        } else if (jqXHR.status === 400) {
+          onSuccess(jqXHR.responseJSON);
+        }
+      }
+    });
+  };
+
 	this.manageForm = function(formCont, callback, clearOnSuccess) {
-		callback = typeof(callback) === 'undefined' ? function(){} : callback;
-		clearOnSuccess = typeof(clearOnSuccess) === 'undefined' ? true : clearOnSuccess;
 		formCont = $(formCont);
+
+		$(formCont).submit(function(e) {
+			e.preventDefault();
+
+			if (typeof (grecaptcha) !== 'undefined') {
+			  T.validate(formCont, function () {
+			    var widgetID = formCont.data('recaptcha');
+			    grecaptcha.execute(widgetID);
+        });
+
+			} else {
+			  T.submit(formCont, callback, clearOnSuccess)
+      }
+			return false;
+		});
+
 		$(T.button, formCont).click(function(e) {
 			e.preventDefault();
 			var inactive = $(this).hasClass('inactive');
@@ -1037,51 +1096,52 @@ function Form() {
 			}
 			return false;
 		});
-
-		$(formCont).submit(function(e){
-			e.preventDefault();
-			var form = $(this);
-			$(T.button, form).data('inactive', true).addClass('inactive');
-			$(T.message, form).fadeOut(160);
-			T.clearFormErrors(form);
-			var data = T.populateDataAjaxForm(form);
-
-			var onSuccess = function(data) {
-			  if(data['status'] === 'ok') {
-          if (clearOnSuccess) {
-            T.clearFormValues(form);
-          }
-          T.setFormSuccess(form, data['detail']);
-          callback(data);
-        } else {
-          T.setFormErrors(form, data['detail']['errors']);
-        }
-        $(T.button, form).data('inactive', false).removeClass('inactive');
-      };
-
-			$.ajax({
-				url: form.attr('action'),
-				data: data,
-				dataType: 'json',
-				type: 'POST',
-				timeout: 60000,  // 1 min
-				success: onSuccess,
-				error: function(jqXHR, textStatus) {
-				  if (jqXHR.status > 400) {
-				    console.log(textStatus + ' ' + jqXHR.status + ': ' + jqXHR.statusText);
-
-				    if(jqXHR.statusText) {
-	  					T.setFormErrors(form, {'Server error': [jqXHR.statusText]});
-	  				}
-	  				$(T.button, form).data('inactive', false).removeClass('inactive');
-          } else if (jqXHR.status === 400) {
-				    onSuccess(jqXHR.responseJSON);
-          }
-				}
-			});
-			return false;
-		});
 	};
+
+	this.submit = function (formCont, callback, clearOnSuccess) {
+	  callback = typeof(callback) === 'undefined' ? function() {} : callback;
+		clearOnSuccess = typeof(clearOnSuccess) === 'undefined' ? true : clearOnSuccess;
+
+	  var form = $(formCont);
+    $(T.button, form).data('inactive', true).addClass('inactive');
+    $(T.message, form).fadeOut(160);
+    T.clearFormErrors(form);
+    var data = T.populateDataAjaxForm(form);
+
+    var onSuccess = function(data) {
+      if(data['status'] === 'ok') {
+        if (clearOnSuccess) {
+          T.clearFormValues(form);
+        }
+        T.setFormSuccess(form, data['detail']);
+        callback(data);
+      } else {
+        T.setFormErrors(form, data['detail']['errors']);
+      }
+      $(T.button, form).data('inactive', false).removeClass('inactive');
+    };
+
+    $.ajax({
+      url: form.attr('action'),
+      data: data,
+      dataType: 'json',
+      type: 'POST',
+      timeout: 60000,  // 1 min
+      success: onSuccess,
+      error: function(jqXHR, textStatus) {
+        if (jqXHR.status > 400) {
+          console.log(textStatus + ' ' + jqXHR.status + ': ' + jqXHR.statusText);
+
+          if(jqXHR.statusText) {
+            T.setFormErrors(form, {'Server error': [jqXHR.statusText]});
+          }
+          $(T.button, form).data('inactive', false).removeClass('inactive');
+        } else if (jqXHR.status === 400) {
+          onSuccess(jqXHR.responseJSON);
+        }
+      }
+    });
+  }
 }
 
 function openThanksCallback() {
@@ -1092,9 +1152,10 @@ function openThanksRequest() {
   $('.thanks_request').click();
 }
 
+window.F = new Form();
+
 $(document).ready(function() {
   var body = $('body');
-  window.F = new Form();
   var feedbackForm = $('.b-feedback__form,.contacts__form');
   if (feedbackForm.size() > 0) {
     window.F.manageForm(
@@ -1196,3 +1257,114 @@ $(window).on('load', function(){
     }
   }
 });
+
+
+function onProductPurchaseFormSubmit () {
+  var f = $('#product_purchase');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onAboutFeedbackFormSubmit () {
+  var f = $('#about_feedback');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksCallback);
+  }
+}
+
+function onContactsFormSubmit () {
+  var f = $('#contacts_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onHomepageFeedbackFormSubmit () {
+  var f = $('#homepage_feedback');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onServiceFeedbackFormSubmit () {
+  var f = $('#service_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onPartnersFormSubmit () {
+  var f = $('#partners_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onSupportFormSubmit () {
+  var f = $('#support_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onTrainingFormSubmit () {
+  var f = $('#training_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onPopupCallbackFormSubmit () {
+  var f = $('#popup_callback_form');
+  if (f.length > 0) {
+    window.F.submit(f, function() {
+		  $('.modal-callback [data-fancybox-close]').click();
+		  openThanksCallback();
+		});
+  }
+}
+
+function onPopupProductProposalFormSubmit () {
+  var f = $('#product_proposal_form');
+  if (f.length > 0) {
+    window.F.submit(f, function () {
+      $('.modal-commercial-porposal [data-fancybox-close]').click();
+      openThanksRequest();
+    });
+  }
+}
+
+function onProductQuestionFormSubmit () {
+  var f = $('#product_question_form');
+  if (f.length > 0) {
+    window.F.submit(f, function () {
+      $('.modal-product-question [data-fancybox-close]').click();
+      openThanksRequest();
+    });
+  }
+}
+
+
+function onRecaptchaLoadCallback () {
+  var forms = [
+    'product_purchase',
+    'about_feedback',
+    'contacts_form',
+    'homepage_feedback',
+    'service_form',
+    'partners_form',
+    'support_form',
+    'training_form'
+  ];
+  var formID, f;
+
+  for (var i = 0; i < forms.length; i ++) {
+    formID = forms[i];
+    f = $('#' + formID);
+
+    if (f.length > 0) {
+      f.data('recaptcha', grecaptcha.render('recaptcha_' + formID));
+    }
+  }
+}
