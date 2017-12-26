@@ -36,7 +36,7 @@
 					 class="btn">{{ var('REGIONAL_DEALERS_BUTTON', request) }}</a>
 			</div>
 
-			<form action="{{ url('forms:feedback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+			<form id="contacts_form" action="{{ url('forms:feedback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 							class="form contacts__form" method="POST" accept-charset="utf-8" novalidate>
 					{{- csrf_input -}}
 				{%- if contacts_page.questions_title -%}
@@ -77,6 +77,9 @@
       {% endif %}
 
 				<div class="form__button">
+					{%- import 'forms/widgets/grecaptcha.html' as recaptcha -%}
+					{{- recaptcha.grecaptcha('contacts_form', 'onContactsFormSubmit') -}}
+
 					<button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
 				</div>
 			</form>

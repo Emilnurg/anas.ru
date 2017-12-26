@@ -1260,26 +1260,95 @@ $(window).on('load', function(){
 
 
 function onProductPurchaseFormSubmit () {
-  var formID = 'product_purchase',
-    f = $('#' + formID);
-
+  var f = $('#product_purchase');
   if (f.length > 0) {
-    window.F.submit(
-      f,
-      f.hasClass('callback-form') ? openThanksCallback : openThanksRequest
-    );
+    window.F.submit(f, openThanksRequest);
   }
 }
 
-function onProductPurchaseFormReady () {
-  var formID = 'product_purchase',
-    f = $('#' + formID);
-
+function onAboutFeedbackFormSubmit () {
+  var f = $('#about_feedback');
   if (f.length > 0) {
-    f.data('recaptcha', grecaptcha.render('recaptcha_' + formID))
+    window.F.submit(f, openThanksCallback);
   }
 }
+
+function onContactsFormSubmit () {
+  var f = $('#contacts_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onHomepageFeedbackFormSubmit () {
+  var f = $('#homepage_feedback');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onServiceFeedbackFormSubmit () {
+  var f = $('#service_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onPartnersFormSubmit () {
+  var f = $('#partners_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onSupportFormSubmit () {
+  var f = $('#support_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onTrainingFormSubmit () {
+  var f = $('#training_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
+function onPopupCallbackFormSubmit () {
+  var f = $('#popup_callback_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksCallback);
+  }
+}
+
+function onPopupProductProposalFormSubmit () {
+  var f = $('#product_proposal_form');
+  if (f.length > 0) {
+    window.F.submit(f, openThanksRequest);
+  }
+}
+
 
 function onRecaptchaLoadCallback () {
-  onProductPurchaseFormReady();
+  var forms = [
+    'product_purchase',
+    'about_feedback',
+    'contacts_form',
+    'homepage_feedback',
+    'service_form',
+    'partners_form',
+    'support_form',
+    'training_form'
+  ];
+  var formID, f;
+
+  for (var i = 0; i < forms.length; i ++) {
+    formID = forms[i];
+    f = $('#' + formID);
+
+    if (f.length > 0) {
+      f.data('recaptcha', grecaptcha.render('recaptcha_' + formID));
+    }
+  }
 }

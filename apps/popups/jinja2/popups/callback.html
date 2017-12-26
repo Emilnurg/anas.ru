@@ -1,6 +1,6 @@
 <div id="modal" class="modal modal--ajax modal--form modal-callback">
   <div class="modal__inner">
-    <form action="{{ url('forms:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+    <form id="popup_callback_form" action="{{ url('forms:callback', kwargs={'lang': request.LANGUAGE_CODE}) }}"
 					class="form b-feedback__form callback-form" method="POST" accept-charset="utf-8" novalidate>
 			{{- csrf_input -}}
       <div class="form__heading">
@@ -23,13 +23,16 @@
 				</div>
 			</div>
 
-        {%- if var('FORM_PRIVACE_TEXT', request) -%}
-          <div class="form__privacy">
-              <p>{{- var('FORM_PRIVACE_TEXT', request) -}}</p>
-          </div>
-        {% endif %}
+			{%- if var('FORM_PRIVACE_TEXT', request) -%}
+				<div class="form__privacy">
+						<p>{{- var('FORM_PRIVACE_TEXT', request) -}}</p>
+				</div>
+			{% endif %}
 
       <div class="form__button">
+				{%- import 'forms/widgets/grecaptcha.html' as recaptcha -%}
+				{{- recaptcha.grecaptcha('popup_callback_form', 'onPopupCallbackFormSubmit') -}}
+
         <button type="submit" class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
       </div>
     </form>
@@ -37,7 +40,10 @@
 
 	<script type="application/javascript">
 	$(document).ready(function() {
-		window.F.manageForm('.modal-callback .form', function() {
+	  var f = $('.modal-callback .form');
+	  f.data('recaptcha', grecaptcha.render('recaptcha_popup_callback_form'));
+
+		window.F.manageForm(f, function() {
 		  $('.modal-callback [data-fancybox-close]').click();
 		  openThanksCallback();
 		});

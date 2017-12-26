@@ -204,9 +204,10 @@
               <p>{{ var('COURSE_TRAINING_SUBTITLE', request) }}</p>
             </div>
           </div>
+
           <div class="col-lg-6">
             <a name="form"></a>
-            <form action="{{ url('forms:training', kwargs={'lang': request.LANGUAGE_CODE}) }}"
+            <form id="training_form" action="{{ url('forms:training', kwargs={'lang': request.LANGUAGE_CODE}) }}"
                   class="form b-feedback__form" method="POST" accept-charset="utf-8" novalidate>
               {{- csrf_input -}}
               <div class="form__heading">
@@ -242,6 +243,9 @@
               {% endif %}
 
               <div class="form__button">
+								{%- import 'forms/widgets/grecaptcha.html' as recaptcha -%}
+								{{- recaptcha.grecaptcha('training_form', 'onTrainingFormSubmit') -}}
+
                 <button type="submit"
                         class="btn btn--black">{{ var('FORM_SUBMIT_BUTTON', request) }}</button>
               </div>
