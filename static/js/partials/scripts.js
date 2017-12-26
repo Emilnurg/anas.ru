@@ -1318,14 +1318,30 @@ function onTrainingFormSubmit () {
 function onPopupCallbackFormSubmit () {
   var f = $('#popup_callback_form');
   if (f.length > 0) {
-    window.F.submit(f, openThanksCallback);
+    window.F.submit(f, function() {
+		  $('.modal-callback [data-fancybox-close]').click();
+		  openThanksCallback();
+		});
   }
 }
 
 function onPopupProductProposalFormSubmit () {
   var f = $('#product_proposal_form');
   if (f.length > 0) {
-    window.F.submit(f, openThanksRequest);
+    window.F.submit(f, function () {
+      $('.modal-commercial-porposal [data-fancybox-close]').click();
+      openThanksRequest();
+    });
+  }
+}
+
+function onProductQuestionFormSubmit () {
+  var f = $('#product_question_form');
+  if (f.length > 0) {
+    window.F.submit(f, function () {
+      $('.modal-product-question [data-fancybox-close]').click();
+      openThanksRequest();
+    });
   }
 }
 

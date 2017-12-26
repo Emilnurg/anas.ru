@@ -62,7 +62,7 @@
 
       f.data('recaptcha', grecaptcha.render('recaptcha_product_proposal_form'));
 
-      window.F.manageForm(, function () {
+      window.F.manageForm(f, function () {
         $('.modal-commercial-porposal [data-fancybox-close]').click();
         openThanksRequest();
       });
