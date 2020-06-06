@@ -1,6 +1,6 @@
 beautifulsoup4
 bpython
-django==1.10.7
+django==1.11.29
 django-ckeditor
 django-image-cropping
 -e git+https://github.com/wizzzet/django-modeltranslation.git#egg=django-modeltranslation
